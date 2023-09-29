@@ -1,0 +1,41 @@
+# LaTeX temporäre Dateien
+*.aux
+*.glo
+*.idx
+*.log
+*.toc
+*.ist
+*.acn
+*.acr
+*.alg
+*.bbl
+*.blg
+*.dvi
+*.glg
+*.gls
+*.ilg
+*.ind
+*.lof
+*.lot
+*.maf
+*.mtc
+*.mtc1
+*.out
+*.synctex.gz
+*.nav
+*.snm
+*.vrb
+*.fls
+*.fdb_latexmk
+*.xdy
+*.run.xml
+*.bcf
+*.synctex(busy)
+
+# Generierte PDF-Dateien (optional)
+#*.pdf
+
+# Andere Dateien
+*.backup
+*~
+._*
