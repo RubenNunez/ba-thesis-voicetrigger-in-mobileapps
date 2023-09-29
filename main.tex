@@ -6,6 +6,10 @@
 \usepackage{geometry}
 \usepackage{hyperref}
 \usepackage{subfiles}
+\usepackage{amssymb} 
+\usepackage{color}
+\usepackage[rgb]{xcolor}
+\usepackage{afterpage}
 \usepackage[style=apa, backend=biber]{biblatex}
 % \usepackage{indentfirst} 
 % \usepackage[
@@ -17,8 +21,22 @@
 % ]{hyperref}
 
 \addbibresource{references.bib}
-
 \geometry{a4paper, total={170mm,257mm}, left=20mm, top=20mm}
+\definecolor{ba-gray}{rgb}{0.9,0.9,0.9}
+
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage}
+
+\newcommand\redpage{%
+    \newpage
+    \pagecolor{red}
+    \blankpage
+    \afterpage{\nopagecolor}}
+
+
 
 \title{
     {\LARGE Bachelorarbeit}\\[2em]
@@ -30,37 +48,95 @@
 \begin{document}
 
 \maketitle
-\thispagestyle{empty} %Keine Seitennummerierung
+\thispagestyle{empty} %Keine Seitennummerierung auf der start seite
 \newpage
 
-\section*{Eidesstattliche Erklärung}
+\section*{Bachelorarbeit an der Hochschule Luzern -- Informatik}
+\subfile{affidavit.tex}
 \newpage
 
 
+\section*{Abstract}
+Das Problem dieser Arbeit ist im wesentlichen die Erkennung von Triggerwörtern innerhalb
+des Kontext einer App. Grundsätzlich ist es unüblich, dass mobile Apps eine
+integrierte Sprachsteuerungsfunktion anbieten.
+
+\newpage
 \tableofcontents
+
 \newpage
-
-
 \section{Problem, Fragestellung, Vision}
 Das Problem dieser Arbeit ist im wesentlichen die Erkennung von Triggerwörtern innerhalb
 des Kontext einer App. Grundsätzlich ist es unüblich, dass mobile Apps eine
 integrierte Sprachsteuerungsfunktion anbieten.
+
 \newpage
-
-
 \section{Stand der Forschung}
-
-
 Laut \textcite{einstein1905} ist $E$ gleich $mc^2$. \\
 \noindent Dieser Text wird ohne Einzug beginnen.
 Wie \textcite{einstein1905} bemerkte, ist \(E=mc^2\). \\
 \glqq Ein bekanntes Ergebnis aus der Relativitätstheorie ist \(E=mc^2\) (\cite{einstein1905}).\grqq
 
 
+\newpage
+\section{Ideen und Konzepte}
+Das Problem dieser Arbeit ist im wesentlichen die Erkennung von Triggerwörtern innerhalb
+des Kontext einer App. Grundsätzlich ist es unüblich, dass mobile Apps eine
+integrierte Sprachsteuerungsfunktion anbieten.
 
+
+\newpage
+\section{Methoden}
+Das Problem dieser Arbeit ist im wesentlichen die Erkennung von Triggerwörtern innerhalb
+des Kontext einer App. Grundsätzlich ist es unüblich, dass mobile Apps eine
+integrierte Sprachsteuerungsfunktion anbieten.
+
+
+\newpage
+\section{Realisierung}
+Das Problem dieser Arbeit ist im wesentlichen die Erkennung von Triggerwörtern innerhalb
+des Kontext einer App. Grundsätzlich ist es unüblich, dass mobile Apps eine
+integrierte Sprachsteuerungsfunktion anbieten.
+
+
+\newpage
+\section{Evaluation und Validation}
+Das Problem dieser Arbeit ist im wesentlichen die Erkennung von Triggerwörtern innerhalb
+des Kontext einer App. Grundsätzlich ist es unüblich, dass mobile Apps eine
+integrierte Sprachsteuerungsfunktion anbieten.
+
+\newpage
+\section{Ausblick}
+Das Problem dieser Arbeit ist im wesentlichen die Erkennung von Triggerwörtern innerhalb
+des Kontext einer App. Grundsätzlich ist es unüblich, dass mobile Apps eine
+integrierte Sprachsteuerungsfunktion anbieten.
+
+
+\newpage
 \section{Anhang}
-
 \subfile{projectmanagement.tex}
+\newpage
+
+% Verzeichnisse
+\addcontentsline{toc}{section}{Abbildungsverzeichnis}
+\listoffigures
+\addcontentsline{toc}{section}{Tabellenverzeichnis}
+\listoftables
+\printbibliography[title=Literaturverzeichnis, heading=bibintoc]
+
+
+
+%       %%%%%   %    %   %%%
+%       %       % %  %   %   %
+%       %%%%    %  % %   %    %
+%       %       %   %%   %   %
+%       %%%%%   %    %   %%%
+
+
+\newpage
+\pagecolor{ba-gray}
+\afterpage{\nopagecolor}
+\blankpage
 
 \newpage
 \section*{Aufgabenstellung}
@@ -116,9 +192,6 @@ Erfahrung mit entsprechenden APIs sind erforderlich.
 
 
 
-% Literaturverzeichnis
-\newpage
-\printbibliography[title=Literaturverzeichnis]
 
 
 
