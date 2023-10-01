@@ -77,23 +77,38 @@ Laut \textcite{einstein1905} ist $E$ gleich $mc^2$. \\
 Wie \textcite{einstein1905} bemerkte, ist \(E=mc^2\). \\
 \glqq Ein bekanntes Ergebnis aus der Relativitätstheorie ist \(E=mc^2\) (\cite{einstein1905}).\grqq
 
-\subsection{Was ist Audio}
+\subsection{Audio}
 Das Verständnis von Audio ist für diese Arbeit von zentraler Bedeutung. In der digitalen Welt
 repräsentiert Audio Schallwellen, die durch eine Reihe von numerischen Werten dargestellt werden.
-(\cite[p.9]{somberg2019audioapi})  beschreibt Audio als: \glqq Fundamentally, audio can be
+\cite[p.9]{somberg2019audioapi} beschreibt Audio als: \glqq Fundamentally, audio can be
 modeled as waves in an elastic medium. In our normal everyday experience, the elastic medium is
 air, and the waves are air pressure waves.\grqq \ Audiosignale werden durch die Funktion
 \(\mathbf{A(t)}\) repräsentiert, wobei \(t\) die Zeit und \(\mathbf{A(t)}\) die Amplitude zum
 Zeitpunkt \(t\) angibt. Die Amplitude ist die Stärke des Signals und die Zeit repräsentiert die
-Position des Signals in der Zeit (\cite[Chapter~3.1]{tarr2018hackaudio}). Diese Betrachtung ist
-vor allem in der Elektrotechnik von Bedeutung, da die Amplitude als Spannung angesehen werden kann.
-Grundsätzlich ist Audio ein kontinuierliches Signal. In der digitalen Welt
-können wir jedoch nur diskrete Werte darstellen. Daher wird das kontinuierliche Signal in diskrete
-Werte umgewandelt. Dieser Vorgang wird als \textit{Sampling} bezeichnet.
-(\cite[Chapter~3.1]{tarr2018hackaudio})
+Position des Signals in der Zeit. Diese Betrachtung ist vor allem in der Elektrotechnik
+von Bedeutung, da die Amplitude als Spannung angesehen werden kann. Grundsätzlich ist Audio ein
+kontinuierliches Signal. In der digitalen Welt können wir jedoch nur diskrete Werte darstellen.
+Daher wird das kontinuierliche Signal in diskrete Werte umgewandelt. Dieser Vorgang wird als
+\textit{Sampling} bezeichnet. (\cite[Chapter~3.1]{tarr2018hackaudio})
 
 
 \subsubsection{Sampling}
+Ein früher Ansatz zur digitalen Darstellung von analogen Signalen war die Pulse-Code-Modulation
+(PCM). Dieses Verfahren wurde bereits in den 1930er Jahren von Alec H. Reeves entwickelt,
+parallel zum Aufkommen der digitalen Telekommunikation (\cite[p.~57]{deloraine1965pcm}).
+Im Grundsatz wird es heute noch in modernen Computersystemen nach dem gleichen Verfahren angewandt.
+
+
+\noindent
+\newline
+Nun folgt eine formelle Definition von Sampling. Ein kontinuierliches Signal \(\mathbf{A(t)}\)
+wird in bestimmten Zeitintervallen \(T_s\) gesampelt. Diese Zeitintervalle werden auch als
+Sampling-Periode bezeichnet. Die Sampling-Rate \(F_s = \displaystyle\frac{1}{T_s}\) gibt die Anzahl der Samples
+pro Sekunde an.
+
+
+
+
 
 
 
