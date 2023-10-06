@@ -7,6 +7,9 @@
 \usepackage{hyperref}
 \usepackage{subfiles}
 \usepackage{amssymb} 
+\usepackage{amsmath}
+\usepackage{tabularx}
+\usepackage{colortbl}
 \usepackage{color}
 \usepackage[rgb]{xcolor}
 \usepackage{afterpage}
@@ -107,35 +110,39 @@ Sprachsteuerung hat das Potenzial, das Benutzererlebnis erheblich zu verbessern.
 
 \newpage
 \section{Stand der Forschung}
-Laut \textcite{einstein1905} ist $E$ gleich $mc^2$. \\
-\noindent Dieser Text wird ohne Einzug beginnen.
-Wie \textcite{einstein1905} bemerkte, ist \(E=mc^2\). \\
-\glqq Ein bekanntes Ergebnis aus der Relativitätstheorie ist \(E=mc^2\) (\cite{einstein1905}).\grqq
+Um diese Arbeit fundiert anzugehen, ist ein Verständnis der Grundlagen in den Bereichen 
+Audioverarbeitung und Machine Learning essenziell. Daher wird in diesem Kapitel ein Überblick 
+über die wichtigsten Themen gegeben. Zudem wird das Kapitel sich mit der Implementation von 
+Sprachsteuerungstechnologien befassen. Darunter fallen die Sprachassistenten wie Siri, Alexa oder 
+Google Assistant. Was natürlich auch nicht fehlen darf, ist eine kleine Einleitung in die 
+Fourier-Transformation. Die Fourier-Transformation ist ein wichtiges Konzept in der 
+Signalverarbeitung und wird in dieser Arbeit verwendet.
+
+
 
 \subsection{Audio}
-Das Verständnis von Audio ist für diese Arbeit von zentraler Bedeutung. In der digitalen Welt
-repräsentiert Audio Schallwellen, die durch eine Reihe von numerischen Werten dargestellt werden.
-\cite[p.9]{somberg2019audioapi} beschreibt Audio als: \glqq Fundamentally, audio can be
-modeled as waves in an elastic medium. In our normal everyday experience, the elastic medium is
-air, and the waves are air pressure waves.\grqq \ Audiosignale werden durch die Funktion
-\(\mathbf{A(t)}\) repräsentiert, wobei \(t\) die Zeit und \(\mathbf{A(t)}\) die Amplitude zum
+In der digitalen Welt repräsentiert Audio Schallwellen, die durch eine Reihe von numerischen Werten 
+dargestellt werden \cite[p.9]{somberg2019audioapi}. beschreibt Audio als: \glqq Fundamentally, 
+audio can be modeled as waves in an elastic medium. In our normal everyday experience, the elastic 
+medium is air, and the waves are air pressure waves.\grqq \ Audiosignale werden durch die Funktion
+\(A(t)\) repräsentiert, wobei \(t\) die Zeit und \(A(t)\) die Amplitude zum
 Zeitpunkt \(t\) angibt. Die Amplitude ist die Stärke des Signals und die Zeit repräsentiert die
 Position des Signals in der Zeit. Diese Betrachtung ist vor allem in der Elektrotechnik
 von Bedeutung, da die Amplitude als Spannung angesehen werden kann. Grundsätzlich ist Audio ein
 kontinuierliches Signal. In der digitalen Welt können wir jedoch nur diskrete Werte darstellen.
 Daher wird das kontinuierliche Signal in diskrete Werte umgewandelt. Dieser Vorgang wird als
-\textit{Sampling} bezeichnet. (\cite[Chapter~3.1]{tarr2018hackaudio})
+\textit{Sampling} bezeichnet (\cite[Chapter~3.1]{tarr2018hackaudio}). 
 
 
 \subsubsection{Sampling}
 Ein früher Ansatz zur digitalen Darstellung von analogen Signalen war die Pulse-Code-Modulation
 (PCM). Dieses Verfahren wurde bereits in den 1930er Jahren von Alec H. Reeves entwickelt,
 parallel zum Aufkommen der digitalen Telekommunikation (\cite[p.~57]{deloraine1965pcm}).
-Im Grundsatz wird es heute noch in modernen Computersystemen nach dem gleichen Verfahren angewandt.
+Im Grundsatz wird es heute noch in modernen Computersystemen nach dem gleichen Verfahren angewendet.
 
 \noindent
 \newline
-Nun folgt eine formelle Definition von Sampling. Ein kontinuierliches Signal \(\mathbf{A(t)}\)
+Es folgt eine formelle Definition von Sampling. Ein kontinuierliches Signal \(A(t)\)
 wird in bestimmten Zeitintervallen \(T_s\) gesampelt. Diese Zeitintervalle werden auch als
 Sampling-Periode bezeichnet. Die Sampling-Rate \(F_s = \displaystyle\frac{1}{T_s}\) gibt die Anzahl
 der Samples pro Sekunde an. Angenommen wir haben ein Signal mit einer Sampling-Periode
@@ -157,21 +164,24 @@ Eigenschaft erfüllt ist, kann das Signal ohne Informationsverlust rekonstruiert
 Weiter ist es wichtig zu verstehen, dass ein Sample ein diskreter Wert ist. Und dieser wird in
 digitalen Systemen durch eine bestimmte Anzahl von Bits dargestellt. Die Anzahl der Bits wird
 als \textit{Bit-Depth} bezeichnet. Die Bit-Depth bestimmt die Auflösung des Signals. Typische
-Bit-Depth Werte sind \(16\) oder \(24\) Bit. (\cite[p.10]{somberg2019audioapi})
+Bit-Depth Werte sind \(16\) oder \(24\) Bit (\cite[p.10]{somberg2019audioapi}). 
 
 \subsubsection{Frames, Channels, Buffers}
-Da sich diese Arbeit im weiteren Verlauf vor allem mit der Verarbeitung von Audio in digitalen
-Systemen beschäftigt, ist es wichtig, die Begriffe \textit{Frame}, \textit{Channel} und
+Ebendfalls wichtig ist das Verständnis von Frames, Channels und Buffers. Da diese Arbeit sich mit
+Audio-Systemen beschäftigt, ist es wichtig, die Begriffe \textit{Frame}, \textit{Channel} und
 \textit{Buffer} zu verstehen. Fangen wir mit dem Begriff \textit{Channel} an. Ein Channel kann als
 ein einzelnes Audio-Signal angesehen werden. Ein Mono-Signal hat genau nur einen Channel. Ein
 Stereo-Signal hat zwei Channels. Ein Surround-Signal hat mehr als zwei Channels. usw.
-Nun zum Begriff \textit{Frame} entspricht einem Sample pro Channel. Weiter sind Frames in Buffers
-organisiert. Ein Buffer ist eine Sammlung von Frames. Typischerweise werden Buffers in Grössen von
-\(64\), \(128\), \(256\), \(512\) oder \(1024\) Frames organisiert. (\cite[p.10]{somberg2019audioapi})
+Nun zum Begriff \textit{Frame}. Ein Frame entspricht einem Sample pro Channel. Weiter sind Frames 
+in Buffers organisiert. Ein Buffer ist eine Sammlung von Frames. Typischerweise werden Buffers in 
+Grössen von \(64\), \(128\), \(256\), \(512\) oder \(1024\) Frames organisiert. Die Abbildung 
+\ref{fig:frames_channels_buffers} zeigt die Beziehung zwischen Frames, Channels und Buffers. 
+Die Abbildung wurde basierend auf (\cite[p.10]{somberg2019audioapi}) erstellt und verdeutlicht die
+Beziehung zwischen Frames, Channels und Buffers.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.7\linewidth]{img/placeholder.png}
+    \includegraphics[width=0.7\linewidth]{img/audio-nutshell.pdf}
     \caption{Frames, Channels und Buffers}
     \label{fig:frames_channels_buffers}
 \end{figure}
@@ -179,24 +189,118 @@ organisiert. Ein Buffer ist eine Sammlung von Frames. Typischerweise werden Buff
 
 \subsubsection{Buffers im Detail}
 Ein Buffer im Kontext von Audio ist eine aufeinanderfolgende Sammlung von Frames. Die bereits
-angesprochene Grösse eines Buffers bestimmt im wesentlichen die Latenzzeit des Signals. Kleine
+angesprochene Grösse eines Buffers bestimmt im wesentlichen die Latenzzeit des Systems. Kleine
 Buffer-Grössen haben eine geringe Latenzzeit, während grosse Buffer-Grössen eine hohe Latenzzeit 
-haben (\cite[p.10]{somberg2019audioapi}). Es ist wichtig zu verstehen, dass kleine Buffer-Grössen 
-zu einer höheren CPU-Auslastung führen, während bei grosse Buffer-Grössen das nicht der Fall ist.
+haben (\cite[p.10]{somberg2019audioapi}). Der Trade-Off ist dass kleine Buffer-Grössen 
+zu einer höheren CPU-Auslastung führen, während bei grossen Buffer-Grössen das nicht der Fall ist.
 Das liegt daran, dass bei kleinen Buffer-Grössen die CPU häufiger aufgerufen wird, um die Buffers
 zu verarbeiten. 
 
 \noindent
 \newline
-Nun betrachten wir die Anordnung der Frames in einem Buffer. Es gibt zwei Möglichkeiten, wie die
-Frames in einem Buffer angeordnet werden können. Die erste Möglichkeit nennt sich 
-\textit{Interleaved}. Bei dieser Anordnung werden die Frames eines Channels nacheinander in den
-Buffer geschrieben. Die zweite Möglichkeit nennt sich \textit{Non-Interleaved}. Bei dieser Variante
-werden die Frames eines Channels in separaten Buffers geschrieben. 
-(\cite[p.11]{somberg2019audioapi})
+Nun betrachten wir die Anordnung der Frames in einem Buffer, wie in den folgenden Abbildungen 
+dargestellt. Es gibt zwei Möglichkeiten, wie die Frames in einem Buffer angeordnet werden 
+können: \textit{Interleaved} und \textit{Non-Interleaved}. Bei der \textit{Interleaved}-Anordnung 
+werden die Frames der einzelnen Channels nacheinander in sequentieller Reihenfolge in den Buffer 
+geschrieben. Im Gegensatz dazu werden bei der \textit{Non-Interleaved}-Variante die Frames 
+eines Channels nacheinander in den Buffer geschrieben, bevor die Frames des nächsten Channels 
+hinzugefügt werden. Dieser Vorgang wird für jeden Channel wiederholt. Die Abbildung 
+\ref{fig:frames_buffers} zeigt die Unterschiede zwischen den beiden Anordnungen. Die Abbildung 
+wurde basierend auf (\cite[p.11]{somberg2019audioapi}) erstellt.
 
 
+\begin{figure}[h]
+    \centering
+    \begin{tabularx}{\textwidth}{|X|X|X|X|X|X|X|X|}
+    \hline
+    L & R & L & R & L & R & L & R \\
+    \hline
+    L & L & L & L & R & R & R & R \\
+    \hline
+    \end{tabularx}
 
+    
+    \caption{Frames in Interleaved und Non-interleaved Buffers}
+    \label{fig:frames_buffers}
+\end{figure}
+
+\noindent
+\newline
+Mit diesem Wissen können wir nun die Unterschiede zwischen den beiden Anordnungen. Für die 
+Anwendung ist es wichtig zu verstehen, mit welcher Anordnung die verwendete API arbeitet.
+
+
+\subsection{Fourier-Transformation}
+Die Fourier-Transformation ist ein zentrales Werkzeug der Fourier-Analyse, einem Teilgebiet der 
+Mathematik, das sich mit der Zerlegung von Funktionen in Frequenzkomponenten beschäftigt. 
+Im Kern handelt es sich bei der Fourier-Analyse um die Approximation einer Funktion durch 
+Überlagerung von Schwingungen mit unterschiedlichen Frequenzen. Dieses Konzept wird auch von 
+Prof. Dr. Weitz in seinem Youtube Video erläutert (\cite[2:20]{weitz2023fourier}). 
+Mathematisch ausgedrückt kann die kontinuierliche Fourier-Transformation eines Signals \( f(t) \) 
+wie folgt definiert werden:
+
+\begin{equation*}
+F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-i \omega t} \, dt
+\label{eq:fourier_transform}
+\end{equation*}
+
+\noindent
+\newline
+\(F(\omega)\) ist die kontinuierliche Fourier-Transformation von \(f(t)\) 
+(\cite[49:27]{weitz2023fourier}). Als kleines Rechenbeispiel betrachten wir die kontinuierliche
+Fourier-Transformation der einfachen periodischen Funktion \(f(t) = sin(t) + \frac{1}{2}sin(2t)\). 
+
+\noindent
+\newline
+Um die Fourier-Transformation für \( f(t) = \sin(t) + \frac{1}{2}\sin(2t) \) zu berechnen, 
+gehen wir schrittweise vor:
+
+\noindent
+\newline
+\textbf{1. Zerlegung des Signals:}  
+Zunächst zerlegen wir \( f(t) \) in seine beiden Komponenten: \( \sin(t) \) und 
+\( \frac{1}{2}\sin(2t) \). Die Fourier-Transformation wird für jede dieser Komponenten separat 
+berechnet und die Ergebnisse werden dann zusammengefasst.
+
+\noindent
+\newline
+\textbf{2. Fourier-Transformation von \( \sin(t) \):}  
+Die Fourier-Transformation von \( \sin(t) \) ergibt zwei Delta-Funktionen in der Frequenzdomäne, 
+jeweils bei \( \omega = 1 \) und \( \omega = -1 \). Die Fourier-Transformation für \( \sin(t) \) 
+lautet:
+
+\begin{equation*}
+\mathcal{F}\{\sin(t)\} = i \left( \delta(\omega + 1) - \delta(\omega - 1) \right)
+\end{equation*}
+
+\noindent
+\newline
+\textbf{3. Fourier-Transformation von \( \frac{1}{2}\sin(2t) \):}  
+Ähnlich wie im vorherigen Schritt, ergibt die Fourier-Transformation von \( \frac{1}{2}\sin(2t) \) 
+zwei Delta-Funktionen bei \( \omega = 2 \) und \( \omega = -2 \). Die Fourier-Transformation für 
+\( \frac{1}{2}\sin(2t) \) lautet:
+
+\begin{equation*}
+\mathcal{F}\{\frac{1}{2}\sin(2t)\} = \frac{i}{2} \left( \delta(\omega + 2) - 
+\delta(\omega - 2) \right)
+\end{equation*}
+
+\noindent
+\newline
+Das Zusammenfassen der beiden Ergebnisse ergibt die endgültige Fourier-Transformierte für 
+\( f(t) = \sin(t) + \frac{1}{2}\sin(2t) \):
+
+\begin{equation*}
+F(\omega) = \frac{i}{2} \left( \delta(\omega + 1) - \delta(\omega - 1) \right) + 
+\frac{i}{4} \left( \delta(\omega + 2) - \delta(\omega - 2) \right)
+\end{equation*}
+
+
+\noindent
+\newline
+Die diskrete Fourier-Transformation (DFT) ist eine diskrete Version der Fourier-Transformation.
+Welche die Fourier-Transformation auf diskrete Signale anwendet. Die DFT ist näher an der
+Anwendung, da Signale in digitalen Systemen diskret sind.
 
 
 
