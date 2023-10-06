@@ -48,7 +48,7 @@
 \begin{document}
 
 \maketitle
-\thispagestyle{empty} %Keine Seitennummerierung auf der start seite
+\thispagestyle{empty} %Keine Seitennummerierung auf der start Seite
 \newpage
 
 \section*{Bachelorarbeit an der Hochschule Luzern -- Informatik}
@@ -66,9 +66,44 @@ integrierte Sprachsteuerungsfunktion anbieten.
 
 \newpage
 \section{Problem, Fragestellung, Vision}
-Das Problem dieser Arbeit ist im wesentlichen die Erkennung von Triggerwörtern innerhalb
-des Kontext einer App. Grundsätzlich ist es unüblich, dass mobile Apps eine
-integrierte Sprachsteuerungsfunktion anbieten.
+Das Kernproblem dieser Bachelorarbeit ist die Erkennung von Triggerwörtern innerhalb eines 
+App-Kontexts. Obwohl Sprachsteuerungstechnologien ein erhebliches Potenzial aufweisen und 
+Assistenten wie Siri oder Alexa weit verbreitet sind, bieten mobile Apps selten eine integrierte 
+Spracherkennung. Dies führt zu einer Lücke, da solche Assistenten nicht spezifisch für App-Kontexte 
+optimiert sind. Diese Arbeit verfolgt das Ziel, diese Lücke zu schliessen und eine integrierte 
+Spracherkennungsfunktion zu entwickeln, die Triggerwörter in einer App effektiv erkennt.
+
+\subsection{Fragestellung}
+Die Fragestellung dieser Arbeit lautet: \textit{Wie kann eine integrierte Sprachsteuerung für eine
+Mobile Apps entwickelt werden, die speziell das Erkennen von Triggerwörtern ermöglicht, indem 
+Methoden des Machine Learnings genutzt werden?}.
+
+\subsection*{Ausgangslage und Problemstellung}
+Sprachsteuerungstechnologien haben ein grosses Potenzial und werden bisher vor allem als
+Sprachsteuerungsassistenten genutzt. Während es etablierte Sprachassistenten wie Siri gibt,
+fehlt es an Lösungen für eine integrierte Sprachsteuerung in Mobile Apps, insbesondere in
+Bezug auf das Erkennen von Triggerwörtern.
+
+\subsection*{Ziel der Arbeit und erwartete Resultate}
+Ziel der Arbeit ist es zum einen, eine Grundlage zu schaffen, um ein Triggerwort oder eine
+Sequenz von Triggerwörtern in der akustischen Sprache erkennen zu können. Dabei werden
+Methoden und Werkzeuge aus dem Bereich des Machine Learnings verwendet. Zum anderen soll
+diese Erkenntnis in eine mobile Plattform wie iOS oder Android integriert werden. Für den
+Rahmen dieser Arbeit genügt die Integration in eine der genannten Plattformen. Weiterhin
+werden das Thema Datenschutz und die ethischen Aspekte berücksichtigt.
+
+\subsection*{Gewünschte Methoden, Vorgehen}
+Das Projekt kann beispielsweise in drei Phasen durchgeführt werden: Technische Abklärungen,
+Datensammlung und Modelltraining, sowie die Erarbeitung eines Prototypen. Agile
+Vorgehensweisen sind wünschenswert.
+
+\subsection*{Kreativität, Methoden, Innovation}
+Bisher sind Sprachsteuerungsfunktionen fast ausschliesslich grossen Akteuren wie Siri
+vorbehalten. Der innovative Ansatz dieser Arbeit zielt darauf ab, einen Anreiz zu setzen,
+um diese Funktionen auch in herkömmlichen Apps einzusetzen. Die handfreie Bedienung durch
+Sprachsteuerung hat das Potenzial, das Benutzererlebnis erheblich zu verbessern.
+
+
 
 \newpage
 \section{Stand der Forschung}
@@ -98,13 +133,71 @@ Ein früher Ansatz zur digitalen Darstellung von analogen Signalen war die Pulse
 parallel zum Aufkommen der digitalen Telekommunikation (\cite[p.~57]{deloraine1965pcm}).
 Im Grundsatz wird es heute noch in modernen Computersystemen nach dem gleichen Verfahren angewandt.
 
-
 \noindent
 \newline
 Nun folgt eine formelle Definition von Sampling. Ein kontinuierliches Signal \(\mathbf{A(t)}\)
 wird in bestimmten Zeitintervallen \(T_s\) gesampelt. Diese Zeitintervalle werden auch als
-Sampling-Periode bezeichnet. Die Sampling-Rate \(F_s = \displaystyle\frac{1}{T_s}\) gibt die Anzahl der Samples
-pro Sekunde an.
+Sampling-Periode bezeichnet. Die Sampling-Rate \(F_s = \displaystyle\frac{1}{T_s}\) gibt die Anzahl
+der Samples pro Sekunde an. Angenommen wir haben ein Signal mit einer Sampling-Periode
+von \(T_s = 0.001\). Um nun die Sampling-Rate zu berechnen, müssen wir den Kehrwert der
+Sampling-Periode berechnen. \(F_s = \displaystyle\frac{1}{0.001} = 1000\). Somit erhalten wir eine
+Sampling-Rate von \(1000\) Samples pro Sekunde. Nun typische Sampling-Raten sind \(44100\) Hz
+oder \(48000\) Hz. Bei Sampling-Raten wird die Einheit \textit{Hertz} verwendet. Ein Hertz entspricht
+einer Frequenz von einem Sample pro Sekunde. Ein weiter wichtiger Begriff ist die
+\textit{Nyquist-Frequenz}. Die Nyquist-Frequenz \(F_n\) ist die Hälfte der Sampling-Rate.
+Also \(F_n = \displaystyle\frac{F_s}{2}\). Die Idee hinter der Nyquist-Frequenz ist, dass die
+Sampling-Rate mindestens doppelt so hoch sein muss wie die höchste Frequenz des Signals. Wenn diese
+Eigenschaft erfüllt ist, kann das Signal ohne Informationsverlust rekonstruiert werden 
+(\cite[Chapter~3.1]{tarr2018hackaudio}). Mehr dazu folgt im Unterkapitel 
+\textit{Fourier-Transformation}.
+
+
+\noindent
+\newline
+Weiter ist es wichtig zu verstehen, dass ein Sample ein diskreter Wert ist. Und dieser wird in
+digitalen Systemen durch eine bestimmte Anzahl von Bits dargestellt. Die Anzahl der Bits wird
+als \textit{Bit-Depth} bezeichnet. Die Bit-Depth bestimmt die Auflösung des Signals. Typische
+Bit-Depth Werte sind \(16\) oder \(24\) Bit. (\cite[p.10]{somberg2019audioapi})
+
+\subsubsection{Frames, Channels, Buffers}
+Da sich diese Arbeit im weiteren Verlauf vor allem mit der Verarbeitung von Audio in digitalen
+Systemen beschäftigt, ist es wichtig, die Begriffe \textit{Frame}, \textit{Channel} und
+\textit{Buffer} zu verstehen. Fangen wir mit dem Begriff \textit{Channel} an. Ein Channel kann als
+ein einzelnes Audio-Signal angesehen werden. Ein Mono-Signal hat genau nur einen Channel. Ein
+Stereo-Signal hat zwei Channels. Ein Surround-Signal hat mehr als zwei Channels. usw.
+Nun zum Begriff \textit{Frame} entspricht einem Sample pro Channel. Weiter sind Frames in Buffers
+organisiert. Ein Buffer ist eine Sammlung von Frames. Typischerweise werden Buffers in Grössen von
+\(64\), \(128\), \(256\), \(512\) oder \(1024\) Frames organisiert. (\cite[p.10]{somberg2019audioapi})
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\linewidth]{img/placeholder.png}
+    \caption{Frames, Channels und Buffers}
+    \label{fig:frames_channels_buffers}
+\end{figure}
+
+
+\subsubsection{Buffers im Detail}
+Ein Buffer im Kontext von Audio ist eine aufeinanderfolgende Sammlung von Frames. Die bereits
+angesprochene Grösse eines Buffers bestimmt im wesentlichen die Latenzzeit des Signals. Kleine
+Buffer-Grössen haben eine geringe Latenzzeit, während grosse Buffer-Grössen eine hohe Latenzzeit 
+haben (\cite[p.10]{somberg2019audioapi}). Es ist wichtig zu verstehen, dass kleine Buffer-Grössen 
+zu einer höheren CPU-Auslastung führen, während bei grosse Buffer-Grössen das nicht der Fall ist.
+Das liegt daran, dass bei kleinen Buffer-Grössen die CPU häufiger aufgerufen wird, um die Buffers
+zu verarbeiten. 
+
+\noindent
+\newline
+Nun betrachten wir die Anordnung der Frames in einem Buffer. Es gibt zwei Möglichkeiten, wie die
+Frames in einem Buffer angeordnet werden können. Die erste Möglichkeit nennt sich 
+\textit{Interleaved}. Bei dieser Anordnung werden die Frames eines Channels nacheinander in den
+Buffer geschrieben. Die zweite Möglichkeit nennt sich \textit{Non-Interleaved}. Bei dieser Variante
+werden die Frames eines Channels in separaten Buffers geschrieben. 
+(\cite[p.11]{somberg2019audioapi})
+
+
+
+
 
 
 
@@ -195,30 +288,7 @@ von Triggerwörtern.
     \item Website: www.bitforge.ch
 \end{itemize}
 
-\section*{Ausgangslage und Problemstellung}
-Sprachsteuerungstechnologien haben ein grosses Potenzial und werden bisher vor allem als
-Sprachsteuerungsassistenten genutzt. Während es etablierte Sprachassistenten wie Siri gibt,
-fehlt es an Lösungen für eine integrierte Sprachsteuerung in Mobile Apps, insbesondere in
-Bezug auf das Erkennen von Triggerwörtern.
 
-\section*{Ziel der Arbeit und erwartete Resultate}
-Ziel der Arbeit ist es zum einen, eine Grundlage zu schaffen, um ein Triggerwort oder eine
-Sequenz von Triggerwörtern in der akustischen Sprache erkennen zu können. Dabei werden
-Methoden und Werkzeuge aus dem Bereich des Machine Learnings verwendet. Zum anderen soll
-diese Erkenntnis in eine mobile Plattform wie iOS oder Android integriert werden. Für den
-Rahmen dieser Arbeit genügt die Integration in eine der genannten Plattformen. Weiterhin
-werden das Thema Datenschutz und die ethischen Aspekte berücksichtigt.
-
-\section*{Gewünschte Methoden, Vorgehen}
-Das Projekt kann beispielsweise in drei Phasen durchgeführt werden: Technische Abklärungen,
-Datensammlung und Modelltraining, sowie die Erarbeitung eines Prototypen. Agile
-Vorgehensweisen sind wünschenswert.
-
-\section*{Kreativität, Methoden, Innovation}
-Bisher sind Sprachsteuerungsfunktionen fast ausschliesslich grossen Akteuren wie Siri
-vorbehalten. Der innovative Ansatz dieser Arbeit zielt darauf ab, einen Anreiz zu setzen,
-um diese Funktionen auch in herkömmlichen Apps einzusetzen. Die handfreie Bedienung durch
-Sprachsteuerung hat das Potenzial, das Benutzererlebnis erheblich zu verbessern.
 
 \section*{Sonstige Bemerkungen}
 Grundkenntnisse in Machine Learning, speziell im Bereich der Spracherkennung, sowie
