@@ -4,10 +4,11 @@
 This bachelor thesis focuses on the integration of voice control technologies into mobile apps, emphasizing the detection of trigger words within the context of an app.
 
 ## Getting Started
-(Here you can add instructions for setting up, running, or testing any code or simulations you might include in the repository.)
+
 
 ## Dependencies
-(List any software, libraries, or tools that someone would need to run your code.)
+- Anaconda Environment
+  - Python 3.9
 
 ## Authors
 - Ruben Nuñez
