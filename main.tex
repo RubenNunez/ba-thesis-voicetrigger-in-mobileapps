@@ -198,15 +198,18 @@ zu verarbeiten.
 
 \noindent
 \newline
-Nun betrachten wir die Anordnung der Frames in einem Buffer, wie in den folgenden Abbildungen 
-dargestellt. Es gibt zwei Möglichkeiten, wie die Frames in einem Buffer angeordnet werden 
+Nun betrachten wir die mögliche Anordnung eines Buffers, wie in den folgenden Abbildungen 
+dargestellt. Es gibt zwei Möglichkeiten, wie Buffers angeordnet werden 
 können: \textit{Interleaved} und \textit{Non-Interleaved}. Bei der \textit{Interleaved}-Anordnung 
-werden die Frames der einzelnen Channels nacheinander in sequentieller Reihenfolge in den Buffer 
-geschrieben. Im Gegensatz dazu werden bei der \textit{Non-Interleaved}-Variante die Frames 
-eines Channels nacheinander in den Buffer geschrieben, bevor die Frames des nächsten Channels 
+werden die Samples der einzelnen Channels nacheinander in sequentieller Reihenfolge in den Buffer 
+geschrieben. Im Gegensatz dazu werden bei der \textit{Non-Interleaved}-Variante die Samples 
+eines Channels nacheinander in den Buffer geschrieben, bevor die Samples des nächsten Channels 
 hinzugefügt werden. Dieser Vorgang wird für jeden Channel wiederholt. Die Abbildung 
-\ref{fig:frames_buffers} zeigt die Unterschiede zwischen den beiden Anordnungen. Die Abbildung 
-wurde basierend auf (\cite[p.11]{somberg2019audioapi}) erstellt.
+\ref{fig:frames_buffers} zeigt die Unterschiede zwischen den beiden Anordnungen. Jede Zelle der 
+Tabelle entspricht einem Sample. L und R stehen exemplarisch für die Channels Left und Right.
+Die erste Zeile entspricht der \textit{Interleaved}-Anordnung und die zweite Zeile der
+\textit{Non-Interleaved}-Anordnung. Die Abbildung wurde basierend auf 
+(\cite[p.11]{somberg2019audioapi}) erstellt.
 
 
 \begin{figure}[h]
@@ -226,7 +229,7 @@ wurde basierend auf (\cite[p.11]{somberg2019audioapi}) erstellt.
 
 \noindent
 \newline
-Mit diesem Wissen können wir nun die Unterschiede zwischen den beiden Anordnungen. Für die 
+Mit diesem Wissen kennen wir nun die Unterschiede zwischen den beiden Anordnungen. Für die 
 Anwendung ist es wichtig zu verstehen, mit welcher Anordnung die verwendete API arbeitet.
 
 
