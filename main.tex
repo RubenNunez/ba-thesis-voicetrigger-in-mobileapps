@@ -228,19 +228,23 @@ Die erste Zeile entspricht der \textit{Interleaved}-Anordnung und die zweite Zei
 \end{figure}
 
 \noindent
-\newline
 Mit diesem Wissen kennen wir nun die Unterschiede zwischen den beiden Anordnungen. Für die 
 Anwendung ist es wichtig zu verstehen, mit welcher Anordnung die verwendete API arbeitet.
 
 
-\subsection{Fourier-Transformation}
-Die Fourier-Transformation ist ein zentrales Werkzeug der Fourier-Analyse, einem Teilgebiet der 
-Mathematik, das sich mit der Zerlegung von Funktionen in Frequenzkomponenten beschäftigt. 
-Im Kern handelt es sich bei der Fourier-Analyse um die Approximation einer Funktion durch 
-Überlagerung von Schwingungen mit unterschiedlichen Frequenzen. Dieses Konzept wird auch von 
-Prof. Dr. Weitz in seinem Youtube Video erläutert (\cite[2:20]{weitz2023fourier}). 
-Mathematisch ausgedrückt kann die kontinuierliche Fourier-Transformation eines Signals \( f(t) \) 
-wie folgt definiert werden:
+\subsection{Fourier-Analyse}
+Die Fourier-Analyse befasst sich mit der Zerlegung von Funktionen in Frequenzkomponenten. Die 
+Fourier-Analyse ist ein wichtiges Konzept in der Signalverarbeitung und findet breite Anwendung 
+in der Audioverarbeitung. Daher ist ein Grundverständnis für diese Arbeit relevant. 
+
+\subsubsection{Fourier-Transformation}
+Die Fourier-Transformation ist ein zentrales Werkzeug der Fourier-Analyse. Sie ermöglicht die 
+Zerlegung von Funktionen in ihre Frequenzkomponenten und die Rekonstruktion von Funktionen aus 
+diesen Komponenten. Dies wird als Fourier-Analyse und Fourier-Synthese bezeichnet. Dieses Konzept 
+wird auch von Prof. Dr. Weitz in seinem Video zu Fourier-Analyse erläutert 
+(\cite[2:20]{weitz2023fourier}). Mathematisch ausgedrückt wird die kontinuierliche 
+Fourier-Transformation eines Signals \( f(t) \) wie folgt definiert 
+(\cite[Chapter~5]{hansen2014fourier}): 
 
 \begin{equation*}
 F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-i \omega t} \, dt
@@ -248,62 +252,68 @@ F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-i \omega t} \, dt
 \end{equation*}
 
 \noindent
-\newline
-\(F(\omega)\) ist die kontinuierliche Fourier-Transformation von \(f(t)\) 
-(\cite[49:27]{weitz2023fourier}). Als kleines Rechenbeispiel betrachten wir die kontinuierliche
-Fourier-Transformation der einfachen periodischen Funktion \(f(t) = sin(t) + \frac{1}{2}sin(2t)\). 
+\(F(\omega)\) ist die Fourier-Transformation von \(f(t)\) 
+(\cite[49:27]{weitz2023fourier}). Als kleines Rechenbeispiel betrachten wir die 
+Fourier-Transformation der Rechteckfunktion \( \text{rect}(x) \), die wie folgt definiert ist:
+
+\[
+\text{rect}(x) = 
+\begin{cases} 
+1 & \text{für } -1 \leq x \leq 1 \\
+0 & \text{sonst}
+\end{cases}
+\]
 
 \noindent
-\newline
-Um die Fourier-Transformation für \( f(t) = \sin(t) + \frac{1}{2}\sin(2t) \) zu berechnen, 
-gehen wir schrittweise vor:
-
-\noindent
-\newline
-\textbf{1. Zerlegung des Signals:}  
-Zunächst zerlegen wir \( f(t) \) in seine beiden Komponenten: \( \sin(t) \) und 
-\( \frac{1}{2}\sin(2t) \). Die Fourier-Transformation wird für jede dieser Komponenten separat 
-berechnet und die Ergebnisse werden dann zusammengefasst.
-
-\noindent
-\newline
-\textbf{2. Fourier-Transformation von \( \sin(t) \):}  
-Die Fourier-Transformation von \( \sin(t) \) ergibt zwei Delta-Funktionen in der Frequenzdomäne, 
-jeweils bei \( \omega = 1 \) und \( \omega = -1 \). Die Fourier-Transformation für \( \sin(t) \) 
-lautet:
+Die Fourier-Transformation der Funktion \( \text{rect}(x) \) kann wie folgt berechnet werden:
 
 \begin{equation*}
-\mathcal{F}\{\sin(t)\} = i \left( \delta(\omega + 1) - \delta(\omega - 1) \right)
+\begin{split}
+F(\omega) &= \int_{-\infty}^{\infty} \text{rect}(x) e^{-i \omega x} \, dx \\
+&= \int_{-1}^{1} e^{-i \omega x} \, dx \\
+&= \frac{1}{-i \omega} \left[ e^{-i \omega x} \right]_{-1}^{1} \\
+&= \frac{1}{-i \omega} \left( e^{-i \omega} - e^{i \omega} \right) \\
+&= \frac{1}{-i \omega} \left( \cos(\omega) - i \sin(\omega) - \cos(\omega) - i \sin(\omega) \right) \\
+&= \frac{1}{-i \omega} \left( -2 i \sin(\omega) \right) \\
+&= \frac{2 \sin(\omega)}{\omega}
+\end{split}
 \end{equation*}
+\noindent
 
 \noindent
 \newline
-\textbf{3. Fourier-Transformation von \( \frac{1}{2}\sin(2t) \):}  
-Ähnlich wie im vorherigen Schritt, ergibt die Fourier-Transformation von \( \frac{1}{2}\sin(2t) \) 
-zwei Delta-Funktionen bei \( \omega = 2 \) und \( \omega = -2 \). Die Fourier-Transformation für 
-\( \frac{1}{2}\sin(2t) \) lautet:
+Somit ist die Fourier-Transformation der Rechteckfunktion \( \text{rect}(x) \) gleich
+\( \displaystyle\frac{2 \sin(\omega)}{\omega} \).
 
-\begin{equation*}
-\mathcal{F}\{\frac{1}{2}\sin(2t)\} = \frac{i}{2} \left( \delta(\omega + 2) - 
-\delta(\omega - 2) \right)
-\end{equation*}
-
-\noindent
-\newline
-Das Zusammenfassen der beiden Ergebnisse ergibt die endgültige Fourier-Transformierte für 
-\( f(t) = \sin(t) + \frac{1}{2}\sin(2t) \):
-
-\begin{equation*}
-F(\omega) = \frac{i}{2} \left( \delta(\omega + 1) - \delta(\omega - 1) \right) + 
-\frac{i}{4} \left( \delta(\omega + 2) - \delta(\omega - 2) \right)
-\end{equation*}
-
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\linewidth]{img/example-fourier-trans.png}
+    \caption{Rechteckfunktion und ihre Fourier-Transformation}
+    \label{fig:fourier_transform}
+\end{figure}
 
 \noindent
-\newline
+Die Abbildung \ref{fig:fourier_transform} stellt die \( \text{rect}(x) \) Funktion und ihre 
+Fourier-Transformation, die als \( \text{sinc}(\omega) \) bezeichnet wird, dar. Die Nullstellen 
+\( \pm \pi, \pm 2 \pi, \pm 3 \pi, \dots \) der \( \text{sinc}(\omega) \) Funktion deuten darauf 
+hin, dass die \( \text{rect}(x) \) Funktion bei diesen Frequenzen keine Energie besitzt. Die 
+primäre Energie der Funktion liegt bei \( \omega=0 \). Beispiel adaptiert von 
+(\cite[Chapter~5 - Example~5.1]{hansen2014fourier}).
+
+
+
+\subsubsection{Diskrete Fourier-Transformation}
+
 Die diskrete Fourier-Transformation (DFT) ist eine diskrete Version der Fourier-Transformation.
 Welche die Fourier-Transformation auf diskrete Signale anwendet. Die DFT ist näher an der
-Anwendung, da Signale in digitalen Systemen diskret sind.
+Anwendung, da Signale in digitalen Systemen diskret sind und aus Samples bestehen. Wir werden auch 
+hier ein kleines Rechenbeispiel durchführen, welche die DFT veranschaulicht. Dafür werden wir eine
+Funktion \( f(x) \) definieren diese mittels Python in Samples umwandeln und anschliessend die DFT
+anwenden.
+
+
+
+
 
 
 
