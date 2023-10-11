@@ -9,6 +9,7 @@
 \usepackage{amssymb} 
 \usepackage{amsmath}
 \usepackage{tabularx}
+\usepackage{listings}
 \usepackage{colortbl}
 \usepackage{color}
 \usepackage[rgb]{xcolor}
@@ -39,6 +40,31 @@
     \blankpage
     \afterpage{\nopagecolor}}
 
+
+
+    \definecolor{codeblack}{rgb}{0.1,0.1,0.23}
+    \definecolor{codegreen}{rgb}{0.2,0.5,0.1}
+    \definecolor{codepurple}{rgb}{0.5,0.0,0.5}
+    \definecolor{backcolour}{rgb}{0.95,0.95,0.95}
+    \definecolor{codered}{rgb}{0.7,0.1,0.2}
+    
+    \lstset{
+      language=Python,
+      basicstyle=\ttfamily\footnotesize, % footnotesize gibt eine kleinere Schriftgröße
+      backgroundcolor=\color{white},
+      commentstyle=\color{codegreen},
+      keywordstyle=\color{codered},
+      numberstyle=\tiny\color{codegray},
+      stringstyle=\color{codepurple},
+      identifierstyle=\color{codeblack},
+      showstringspaces=false,
+      numbers=none,
+      captionpos=b,
+      frame=none,
+      rulecolor=\color{black},
+      aboveskip=1em, % Abstand über dem Code
+      belowskip=1em  % Abstand unter dem Code
+    }
 
 
 \title{
@@ -304,22 +330,117 @@ primäre Energie der Funktion liegt bei \( \omega=0 \). Beispiel adaptiert von
 
 \subsubsection{Diskrete Fourier-Transformation}
 
-Die diskrete Fourier-Transformation (DFT) ist eine diskrete Version der Fourier-Transformation.
-Welche die Fourier-Transformation auf diskrete Signale anwendet. Die DFT ist näher an der
-Anwendung, da Signale in digitalen Systemen diskret sind und aus Samples bestehen. Wir werden auch 
-hier ein kleines Rechenbeispiel durchführen, welche die DFT veranschaulicht. Dafür werden wir eine
-Funktion \( f(x) \) definieren diese mittels Python in Samples umwandeln und anschliessend die DFT
-anwenden.
+Die diskrete Fourier-Transformation (DFT) stellt eine diskrete Variante der kontinuierlichen 
+Fourier-Transformation dar und wird speziell auf diskrete Signale angewendet. In digitalen 
+Systemen sind Signale typischerweise diskret und bestehen aus einzelnen Samples, weshalb die DFT 
+besonders relevant für solche Anwendungen ist. Die mathematische Definition der DFT ist 
+(\cite[Chapter~3]{hansen2014fourier}):
+
+\[
+F(k) = \sum_{n=0}^{N-1} f(n) \cdot e^{-\frac{2\pi i}{N} kn}
+\]
+
+\noindent
+\newline
+Zur Veranschaulichung betrachten wir ein Code-Beispiel. Wir haben eine Funktion \(f(t)\) und unterteilen
+diese in \(N\) Samples. Die DFT berechnet nun die Frequenzkomponenten des Signals. Die Abbildung 
+\ref{fig:dft_example} zeigt ein Beispiel für ein Signal \(f(t)\) mit \(N=5\) Samples.
+
+\[ f(t) = 1.5 \cos(t) + 0.25 \sin(t) + 2 \sin(2t) + \sin(3t) \].
 
 
+\begin{lstlisting}
+import numpy as np
+import matplotlib.pyplot as plt
+
+def f(x):
+    return 1.5 * np.cos(x) + 0.25 * np.sin(x) + 2 * np.sin(2*x) + np.sin(3*x)
+
+N_SAMPLES = 5
+
+x_curve = np.linspace(0, 2*np.pi, 100) # 100 Punkte zwischen 0 und 2pi
+x_points = np.linspace(0, 2*np.pi, N_SAMPLES) # 5 Punkte zwischen 0 und 2pi
+
+plt.plot(x_curve, f(x_curve))
+plt.plot(x_points, f(x_points), 'o') # Plotte die 5 Punkte
+\end{lstlisting}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.60\linewidth]{img/dft.png}
+    \caption{Funktion \( f(x) \) mit 5 Samples}
+    \label{fig:dft_example}
+\end{figure}
+
+\noindent
+Nun berechnen wir die DFT der 5 Samples. Dazu verwenden wir die \texttt{fft} Funktion aus der
+\texttt{numpy} Bibliothek. Das Resultat ist ein Array mit \(N\) komplexen Zahlen. Die Abbildung 
+\ref{fig:dft_example_table} zeigt die Funktion \(f(x)\) und die DFT der 5 Samples.
+
+\begin{lstlisting}
+fhat = np.fft.fft(f(x_points), N_SAMPLES)
+\end{lstlisting}
+
+\begin{figure}[h]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|}
+    \hline
+    & 0 & 1 & 2 & 3 & 4 \\
+    \hline
+    \(f(x)\) & 1.5 & 0.25 & 0.5 & 1.75 & 1.5 \\
+    \hline
+    dft & \(5.50 + 0.00i\) & \(0.22 + 1.92i\) & \(0.78 - 0.45i\) & \(0.78 + 0.45i\) & \(0.22 - 1.92i\) \\
+    \hline
+    \end{tabular}
+    \caption{\(f(x)\) und die DFT der 5 Samples}
+    \label{fig:dft_example_table}
+\end{figure}
+
+\noindent
+Mit den Frequenzkomponenten der DFT können Signale manipuliert werden, etwa durch Filtern 
+bestimmter Frequenzbereiche. Um das ursprüngliche Signal wiederzuerlangen, wenden wir die inverse 
+DFT an. Die Formel der inversen DFT, welche das Signal rekonstruiert, lautet 
+(\cite[Chapter~3]{hansen2014fourier}):
 
 
+\[
+f(n) = \frac{1}{N} \sum_{k=0}^{N-1} F(k) \cdot e^{\frac{2\pi i}{N} kn}
+\]
+
+\begin{lstlisting}
+reconstructed_manual = np.zeros_like(x_points, dtype=np.complex128)
+
+dt = x_points[1] - x_points[0] # Abstand zwischen zwei Punkten
+T = N_SAMPLES * dt # Periode des Signals
+
+for n in range(N_SAMPLES):
+    freq = n / T # Korrespondierende Frequenz des Koeffizienten
+    coeff = fhat[n] # Koeffizient selbst
+    term = coeff * np.exp(1j * 2 * np.pi * freq * x_points)
+    reconstructed_manual += term
+
+reconstructed_manual = (reconstructed_manual / N_SAMPLES).real
+reconstructed = np.fft.ifft(fhat).real # Rekonstruiertes Signal mit ifft
+\end{lstlisting}
 
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.60\linewidth]{img/dft_reconstructed.png}
+    \caption{Rekonstruktion des Signals \(f(x)\)}
+    \label{fig:dft_example_reconstructed}
+\end{figure}
 
-
-
-
+\subsubsection{Aliasing}
+Aliasing tritt auf, wenn ein Signal bei einer nicht ausreichend hohen Samplingrate digital erfasst 
+wird, wodurch Frequenzen des Signals fehlinterpretiert werden können. Als allgemeines Beispiel wenn 
+ein Sinussignal mit einer Frequenz von 1200 Hz betrachtet wird und dieses mit einer Samplingrate 
+von nur 1000 Hz aufgenommen wurde, könnte das digitalisierte Signal so aussehen, als ob das 
+ursprüngliche Signal eine Frequenz von 200 Hz hätte. Das ist, als ob man ein sich schnell 
+drehendes Rad filmt und auf dem Video wirkt es, als würde es sich langsamer oder sogar rückwärts 
+drehen. Um solche Fehler zu verhindern, sollte die Samplingrate stets mindestens das 
+Doppelte der höchsten Frequenz des Signals betragen, ein Grundsatz, der als Nyquist-Kriterium 
+bekannt ist. (\cite[]{weitz2023fourier}).
 
 
 \newpage
