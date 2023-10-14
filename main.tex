@@ -247,8 +247,6 @@ Die erste Zeile entspricht der \textit{Interleaved}-Anordnung und die zweite Zei
     L & L & L & L & R & R & R & R \\
     \hline
     \end{tabularx}
-
-    
     \caption{Frames in Interleaved und Non-interleaved Buffers}
     \label{fig:frames_buffers}
 \end{figure}
@@ -257,11 +255,74 @@ Die erste Zeile entspricht der \textit{Interleaved}-Anordnung und die zweite Zei
 Mit diesem Wissen kennen wir nun die Unterschiede zwischen den beiden Anordnungen. Für die 
 Anwendung ist es wichtig zu verstehen, mit welcher Anordnung die verwendete API arbeitet.
 
-\subsection{Audio-APIs}
-In diesem Abschnitt werden die wichtigsten Audio-APIs vorgestellt.
+\subsection{Audio APIs im Überblick}
+In der Audioverarbeitung sind APIs unerlässlich, die den Zugriff auf Audiofunktionen ermöglichen. 
+Diese Schnittstellen werden als Audio APIs bezeichnet. Sie stellen Funktionen und Klassen bereit, 
+mit denen Entwickler Audiofunktionen wie das Aufnehmen, Wiedergeben, Mischen und Verarbeiten von 
+Audiosignalen in ihre Anwendungen integrieren können. Audio APIs spielen eine zentrale Rolle in 
+modernen Betriebssystemen und Anwendungsplattformen, da sie die Grundlage für alle Audioanwendungen 
+bieten. Ohne solche APIs wäre die Entwicklung von Audio-Software erheblich komplexer, da jeder 
+Entwickler eigene Schnittstellen und Treiber entwickeln müsste. Daher werden in diesem Kapitel 
+einige der wichtigsten Audio APIs vorgestellt, welche in dieser Arbeit verwendet werden.
+
+
+\noindent
+\newline
+Während dem Erarbeiten dieser Arbeit wurden zwei grundlegende Anwendungsfälle identifiziert. Zum 
+einen war die intensive Verarbeitung von Audio in Python erforderlich, um die Grundlagen der
+Audioverarbeitung zu verstehen. Zum anderen war es notwendig, eine Audio API in eine mobile 
+Anwendung zu integrieren. Daher wurden die folgenden APIs ausgewählt, um diese Anwendungsfälle zu
+unterstützen:
+
+\begin{itemize}
+    \item \textbf{SoundDevice:} Eine Python-Bibliothek, die eine einfache und plattformübergreifende
+    \item \textbf{PyAudio:} Eine Python-Bibliothek, die eine einfache und plattformübergreifende
+    \item \textbf{AVAudioEngine:} Eine Audio API für iOS und macOS.
+    \item \textbf{AudioTrack:} Eine Audio API für Android.
+    \item \textbf{Web Audio API:} Eine Audio API für Webbrowser.
+    \item \textbf{WebRTC:} Eine Audio API für Webbrowser.
+\end{itemize}
 
 
 
+
+
+\subsubsection{Merkmale und Auswahl von Audio APIs}
+Beim Vergleich verschiedener Audio APIs gibt es mehrere Faktoren zu beachten:
+\begin{itemize}
+\item \textbf{Plattformunterstützung:} Einige APIs sind plattformspezifisch, während andere 
+plattformübergreifend sind.
+\item \textbf{Funktionsumfang:} Unterschiedliche APIs bieten verschiedene Funktionen, von 
+grundlegenden Aufnahme- und Wiedergabefunktionen bis hin zu erweiterten 
+Audioverarbeitungsfunktionen.
+\item \textbf{Performance:} Die Effizienz einer API kann sich auf die Latenz und die CPU-Auslastung 
+auswirken.
+\item \textbf{Gemeinschaft und Dokumentation:} Eine aktive Entwicklergemeinschaft und umfassende 
+Dokumentation können den Einstieg und die Problembehandlung erleichtern.
+\end{itemize}
+
+\noindent
+In dieser Arbeit wurde die \textit{SoundDevice} API gegenüber der \textit{PyAudio} API bevorzugt, 
+aufgrund ihrer besseren Kompatibilität mit dem verwendeten Setup. Es ist jedoch wichtig zu betonen, 
+dass die Wahl der richtigen API stark von den spezifischen Anforderungen des Projekts abhängt.
+
+\subsubsection{Integration und Anwendung von Audio APIs}
+Die effektive Nutzung einer Audio API erfordert ein Verständnis ihrer Struktur und Funktionsweise. 
+Beispielsweise ist es wichtig zu wissen, wie Buffers und Channels in der jeweiligen API gehandhabt 
+werden. In der Regel bieten APIs Funktionen zum Initialisieren von Audio-Streams, zum Steuern von 
+Audio-Parametern wie Abtastrate und Bitrate und zum Verarbeiten von Audio-Daten in Echtzeit. Die 
+korrekte Integration und Anwendung dieser Funktionen ist entscheidend für die Erstellung qualitativ 
+hochwertiger Audio-Anwendungen.
+
+\subsubsection{Zusammenfassung}
+Die Audioverarbeitung ist ein faszinierendes und komplexes Gebiet, das fundierte Kenntnisse in 
+vielen verschiedenen Bereichen erfordert. Von der tiefen mathematischen Theorie der Fourier-Analyse 
+bis hin zur praktischen Anwendung von Audio APIs gibt es viele Aspekte zu berücksichtigen. Diese 
+Arbeit zielt darauf ab, einen umfassenden Überblick über die Schlüsselkonzepte und Techniken in 
+diesem Bereich zu geben und als Fundament für zukünftige Forschung und Anwendung zu dienen.
+
+
+\newpage
 \subsection{Fourier-Analyse}
 Die Fourier-Analyse befasst sich mit der Zerlegung von Funktionen in Frequenzkomponenten. Die 
 Fourier-Analyse ist ein wichtiges Konzept in der Signalverarbeitung und findet breite Anwendung 
@@ -434,6 +495,19 @@ reconstructed = np.fft.ifft(fhat).real # Rekonstruiertes Signal mit ifft
     \caption{Rekonstruktion des Signals \(f(x)\)}
     \label{fig:dft_example_reconstructed}
 \end{figure}
+
+
+\noindent
+\newline
+Die Abbildung \ref{fig:dft_example_reconstructed} zeigt die ursprüngliche Funktion \(f(x)\) und die
+rekonstruierte Funktionen \texttt{reconstructed (n=5)} und \texttt{reconstructed (n=nyquist)}.
+Die Annäherung der mit der inversen DFT rekonstruierten Funktion an die ursprüngliche Funktion ist
+bei \(n=5\) deutlich sichtbar. Bei \(n=nyquist\) ist die Annäherung nahezu perfekt, wenn nicht sogar
+perfekt. Die Sampling-Rate bei der Nyquist angenäherten Funktion ist das Doppelte der höchsten
+Frequenz des Signals. Das ist in diesem Fall \(2 \cdot 3 + 1 = 7\).
+
+
+
 
 \subsubsection{Aliasing}
 Aliasing tritt auf, wenn ein Signal bei einer nicht ausreichend hohen Samplingrate digital erfasst 
