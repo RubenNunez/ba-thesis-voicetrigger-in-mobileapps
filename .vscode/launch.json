@@ -1,0 +1,28 @@
+{
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "name": "Debug src (src)",
+            "program": "${workspaceFolder:ba-thesis-voicetrigger-in-mobileapps}/src/.build/debug/src",
+            "args": [],
+            "cwd": "${workspaceFolder:ba-thesis-voicetrigger-in-mobileapps}/src",
+            "preLaunchTask": "swift: Build Debug src (src)"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "name": "Release src (src)",
+            "program": "${workspaceFolder:ba-thesis-voicetrigger-in-mobileapps}/src/.build/release/src",
+            "args": [],
+            "cwd": "${workspaceFolder:ba-thesis-voicetrigger-in-mobileapps}/src",
+            "preLaunchTask": "swift: Build Release src (src)"
+        }
+    ]
+}
