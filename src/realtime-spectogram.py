@@ -10,8 +10,6 @@ import signal # For Ctrl+C handling
 
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 
-
-
 # https://colorcet.holoviz.org/
 # Default colormap
 colormap = pg.colormap.get("CET-R1")  # 'CET-R1', 'CET-D1', 'magma', 'inferno', 'plasma',
@@ -19,7 +17,6 @@ default_lut = colormap.getLookupTable()
 
 colors = plt.get_cmap(cc.m_fire)(np.linspace(0, 1, 256))
 default_lut = (colors[:, :3] * 255).astype(np.uint8)
-
 
 
 CHUNK = 1024
@@ -83,7 +80,7 @@ class AudioStream(object):
                  
 
     def get_spectrogram(self, data):
-        freqs = np.fft.rfftfreq(CHUNK, 1./RATE)
+        freqs = np.fft.rfftfreq(CHUNK, 1/RATE)
         t = np.arange(0, CHUNK, 1)
         Sxx = np.fft.rfft(data)  # FFT
         Sxx = np.abs(np.fft.rfft(data))**2

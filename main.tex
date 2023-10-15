@@ -6,7 +6,7 @@
 \usepackage{geometry}
 \usepackage{hyperref}
 \usepackage{subfiles}
-\usepackage{amssymb} 
+\usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{tabularx}
 \usepackage{listings}
@@ -29,47 +29,47 @@
 \definecolor{ba-gray}{rgb}{0.9,0.9,0.9}
 
 \newcommand\blankpage{%
-    \null
-    \thispagestyle{empty}%
-    \addtocounter{page}{-1}%
-    \newpage}
+	\null
+	\thispagestyle{empty}%
+	\addtocounter{page}{-1}%
+	\newpage}
 
 \newcommand\redpage{%
-    \newpage
-    \pagecolor{red}
-    \blankpage
-    \afterpage{\nopagecolor}}
+	\newpage
+	\pagecolor{red}
+	\blankpage
+	\afterpage{\nopagecolor}}
 
 
 
-    \definecolor{codeblack}{rgb}{0.1,0.1,0.23}
-    \definecolor{codegreen}{rgb}{0.2,0.5,0.1}
-    \definecolor{codepurple}{rgb}{0.5,0.0,0.5}
-    \definecolor{backcolour}{rgb}{0.95,0.95,0.95}
-    \definecolor{codered}{rgb}{0.7,0.1,0.2}
-    
-    \lstset{
-      language=Python,
-      basicstyle=\ttfamily\footnotesize, % footnotesize gibt eine kleinere Schriftgröße
-      backgroundcolor=\color{white},
-      commentstyle=\color{codegreen},
-      keywordstyle=\color{codered},
-      numberstyle=\tiny\color{codegray},
-      stringstyle=\color{codepurple},
-      identifierstyle=\color{codeblack},
-      showstringspaces=false,
-      numbers=none,
-      captionpos=b,
-      frame=none,
-      rulecolor=\color{black},
-      aboveskip=1em, % Abstand über dem Code
-      belowskip=1em  % Abstand unter dem Code
-    }
+\definecolor{codeblack}{rgb}{0.1,0.1,0.23}
+\definecolor{codegreen}{rgb}{0.2,0.5,0.1}
+\definecolor{codepurple}{rgb}{0.5,0.0,0.5}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.95}
+\definecolor{codered}{rgb}{0.7,0.1,0.2}
+
+\lstset{
+	language=Python,
+	basicstyle=\ttfamily\footnotesize, % footnotesize gibt eine kleinere Schriftgröße
+	backgroundcolor=\color{white},
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{codered},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	identifierstyle=\color{codeblack},
+	showstringspaces=false,
+	numbers=none,
+	captionpos=b,
+	frame=none,
+	rulecolor=\color{black},
+	aboveskip=1em, % Abstand über dem Code
+	belowskip=1em  % Abstand unter dem Code
+}
 
 
 \title{
-    {\LARGE Bachelorarbeit}\\[2em]
-    {\textbf{Integration einer Sprachsteuerungsfunktion {\break} in Mobile Apps}}
+{\LARGE Bachelorarbeit}\\[2em]
+{\textbf{Integration einer Sprachsteuerungsfunktion {\break} in Mobile Apps}}
 }
 \author{Rubén Nuñez}
 \date{Herbstsemester 2023}
@@ -84,8 +84,7 @@
 \subfile{affidavit.tex}
 \newpage
 
-
-\section*{Abstract}
+\newpage \section*{Abstract}
 Das Problem dieser Arbeit ist im wesentlichen die Erkennung von Triggerwörtern innerhalb
 des Kontext einer App. Grundsätzlich ist es unüblich, dass mobile Apps eine
 integrierte Sprachsteuerungsfunktion anbieten.
@@ -94,62 +93,38 @@ integrierte Sprachsteuerungsfunktion anbieten.
 \tableofcontents
 
 \newpage
-\section{Problem, Fragestellung, Vision}
-Das Kernproblem dieser Bachelorarbeit ist die Erkennung von Triggerwörtern innerhalb eines 
-App-Kontexts. Obwohl Sprachsteuerungstechnologien ein erhebliches Potenzial aufweisen und 
-Assistenten wie Siri oder Alexa weit verbreitet sind, bieten mobile Apps selten eine integrierte 
-Spracherkennung. Dies führt zu einer Lücke, da solche Assistenten nicht spezifisch für App-Kontexte 
-optimiert sind. Diese Arbeit verfolgt das Ziel, diese Lücke zu schliessen und eine integrierte 
+
+\newpage \section{Problem, Fragestellung, Vision}
+Das Kernproblem dieser Bachelorarbeit ist die Entwicklung einer integrierten
+Spracherkennungsfunktion die bestimmte Triggerwörter innerhalb einer mobilen App erkennt. Obwohl
+Sprachsteuerungstechnologien ein erhebliches Potenzial aufweisen und Assistenten wie Siri oder
+Alexa weit verbreitet sind, bieten mobile Apps selten eine integrierte Spracherkennung. Dies führt
+zu einer Lücke, da solche Assistenten nicht spezifisch für App-Kontexte optimiert sind.
+Diese Arbeit verfolgt das Ziel, diese Lücke zu schliessen und eine integrierte
 Spracherkennungsfunktion zu entwickeln, die Triggerwörter in einer App effektiv erkennt.
 
 \subsection{Fragestellung}
 Die Fragestellung dieser Arbeit lautet: \textit{Wie kann eine integrierte Sprachsteuerung für eine
-Mobile Apps entwickelt werden, die speziell das Erkennen von Triggerwörtern ermöglicht, indem 
-Methoden des Machine Learnings genutzt werden?}.
+	Mobile Apps entwickelt werden, die speziell das Erkennen von Triggerwörtern ermöglicht, indem
+	Methoden des Machine Learnings genutzt werden?}.
 
-\subsection*{Ausgangslage und Problemstellung}
-Sprachsteuerungstechnologien haben ein grosses Potenzial und werden bisher vor allem als
-Sprachsteuerungsassistenten genutzt. Während es etablierte Sprachassistenten wie Siri gibt,
-fehlt es an Lösungen für eine integrierte Sprachsteuerung in Mobile Apps, insbesondere in
-Bezug auf das Erkennen von Triggerwörtern.
-
-\subsection*{Ziel der Arbeit und erwartete Resultate}
-Ziel der Arbeit ist es zum einen, eine Grundlage zu schaffen, um ein Triggerwort oder eine
-Sequenz von Triggerwörtern in der akustischen Sprache erkennen zu können. Dabei werden
-Methoden und Werkzeuge aus dem Bereich des Machine Learnings verwendet. Zum anderen soll
-diese Erkenntnis in eine mobile Plattform wie iOS oder Android integriert werden. Für den
+\subsection{Vision}
+Das Ziel sowie die Vision der Arbeit ist es zum einen, eine Grundlage zu schaffen, um ein
+Triggerwort oder eine Sequenz von Triggerwörtern in der akustischen Sprache erkennen zu können.
+Dabei werden Methoden und Werkzeuge aus dem Bereich des Machine Learnings verwendet. Zum anderen
+soll diese Erkenntnis in eine mobile Plattform wie iOS oder Android integriert werden. Für den
 Rahmen dieser Arbeit genügt die Integration in eine der genannten Plattformen. Weiterhin
 werden das Thema Datenschutz und die ethischen Aspekte berücksichtigt.
 
-\subsection*{Gewünschte Methoden, Vorgehen}
-Das Projekt kann beispielsweise in drei Phasen durchgeführt werden: Technische Abklärungen,
-Datensammlung und Modelltraining, sowie die Erarbeitung eines Prototypen. Agile
-Vorgehensweisen sind wünschenswert.
-
-\subsection*{Kreativität, Methoden, Innovation}
-Bisher sind Sprachsteuerungsfunktionen fast ausschliesslich grossen Akteuren wie Siri
-vorbehalten. Der innovative Ansatz dieser Arbeit zielt darauf ab, einen Anreiz zu setzen,
-um diese Funktionen auch in herkömmlichen Apps einzusetzen. Die handfreie Bedienung durch
-Sprachsteuerung hat das Potenzial, das Benutzererlebnis erheblich zu verbessern.
-
-
-
-\newpage
-\section{Stand der Forschung}
-Um diese Arbeit fundiert anzugehen, ist ein Verständnis der Grundlagen in den Bereichen 
-Audioverarbeitung und Machine Learning essenziell. Daher wird in diesem Kapitel ein Überblick 
-über die wichtigsten Themen gegeben. Zudem wird das Kapitel sich mit der Implementation von 
-Sprachsteuerungstechnologien befassen. Darunter fallen die Sprachassistenten wie Siri, Alexa oder 
-Google Assistant. Was natürlich auch nicht fehlen darf, ist eine kleine Einleitung in die 
-Fourier-Analyse. Die Fourier-Analyse ist ein wichtiges Konzept in der 
-Signalverarbeitung und wird in dieser Arbeit verwendet.
-
-
+\newpage \section{Grundlagen}
+Um diese Arbeit fundiert anzugehen, ist ein Verständnis der Grundlagen in den Bereichen
+Audioverarbeitung und Machine Learning essenziell. Daher wird in diesem Kapitel ein Überblick
+über die wichtigsten Themen gegeben. ...
 
 \subsection{Audio}
-In der digitalen Welt repräsentiert Audio Schallwellen, die durch eine Reihe von numerischen Werten 
-dargestellt werden \cite[p.9]{somberg2019audioapi}. beschreibt Audio als: \glqq Fundamentally, 
-audio can be modeled as waves in an elastic medium. In our normal everyday experience, the elastic 
+In der digitalen Welt repräsentiert Audio Schallwellen, die durch eine Reihe von numerischen Werten
+dargestellt werden \cite[p.9]{somberg2019audioapi}. beschreibt Audio als: \glqq Fundamentally,
+audio can be modeled as waves in an elastic medium. In our normal everyday experience, the elastic
 medium is air, and the waves are air pressure waves.\grqq \ Audiosignale werden durch die Funktion
 \(A(t)\) repräsentiert, wobei \(t\) die Zeit und \(A(t)\) die Amplitude zum
 Zeitpunkt \(t\) angibt. Die Amplitude ist die Stärke des Signals und die Zeit repräsentiert die
@@ -157,7 +132,7 @@ Position des Signals in der Zeit. Diese Betrachtung ist vor allem in der Elektro
 von Bedeutung, da die Amplitude als Spannung angesehen werden kann. Grundsätzlich ist Audio ein
 kontinuierliches Signal. In der digitalen Welt können wir jedoch nur diskrete Werte darstellen.
 Daher wird das kontinuierliche Signal in diskrete Werte umgewandelt. Dieser Vorgang wird als
-\textit{Sampling} bezeichnet (\cite[Chapter~3.1]{tarr2018hackaudio}). 
+\textit{Sampling} bezeichnet (\cite[Chapter~3.1]{tarr2018hackaudio}).
 
 
 \subsubsection{Sampling}
@@ -166,8 +141,7 @@ Ein früher Ansatz zur digitalen Darstellung von analogen Signalen war die Pulse
 parallel zum Aufkommen der digitalen Telekommunikation (\cite[p.~57]{deloraine1965pcm}).
 Im Grundsatz wird es heute noch in modernen Computersystemen nach dem gleichen Verfahren angewendet.
 
-\noindent
-\newline
+\noindent \newline
 Es folgt eine formelle Definition von Sampling. Ein kontinuierliches Signal \(A(t)\)
 wird in bestimmten Zeitintervallen \(T_s\) gesampelt. Diese Zeitintervalle werden auch als
 Sampling-Periode bezeichnet. Die Sampling-Rate \(F_s = \displaystyle\frac{1}{T_s}\) gibt die Anzahl
@@ -180,17 +154,15 @@ einer Frequenz von einem Sample pro Sekunde. Ein weiter wichtiger Begriff ist di
 \textit{Nyquist-Frequenz}. Die Nyquist-Frequenz \(F_n\) ist die Hälfte der Sampling-Rate.
 Also \(F_n = \displaystyle\frac{F_s}{2}\). Die Idee hinter der Nyquist-Frequenz ist, dass die
 Sampling-Rate mindestens doppelt so hoch sein muss wie die höchste Frequenz des Signals. Wenn diese
-Eigenschaft erfüllt ist, kann das Signal ohne Informationsverlust rekonstruiert werden 
-(\cite[Chapter~3.1]{tarr2018hackaudio}). Mehr dazu folgt im Unterkapitel 
+Eigenschaft erfüllt ist, kann das Signal ohne Informationsverlust rekonstruiert werden
+(\cite[Chapter~3.1]{tarr2018hackaudio}). Mehr dazu folgt im Unterkapitel
 \textit{Fourier-Analyse}.
 
-
-\noindent
-\newline
+\noindent \newline
 Weiter ist es wichtig zu verstehen, dass ein Sample ein diskreter Wert ist. Und dieser wird in
 digitalen Systemen durch eine bestimmte Anzahl von Bits dargestellt. Die Anzahl der Bits wird
 als \textit{Bit-Depth} bezeichnet. Die Bit-Depth bestimmt die Auflösung des Signals. Typische
-Bit-Depth Werte sind \(16\) oder \(24\) Bit (\cite[p.10]{somberg2019audioapi}). 
+Bit-Depth Werte sind \(16\) oder \(24\) Bit (\cite[p.10]{somberg2019audioapi}).
 
 \subsubsection{Frames, Channels, Buffers}
 Ebendfalls wichtig ist das Verständnis von Frames, Channels und Buffers. Da diese Arbeit sich mit
@@ -198,176 +170,168 @@ Audio-Systemen beschäftigt, ist es wichtig, die Begriffe \textit{Frame}, \texti
 \textit{Buffer} zu verstehen. Fangen wir mit dem Begriff \textit{Channel} an. Ein Channel kann als
 ein einzelnes Audio-Signal angesehen werden. Ein Mono-Signal hat genau nur einen Channel. Ein
 Stereo-Signal hat zwei Channels. Ein Surround-Signal hat mehr als zwei Channels. usw.
-Nun zum Begriff \textit{Frame}. Ein Frame entspricht einem Sample pro Channel. Weiter sind Frames 
-in Buffers organisiert. Ein Buffer ist eine Sammlung von Frames. Typischerweise werden Buffers in 
-Grössen von \(64\), \(128\), \(256\), \(512\) oder \(1024\) Frames organisiert. Die Abbildung 
-\ref{fig:frames_channels_buffers} zeigt die Beziehung zwischen Frames, Channels und Buffers. 
+Nun zum Begriff \textit{Frame}. Ein Frame entspricht einem Sample pro Channel. Weiter sind Frames
+in Buffers organisiert. Ein Buffer ist eine Sammlung von Frames. Typischerweise werden Buffers in
+Grössen von \(64\), \(128\), \(256\), \(512\) oder \(1024\) Frames organisiert. Die Abbildung
+\ref{fig:frames_channels_buffers} zeigt die Beziehung zwischen Frames, Channels und Buffers.
 Die Abbildung wurde basierend auf (\cite[p.10]{somberg2019audioapi}) erstellt und verdeutlicht die
 Beziehung zwischen Frames, Channels und Buffers.
 
 \begin{figure}[h]
-    \centering
-    \includegraphics[width=0.7\linewidth]{img/audio-nutshell.pdf}
-    \caption{Frames, Channels und Buffers}
-    \label{fig:frames_channels_buffers}
+	\centering
+	\includegraphics[width=0.7\linewidth]{img/audio-nutshell.pdf}
+	\caption{Frames, Channels und Buffers}
+	\label{fig:frames_channels_buffers}
 \end{figure}
 
 
 \subsubsection{Buffers im Detail}
 Ein Buffer im Kontext von Audio ist eine aufeinanderfolgende Sammlung von Frames. Die bereits
 angesprochene Grösse eines Buffers bestimmt im wesentlichen die Latenzzeit des Systems. Kleine
-Buffer-Grössen haben eine geringe Latenzzeit, während grosse Buffer-Grössen eine hohe Latenzzeit 
-haben (\cite[p.10]{somberg2019audioapi}). Der Trade-Off ist dass kleine Buffer-Grössen 
+Buffer-Grössen haben eine geringe Latenzzeit, während grosse Buffer-Grössen eine hohe Latenzzeit
+haben (\cite[p.10]{somberg2019audioapi}). Der Trade-Off ist dass kleine Buffer-Grössen
 zu einer höheren CPU-Auslastung führen, während bei grossen Buffer-Grössen das nicht der Fall ist.
 Das liegt daran, dass bei kleinen Buffer-Grössen die CPU häufiger aufgerufen wird, um die Buffers
-zu verarbeiten. 
+zu verarbeiten.
 
-\noindent
-\newline
-Nun betrachten wir die mögliche Anordnung eines Buffers, wie in den folgenden Abbildungen 
-dargestellt. Es gibt zwei Möglichkeiten, wie Buffers angeordnet werden 
-können: \textit{Interleaved} und \textit{Non-Interleaved}. Bei der \textit{Interleaved}-Anordnung 
-werden die Samples der einzelnen Channels nacheinander in sequentieller Reihenfolge in den Buffer 
-geschrieben. Im Gegensatz dazu werden bei der \textit{Non-Interleaved}-Variante die Samples 
-eines Channels nacheinander in den Buffer geschrieben, bevor die Samples des nächsten Channels 
-hinzugefügt werden. Dieser Vorgang wird für jeden Channel wiederholt. Die Abbildung 
-\ref{fig:frames_buffers} zeigt die Unterschiede zwischen den beiden Anordnungen. Jede Zelle der 
+\noindent \newline
+Nun betrachten wir die mögliche Anordnung eines Buffers, wie in den folgenden Abbildungen
+dargestellt. Es gibt zwei Möglichkeiten, wie Buffers angeordnet werden
+können: \textit{Interleaved} und \textit{Non-Interleaved}. Bei der \textit{Interleaved}-Anordnung
+werden die Samples der einzelnen Channels nacheinander in sequentieller Reihenfolge in den Buffer
+geschrieben. Im Gegensatz dazu werden bei der \textit{Non-Interleaved}-Variante die Samples
+eines Channels nacheinander in den Buffer geschrieben, bevor die Samples des nächsten Channels
+hinzugefügt werden. Dieser Vorgang wird für jeden Channel wiederholt. Die Abbildung
+\ref{fig:frames_buffers} zeigt die Unterschiede zwischen den beiden Anordnungen. Jede Zelle der
 Tabelle entspricht einem Sample. L und R stehen exemplarisch für die Channels Left und Right.
 Die erste Zeile entspricht der \textit{Interleaved}-Anordnung und die zweite Zeile der
-\textit{Non-Interleaved}-Anordnung. Die Abbildung wurde basierend auf 
+\textit{Non-Interleaved}-Anordnung. Die Abbildung wurde basierend auf
 (\cite[p.11]{somberg2019audioapi}) erstellt.
 
-
 \begin{figure}[h]
-    \centering
-    \begin{tabularx}{\textwidth}{|X|X|X|X|X|X|X|X|}
-    \hline
-    L & R & L & R & L & R & L & R \\
-    \hline
-    L & L & L & L & R & R & R & R \\
-    \hline
-    \end{tabularx}
-    \caption{Frames in Interleaved und Non-interleaved Buffers}
-    \label{fig:frames_buffers}
+	\centering
+	\begin{tabularx}{\textwidth}{|X|X|X|X|X|X|X|X|}
+		\hline
+		L & R & L & R & L & R & L & R \\
+		\hline
+		L & L & L & L & R & R & R & R \\
+		\hline
+	\end{tabularx}
+	\caption{Frames in Interleaved und Non-interleaved Buffers}
+	\label{fig:frames_buffers}
 \end{figure}
 
 \noindent
-Mit diesem Wissen kennen wir nun die Unterschiede zwischen den beiden Anordnungen. Für die 
+Mit diesem Wissen kennen wir nun die Unterschiede zwischen den beiden Anordnungen. Für die
 Anwendung ist es wichtig zu verstehen, mit welcher Anordnung die verwendete API arbeitet.
 
 \subsection{Audio APIs im Überblick}
-In der Audioverarbeitung sind APIs unerlässlich, die den Zugriff auf Audiofunktionen ermöglichen. 
-Diese Schnittstellen werden als Audio APIs bezeichnet. Sie stellen Funktionen und Klassen bereit, 
-mit denen Entwickler Audiofunktionen wie das Aufnehmen, Wiedergeben, Mischen und Verarbeiten von 
-Audiosignalen in ihre Anwendungen integrieren können. Audio APIs spielen eine zentrale Rolle in 
-modernen Betriebssystemen und Anwendungsplattformen, da sie die Grundlage für alle Audioanwendungen 
-bieten. Ohne solche APIs wäre die Entwicklung von Audio-Software erheblich komplexer, da jeder 
-Entwickler eigene Schnittstellen und Treiber entwickeln müsste. Daher werden in diesem Kapitel 
+In der Audioverarbeitung sind APIs unerlässlich, die den Zugriff auf Audiofunktionen ermöglichen.
+Diese Schnittstellen werden als Audio APIs bezeichnet. Sie stellen Funktionen und Klassen bereit,
+mit denen Entwickler Audiofunktionen wie das Aufnehmen, Wiedergeben, Mischen und Verarbeiten von
+Audiosignalen in ihre Anwendungen integrieren können. Audio APIs spielen eine zentrale Rolle in
+modernen Betriebssystemen und Anwendungsplattformen, da sie die Grundlage für alle Audioanwendungen
+bieten. Ohne solche APIs wäre die Entwicklung von Audio-Software erheblich komplexer, da jeder
+Entwickler eigene Schnittstellen und Treiber entwickeln müsste. Daher werden in diesem Kapitel
 einige der wichtigsten Audio APIs vorgestellt, welche in dieser Arbeit verwendet werden.
 
 
-\noindent
-\newline
-Während dem Erarbeiten dieser Arbeit wurden zwei grundlegende Anwendungsfälle identifiziert. Zum 
+\noindent \newline
+Während dem Erarbeiten dieser Arbeit wurden zwei grundlegende Anwendungsfälle identifiziert. Zum
 einen war die intensive Verarbeitung von Audio in Python erforderlich, um die Grundlagen der
-Audioverarbeitung zu verstehen. Zum anderen war es notwendig, eine Audio API in eine mobile 
+Audioverarbeitung zu verstehen. Zum anderen war es notwendig, eine Audio API in eine mobile
 Anwendung zu integrieren. Daher wurden die folgenden APIs ausgewählt, um diese Anwendungsfälle zu
 unterstützen:
 
 \begin{itemize}
-    \item \textbf{SoundDevice:} Eine Python-Bibliothek, die eine einfache und plattformübergreifende
-    \item \textbf{PyAudio:} Eine Python-Bibliothek, die eine einfache und plattformübergreifende
-    \item \textbf{AVAudioEngine:} Eine Audio API für iOS und macOS.
-    \item \textbf{AudioTrack:} Eine Audio API für Android.
-    \item \textbf{Web Audio API:} Eine Audio API für Webbrowser.
-    \item \textbf{WebRTC:} Eine Audio API für Webbrowser.
+	\item \textbf{SoundDevice:} Eine Python-Bibliothek, die eine einfache und plattformübergreifende
+	\item \textbf{PyAudio:} Eine Python-Bibliothek, die eine einfache und plattformübergreifende
+	\item \textbf{AVAudioEngine:} Eine Audio API für iOS und macOS.
+	\item \textbf{AudioTrack:} Eine Audio API für Android.
+	\item \textbf{Web Audio API:} Eine Audio API für Webbrowser.
+	\item \textbf{WebRTC:} Eine Audio API für Webbrowser.
 \end{itemize}
-
-
-
-
 
 \subsubsection{Merkmale und Auswahl von Audio APIs}
 Beim Vergleich verschiedener Audio APIs gibt es mehrere Faktoren zu beachten:
 \begin{itemize}
-\item \textbf{Plattformunterstützung:} Einige APIs sind plattformspezifisch, während andere 
-plattformübergreifend sind.
-\item \textbf{Funktionsumfang:} Unterschiedliche APIs bieten verschiedene Funktionen, von 
-grundlegenden Aufnahme- und Wiedergabefunktionen bis hin zu erweiterten 
-Audioverarbeitungsfunktionen.
-\item \textbf{Performance:} Die Effizienz einer API kann sich auf die Latenz und die CPU-Auslastung 
-auswirken.
-\item \textbf{Gemeinschaft und Dokumentation:} Eine aktive Entwicklergemeinschaft und umfassende 
-Dokumentation können den Einstieg und die Problembehandlung erleichtern.
+	\item \textbf{Plattformunterstützung:} Einige APIs sind plattformspezifisch, während andere
+	      plattformübergreifend sind.
+	\item \textbf{Funktionsumfang:} Unterschiedliche APIs bieten verschiedene Funktionen, von
+	      grundlegenden Aufnahme- und Wiedergabefunktionen bis hin zu erweiterten
+	      Audioverarbeitungsfunktionen.
+	\item \textbf{Performance:} Die Effizienz einer API kann sich auf die Latenz und die CPU-Auslastung
+	      auswirken.
+	\item \textbf{Gemeinschaft und Dokumentation:} Eine aktive Entwicklergemeinschaft und umfassende
+	      Dokumentation können den Einstieg und die Problembehandlung erleichtern.
 \end{itemize}
 
 \noindent
-In dieser Arbeit wurde die \textit{SoundDevice} API gegenüber der \textit{PyAudio} API bevorzugt, 
-aufgrund ihrer besseren Kompatibilität mit dem verwendeten Setup. Es ist jedoch wichtig zu betonen, 
+In dieser Arbeit wurde die \textit{SoundDevice} API gegenüber der \textit{PyAudio} API bevorzugt,
+aufgrund ihrer besseren Kompatibilität mit dem verwendeten Setup. Es ist jedoch wichtig zu betonen,
 dass die Wahl der richtigen API stark von den spezifischen Anforderungen des Projekts abhängt.
 
 \subsubsection{Integration und Anwendung von Audio APIs}
-Die effektive Nutzung einer Audio API erfordert ein Verständnis ihrer Struktur und Funktionsweise. 
-Beispielsweise ist es wichtig zu wissen, wie Buffers und Channels in der jeweiligen API gehandhabt 
-werden. In der Regel bieten APIs Funktionen zum Initialisieren von Audio-Streams, zum Steuern von 
-Audio-Parametern wie Abtastrate und Bitrate und zum Verarbeiten von Audio-Daten in Echtzeit. Die 
-korrekte Integration und Anwendung dieser Funktionen ist entscheidend für die Erstellung qualitativ 
+Die effektive Nutzung einer Audio API erfordert ein Verständnis ihrer Struktur und Funktionsweise.
+Beispielsweise ist es wichtig zu wissen, wie Buffers und Channels in der jeweiligen API gehandhabt
+werden. In der Regel bieten APIs Funktionen zum Initialisieren von Audio-Streams, zum Steuern von
+Audio-Parametern wie Abtastrate und Bitrate und zum Verarbeiten von Audio-Daten in Echtzeit. Die
+korrekte Integration und Anwendung dieser Funktionen ist entscheidend für die Erstellung qualitativ
 hochwertiger Audio-Anwendungen.
 
 \subsubsection{Zusammenfassung}
-Die Audioverarbeitung ist ein faszinierendes und komplexes Gebiet, das fundierte Kenntnisse in 
-vielen verschiedenen Bereichen erfordert. Von der tiefen mathematischen Theorie der Fourier-Analyse 
-bis hin zur praktischen Anwendung von Audio APIs gibt es viele Aspekte zu berücksichtigen. Diese 
-Arbeit zielt darauf ab, einen umfassenden Überblick über die Schlüsselkonzepte und Techniken in 
+Die Audioverarbeitung ist ein faszinierendes und komplexes Gebiet, das fundierte Kenntnisse in
+vielen verschiedenen Bereichen erfordert. Von der tiefen mathematischen Theorie der Fourier-Analyse
+bis hin zur praktischen Anwendung von Audio APIs gibt es viele Aspekte zu berücksichtigen. Diese
+Arbeit zielt darauf ab, einen umfassenden Überblick über die Schlüsselkonzepte und Techniken in
 diesem Bereich zu geben und als Fundament für zukünftige Forschung und Anwendung zu dienen.
 
 
-\newpage
-\subsection{Fourier-Analyse}
-Die Fourier-Analyse befasst sich mit der Zerlegung von Funktionen in Frequenzkomponenten. Die 
-Fourier-Analyse ist ein wichtiges Konzept in der Signalverarbeitung und findet breite Anwendung 
-in der Audioverarbeitung. Daher ist ein Grundverständnis für diese Arbeit relevant. 
+\newpage \subsection{Fourier-Analyse}
+Die Fourier-Analyse befasst sich mit der Zerlegung von Funktionen in Frequenzkomponenten. Die
+Fourier-Analyse ist ein wichtiges Konzept in der Signalverarbeitung und findet breite Anwendung
+in der Audioverarbeitung. Daher ist ein Grundverständnis für diese Arbeit relevant.
 
 \subsubsection{Fourier-Transformation}
-Die Fourier-Transformation ist ein zentrales Werkzeug der Fourier-Analyse. Sie ermöglicht die 
-Zerlegung von Funktionen in ihre Frequenzkomponenten und die Rekonstruktion von Funktionen aus 
-diesen Komponenten. Dies wird als Fourier-Analyse und Fourier-Synthese bezeichnet. Dieses Konzept 
-wird auch von Prof. Dr. Weitz in seinem Video zu Fourier-Analyse erläutert 
-(\cite[2:20]{weitz2023fourier}). Mathematisch ausgedrückt wird die kontinuierliche 
-Fourier-Transformation eines Signals \( f(t) \) wie folgt definiert 
-(\cite[Chapter~5]{hansen2014fourier}): 
+Die Fourier-Transformation ist ein zentrales Werkzeug der Fourier-Analyse. Sie ermöglicht die
+Zerlegung von Funktionen in ihre Frequenzkomponenten und die Rekonstruktion von Funktionen aus
+diesen Komponenten. Dies wird als Fourier-Analyse und Fourier-Synthese bezeichnet. Dieses Konzept
+wird auch von Prof. Dr. Weitz in seinem Video zu Fourier-Analyse erläutert
+(\cite[2:20]{weitz2023fourier}). Mathematisch ausgedrückt wird die kontinuierliche
+Fourier-Transformation eines Signals \( f(t) \) wie folgt definiert
+(\cite[Chapter~5]{hansen2014fourier}):
 
 \begin{equation*}
-F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-i \omega t} \, dt
-\label{eq:fourier_transform}
+	F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-i \omega t} \, dt
+	\label{eq:fourier_transform}
 \end{equation*}
 
 \noindent
-\(F(\omega)\) ist die Fourier-Transformation von \(f(t)\) 
-(\cite[49:27]{weitz2023fourier}). Als kleines Rechenbeispiel betrachten wir die 
+\(F(\omega)\) ist die Fourier-Transformation von \(f(t)\)
+(\cite[49:27]{weitz2023fourier}). Als kleines Rechenbeispiel betrachten wir die
 Fourier-Transformation der Rechteckfunktion \( \text{rect}(x) \), die wie folgt definiert ist:
 
 \[
-\text{rect}(x) = 
-\begin{cases} 
-1 & \text{für } -1 \leq x \leq 1 \\
-0 & \text{sonst}
-\end{cases}
+	\text{rect}(x) =
+	\begin{cases}
+		1 & \text{für } -1 \leq x \leq 1 \\
+		0 & \text{sonst}
+	\end{cases}
 \]
 
 \noindent
 Die Fourier-Transformation der Funktion \( \text{rect}(x) \) kann wie folgt berechnet werden:
 
 \begin{equation*}
-\begin{split}
-F(\omega) &= \int_{-\infty}^{\infty} \text{rect}(x) e^{-i \omega x} \, dx \\
-&= \int_{-1}^{1} e^{-i \omega x} \, dx \\
-&= \frac{1}{-i \omega} \left[ e^{-i \omega x} \right]_{-1}^{1} \\
-&= \frac{1}{-i \omega} \left( e^{-i \omega} - e^{i \omega} \right) \\
-&= \frac{1}{-i \omega} \left( \cos(\omega) - i \sin(\omega) - \cos(\omega) - i \sin(\omega) \right) \\
-&= \frac{1}{-i \omega} \left( -2 i \sin(\omega) \right) \\
-&= \frac{2 \sin(\omega)}{\omega}
-\end{split}
+	\begin{split}
+		F(\omega) &= \int_{-\infty}^{\infty} \text{rect}(x) e^{-i \omega x} \, dx \\
+		&= \int_{-1}^{1} e^{-i \omega x} \, dx \\
+		&= \frac{1}{-i \omega} \left[ e^{-i \omega x} \right]_{-1}^{1} \\
+		&= \frac{1}{-i \omega} \left( e^{-i \omega} - e^{i \omega} \right) \\
+		&= \frac{1}{-i \omega} \left( \cos(\omega) - i \sin(\omega) - \cos(\omega) - i \sin(\omega) \right) \\
+		&= \frac{1}{-i \omega} \left( -2 i \sin(\omega) \right) \\
+		&= \frac{2 \sin(\omega)}{\omega}
+	\end{split}
 \end{equation*}
 \noindent
 
@@ -377,38 +341,38 @@ Somit ist die Fourier-Transformation der Rechteckfunktion \( \text{rect}(x) \) g
 \( \displaystyle\frac{2 \sin(\omega)}{\omega} \).
 
 \begin{figure}[h]
-    \centering
-    \includegraphics[width=0.8\linewidth]{img/example-fourier-trans.png}
-    \caption{Rechteckfunktion und ihre Fourier-Transformation}
-    \label{fig:fourier_transform}
+	\centering
+	\includegraphics[width=0.8\linewidth]{img/example-fourier-trans.png}
+	\caption{Rechteckfunktion und ihre Fourier-Transformation}
+	\label{fig:fourier_transform}
 \end{figure}
 
 \noindent
-Die Abbildung \ref{fig:fourier_transform} stellt die \( \text{rect}(x) \) Funktion und ihre 
-Fourier-Transformation, die als \( \text{sinc}(\omega) \) bezeichnet wird, dar. Die Nullstellen 
-\( \pm \pi, \pm 2 \pi, \pm 3 \pi, \dots \) der \( \text{sinc}(\omega) \) Funktion deuten darauf 
-hin, dass die \( \text{rect}(x) \) Funktion bei diesen Frequenzen keine Energie besitzt. Die 
-primäre Energie der Funktion liegt bei \( \omega=0 \). Beispiel adaptiert von 
+Die Abbildung \ref{fig:fourier_transform} stellt die \( \text{rect}(x) \) Funktion und ihre
+Fourier-Transformation, die als \( \text{sinc}(\omega) \) bezeichnet wird, dar. Die Nullstellen
+\( \pm \pi, \pm 2 \pi, \pm 3 \pi, \dots \) der \( \text{sinc}(\omega) \) Funktion deuten darauf
+hin, dass die \( \text{rect}(x) \) Funktion bei diesen Frequenzen keine Energie besitzt. Die
+primäre Energie der Funktion liegt bei \( \omega=0 \). Beispiel adaptiert von
 (\cite[Chapter~5 - Example~5.1]{hansen2014fourier}).
 
 
 
 \subsubsection{Diskrete Fourier-Transformation}
 
-Die diskrete Fourier-Transformation (DFT) stellt eine diskrete Variante der kontinuierlichen 
-Fourier-Transformation dar und wird speziell auf diskrete Signale angewendet. In digitalen 
-Systemen sind Signale typischerweise diskret und bestehen aus einzelnen Samples, weshalb die DFT 
-besonders relevant für solche Anwendungen ist. Die mathematische Definition der DFT ist 
+Die diskrete Fourier-Transformation (DFT) stellt eine diskrete Variante der kontinuierlichen
+Fourier-Transformation dar und wird speziell auf diskrete Signale angewendet. In digitalen
+Systemen sind Signale typischerweise diskret und bestehen aus einzelnen Samples, weshalb die DFT
+besonders relevant für solche Anwendungen ist. Die mathematische Definition der DFT ist
 (\cite[Chapter~3]{hansen2014fourier}):
 
 \[
-F(k) = \sum_{n=0}^{N-1} f(n) \cdot e^{-\frac{2\pi i}{N} kn}
+	F(k) = \sum_{n=0}^{N-1} f(n) \cdot e^{-\frac{2\pi i}{N} kn}
 \]
 
 \noindent
 \newline
 Zur Veranschaulichung betrachten wir ein Code-Beispiel. Wir haben eine Funktion \(f(t)\) und unterteilen
-diese in \(N\) Samples. Die DFT berechnet nun die Frequenzkomponenten des Signals. Die Abbildung 
+diese in \(N\) Samples. Die DFT berechnet nun die Frequenzkomponenten des Signals. Die Abbildung
 \ref{fig:dft_example} zeigt ein Beispiel für ein Signal \(f(t)\) mit \(N=5\) Samples.
 
 \[ f(t) = 1.5 \cos(t) + 0.25 \sin(t) + 2 \sin(2t) + \sin(3t) \].
@@ -431,15 +395,15 @@ plt.plot(x_points, f(x_points), 'o') # Plotte die 5 Punkte
 \end{lstlisting}
 
 \begin{figure}[h]
-    \centering
-    \includegraphics[width=0.60\linewidth]{img/dft.png}
-    \caption{Funktion \( f(x) \) mit 5 Samples}
-    \label{fig:dft_example}
+	\centering
+	\includegraphics[width=0.60\linewidth]{img/dft.png}
+	\caption{Funktion \( f(x) \) mit 5 Samples}
+	\label{fig:dft_example}
 \end{figure}
 
 \noindent
 Nun berechnen wir die DFT der 5 Samples. Dazu verwenden wir die \texttt{fft} Funktion aus der
-\texttt{numpy} Bibliothek. Das Resultat ist ein Array mit \(N\) komplexen Zahlen. Die Abbildung 
+\texttt{numpy} Bibliothek. Das Resultat ist ein Array mit \(N\) komplexen Zahlen. Die Abbildung
 \ref{fig:dft_example_table} zeigt die Funktion \(f(x)\) und die DFT der 5 Samples.
 
 \begin{lstlisting}
@@ -447,29 +411,29 @@ fhat = np.fft.fft(f(x_points), N_SAMPLES)
 \end{lstlisting}
 
 \begin{figure}[h]
-    \centering
-    \begin{tabular}{|c|c|c|c|c|c|}
-    \hline
-    & 0 & 1 & 2 & 3 & 4 \\
-    \hline
-    \(f(x)\) & 1.5 & 0.25 & 0.5 & 1.75 & 1.5 \\
-    \hline
-    dft & \(5.50 + 0.00i\) & \(0.22 + 1.92i\) & \(0.78 - 0.45i\) & \(0.78 + 0.45i\) & \(0.22 - 1.92i\) \\
-    \hline
-    \end{tabular}
-    \caption{\(f(x)\) und die DFT der 5 Samples}
-    \label{fig:dft_example_table}
+	\centering
+	\begin{tabular}{|c|c|c|c|c|c|}
+		\hline
+		         & 0                & 1                & 2                & 3                & 4                \\
+		\hline
+		\(f(x)\) & 1.5              & 0.25             & 0.5              & 1.75             & 1.5              \\
+		\hline
+		dft      & \(5.50 + 0.00i\) & \(0.22 + 1.92i\) & \(0.78 - 0.45i\) & \(0.78 + 0.45i\) & \(0.22 - 1.92i\) \\
+		\hline
+	\end{tabular}
+	\caption{\(f(x)\) und die DFT der 5 Samples}
+	\label{fig:dft_example_table}
 \end{figure}
 
 \noindent
-Mit den Frequenzkomponenten der DFT können Signale manipuliert werden, etwa durch Filtern 
-bestimmter Frequenzbereiche. Um das ursprüngliche Signal wiederzuerlangen, wenden wir die inverse 
-DFT an. Die Formel der inversen DFT, welche das Signal rekonstruiert, lautet 
+Mit den Frequenzkomponenten der DFT können Signale manipuliert werden, etwa durch Filtern
+bestimmter Frequenzbereiche. Um das ursprüngliche Signal wiederzuerlangen, wenden wir die inverse
+DFT an. Die Formel der inversen DFT, welche das Signal rekonstruiert, lautet
 (\cite[Chapter~3]{hansen2014fourier}):
 
 
 \[
-f(n) = \frac{1}{N} \sum_{k=0}^{N-1} F(k) \cdot e^{\frac{2\pi i}{N} kn}
+	f(n) = \frac{1}{N} \sum_{k=0}^{N-1} F(k) \cdot e^{\frac{2\pi i}{N} kn}
 \]
 
 \begin{lstlisting}
@@ -479,23 +443,20 @@ dt = x_points[1] - x_points[0] # Abstand zwischen zwei Punkten
 T = N_SAMPLES * dt # Periode des Signals
 
 for n in range(N_SAMPLES):
-    freq = n / T # Korrespondierende Frequenz des Koeffizienten
-    coeff = fhat[n] # Koeffizient selbst
-    term = coeff * np.exp(1j * 2 * np.pi * freq * x_points)
-    reconstructed_manual += term
+    # Rekonstruiert Signal mit Fourier-Koeffizienten, neg. Freq. bei n > N_SAMPLES/2.
+    freq = n / (2*np.pi) if n <= N_SAMPLES//2 else (n - N_SAMPLES) / (2*np.pi)
+    reconstructed_manual += fhat[n] * np.exp(1j * 2 * np.pi * freq * x)
 
 reconstructed_manual = (reconstructed_manual / N_SAMPLES).real
 reconstructed = np.fft.ifft(fhat).real # Rekonstruiertes Signal mit ifft
 \end{lstlisting}
 
-
 \begin{figure}[h]
-    \centering
-    \includegraphics[width=0.60\linewidth]{img/dft_reconstructed.png}
-    \caption{Rekonstruktion des Signals \(f(x)\)}
-    \label{fig:dft_example_reconstructed}
+	\centering
+	\includegraphics[width=0.60\linewidth]{img/dft_reconstructed.png}
+	\caption{Rekonstruktion des Signals \(f(x)\)}
+	\label{fig:dft_example_reconstructed}
 \end{figure}
-
 
 \noindent
 \newline
@@ -506,67 +467,93 @@ bei \(n=5\) deutlich sichtbar. Bei \(n=nyquist\) ist die Annäherung nahezu perf
 perfekt. Die Sampling-Rate bei der Nyquist angenäherten Funktion ist das Doppelte der höchsten
 Frequenz des Signals. Das ist in diesem Fall \(2 \cdot 3 + 1 = 7\).
 
-
-
-
 \subsubsection{Aliasing}
-Aliasing tritt auf, wenn ein Signal bei einer nicht ausreichend hohen Samplingrate digital erfasst 
-wird, wodurch Frequenzen des Signals fehlinterpretiert werden können. Als allgemeines Beispiel wenn 
-ein Sinussignal mit einer Frequenz von 1200 Hz betrachtet wird und dieses mit einer Samplingrate 
-von nur 1000 Hz aufgenommen wurde, könnte das digitalisierte Signal so aussehen, als ob das 
-ursprüngliche Signal eine Frequenz von 200 Hz hätte. Das ist, als ob man ein sich schnell 
-drehendes Rad filmt und auf dem Video wirkt es, als würde es sich langsamer oder sogar rückwärts 
-drehen. Um solche Fehler zu verhindern, sollte die Samplingrate stets mindestens das 
-Doppelte der höchsten Frequenz des Signals betragen, ein Grundsatz, der als Nyquist-Kriterium 
+Aliasing tritt auf, wenn ein Signal bei einer nicht ausreichend hohen Samplingrate digital erfasst
+wird, wodurch Frequenzen des Signals fehlinterpretiert werden können. Als allgemeines Beispiel wenn
+ein Sinussignal mit einer Frequenz von 1200 Hz betrachtet wird und dieses mit einer Samplingrate
+von nur 1000 Hz aufgenommen wurde, könnte das digitalisierte Signal so aussehen, als ob das
+ursprüngliche Signal eine Frequenz von 200 Hz hätte. Das ist, als ob man ein sich schnell
+drehendes Rad filmt und auf dem Video wirkt es, als würde es sich langsamer oder sogar rückwärts
+drehen. Um solche Fehler zu verhindern, sollte die Samplingrate stets mindestens das
+Doppelte der höchsten Frequenz des Signals betragen, ein Grundsatz, der als Nyquist-Kriterium
 bekannt ist. (\cite[]{weitz2023fourier}).
 
+\subsection{Spektrogramm}
+Da wir nun die Grundlagen der Fourier-Analyse kennen, können wir uns mit dem Spektrogramm
+beschäftigen. Ein Spektrogramm ist eine visuelle Darstellung der Frequenzkomponenten eines
+Signals über der Zeit. Definiert ein Spektrogramm (\cite[Chapter~15.2.1]{tarr2018hackaudio})
+folgendermassen:
 
-\newpage
-\section{Ideen und Konzepte}
+\begin{displayquote}
+	''A spectrogram is a three-dimensional visualization of a signal’s amplitude over frequency and
+	time. Many audio signals are comprised of multiple frequencies happening at the same time, and
+	are also signals that change to different frequencies at different times. Therefore, the
+	spectrogram is a common way for audio engineers to analyze a complex signal.''
+\end{displayquote}
+
+\noindent
+Im Kontext von Maschinellem Lernen und insbesondere in der Spracherkennung spielt das Spektrogramm 
+eine entscheidende Rolle. Wenn wir ein Audiosignal in seine Frequenzkomponenten zerlegen, verlieren 
+wir durch die Anwendung der FFT die zeitliche Information des Signals. In Anwendungen wie der 
+Spracherkennung ist es jedoch unerlässlich, nicht nur zu wissen, welche Frequenzen in einem Signal 
+vorhanden sind, sondern auch wann sie auftreten. Ein Spektrogramm löst dieses Problem, indem es 
+Frequenzen in Beziehung zur Zeit darstellt. Dies ist besonders wichtig, um beispielsweise die 
+Reihenfolge von gesprochenen Wörtern in einem Satz zu erkennen \cite{chaudhary2020}. Ein 
+Spektrogramm bietet somit eine Kombination aus zeitlichen und frequenziellen Informationen, was es 
+zu einem mächtigen Werkzeug für die Spracherkennung und andere Anwendungen im Bereich Maschinelles 
+Lernen macht.
+
+\newpage \section{Stand der Forschung}
+Zudem wird das Kapitel sich mit der Implementation von
+Sprachsteuerungstechnologien befassen. Darunter fallen die Sprachassistenten wie Siri, Alexa oder
+Google Assistant. Was natürlich auch nicht fehlen darf, ist eine kleine Einleitung in die
+Fourier-Analyse. Die Fourier-Analyse ist ein wichtiges Konzept in der
+Signalverarbeitung und wird in dieser Arbeit verwendet.
+
+\newpage \section{Ideen und Konzepte}
+Dieses Kapitel beschreibt die Ideen und Konzepte, die für die Umsetzung der Arbeit verwendet
+werden. Es wird auch auf die verwendeten Technologien eingegangen.
+
+Die Grob Idee ist es im wesentlichen, ein eigenes Modell zu trainieren, welches Triggerwörter
+erkennt. Dazu wird ein Datensatz erstellt, welcher die Triggerwörter, sowie andere Wörter
+enthält.
+
+In einem ersten Schritt wird ein eigenes Modell trainiert, welches Triggerwörter erkennt.
+Es gibt aber auch die Möglichkeit, ein bereits vortrainiertes Modell zu verwenden. Dieses Kapitel
+
+
+....
+
+\newpage \section{Methoden}
 Das Problem dieser Arbeit ist im wesentlichen die Erkennung von Triggerwörtern innerhalb
 des Kontext einer App. Grundsätzlich ist es unüblich, dass mobile Apps eine
 integrierte Sprachsteuerungsfunktion anbieten.
 
-
-\newpage
-\section{Methoden}
+\newpage \section{Realisierung}
 Das Problem dieser Arbeit ist im wesentlichen die Erkennung von Triggerwörtern innerhalb
 des Kontext einer App. Grundsätzlich ist es unüblich, dass mobile Apps eine
 integrierte Sprachsteuerungsfunktion anbieten.
 
-
-\newpage
-\section{Realisierung}
+\newpage \section{Evaluation und Validation}
 Das Problem dieser Arbeit ist im wesentlichen die Erkennung von Triggerwörtern innerhalb
 des Kontext einer App. Grundsätzlich ist es unüblich, dass mobile Apps eine
 integrierte Sprachsteuerungsfunktion anbieten.
 
-
-\newpage
-\section{Evaluation und Validation}
+\newpage \section{Ausblick}
 Das Problem dieser Arbeit ist im wesentlichen die Erkennung von Triggerwörtern innerhalb
 des Kontext einer App. Grundsätzlich ist es unüblich, dass mobile Apps eine
 integrierte Sprachsteuerungsfunktion anbieten.
 
-\newpage
-\section{Ausblick}
-Das Problem dieser Arbeit ist im wesentlichen die Erkennung von Triggerwörtern innerhalb
-des Kontext einer App. Grundsätzlich ist es unüblich, dass mobile Apps eine
-integrierte Sprachsteuerungsfunktion anbieten.
-
-
-\newpage
-\section{Anhang}
+\newpage \section{Anhang}
 \subfile{projectmanagement.tex}
-\newpage
 
+\clearpage
 % Verzeichnisse
 \addcontentsline{toc}{section}{Abbildungsverzeichnis}
 \listoffigures
 \addcontentsline{toc}{section}{Tabellenverzeichnis}
 \listoftables
 \printbibliography[title=Literaturverzeichnis, heading=bibintoc]
-
 
 
 %       %%%%%   %    %   %%%
@@ -582,37 +569,31 @@ integrierte Sprachsteuerungsfunktion anbieten.
 \blankpage
 
 \newpage
+
 \section*{Aufgabenstellung}
 Integration von Sprachsteuerungstechnologien in Mobile Apps, insbesondere zur Erkennung
 von Triggerwörtern.
 
 \section*{Projektteam}
 \begin{itemize}
-    \item Student:in: Rubén Nuñez
-    \item Betreuer:in: Herzog
-    \item Firma: Bitforge AG
+	\item Student:in: Rubén Nuñez
+	\item Betreuer:in: Herzog
+	\item Firma: Bitforge AG
 \end{itemize}
 
 \section*{Auftraggeber}
 \begin{itemize}
-    \item Firma: Bitforge AG
-    \item Ansprechperson: Stefan Reinhard
-    \item Funktion: Head of Mobile
-    \item Adresse: Zeughausstrasse 39, 8004 Zürich
-    \item Telefon: +41 55 211 02 41
-    \item E-Mail: stefan.reinhard@bitforge.ch
-    \item Website: www.bitforge.ch
+	\item Firma: Bitforge AG
+	\item Ansprechperson: Stefan Reinhard
+	\item Funktion: Head of Mobile
+	\item Adresse: Zeughausstrasse 39, 8004 Zürich
+	\item Telefon: +41 55 211 02 41
+	\item E-Mail: stefan.reinhard@bitforge.ch
+	\item Website: www.bitforge.ch
 \end{itemize}
-
-
 
 \section*{Sonstige Bemerkungen}
 Grundkenntnisse in Machine Learning, speziell im Bereich der Spracherkennung, sowie
 Erfahrung mit entsprechenden APIs sind erforderlich.
-
-
-
-
-
 
 \end{document}
