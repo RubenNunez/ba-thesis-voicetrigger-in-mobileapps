@@ -1,26 +1,6 @@
-@article{einstein1905,
-  title     = {Zur Elektrodynamik bewegter K{\"o}rper},
-  author    = {Einstein, Albert},
-  journal   = {Annalen der physik},
-  volume    = {322},
-  number    = {10},
-  pages     = {891--921},
-  year      = {1905},
-  publisher = {Wiley Online Library}
-}
-
-% Document here https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/p1386r2.pdf 
-@article{somberg2019audioapi,
-  title   = {A Standard Audio API for C++: Motivation, Scope, and Basic Design},
-  author  = {Somberg, Guy and Davidson, Guy and Doumler, Timur},
-  journal = {Programming Language C++},
-  date    = {2019-06-17},
-  note    = {“C++ is there to deal with hardware at a low level, and to abstract away from it \
-             with zero overhead.” – Bjarne Stroustrup, Cpp.chat Episode \#44}
-}
 
 
-% Book in Rubens O'reilly Account
+% Book O'reilly: Aduio Programming with MATLAB
 @book{tarr2018hackaudio,
   abstract  = {Computers are at the center of almost everything related to audio. Whether for \
                synthesis in music production, recording in the studio, or mixing in live sound, \
@@ -59,7 +39,40 @@
   date      = {2018}
 }
 
-% In Article https://ieeexplore.ieee.org/abstract/document/5212943
+% Book O'reilly: Fourier Analysis
+@book{hansen2014fourier,
+  title     = {Fourier Transforms: Principles and Applications},
+  author    = {Hansen, Eric W.},
+  date      = {2014-09},
+  publisher = {Wiley},
+  abstract  = {Fourier Transforms: Principles and Applications explains transform methods and \
+               their applications to electrical systems from circuits, antennas, and signal \
+               processors—ably guiding readers from vector space concepts through the Discrete \
+               Fourier Transform (DFT), Fourier series, and Fourier transform to other related \
+               transform methods. Featuring chapter end summaries of key results, over two \
+               hundred examples and four hundred homework problems, and a Solutions Manual \
+               this book is perfect for graduate students in signal processing and \
+               communications as well as practicing engineers. Class-tested at Dartmouth. \
+               Provides the same solid background as classic texts in the field, but with an \
+               emphasis on digital and other contemporary applications to signal and image \
+               processing. Modular coverage of material allows for topics to be covered \
+               by preference. MATLAB files and Solutions Manual available to instructors. \
+               Over 300 figures, 200 worked examples, and 432 homework problems.},
+  pages     = {776},
+  keywords  = {FinTech, Fourier Transforms, Signal Processing, Communications, Electrical Systems}
+}
+
+% Proposal: Audio C++ https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/p1386r2.pdf 
+@article{somberg2019audioapi,
+  title   = {A Standard Audio API for C++: Motivation, Scope, and Basic Design},
+  author  = {Somberg, Guy and Davidson, Guy and Doumler, Timur},
+  journal = {Programming Language C++},
+  date    = {2019-06-17},
+  note    = {“C++ is there to deal with hardware at a low level, and to abstract away from it \
+             with zero overhead.” – Bjarne Stroustrup, Cpp.chat Episode \#44}
+}
+
+% Article: PCM -  https://ieeexplore.ieee.org/abstract/document/5212943
 @article{deloraine1965pcm,
   author  = {Deloraine, E. Maurice and Reeves, Alec H.},
   journal = {IEEE Spectrum},
@@ -71,8 +84,7 @@
   doi     = {10.1109/MSPEC.1965.5212943}
 }
 
-
-% In Link https://dropsofai.com/understanding-audio-data-fourier-transform-fft-and-spectrogram-features-for-a-speech-recognition-system/
+% Blog: https://dropsofai.com/understanding-audio-data-fourier-transform-fft-and-spectrogram-features-for-a-speech-recognition-system/
 @online{chaudhary2020,
   author    = {Kartik Chaudhary},
   title     = {Understanding Audio data, Fourier Transform, FFT and Spectrogram features for \
@@ -82,7 +94,7 @@
   note      = {Zugriff am: 06.10.2023}, 
 }
 
-% Youtube Video https://www.youtube.com/watch?v=zXd743X6I0w Fourier-Analysis in 100 Minuten
+% Video https://www.youtube.com/watch?v=zXd743X6I0w Fourier-Analysis in 100 Minuten
 @online{weitz2023fourier,
   author    = {Prof. Dr. Edmund Weitz},
   title     = {Fourier-Analysis in 100 Minuten},
@@ -104,26 +116,64 @@
 }
 
 
-% Book in Rubens O'reilly Account
-@book{hansen2014fourier,
-  title     = {Fourier Transforms: Principles and Applications},
-  author    = {Hansen, Eric W.},
-  date      = {2014-09},
-  publisher = {Wiley},
-  abstract  = {Fourier Transforms: Principles and Applications explains transform methods and \
-               their applications to electrical systems from circuits, antennas, and signal \
-               processors—ably guiding readers from vector space concepts through the Discrete \
-               Fourier Transform (DFT), Fourier series, and Fourier transform to other related \
-               transform methods. Featuring chapter end summaries of key results, over two \
-               hundred examples and four hundred homework problems, and a Solutions Manual \
-               this book is perfect for graduate students in signal processing and \
-               communications as well as practicing engineers. Class-tested at Dartmouth. \
-               Provides the same solid background as classic texts in the field, but with an \
-               emphasis on digital and other contemporary applications to signal and image \
-               processing. Modular coverage of material allows for topics to be covered \
-               by preference. MATLAB files and Solutions Manual available to instructors. \
-               Over 300 figures, 200 worked examples, and 432 homework problems.},
-  pages     = {776},
-  keywords  = {FinTech, Fourier Transforms, Signal Processing, Communications, Electrical Systems}
+
+
+# Paper: https://arxiv.org/abs/2108.00084
+@misc{hannun2021history,
+      title={The History of Speech Recognition to the Year 2030}, 
+      author={Awni Hannun},
+      date={2021},
+      eprint={2108.00084},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+}
+
+# Paper: https://openarchive.nure.ua/items/cc1c316e-fa03-437f-855d-8e699339f1d5
+@article{matarneh2017speechrecognition,
+  title     = {Speech Recognition Systems: A Comparative Review},
+  author    = {Matarneh, Rami and Maksymova, Svitlana and Lyashenko, Vyacheslav V. and Belova, Nataliya V.},
+  journal   = {OSR Journal of Computer Engineering (IOSR-JCE)},
+  volume    = {19},
+  number    = {5},
+  pages     = {71--79},
+  date      = {2017},
+  issn      = {e-ISSN: 2278-0661, p-ISSN: 2278-8727},
+  doi       = {10.9790/0661-1905047179},
+  url       = {http://www.iosrjournals.org},
+  note      = {Submission Date: 13-10-2017, Acceptance Date: 27-10-2017},
+  abstract  = {Creating voice control for robots is very important and difficult task. Therefore, \
+               we consider different systems of speech recognition. We divided them into two main \
+               classes: (1) open-source and (2) close-source code. As close-source software the \
+               following were selected: Dragon Mobile SDK, Google Speech Recognition API, Siri, \
+               Yandex SpeechKit and Microsoft Speech API. While the following were selected as \
+               open-source software: CMU Sphinx, Kaldi, Julius, HTK, iAtros, RWTH ASR and Simon. \
+               The comparison mainly based on accuracy, API, performance, speed in real-time, \
+               response time and compatibility. the variety of comparison axes allow us to make \
+               detailed description of the differences and similarities, which in turn enabled us \
+               to adopt a careful decision to choose the appropriate system depending on our need. \
+               Keywords: Robot, Speech recognition, Voice systems with closed source code, Voice \
+               systems with open source code}
+}
+
+
+# Blog: Hey Siri Feature
+@online{siri2017hey,
+    author = {Siri-Team},
+    title = {Hey Siri: An On-device DNN-powered Voice Trigger for Apple’s Personal Assistant},
+    date = {2017-10},
+    journal = {Apple Machine Learning Journal},
+    url = {https://machinelearning.apple.com/research/hey-siri},
+    note = {Zugriffsdatum: 10. September 2023}
+}
+
+# Blog: Voice Trigger System for Siri
+@online{apple2023voice,
+    title = {Voice Trigger System for Siri},
+    author = {Machine Learning Journal Apple},
+    date = {2023-08},
+    journal = {Apple Machine Learning Journal},
+    url = {https://machinelearning.apple.com/research/voice-trigger},
+    note = {Zugriffsdatum: 10. September 2023},
+    abstract = {A growing number of consumer devices, including smart speakers, headphones, and watches, use speech as the primary means of user input. Voice trigger detection systems have become an important component of the user interaction pipeline. This article discusses Apple's design of a high-accuracy, on-device voice trigger system.}
 }
 
