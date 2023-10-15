@@ -87,7 +87,8 @@
 \newpage \section*{Abstract}
 Das Problem dieser Arbeit ist im wesentlichen die Erkennung von Triggerwörtern innerhalb
 des Kontext einer App. Grundsätzlich ist es unüblich, dass mobile Apps eine
-integrierte Sprachsteuerungsfunktion anbieten.
+integrierte Sprachsteuerungsfunktion anbieten. 
+
 
 \newpage
 \tableofcontents
@@ -184,7 +185,6 @@ Beziehung zwischen Frames, Channels und Buffers.
 	\label{fig:frames_channels_buffers}
 \end{figure}
 
-
 \subsubsection{Buffers im Detail}
 Ein Buffer im Kontext von Audio ist eine aufeinanderfolgende Sammlung von Frames. Die bereits
 angesprochene Grösse eines Buffers bestimmt im wesentlichen die Latenzzeit des Systems. Kleine
@@ -225,51 +225,50 @@ Die erste Zeile entspricht der \textit{Interleaved}-Anordnung und die zweite Zei
 Mit diesem Wissen kennen wir nun die Unterschiede zwischen den beiden Anordnungen. Für die
 Anwendung ist es wichtig zu verstehen, mit welcher Anordnung die verwendete API arbeitet.
 
-\subsection{Audio APIs im Überblick}
-In der Audioverarbeitung sind APIs unerlässlich, die den Zugriff auf Audiofunktionen ermöglichen.
-Diese Schnittstellen werden als Audio APIs bezeichnet. Sie stellen Funktionen und Klassen bereit,
-mit denen Entwickler Audiofunktionen wie das Aufnehmen, Wiedergeben, Mischen und Verarbeiten von
-Audiosignalen in ihre Anwendungen integrieren können. Audio APIs spielen eine zentrale Rolle in
-modernen Betriebssystemen und Anwendungsplattformen, da sie die Grundlage für alle Audioanwendungen
-bieten. Ohne solche APIs wäre die Entwicklung von Audio-Software erheblich komplexer, da jeder
-Entwickler eigene Schnittstellen und Treiber entwickeln müsste. Daher werden in diesem Kapitel
-einige der wichtigsten Audio APIs vorgestellt, welche in dieser Arbeit verwendet werden.
-
+\subsubsection{Einblick in Audio APIs}
+Audio APIs sind im Bereich der Audioverarbeitung von essentieller Bedeutung. Sie bieten eine
+Schnittstelle, welche den Zugriff auf vielfältige Audiofunktionen erlaubt. Ohne solche APIs stünden 
+Entwickler vor der Mammutaufgabe, eigenständige Schnittstellen und Treiber für jedes Projekt neu zu 
+konzipieren. Einige der in dieser Arbeit verwendeten Schlüssel-APIs werden in diesem Abschnitt näher 
+beleuchtet.
 
 \noindent \newline
-Während dem Erarbeiten dieser Arbeit wurden zwei grundlegende Anwendungsfälle identifiziert. Zum
-einen war die intensive Verarbeitung von Audio in Python erforderlich, um die Grundlagen der
-Audioverarbeitung zu verstehen. Zum anderen war es notwendig, eine Audio API in eine mobile
-Anwendung zu integrieren. Daher wurden die folgenden APIs ausgewählt, um diese Anwendungsfälle zu
-unterstützen:
+In der Erarbeitungsphase dieser Arbeit kristallisierten sich zwei primäre Anwendungsgebiete heraus. 
+Erstens die intensive Auseinandersetzung mit Audioverarbeitung in Python, um tieferes Verständnis 
+für die Materie zu entwickeln. Zweitens die Notwendigkeit, eine Audio API in eine mobile 
+Applikation zu integrieren. Im Kontext dieser Arbeit werden sie als \textit{Audio API für Analyse} 
+und \textit{Audio API für Integration} bezeichnet.
+
+\noindent \newline
+Im Bereich der \textit{Analyse} fiel die Wahl auf folgende APIs:
 
 \begin{itemize}
-	\item \textbf{SoundDevice:} Eine Python-Bibliothek, die eine einfache und plattformübergreifende
-	\item \textbf{PyAudio:} Eine Python-Bibliothek, die eine einfache und plattformübergreifende
-	\item \textbf{AVAudioEngine:} Eine Audio API für iOS und macOS.
-	\item \textbf{AudioTrack:} Eine Audio API für Android.
-	\item \textbf{Web Audio API:} Eine Audio API für Webbrowser.
-	\item \textbf{WebRTC:} Eine Audio API für Webbrowser.
-\end{itemize}
-
-\subsubsection{Merkmale und Auswahl von Audio APIs}
-Beim Vergleich verschiedener Audio APIs gibt es mehrere Faktoren zu beachten:
-\begin{itemize}
-	\item \textbf{Plattformunterstützung:} Einige APIs sind plattformspezifisch, während andere
-	      plattformübergreifend sind.
-	\item \textbf{Funktionsumfang:} Unterschiedliche APIs bieten verschiedene Funktionen, von
-	      grundlegenden Aufnahme- und Wiedergabefunktionen bis hin zu erweiterten
-	      Audioverarbeitungsfunktionen.
-	\item \textbf{Performance:} Die Effizienz einer API kann sich auf die Latenz und die CPU-Auslastung
-	      auswirken.
-	\item \textbf{Gemeinschaft und Dokumentation:} Eine aktive Entwicklergemeinschaft und umfassende
-	      Dokumentation können den Einstieg und die Problembehandlung erleichtern.
+\item \textbf{PyAudio:} Eine verbreitete Schnittstelle in Python zur Audioverarbeitung.
+\item \textbf{SoundDevice:} Eine vielseitige Python-Bibliothek für vielschichtige 
+Audioverarbeitungsaufgaben.
+\item \textbf{librosa:} Eine Bibliothek, die speziell auf die Analyse von Audiosignalen 
+ausgerichtet ist.
 \end{itemize}
 
 \noindent
-In dieser Arbeit wurde die \textit{SoundDevice} API gegenüber der \textit{PyAudio} API bevorzugt,
-aufgrund ihrer besseren Kompatibilität mit dem verwendeten Setup. Es ist jedoch wichtig zu betonen,
-dass die Wahl der richtigen API stark von den spezifischen Anforderungen des Projekts abhängt.
+Im Kontext der \textit{Integration} standen folgende APIs im Fokus:
+
+\begin{itemize}
+	\item \textbf{AVAudioEngine:} Eine leistungsfähige Schnittstelle primär für die Plattformen iOS 
+    und macOS.
+	\item \textbf{AudioTrack:} Eine spezialisierte API für Audioanwendungen auf Android-Geräten.
+\end{itemize}
+
+\noindent
+Die folgenden Abschnitte werden tiefer auf die jeweiligen Eigenschaften und Möglichkeiten dieser 
+APIs eingehen, insbesondere im Hinblick darauf, wie sie sich für die Aufnahme, Wiedergabe und 
+Echtzeitverarbeitung von Audiodaten eignen.
+
+\subsubsection{Audio API für Analyse}
+Python zeichnet sich durch eine beeindruckende Auswahl an Bibliotheken für datenanalytische Aufgaben 
+aus, zu denen auch NumPy, SciPy, Pandas und Matplotlib gehören. In dieser Arbeit wurde zunächst 
+\textbf{PyAudio} in Erwägung gezogen. PyAudio ist als Schnittstelle zur PortAudio-Bibliothek 
+bekannt, die plattformübergreifende Audioverarbeitungsfunktionen bereitstellt. Trotz ihrer intuitiven Funktionen für Aufnahme und Wiedergabe wurde PyAudio letztlich aufgrund von Inkompatibilitäten mit der gewählten Entwicklungsumgebung verworfen.
 
 \subsubsection{Integration und Anwendung von Audio APIs}
 Die effektive Nutzung einer Audio API erfordert ein Verständnis ihrer Struktur und Funktionsweise.
@@ -285,7 +284,6 @@ vielen verschiedenen Bereichen erfordert. Von der tiefen mathematischen Theorie 
 bis hin zur praktischen Anwendung von Audio APIs gibt es viele Aspekte zu berücksichtigen. Diese
 Arbeit zielt darauf ab, einen umfassenden Überblick über die Schlüsselkonzepte und Techniken in
 diesem Bereich zu geben und als Fundament für zukünftige Forschung und Anwendung zu dienen.
-
 
 \newpage \subsection{Fourier-Analyse}
 Die Fourier-Analyse befasst sich mit der Zerlegung von Funktionen in Frequenzkomponenten. Die
@@ -479,29 +477,39 @@ Doppelte der höchsten Frequenz des Signals betragen, ein Grundsatz, der als Nyq
 bekannt ist. (\cite[]{weitz2023fourier}).
 
 \subsection{Spektrogramm}
-Da wir nun die Grundlagen der Fourier-Analyse kennen, können wir uns mit dem Spektrogramm
-beschäftigen. Ein Spektrogramm ist eine visuelle Darstellung der Frequenzkomponenten eines
-Signals über der Zeit. Definiert ein Spektrogramm (\cite[Chapter~15.2.1]{tarr2018hackaudio})
-folgendermassen:
+Mit einem Verständnis der Grundlagen der Fourier-Analyse können wir die Bedeutung des Spektrogramms
+erfassen. Ein Spektrogramm bietet eine visuelle Darstellung der verschiedenen Frequenzen, die in
+einem Signal über die Zeit hinweg vorhanden sind. Ein Spektrogramm wird wie folgt definiert:
 
 \begin{displayquote}
 	''A spectrogram is a three-dimensional visualization of a signal’s amplitude over frequency and
-	time. Many audio signals are comprised of multiple frequencies happening at the same time, and
-	are also signals that change to different frequencies at different times. Therefore, the
-	spectrogram is a common way for audio engineers to analyze a complex signal.''
+	time. Many audio signals are comprised of multiple frequencies occurring simultaneously, with
+	these frequencies often changing over time.'' (\cite[Chapter~15.2.1]{tarr2018hackaudio})
 \end{displayquote}
 
 \noindent
-Im Kontext von Maschinellem Lernen und insbesondere in der Spracherkennung spielt das Spektrogramm 
-eine entscheidende Rolle. Wenn wir ein Audiosignal in seine Frequenzkomponenten zerlegen, verlieren 
-wir durch die Anwendung der FFT die zeitliche Information des Signals. In Anwendungen wie der 
-Spracherkennung ist es jedoch unerlässlich, nicht nur zu wissen, welche Frequenzen in einem Signal 
-vorhanden sind, sondern auch wann sie auftreten. Ein Spektrogramm löst dieses Problem, indem es 
-Frequenzen in Beziehung zur Zeit darstellt. Dies ist besonders wichtig, um beispielsweise die 
-Reihenfolge von gesprochenen Wörtern in einem Satz zu erkennen \cite{chaudhary2020}. Ein 
-Spektrogramm bietet somit eine Kombination aus zeitlichen und frequenziellen Informationen, was es 
-zu einem mächtigen Werkzeug für die Spracherkennung und andere Anwendungen im Bereich Maschinelles 
-Lernen macht.
+Im Bereich des Machine Learning, insbesondere bei der Spracherkennung, nimmt das Spektrogramm eine
+zentrale Position ein. Die Fourier-Transformation eines Audiosignals in seine Frequenzkomponenten
+resultiert in einem Verlust der zeitlichen Informationen durch die Anwendung der FFT. Für Aufgaben
+wie die Spracherkennung ist es jedoch von grundlegender Bedeutung, nicht nur die im Signal
+vorhandenen Frequenzen zu identifizieren, sondern auch den Zeitpunkt ihres Auftretens zu bestimmen.
+Hier schafft das Spektrogramm Abhilfe, da es die zeitliche Abfolge der Frequenzen sichtbar macht.
+Diese Fähigkeit ist insbesondere für das Erkennen der Sequenz gesprochener Wörter in einem Satz von
+Bedeutung (\cite{chaudhary2020}). Somit verknüpft das Spektrogramm zeitliche und frequenzbezogene
+Informationen, was es zu einem wichtigen Instrument für die Spracherkennung und andere Machine
+Learning-Anwendungen macht. Abbildung \ref{fig:spectrogram} zeigt ein Beispiel eines Spektrogramms,
+das im Rahmen dieser Arbeit entwickelt wurde. Das Spektrogramm wurde unter Verwendung der
+Python-Bibliotheken \texttt{PyQt5} für die Echtzeit-Visualisierung und \texttt{soundevice} für den
+Zugriff auf die Audio-Hardware generiert.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.73\linewidth]{img/spectrogram.png}
+	\caption{Spektrogramm}
+	\label{fig:spectrogram}
+\end{figure}
+
+
 
 \newpage \section{Stand der Forschung}
 Zudem wird das Kapitel sich mit der Implementation von

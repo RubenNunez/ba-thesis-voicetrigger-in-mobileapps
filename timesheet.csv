@@ -1,0 +1,24 @@
+Datum;Task;Time Spent (in hours)
+SW01;Setup des Projekts (git, tex, python);8h
+SW01;Kickoff Meeting vorbereiten;2h
+SW01;Projekt Organisation;1.5h
+SW01;Grobprojektplan erstellen;1.5h
+SW01;Aufgabenstellung finalisieren;2h
+SW01;Proposal zu Audio APO in C++ lesen;3h
+SW01;Research Paper zu Siri lesen;2h
+---;---;---
+SW02;Quellen/Bücher suchen;2h
+SW02;Marktanalyse Benchmarking;2h
+SW02;Allgemeine Recherche/Dokumentation zu Audio;16h
+---;---;---
+SW03;Fourier Analyse Grundlagen aufbauen;20h
+SW03;Fourier Transformation Beispiele erarbeiten;2h
+SW03;Python API für Audio;2h
+SW03;Video Serie zu RNN / CNN anschauen;2h
+---;---;---
+SW04;Spectogramm Real-Time mit Python umsetzen;8h
+SW04;Dokumentation zu Spectogramm;3h
+SW04;Diverse Anpassungen an der Dokumentation;6h
+SW04;Risikomanagement;2h
+
+
