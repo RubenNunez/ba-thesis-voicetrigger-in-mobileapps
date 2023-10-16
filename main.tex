@@ -223,14 +223,14 @@ können: \textit{Interleaved} und \textit{Non-Interleaved}. Bei der \textit{Inte
 werden die Samples der einzelnen Channels nacheinander in sequentieller Reihenfolge in den Buffer
 geschrieben. Im Gegensatz dazu werden bei der \textit{Non-Interleaved}-Variante die Samples
 eines Channels nacheinander in den Buffer geschrieben, bevor die Samples des nächsten Channels
-hinzugefügt werden. Dieser Vorgang wird für jeden Channel wiederholt. Die Abbildung
-\ref{fig:frames_buffers} zeigt die Unterschiede zwischen den beiden Anordnungen. Jede Zelle der
+hinzugefügt werden. Dieser Vorgang wird für jeden Channel wiederholt. Die Tabelle
+\ref{tab:frames_buffers} zeigt die Unterschiede zwischen den beiden Anordnungen. Jede Zelle der
 Tabelle entspricht einem Sample. L und R stehen exemplarisch für die Channels Left und Right.
 Die erste Zeile entspricht der \textit{Interleaved}-Anordnung und die zweite Zeile der
 \textit{Non-Interleaved}-Anordnung. Die Abbildung wurde basierend auf
 (\cite[p.11]{somberg2019audioapi}) erstellt.
 
-\begin{figure}[h]
+\begin{table}[h]
 	\centering
 	\begin{tabularx}{\textwidth}{|X|X|X|X|X|X|X|X|}
 		\hline
@@ -240,8 +240,8 @@ Die erste Zeile entspricht der \textit{Interleaved}-Anordnung und die zweite Zei
 		\hline
 	\end{tabularx}
 	\caption{Frames in Interleaved und Non-interleaved Buffers}
-	\label{fig:frames_buffers}
-\end{figure}
+	\label{tab:frames_buffers}
+\end{table}
 
 \noindent
 Mit diesem Wissen kennen wir nun die Unterschiede zwischen den beiden Anordnungen. Für die
@@ -413,14 +413,14 @@ plt.plot(x_points, f(x_points), 'o') # Plotte die 5 Punkte
 
 \noindent
 Nun berechnen wir die DFT der 5 Samples. Dazu verwenden wir die \texttt{fft} Funktion aus der
-\texttt{numpy} Bibliothek. Das Resultat ist ein Array mit \(N\) komplexen Zahlen. Die Abbildung
-\ref{fig:dft_example_table} zeigt die Funktion \(f(x)\) und die DFT der 5 Samples.
+\texttt{numpy} Bibliothek. Das Resultat ist ein Array mit \(N\) komplexen Zahlen. Die Tabelle
+\ref{tab:dft_example_table} zeigt die Funktion \(f(x)\) und die DFT der 5 Samples.
 
 \begin{lstlisting}
 fhat = np.fft.fft(f(x_points), N_SAMPLES)
 \end{lstlisting}
 
-\begin{figure}[h]
+\begin{table}[h]
 	\centering
 	\begin{tabular}{|c|c|c|c|c|c|}
 		\hline
@@ -432,8 +432,8 @@ fhat = np.fft.fft(f(x_points), N_SAMPLES)
 		\hline
 	\end{tabular}
 	\caption{\(f(x)\) und die DFT der 5 Samples}
-	\label{fig:dft_example_table}
-\end{figure}
+	\label{tab:dft_example_table}
+\end{table}
 
 \noindent
 Mit den Frequenzkomponenten der DFT können Signale manipuliert werden, etwa durch Filtern
@@ -642,6 +642,8 @@ Es gibt aber auch die Möglichkeit, ein bereits vortrainiertes Modell zu verwend
 ....
 
 \newpage \section{Methoden}
+Am besten dieses Paper verwenden (\cite{choi2018tutorial}).
+
 \subsection{Vorgehensmodell}
 \begin{itemize}
     \item Auswahl des passenden Vorgehensmodells zur Integration einer Spracherkennungsfunktion, z.B. iteratives Modell.
@@ -676,6 +678,45 @@ Es gibt aber auch die Möglichkeit, ein bereits vortrainiertes Modell zu verwend
 Das Problem dieser Arbeit ist im wesentlichen die Erkennung von Triggerwörtern innerhalb
 des Kontext einer App. Grundsätzlich ist es unüblich, dass mobile Apps eine
 integrierte Sprachsteuerungsfunktion anbieten.
+
+\subsection{Datensatz}
+Um ein Modell zu trainieren, welches Triggerwörter erkennt, wird ein Datensatz benötigt.
+
+\subsubsection{Datensatz 'other}
+Am besten von Datenset (\cite{warden2018speech})
+\begin{itemize}
+    \item Datenset von Mozilla Common Voice
+    \item Datenset von Google Speech Commands
+\end{itemize}
+
+\subsubsection{Datensatz 'hey-fooby'}
+\begin{itemize}
+    \item TODO: Recorder Webseite für Aufnahme von Sprachsamples
+    \item Synthetische Sprachsamples mit verschiedenen Stimmen Geräuschen und Hintergrundgeräuschen
+\end{itemize}
+
+\subsection{Modell}
+\begin{itemize}
+    \item Auswahl des Modells
+    \item Auswahl der Hyperparameter
+    \item Training des Modells
+    \item Evaluation des Modells
+\end{itemize}
+
+\subsubsection{Modell 'CNN'}
+\begin{itemize}
+    \item Aufbau des Modells 
+    \item TODO: Beschreibung des Modells
+\end{itemize}
+
+\subsubsection{Modell 'RNN'}
+\begin{itemize}
+    \item Aufbau des Modells 
+    \item TODO: Beschreibung des Modells
+
+\end{itemize}
+
+
 
 \newpage \section{Evaluation und Validation}
 Das Problem dieser Arbeit ist im wesentlichen die Erkennung von Triggerwörtern innerhalb
