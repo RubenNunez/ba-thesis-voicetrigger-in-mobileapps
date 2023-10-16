@@ -14,6 +14,7 @@
 \usepackage{color}
 \usepackage[rgb]{xcolor}
 \usepackage{afterpage}
+\usepackage{pdflscape} 
 \usepackage[style=apa, backend=biber]{biblatex}
 % \usepackage{indentfirst} 
 % \usepackage[
@@ -39,7 +40,6 @@
 	\pagecolor{red}
 	\blankpage
 	\afterpage{\nopagecolor}}
-
 
 
 \definecolor{codeblack}{rgb}{0.1,0.1,0.23}
@@ -96,6 +96,14 @@ integrierte Sprachsteuerungsfunktion anbieten.
 \newpage
 
 \newpage \section{Problem, Fragestellung, Vision}
+
+\begin{itemize}
+\item TODO: - Die dominierenden Sprachassistenten wie Siri und Alexa sind nicht für App-spezifische 
+Interaktionen optimiert.
+\item TODO: - Es gibt eine Marktlücke für integrierte Spracherkennung innerhalb mobiler Apps.
+\end{itemize}
+
+\noindent
 Das Kernproblem dieser Bachelorarbeit ist die Entwicklung einer integrierten
 Spracherkennungsfunktion die bestimmte Triggerwörter innerhalb einer mobilen App erkennt. Obwohl
 Sprachsteuerungstechnologien ein erhebliches Potenzial aufweisen und Assistenten wie Siri oder
@@ -105,11 +113,25 @@ Diese Arbeit verfolgt das Ziel, diese Lücke zu schliessen und eine integrierte
 Spracherkennungsfunktion zu entwickeln, die Triggerwörter in einer App effektiv erkennt.
 
 \subsection{Fragestellung}
+
+\begin{itemize}
+\item TODO: - Wie kann man eine App-spezifische integrierte Spracherkennung entwickeln, die mit Machine Learning 
+bestimmte Triggerwörter effizient erkennt?
+\end{itemize}
+
+\noindent
 Die Fragestellung dieser Arbeit lautet: \textit{Wie kann eine integrierte Sprachsteuerung für eine
 	Mobile Apps entwickelt werden, die speziell das Erkennen von Triggerwörtern ermöglicht, indem
 	Methoden des Machine Learnings genutzt werden?}.
 
 \subsection{Vision}
+
+\begin{itemize}
+    \item Erkennung eines oder mehrerer Triggerwörter in gesprochener Sprache.
+    \item Implementierung in eine Hauptmobile-Plattform (entweder iOS oder Android).
+    \item Betrachtung von Datenschutz- und ethischen Überlegungen.
+\end{itemize}
+
 Das Ziel sowie die Vision der Arbeit ist es zum einen, eine Grundlage zu schaffen, um ein
 Triggerwort oder eine Sequenz von Triggerwörtern in der akustischen Sprache erkennen zu können.
 Dabei werden Methoden und Werkzeuge aus dem Bereich des Machine Learnings verwendet. Zum anderen
@@ -124,7 +146,7 @@ Audioverarbeitung und Machine Learning essenziell. Daher wird in diesem Kapitel 
 
 \subsection{Audio}
 In der digitalen Welt repräsentiert Audio Schallwellen, die durch eine Reihe von numerischen Werten
-dargestellt werden \cite[p.9]{somberg2019audioapi}. beschreibt Audio als: \glqq Fundamentally,
+dargestellt werden (\cite[p.9]{somberg2019audioapi}) beschreibt Audio als: \glqq Fundamentally,
 audio can be modeled as waves in an elastic medium. In our normal everyday experience, the elastic
 medium is air, and the waves are air pressure waves.\grqq \ Audiosignale werden durch die Funktion
 \(A(t)\) repräsentiert, wobei \(t\) die Zeit und \(A(t)\) die Amplitude zum
@@ -225,12 +247,10 @@ Die erste Zeile entspricht der \textit{Interleaved}-Anordnung und die zweite Zei
 Mit diesem Wissen kennen wir nun die Unterschiede zwischen den beiden Anordnungen. Für die
 Anwendung ist es wichtig zu verstehen, mit welcher Anordnung die verwendete API arbeitet.
 
-\subsubsection{Einblick in Audio APIs}
+\subsection{Audio APIs}
 Audio APIs sind im Bereich der Audioverarbeitung von essentieller Bedeutung. Sie bieten eine
-Schnittstelle, welche den Zugriff auf vielfältige Audiofunktionen erlaubt. Ohne solche APIs stünden 
-Entwickler vor der Mammutaufgabe, eigenständige Schnittstellen und Treiber für jedes Projekt neu zu 
-konzipieren. Einige der in dieser Arbeit verwendeten Schlüssel-APIs werden in diesem Abschnitt näher 
-beleuchtet.
+Schnittstelle, welche den Zugriff auf vielfältige Audiofunktionen erlaubt. Ohne solche APIs müssten 
+Entwickler die Audioverarbeitung von Grund auf neu implementieren. 
 
 \noindent \newline
 In der Erarbeitungsphase dieser Arbeit kristallisierten sich zwei primäre Anwendungsgebiete heraus. 
@@ -239,13 +259,14 @@ für die Materie zu entwickeln. Zweitens die Notwendigkeit, eine Audio API in ei
 Applikation zu integrieren. Im Kontext dieser Arbeit werden sie als \textit{Audio API für Analyse} 
 und \textit{Audio API für Integration} bezeichnet.
 
+El sol es grande 
+
 \noindent \newline
 Im Bereich der \textit{Analyse} fiel die Wahl auf folgende APIs:
 
 \begin{itemize}
 \item \textbf{PyAudio:} Eine verbreitete Schnittstelle in Python zur Audioverarbeitung.
-\item \textbf{SoundDevice:} Eine vielseitige Python-Bibliothek für vielschichtige 
-Audioverarbeitungsaufgaben.
+\item \textbf{SoundDevice:} Eine vielseitige Python-Bibliothek für Audioverarbeitungsaufgaben.
 \item \textbf{librosa:} Eine Bibliothek, die speziell auf die Analyse von Audiosignalen 
 ausgerichtet ist.
 \end{itemize}
@@ -268,22 +289,13 @@ Echtzeitverarbeitung von Audiodaten eignen.
 Python zeichnet sich durch eine beeindruckende Auswahl an Bibliotheken für datenanalytische Aufgaben 
 aus, zu denen auch NumPy, SciPy, Pandas und Matplotlib gehören. In dieser Arbeit wurde zunächst 
 \textbf{PyAudio} in Erwägung gezogen. PyAudio ist als Schnittstelle zur PortAudio-Bibliothek 
-bekannt, die plattformübergreifende Audioverarbeitungsfunktionen bereitstellt. Trotz ihrer intuitiven Funktionen für Aufnahme und Wiedergabe wurde PyAudio letztlich aufgrund von Inkompatibilitäten mit der gewählten Entwicklungsumgebung verworfen.
+bekannt, die plattformübergreifende Audioverarbeitungsfunktionen bereitstellt. Trotz ihrer 
+intuitiven Funktionen für Aufnahme und Wiedergabe wurde PyAudio letztlich aufgrund von 
+Inkompatibilitäten mit der gewählten Entwicklungsumgebung verworfen.
+TODO: PyAudio/SoundDevice/librosa vergleichen
 
-\subsubsection{Integration und Anwendung von Audio APIs}
-Die effektive Nutzung einer Audio API erfordert ein Verständnis ihrer Struktur und Funktionsweise.
-Beispielsweise ist es wichtig zu wissen, wie Buffers und Channels in der jeweiligen API gehandhabt
-werden. In der Regel bieten APIs Funktionen zum Initialisieren von Audio-Streams, zum Steuern von
-Audio-Parametern wie Abtastrate und Bitrate und zum Verarbeiten von Audio-Daten in Echtzeit. Die
-korrekte Integration und Anwendung dieser Funktionen ist entscheidend für die Erstellung qualitativ
-hochwertiger Audio-Anwendungen.
-
-\subsubsection{Zusammenfassung}
-Die Audioverarbeitung ist ein faszinierendes und komplexes Gebiet, das fundierte Kenntnisse in
-vielen verschiedenen Bereichen erfordert. Von der tiefen mathematischen Theorie der Fourier-Analyse
-bis hin zur praktischen Anwendung von Audio APIs gibt es viele Aspekte zu berücksichtigen. Diese
-Arbeit zielt darauf ab, einen umfassenden Überblick über die Schlüsselkonzepte und Techniken in
-diesem Bereich zu geben und als Fundament für zukünftige Forschung und Anwendung zu dienen.
+\subsubsection{Audio API für Integration}
+TODO: AVAudioEngine, AudioTrack und kurze Codebeispiele
 
 \newpage \subsection{Fourier-Analyse}
 Die Fourier-Analyse befasst sich mit der Zerlegung von Funktionen in Frequenzkomponenten. Die
@@ -509,6 +521,18 @@ Zugriff auf die Audio-Hardware generiert.
 	\label{fig:spectrogram}
 \end{figure}
 
+\subsection{Machine Learning}
+Um die Grundlagen des Machine Learnings im Bereich der Spracherkennung zu verstehen, ist es 
+wichtig, die grundlegenden Konzepte des Machine Learnings zu verstehen. Dazu gehört das Verständnis
+von Neuronalen Netzen. Für den Anwendungsbereich der Spracherkennung sind vor allem die 
+Convolutional Neural Networks (CNN) und die Recurrent Neural Networks (RNN) von Bedeutung. Um diese
+wird es in diesem Kapitel gehen.
+
+\subsubsection{Neuronale Netze}
+
+\subsubsection{Convolutional Neural Networks}
+
+\subsubsection{Recurrent Neural Networks}
 
 
 \newpage \section{Stand der Forschung}
@@ -521,7 +545,7 @@ Amazon bekannt. Apple veröffentlichte Siri im Jahr 2011 mit dem Release von iOS
 
 \subsection{Zeitliche Entwicklung der Spracherkennung} 
 TODO: - Abbildung mit einer Timeline diverser Sprachassistenten und deren Release-Daten aus 
-(\cite{hannun2021history})
+(\cite{hannun2021history}). Was hat diese Entwicklung ermöglicht?
 
 \subsection{Komparative Analyse von Sprachassistenten}
 TODO: - (\cite{matarneh2017speechrecognition}) bietet eine komparative Analyse von 
@@ -529,7 +553,8 @@ Sprachassistenten. Die Analyse "Voice control implementation may be conditionall
 parts: speech, recognition, translation, and execution of commands (Fig. 1)."
 
 \subsection{Funktionsweise von Siri}
-TODO: Offenlegung der Funktionsweise von Siri. Wie funktioniert Siri? 
+TODO: Offenlegung der Funktionsweise von Siri. Wie funktioniert Siri? Als Beispiel eines OS 
+übergreifenden Sprachassistenten.
 (\cite{siri2017hey}) und (\cite{apple2023voice}) 
 
 \begin{itemize}
@@ -543,6 +568,13 @@ TODO: Offenlegung der Funktionsweise von Siri. Wie funktioniert Siri?
     \end{itemize}
 \end{itemize}
 
+\subsection{In App Sprachsteuerung}
+TODO: Siri bietet API für In App Sprachsteuerung. Wie funktioniert das? Wie kann das verwendet.
+Keine eigenen Triggerwörter möglich. Gibt es alternativen?
+
+\subsection{Marktanalyse - Benchmarking}
+
+\subsection{Diskussion}
 
 
 
@@ -556,14 +588,89 @@ enthält.
 
 In einem ersten Schritt wird ein eigenes Modell trainiert, welches Triggerwörter erkennt.
 Es gibt aber auch die Möglichkeit, ein bereits vortrainiertes Modell zu verwenden. Dieses Kapitel
+\subsection{Einleitung}
+\begin{itemize}
+    \item Kurze Wiederholung des Problems und der Vision für Ihr Projekt.
+    \item Einführung in die Ideen und Konzepte, die Sie in Betracht ziehen, um dieses Ziel zu erreichen.
+\end{itemize}
+
+\subsection{Grundlegende Idee}
+\begin{itemize}
+    \item Erklärung, wie eine integrierte Spracherkennung den Benutzererfahrungen in mobilen Apps verbessern könnte.
+    \item Beispiel: Automatisierte To-Do-Liste-Einträge durch Sprachbefehle.
+\end{itemize}
+
+\subsection{Skizzenhafte Lösungsansätze}
+\begin{itemize}
+    \item Machine Learning: Verwendung von bereits trainierten Modellen oder Aufbau eigener Modelle zur Triggerwort-Erkennung.
+    \item Cloud vs. Edge Computing: Ob die Spracherkennung in der Cloud oder direkt auf dem Gerät erfolgen sollte.
+    \item Integration: SDKs oder APIs, die Entwicklern helfen, die Spracherkennungsfunktionalität in ihre Apps zu integrieren.
+\end{itemize}
+
+\subsection{Systemarchitektur}
+\begin{itemize}
+    \item Überlegungen zur Systemarchitektur: Ist ein monolithisches System oder eine Microservice-Architektur sinnvoller?
+    \item Vorteile und Herausforderungen beider Ansätze im Kontext der Spracherkennung.
+\end{itemize}
+
+\subsection{Alternative Ansätze}
+\begin{itemize}
+    \item Untersuchung anderer Technologien oder Ansätze zur Spracherkennung, z.B. regelbasierte Systeme im Vergleich zu Machine Learning.
+    \item Warum Sie sich für einen bestimmten Ansatz entschieden haben oder warum Sie einen anderen verworfen haben.
+\end{itemize}
+
+\subsection{Mögliche Problempunkte}
+\begin{itemize}
+    \item Datenschutz: Wie wird die Privatsphäre der Benutzer gewahrt?
+    \item Effizienz: Wie kann sichergestellt werden, dass die Spracherkennung schnell und akkurat ist?
+    \item Integration: Wie kann die Kompatibilität mit einer Vielzahl von Apps und Plattformen gewährleistet werden?
+\end{itemize}
+
+\subsection{Erste Überlegungen zu Tools und Technologien}
+\begin{itemize}
+    \item Welche Programmiersprachen oder Frameworks könnten verwendet werden?
+    \item Eventuelle Betrachtung von Open-Source-Optionen für Spracherkennung.
+\end{itemize}
+
+\subsection{Zusammenfassung und Ausblick}
+\begin{itemize}
+    \item Ein kurzer Überblick über die in diesem Kapitel vorgestellten Ideen und Konzepte.
+    \item Ein Vorgeschmack darauf, wie diese Konzepte in den kommenden Kapiteln weiter verfolgt werden.
+\end{itemize}
 
 
 ....
 
 \newpage \section{Methoden}
-Das Problem dieser Arbeit ist im wesentlichen die Erkennung von Triggerwörtern innerhalb
-des Kontext einer App. Grundsätzlich ist es unüblich, dass mobile Apps eine
-integrierte Sprachsteuerungsfunktion anbieten.
+\subsection{Vorgehensmodell}
+\begin{itemize}
+    \item Auswahl des passenden Vorgehensmodells zur Integration einer Spracherkennungsfunktion, z.B. iteratives Modell.
+    \item Verweis auf den konkreten Terminplan mit Meilensteinen spezifisch für die Spracherkennungs-Integration (im Kapitel 5 oder im Anhang).
+\end{itemize}
+
+\subsection{Forschungsmethoden (falls anwendbar)}
+\begin{itemize}
+    \item Erwägung von Benutzertests, um zu prüfen, wie intuitiv und effizient die Spracherkennungsfunktion ist.
+    \item Interviews mit potenziellen Nutzern der App, um ihre Anforderungen und Erwartungen in Bezug auf Spracherkennung zu verstehen.
+\end{itemize}
+
+\subsection{Technische Evaluierung}
+\begin{itemize}
+    \item Vergleich verschiedener Spracherkennungs-APIs oder Frameworks hinsichtlich Genauigkeit, Latenz, Sprachunterstützung und Kosten.
+    \item Technische Tests zur Prüfung der Performance und Genauigkeit der gewählten Spracherkennungslösung.
+\end{itemize}
+
+\subsection{Integrationsmethode}
+\begin{itemize}
+    \item Beschreibung der geplanten Techniken zur Integration, z.B. Einbindung über API, Implementierung bestimmter Bibliotheken oder Nutzung nativer App-Funktionen.
+    \item Diskussion über potenzielle Herausforderungen bei der Integration und wie sie angegangen werden sollen.
+\end{itemize}
+
+\subsection{Teststrategie}
+\begin{itemize}
+    \item Entwurf einer Teststrategie speziell für die Spracherkennungsfunktion: Testen unter verschiedenen Bedingungen (z.B. Hintergrundgeräusche, verschiedene Sprachen und Akzente).
+    \item Verweis darauf, dass die eigentliche Testdurchführung in einem anderen Kapitel oder Dokument beschrieben ist.
+\end{itemize}
 
 \newpage \section{Realisierung}
 Das Problem dieser Arbeit ist im wesentlichen die Erkennung von Triggerwörtern innerhalb
