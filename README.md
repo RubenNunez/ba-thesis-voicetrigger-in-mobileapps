@@ -26,7 +26,7 @@ The voice recorder in this repository is sourced from the [Open Speech Recording
 For the machine learning (ML) part of this project, the 'data' folder containing datasets is not included in the repository because of its large size and its non-public nature. It needs to be downloaded manually and placed in the project's root folder.
 
 ## Getting Started
-- The code is based on the Anaconda Python 3.9 environment.
+- The code is based on a Anaconda Python 3.9 environment.
 - It's compatible with Mac OS; testing on Windows hasn't been done.
 
 ## Dependencies
