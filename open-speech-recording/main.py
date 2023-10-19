@@ -6,17 +6,20 @@ from flask import render_template
 from flask import request
 from flask import session
 from werkzeug.utils import secure_filename
+from dotenv import load_dotenv
 
 from google.cloud import storage
 
 import os
 import uuid
 
-app = Flask(__name__)
+load_dotenv()
 
-# Configure this environment variable via app.yaml
 CLOUD_STORAGE_BUCKET = os.environ['CLOUD_STORAGE_BUCKET']
-# [end config]
+SESSION_SECRET_KEY = os.environ['SESSION_SECRET_KEY']
+
+
+app = Flask(__name__)
 
 @app.route("/")
 def welcome():
@@ -76,7 +79,7 @@ def generate_csrf_token():
 
 app.jinja_env.globals['csrf_token'] = generate_csrf_token
 # Change this to your own number before you deploy.
-app.secret_key = os.environ['SESSION_SECRET_KEY']
+app.secret_key = SESSION_SECRET_KEY
 
 if __name__ == "__main__":
     app.run(debug=True)
