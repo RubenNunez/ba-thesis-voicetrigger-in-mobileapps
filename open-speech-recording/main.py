@@ -18,7 +18,6 @@ load_dotenv()
 CLOUD_STORAGE_BUCKET = os.environ['CLOUD_STORAGE_BUCKET']
 SESSION_SECRET_KEY = os.environ['SESSION_SECRET_KEY']
 
-
 app = Flask(__name__)
 
 @app.route("/")

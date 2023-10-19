@@ -1,3 +1,16 @@
+> ## Adapted by Ruben Nunez
+> 
+> 
+> Within the context of my bachelor's thesis at HSLU on integrating voice control features into mobile apps, this "Open Speech Recording" project has been adapted from Pete Warden's original repository on GitHub. The collection of voice samples is crucial, especially for detecting specific trigger words.
+>
+> Original README by Pete Warden follows:
+>
+
+
+
+
+
+
 **Open Speech Recording** is a small web application to collect short snippets
 of speech, and upload them to cloud storage. It's designed to help gather open
 speech data sets to train machine learning systems.
