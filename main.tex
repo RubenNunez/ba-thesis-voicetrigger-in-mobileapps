@@ -16,6 +16,8 @@
 \usepackage{afterpage}
 \usepackage{pdflscape} 
 \usepackage[style=apa, backend=biber]{biblatex}
+
+\usepackage{tikz}
 % \usepackage{indentfirst} 
 % \usepackage[
 %     colorlinks=true, 
@@ -50,7 +52,7 @@
 
 \lstset{
 	language=Python,
-	basicstyle=\ttfamily\footnotesize, % footnotesize gibt eine kleinere Schriftgröße
+	basicstyle=\ttfamily\footnotesize, % footnotesize gibt eine kleinere Schriftgrösse
 	backgroundcolor=\color{white},
 	commentstyle=\color{codegreen},
 	keywordstyle=\color{codered},
@@ -536,14 +538,67 @@ wird es in diesem Kapitel gehen.
 
 
 \newpage \section{Stand der Forschung}
-Die Forschung im Bereich der Spracherkennung ist ein aktives Gebiet. Eine Suche auf Google Scholar
-nach dem Begriff \textit{Speech Recognition} ergibt um die 3 Millionen Ergebnisse. Die Jahre 2010
+Die Forschung im Bereich der Spracherkennung ist ein aktives Forschungsgebiet. Die Jahre 2010
 bis 2020 haben laut (\cite{hannun2021history}) einen grossen Fortschritt in der Spracherkennung
 erlebt. Dieser Fortschritt ist vor allem auf die Verwendung von Deep Learning zurückzuführen. In
 der Allgemeinheit ist Spracherkennung vor allem durch die Sprachassistenten von Apple, Google und
-Amazon bekannt. Apple veröffentlichte Siri im Jahr 2011 mit dem Release von iOS 5. 
+Amazon bekannt. Apple veröffentlichte seinen Sprachassistenten Siri im Jahr 2011 mit dem Release 
+von iOS 5. 
 
 \subsection{Zeitliche Entwicklung der Spracherkennung} 
+Das Jahrzehnt von 2010 bis 2020 erlebte bedeutende Fortschritte in der automatischen 
+Spracherkennung. Viele Menschen nutzen nun täglich Spracherkennung, beispielsweise für 
+Sprachsuchanfragen oder Interaktionen mit Sprachassistenten wie Amazon Alexa und Siri von Apple. 
+Vor 2010 war die Nutzung der Spracherkennung selten. Angesichts der bemerkenswerten Veränderungen 
+im Bereich der Spracherkennung im letzten Jahrzehnt stellt sich die Frage, was das nächste 
+Jahrzehnt bringen wird. 
+
+\begin{figure}[htb]
+    \centering
+    \begin{tikzpicture}[scale=1.5, every node/.style={scale=0.8}] 
+        % Zeichnen der horizontalen Linie
+        \draw[->, thick] (0,0) -- (10,0);
+        \foreach \x in {0,...,10} {
+            \draw (\x,-0.1) -- (\x,0.1);
+        }
+
+        % Beschriftung
+        \node[align=center, below] at (0,-0.5) {2010};
+        \node[align=center, below] at (10,-0.5) {2020};
+
+        % Ereignisse
+		\node[align=center, above] (hybrid) at (2,0.5) {Hybrid};
+		\node[align=center, above] (libri) at (4,0.2) {Deep LibriSpeech\\Google};
+		\node[align=center, above] (human) at (6,0.5) {Human-level\\Switchboard};
+		\node[align=center, above] (kaldi) at (8,0.2) {Kaldi HMM/DNN\\Speech};
+		\node[align=center, below] (google) at (3,-0.5) {Google streaming\\on-device transducer};
+		\node[align=center, below] (siri) at (5,-1) {Apple Siri\\Amazon Echo};
+		\node[align=center, below] (speech2) at (7,-0.5) {Deep Speech 2};
+		\node[align=center, below] (encoder) at (9,-1) {Encoder-decoder models\\for ASR};
+
+		% Linien zu den Ereignissen
+		\draw (hybrid) -- (2,0);
+		\draw (libri) -- (4,0);
+		\draw (human) -- (6,0);
+		\draw (kaldi) -- (8,0);
+		\draw (google) -- (3,0);
+		\draw (siri) -- (5,0);
+		\draw (speech2) -- (7,0);
+		\draw (encoder) -- (9,0);
+    \end{tikzpicture}
+    \caption{Timeline der Spracherkennung}
+	\label{fig:timeline} % für spätere Referenzen
+\end{figure}
+
+\noindent \newline
+Deep Learning hat die Spracherkennung revolutioniert, insbesondere durch die Sammlung grosser 
+transkribierter Datensätze und Fortschritte in Grafikprozessoreinheiten. Interessanterweise hat 
+Richard Hamming, ein Mathematiker, Informatiker und Elektroingenieur, viele Vorhersagen über die 
+Zukunft der Computertechnik gemacht, von denen viele eingetreten sind. Er betonte die Wichtigkeit 
+der Praxis bei der Vorhersage der Zukunft und machte seine Vorhersagen öffentlich. 
+(\cite{hannun2021history})
+
+\noindent \newline
 TODO: - Abbildung mit einer Timeline diverser Sprachassistenten und deren Release-Daten aus 
 (\cite{hannun2021history}). Was hat diese Entwicklung ermöglicht?
 
@@ -553,6 +608,32 @@ Sprachassistenten. Die Analyse "Voice control implementation may be conditionall
 parts: speech, recognition, translation, and execution of commands (Fig. 1)."
 
 \subsection{Funktionsweise von Siri}
+Die Implementation von Siri ist nicht öffentlich zugänglich, aber Apple selbst dokumentiert 
+das Grundlegende Konzept von Siri sehr detailliert. Der Beitrag ``Hey Siri: An On-device DNN-powered 
+Voice Trigger for Apple’s Personal Assistant'' \cite{siri2017hey} von der ML Research Group von 
+Apple gibt einen sehr detaillierten Einblick in die Funktionsweise von Siri. Siri besteht aus
+diversen Komponenten, welche mehrheitlich in der Cloud laufen. ``Most of the implementation of Siri 
+is in the Cloud, including the main automatic speech recognition, the natural language 
+interpretation and the various information services.'' (\cite{siri2017hey}). Der Trigger von Siri
+läuft jedoch auf dem Gerät selbst. Um diesen geht es im wesentlichen in diesem Kapitel.
+
+\noindent \newline
+Siri verwendet für den Voice Trigger ein Deep Neural Network (DNN) um das akustische Muster jedes 
+Frames in eine Verteilung von Wahrscheinlichkeiten für jeden Phonem zu übersetzen. Die Phoneme sind 
+die Bausteine der akustischen Sprache. Aus den Wahrscheinlichkeiten wird in einen zeitlichen 
+Integrationsprozess bestimmt, wie sicher es ist, dass das Gesagte 'Hey Siri' war.
+
+\noindent \newline
+Das Mikrofon des Geräts wandelt das Audiosignal in einen kontinuierlichen Stream von 16000 Samples 
+pro Sekunde um. Diese Samples werden anschliessend durch eine Spektralanalyse in eine Abfolge von 
+Frames transformiert, wobei jeder dieser Frames das Spektrum von ungefähr 0,01 Sekunden beschreibt.
+Zwanzig Frames, die sich über 0,2 Sekunden erstrecken, werden dann als Eingabe für das DNN 
+verwendet.
+ 
+e ....
+
+
+\noindent \newline
 TODO: Offenlegung der Funktionsweise von Siri. Wie funktioniert Siri? Als Beispiel eines OS 
 übergreifenden Sprachassistenten.
 (\cite{siri2017hey}) und (\cite{apple2023voice}) 
