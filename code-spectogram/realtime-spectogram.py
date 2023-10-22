@@ -1,8 +1,8 @@
 import sys
 import numpy as np
 import sounddevice as sd
-from PyQt5 import QtWidgets
-from PyQt5 import QtCore
+from PyQt6 import QtWidgets
+from PyQt6 import QtCore
 import pyqtgraph as pg
 import colorcet as cc
 import matplotlib.pyplot as plt
@@ -62,7 +62,7 @@ class AudioStream(object):
         timer = pg.QtCore.QTimer()
         timer.timeout.connect(self.update)
         timer.start(10)  # Aktualisierungsrate in Millisekunden
-        self.app.exec_()
+        self.app.exec()
 
     def update(self):
         data, _ = self.stream.read(CHUNK)

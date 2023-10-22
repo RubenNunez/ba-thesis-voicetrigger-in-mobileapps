@@ -31,7 +31,8 @@ For the machine learning (ML) part of this project, the 'data' folder containing
 
 ## Dependencies
 - Anaconda Environment
-  - Python 3.9
+  - name: (ba-environment)
+  - Python 3.11.6
 
 ## Authors
 - Ruben Nuñez
