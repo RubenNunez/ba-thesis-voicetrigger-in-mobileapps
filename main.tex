@@ -557,55 +557,76 @@ vielen Menschen genutzt. Die Nutzung der Sprachassistenten wird vor allem für S
 verwendet. Angesichts des Fortschritts der letzten Jahre stellt sich die Frage, was die Zukunft
 bringen wird (\cite{hannun2021history}).
 
+\noindent \newline
+Die Abbildung \ref{fig:updated_timeline} zeigt eine Timeline der wichtigsten Entwicklungen im 
+Zeitraum von 2010 bis 2020. Die Timeline wurde basierend auf der Timeline von 
+(\cite{hannun2021history}) erstellt aber mit einem Zusatz für das Jahr 2020, welches die neuste 
+Entwicklung von Facebook AI's wav2vec2 aufzeigt (\cite{baevski2020wav2vec}).
 
 \begin{figure}[htb]
     \centering
     \begin{tikzpicture}[scale=1.5, every node/.style={scale=0.8}] 
-        % Zeichnen der horizontalen Linie
+        % Drawing the horizontal line
         \draw[->, thick] (0,0) -- (10,0);
-        \foreach \x in {0,...,10} {
+        \foreach \x in {0,10} {
             \draw (\x,-0.1) -- (\x,0.1);
         }
 
-        % Beschriftung
-        \node[align=center, below] at (0,-0.5) {2010};
-        \node[align=center, below] at (10,-0.5) {2020};
+		\foreach \x [count=\xi] in {2010,...,2020} {
+			\draw (\xi-1,-0.1) -- (\xi-1,0.1); % draws the tick mark
+			% \node[below] at (\xi-1,-0.2) {\x}; % labels the tick mark
+		}
 
-        % Ereignisse
-		\node[align=center, above] (hybrid) at (2,0.5) {Hybrid};
-		\node[align=center, above] (libri) at (4,0.2) {Deep LibriSpeech\\Google};
-		\node[align=center, above] (human) at (6,0.5) {Human-level\\Switchboard};
-		\node[align=center, above] (kaldi) at (8,0.2) {Kaldi HMM/DNN\\Speech};
-		\node[align=center, below] (google) at (3,-0.5) {Google streaming\\on-device transducer};
-		\node[align=center, below] (siri) at (5,-1) {Apple Siri\\Amazon Echo};
-		\node[align=center, below] (speech2) at (7,-0.5) {Deep Speech 2};
-		\node[align=center, below] (encoder) at (9,-1) {Encoder-decoder models\\for ASR};
+        % Labeling
+        \node[align=center, below] at (0,-0.8) {2010};
+        \node[align=center, below] at (10,-0.8) {2020};
 
-		% Linien zu den Ereignissen
-		\draw (hybrid) -- (2,0);
-		\draw (libri) -- (4,0);
-		\draw (human) -- (6,0);
-		\draw (kaldi) -- (8,0);
-		\draw (google) -- (3,0);
-		\draw (siri) -- (5,0);
-		\draw (speech2) -- (7,0);
-		\draw (encoder) -- (9,0);
+        % Events
+		\node[align=center, above] (kaldi) at (1.25,0.5) {Kaldi};
+		\node[align=center, above] (hybrid) at (2.4,1) {Hybrid\\HMM/DNN};
+		\node[align=center, above] (deepspeech) at (4.75,0.5) {Deep\\Speech};
+		\node[align=center, above] (librispeech) at (5.5,1) {LibriSpeech};
+		\node[align=center, above] (googlehome) at (6.7,1) {Google\\Home};
+		\node[align=center, above] (humanlevel) at (7.75,0.75) {Human-level\\Switchboard};
+		\node[align=center, above] (wav2vec2) at (10.0,0.75) {Facebook AI\\wav2vec2};
+		\node[align=center, below] (applesiri) at (1.6,-0.8) {Apple Siri};
+		\node[align=center, below] (amazonecho) at (4.55,-0.5) {Amazon Echo};
+		\node[align=center, below] (encoder) at (5.8,-1.175) {Encoder-decoder\\models for ASR};
+		\node[align=center, below] (deepspeech2) at (6.75,-0.5) {Deep Speech 2};
+		\node[align=center, below] (googletransducer) at (9,-1) {Google streaming\\on-device transducer};
+
+		% Lines to the events
+		\draw (kaldi) -- (1.25,0.1);
+		\draw (hybrid) -- (2.4,0.1);
+		\draw (deepspeech) -- (4.75,0.1);
+		\draw (librispeech) -- (5.5,0.1);
+		\draw (googlehome) -- (6.7,0.1);
+		\draw (humanlevel) -- (7.75,0.1);
+		\draw (wav2vec2) -- (10.0,0.1);
+		\draw (applesiri) -- (1.6,-0.1);
+		\draw (amazonecho) -- (4.55,-0.1);
+		\draw (encoder) -- (5.8,-0.1);
+		\draw (deepspeech2) -- (6.75,-0.1);
+		\draw (googletransducer) -- (9,-0.1);
     \end{tikzpicture}
-    \caption{Timeline der Spracherkennung}
-	\label{fig:timeline} % für spätere Referenzen
+    \caption{Timeline of Speech Recognition Developments (2010-2020)}
+	\label{fig:updated_timeline} % for later references
 \end{figure}
 
 \noindent \newline
-Deep Learning hat die Spracherkennung revolutioniert, insbesondere durch die Sammlung grosser 
-transkribierter Datensätze und Fortschritte in Grafikprozessoreinheiten. Interessanterweise hat 
-Richard Hamming, ein Mathematiker, Informatiker und Elektroingenieur, viele Vorhersagen über die 
-Zukunft der Computertechnik gemacht, von denen viele eingetreten sind. Er betonte die Wichtigkeit 
-der Praxis bei der Vorhersage der Zukunft und machte seine Vorhersagen öffentlich. 
-(\cite{hannun2021history})
 
 \noindent \newline
-TODO: - Abbildung mit einer Timeline diverser Sprachassistenten und deren Release-Daten aus 
-(\cite{hannun2021history}). Was hat diese Entwicklung ermöglicht?
+Deep Learning hat zum grossen Teilen die Spracherkennung revolutioniert, insbesondere durch die 
+Sammlung grosser transkribierter Datensätze und Fortschritte in der Hardware. Spätestens seit 
+(\textit{Deep Speech}) sind Fähigkeiten der akustischen Sprachmodelle mit denen von Menschen
+vergleichbar (\cite{hannun2021history}). 
+
+\noindent \newline
+Als offene Vorhersage für die Zukunft der Spracherkennung bezieht sich (\cite{hannun2021history}) 
+auf die Entwicklung bis 2030. Bis 2030 wird die Spracherkennungs-Forschung eine Verlagerung zu 
+self-supervised Modellen und On-Device-Training erleben, wobei der Fokus auf kleine sparsame Modelle
+und personalisierten Modellen liegt. Die Wortfehlerrate wird weiter sinken, während die 
+Sprachqualität steigt (\cite{hannun2021history}).
 
 \subsection{Komparative Analyse von Sprachassistenten}
 TODO: - (\cite{matarneh2017speechrecognition}) bietet eine komparative Analyse von 
