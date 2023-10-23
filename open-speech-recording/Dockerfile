@@ -1,5 +1,4 @@
-# Use a small base image
-FROM python:3.9-slim-buster
+FROM google/cloud-sdk:alpine
 
 # Set the working directory to /app
 WORKDIR /app
@@ -13,11 +12,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of the application code into the container
 COPY . .
 
-# Expose port 5000 for the Flask app
-EXPOSE 5000
-
 # Set the environment variable for Flask
 ENV FLASK_APP=main.py
 
-# Run the Flask app
-CMD ["flask", "run", "--host=0.0.0.0"]
+ENV PYTHONUNBUFFERED 1
+
+EXPOSE 8080
+CMD exec gunicorn --bind :8080 --timeout 3600 app:app
