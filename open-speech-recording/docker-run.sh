@@ -10,6 +10,6 @@ if [[ "$(docker images -q $IMAGE_NAME 2> /dev/null)" == "" ]]; then
 fi
 
 # Run the container with environment variables
-docker run -p 8080:5000 --env-file .env.docker -e GOOGLE_APPLICATION_CREDENTIALS=/app/.secrets/fooby-research-ba-2b78fe420798.json $IMAGE_NAME
+docker run -p 8080:8080 --env-file .env.docker -e GOOGLE_APPLICATION_CREDENTIALS=/app/.secrets/fooby-research-ba-2b78fe420798.json $IMAGE_NAME
 
 
