@@ -1,18 +1,34 @@
 """Training script"""
 
 import os
+from datetime import datetime
 import argparse
 import torch
 import torch.nn as nn
 import torch.utils.data as data
 import torch.optim as optim
 from dataset import WakeWordData, collate_fn
-from model import LSTMWakeWord
+from model import WakeupModel_LSTM
 from sklearn.metrics import classification_report
 from tabulate import tabulate
 
 
+def load_checkpoint(checkpoint_path, model, optimizer, scheduler):
+    """
+    Load model, optimizer, and scheduler states from checkpoint
+    """
+    if not os.path.exists(checkpoint_path):
+        return None
+
+    checkpoint = torch.load(checkpoint_path)
+    model.load_state_dict(checkpoint["model_state_dict"])
+    optimizer.load_state_dict(checkpoint["optimizer_state_dict"])
+    scheduler.load_state_dict(checkpoint["scheduler_state_dict"])
+
+    return checkpoint
+
 def save_checkpoint(checkpoint_path, model, optimizer, scheduler, model_params, notes=None):
+
     torch.save({
         "notes": notes,
         "model_params": model_params,
@@ -46,7 +62,7 @@ def test(test_loader, model, device, epoch):
             print("Iter: {}/{}, accuracy: {}".format(idx, len(test_loader), acc), end="\r")
     average_acc = sum(accs)/len(accs) 
     print('Average test Accuracy:', average_acc, "\n")
-    report = classification_report(labels, preds)
+    report = classification_report(labels, preds, zero_division=0)
     print(report)
     return average_acc, report
 
@@ -75,7 +91,8 @@ def train(train_loader, model, optimizer, loss_fn, device, epoch):
     avg_train_loss = sum(losses)/len(losses)
     acc = binary_accuracy(torch.Tensor(preds), torch.Tensor(labels))
     print('avg train loss:', avg_train_loss, "avg train acc", acc)
-    report = classification_report(torch.Tensor(labels).numpy(), torch.Tensor(preds).numpy())
+    report = classification_report(torch.Tensor(labels).numpy(), torch.Tensor(preds).numpy(), zero_division=0)  # or zero_division=1 if you prefer
+
     print(report)
     return acc, report
 
@@ -104,7 +121,7 @@ def main(args):
         "num_classes": 1, "feature_size": 40, "hidden_size": args.hidden_size,
         "num_layers": 1, "dropout" :0.1, "bidirectional": False
     }
-    model = LSTMWakeWord(**model_params, device=device)
+    model = WakeupModel_LSTM(**model_params, device=device)
     model = model.to(device)
     optimizer = optim.AdamW(model.parameters(), lr=args.lr)
     loss_fn = nn.BCEWithLogitsLoss()
@@ -127,7 +144,9 @@ def main(args):
 
         # saves checkpoint if metrics are better than last
         if args.save_checkpoint_path and test_acc >= best_test_acc:
-            checkpoint_path = os.path.join(args.save_checkpoint_path, args.model_name + ".pt")
+            # Create a string representing the current date and hour
+            current_datetime = datetime.now().strftime("%Y-%m-%d_%H")
+            checkpoint_path = os.path.join(args.save_checkpoint_path, f"{args.model_name}_{current_datetime}.pt")
             print("found best checkpoint. saving model as", checkpoint_path)
             save_checkpoint(
                 checkpoint_path, model, optimizer, scheduler, model_params,
@@ -162,7 +181,7 @@ if __name__ == "__main__":
     parser.add_argument('--batch_size', type=int, default=32, help='size of batch')
     parser.add_argument('--eval_batch_size', type=int, default=32, help='size of batch')
     parser.add_argument('--lr', type=float, default=1e-4, help='learning rate')
-    parser.add_argument('--model_name', type=str, default="wakeword", required=False, help='name of model to save')
+    parser.add_argument('--model_name', type=str, default="wakeup", required=False, help='name of model to save')
     parser.add_argument('--save_checkpoint_path', type=str, default=None, help='Path to save the best checkpoint')
     parser.add_argument('--train_data_json', type=str, default=None, required=True, help='path to train data json file')
     parser.add_argument('--test_data_json', type=str, default=None, required=True, help='path to test data json file')

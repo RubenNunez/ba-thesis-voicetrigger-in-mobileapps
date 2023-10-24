@@ -1,238 +1,59 @@
-[
-    {
-        "key": "common_voice_en_33338020.mp3",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_33339106.mp3",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_34925785.mp3",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_33163447.mp3",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_33338001.mp3",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_33337999.mp3",
-        "label": 0
-    },
-    {
-        "key": "Baum_fd57df1f237446e683d7e2b40654775a_5d5ce1fc391345d59e0c0cecc1fd69f1.wav",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_33339054.mp3",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_33336997.mp3",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_33342888.mp3",
-        "label": 0
-    },
-    {
-        "key": "0_Hey_FOOBY_89aef8e8ae8844e7baaac3471350dd54_381a06436bff49deaf1555110e1293c8.wav",
-        "label": 1
-    },
-    {
-        "key": "common_voice_en_34925818.mp3",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_33352793.mp3",
-        "label": 0
-    },
-    {
-        "key": "1_Hey_FOOBY_fd57df1f237446e683d7e2b40654775a_effbd8aea1424a63973d2b2ec254fca4.wav",
-        "label": 1
-    },
-    {
-        "key": "common_voice_en_34925845.mp3",
-        "label": 0
-    },
-    {
-        "key": "Fanschter_89aef8e8ae8844e7baaac3471350dd54_1041e8e673fa4e2391283c45240b7499.wav",
-        "label": 0
-    },
-    {
-        "key": "Toll_7bfa1aaab1fb4b1f967319c2af09bbbb_23d44ed8395c47a1a10003ef048829b5.wav",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_33152677.mp3",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_33352474.mp3",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_33152299.mp3",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_33163468.mp3",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_33337989.mp3",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_33152311.mp3",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_33342795.mp3",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_33339146.mp3",
-        "label": 0
-    },
-    {
-        "key": "Chatz_fd57df1f237446e683d7e2b40654775a_5891c4206c8347d0bf9463c47fa9e6f6.wav",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_34925819.mp3",
-        "label": 0
-    },
-    {
-        "key": "3_Hey_FOOBY_89aef8e8ae8844e7baaac3471350dd54_381a06436bff49deaf1555110e1293c8.wav",
-        "label": 1
-    },
-    {
-        "key": "common_voice_en_33339148.mp3",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_33155850.mp3",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_33162171.mp3",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_34925847.mp3",
-        "label": 0
-    },
-    {
-        "key": "Chatz_7819145e035e4af38edc4426ed37c62d_ee7dec4d05924d29b00c6f4819e9102e.wav",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_34925851.mp3",
-        "label": 0
-    },
-    {
-        "key": "2_Hey_FOOBY_7bfa1aaab1fb4b1f967319c2af09bbbb_71e3c6bd2f8f43888817d66cb4ff1c5e.wav",
-        "label": 1
-    },
-    {
-        "key": "common_voice_en_33163495.mp3",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_33352460.mp3",
-        "label": 0
-    },
-    {
-        "key": "0_Hey_FOOBY_fd57df1f237446e683d7e2b40654775a_effbd8aea1424a63973d2b2ec254fca4.wav",
-        "label": 1
-    },
-    {
-        "key": "Husli_7bfa1aaab1fb4b1f967319c2af09bbbb_93070e38957947728890ce7438d67e28.wav",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_33352464.mp3",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_33352498.mp3",
-        "label": 0
-    },
-    {
-        "key": "0_Hey_FOOBY_d88fb26508c94dadb48bab48808cd243_caac8cecbb2b4c86a201c813789fbdd2.wav",
-        "label": 1
-    },
-    {
-        "key": "common_voice_en_33339122.mp3",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_34925781.mp3",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_33162397.mp3",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_33152281.mp3",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_34925836.mp3",
-        "label": 0
-    },
-    {
-        "key": "0_Hey_FOOBY_d88fb26508c94dadb48bab48808cd243_6fa8f383af1a4b7ebd275a64b198084e.wav",
-        "label": 1
-    },
-    {
-        "key": "2_Hey_FOOBY_89aef8e8ae8844e7baaac3471350dd54_381a06436bff49deaf1555110e1293c8.wav",
-        "label": 1
-    },
-    {
-        "key": "common_voice_en_33347141.mp3",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_34925806.mp3",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_33342543.mp3",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_33339135.mp3",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_33352776.mp3",
-        "label": 0
-    },
-    {
-        "key": "Ture_89aef8e8ae8844e7baaac3471350dd54_64e94497e8b1412f9761b0e08d44a702.wav",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_33352475.mp3",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_33152282.mp3",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_33338561.mp3",
-        "label": 0
-    },
-    {
-        "key": "common_voice_en_33336978.mp3",
-        "label": 0
-    }
-]
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_33352483.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_33337990.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/Hey_FOOBY/4_Hey_FOOBY_7bfa1aaab1fb4b1f967319c2af09bbbb_71e3c6bd2f8f43888817d66cb4ff1c5e.wav", "label": 1}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/Hund_7819145e035e4af38edc4426ed37c62d_ab70b7353bb24da580a2ffd276558d7f.wav", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_33159782.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/Hey_FOOBY/Hey_FOOBY_89aef8e8ae8844e7baaac3471350dd54_381a06436bff49deaf1555110e1293c8.wav", "label": 1}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_33342543.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/Hund_d88fb26508c94dadb48bab48808cd243_00476c698e6d4511a2cb55f8c557c7f0.wav", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/Hey_FOOBY/0_Hey_FOOBY_7bfa1aaab1fb4b1f967319c2af09bbbb_71e3c6bd2f8f43888817d66cb4ff1c5e.wav", "label": 1}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_33152304.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/Hey_FOOBY/3_Hey_FOOBY_7bfa1aaab1fb4b1f967319c2af09bbbb_bc10f14a9c8f4a93937f8ff04315bf27.wav", "label": 1}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_33342724.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_33352466.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/Hey_FOOBY/1_Hey_FOOBY_7bfa1aaab1fb4b1f967319c2af09bbbb_bc10f14a9c8f4a93937f8ff04315bf27.wav", "label": 1}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_33342887.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_34925806.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/Hey_FOOBY/3_Hey_FOOBY_d88fb26508c94dadb48bab48808cd243_6fa8f383af1a4b7ebd275a64b198084e.wav", "label": 1}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_34925855.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_33338021.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/Vogel_d88fb26508c94dadb48bab48808cd243_0eba789ed00448df9ff13acd868d7ae7.wav", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_33342725.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_34925844.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_33339087.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_33352457.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_33337053.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_33339109.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_33158665.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_33156397.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_33339052.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_33342767.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/Hey_FOOBY/1_Hey_FOOBY_89aef8e8ae8844e7baaac3471350dd54_e5301625a173425d99da0e9ce64716a9.wav", "label": 1}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_33155852.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_33344946.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/Baum_fd57df1f237446e683d7e2b40654775a_5d5ce1fc391345d59e0c0cecc1fd69f1.wav", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_33352460.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/Bett_89aef8e8ae8844e7baaac3471350dd54_98e7bc2ab6314198b73a35f61318681e.wav", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_33352775.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_34925836.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/Hey_FOOBY/1_Hey_FOOBY_d88fb26508c94dadb48bab48808cd243_6fa8f383af1a4b7ebd275a64b198084e.wav", "label": 1}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_33337032.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_33342750.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_33152288.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_33352774.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_33337087.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/Hey_FOOBY/1_Hey_FOOBY_d88fb26508c94dadb48bab48808cd243_caac8cecbb2b4c86a201c813789fbdd2.wav", "label": 1}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_34925781.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/Bett_7bfa1aaab1fb4b1f967319c2af09bbbb_2486b309b02a43bfaae18da196d2a28f.wav", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/Hey_FOOBY/1_Hey_FOOBY_7bfa1aaab1fb4b1f967319c2af09bbbb_71e3c6bd2f8f43888817d66cb4ff1c5e.wav", "label": 1}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_34925818.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_33342249.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_33339147.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_33347109.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/Hey_FOOBY/2_Hey_FOOBY_fd57df1f237446e683d7e2b40654775a_ac16a88bd8de455a9ed6c6d9a6f6d577.wav", "label": 1}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_33153438.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/Frohlich_7819145e035e4af38edc4426ed37c62d_13e1c23ab6b54ecbb75acefcb6ba2dc1.wav", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_33352777.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_33339137.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_33163447.mp3", "label": 0}
+{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM/other/common_voice_en_33342825.mp3", "label": 0}

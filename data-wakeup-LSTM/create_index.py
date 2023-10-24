@@ -15,25 +15,43 @@ def main(args):
     percent = args.percent
     data = []
     for other in others:
+        # check if DS_Store
+        if other == ".DS_Store":
+            continue
+
         data.append({
-            "key": other, #os.path.join(args.other_label_dir, other),
+            "key": os.path.join(args.other_label_dir, other),
             "label": 0
         })
     for fooby in foobies:
+        # check if DS_Store
+        if other == ".DS_Store":
+            continue
+
+
         data.append({
-            "key":  fooby, #os.path.join(args.hey_fooby_label_dir, fooby),
+            "key": os.path.join(args.hey_fooby_label_dir, fooby),
             "label": 1
         })
     random.shuffle(data)
 
-    train_data = data[:int(len(data) - len(data) / percent)]
-    test_data = data[int(len(data) - len(data) / percent):]
-
-    with open(os.path.join(args.save_json_path, 'train.json'), 'w') as f:
-        json.dump(train_data, f, indent=4)
-
-    with open(os.path.join(args.save_json_path, 'test.json'), 'w') as f:
-        json.dump(test_data, f, indent=4)
+    with open(args.save_json_path +"/"+ 'train.json','w') as f:
+        d = len(data)
+        i = 0
+        while(i < int(d - d/percent)):
+            r = data[i]
+            line = json.dumps(r)
+            f.write(line + "\n")
+            i += 1
+    
+    with open(args.save_json_path +"/"+ 'test.json','w') as f:
+        d = len(data)
+        i = int(d - d/percent)
+        while(i < d):
+            r = data[i]
+            line = json.dumps(r)
+            f.write(line + "\n")
+            i += 1
 
     
 
