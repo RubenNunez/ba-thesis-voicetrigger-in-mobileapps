@@ -10,43 +10,39 @@ import random
 
 
 def main(args):
-    zeros = os.listdir(args.zero_label_dir)
-    ones = os.listdir(args.one_label_dir)
+    others = os.listdir(args.other_label_dir)
+    foobies = os.listdir(args.hey_fooby_label_dir)
     percent = args.percent
     data = []
-    for z in zeros:
+    for other in others:
         data.append({
-            "key": os.path.join(args.zero_label_dir, z),
+            "key": os.path.join(args.other_label_dir, other),
             "label": 0
         })
-    for o in ones:
+    for fooby in foobies:
         data.append({
-            "key": os.path.join(args.one_label_dir, o),
+            "key": os.path.join(args.hey_fooby_label_dir, fooby),
             "label": 1
         })
     random.shuffle(data)
 
-    f = open(args.save_json_path +"/"+ "train.json", "w")
-    
     with open(args.save_json_path +"/"+ 'train.json','w') as f:
         d = len(data)
-        i=0
-        while(i<int(d-d/percent)):
-            r=data[i]
+        i = 0
+        while(i < int(d - d/percent)):
+            r = data[i]
             line = json.dumps(r)
             f.write(line + "\n")
-            i = i+1
+            i += 1
     
-    f = open(args.save_json_path +"/"+ "test.json", "w")
-
     with open(args.save_json_path +"/"+ 'test.json','w') as f:
         d = len(data)
-        i=int(d-d/percent)
-        while(i<d):
-            r=data[i]
+        i = int(d - d/percent)
+        while(i < d):
+            r = data[i]
             line = json.dumps(r)
             f.write(line + "\n")
-            i = i+1
+            i += 1
     
 
 if __name__ == "__main__":
