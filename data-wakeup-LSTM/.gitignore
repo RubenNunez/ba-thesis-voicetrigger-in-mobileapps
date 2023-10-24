@@ -1,6 +1,11 @@
 # Ignore data directories
 /FOOBY/
+/FOOBY_replicated/
 /Hello_FOOBY/
+/Hello_FOOBY_replicated/
 /Hey_FOOBY/
+/Hey_FOOBY_replicated/
 /Hi_FOOBY/
+/Hi_FOOBY_replicated/
 /other/
+/other_chunked/

@@ -1,7 +1,7 @@
 import os
 import shutil
 
-base_directory = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data"
+base_directory = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM"
 
 # Define known prefixes
 known_prefixes = ["Hey_FOOBY", "Hello_FOOBY", "Hi_FOOBY", "OK_FOOBY", "FOOBY"]

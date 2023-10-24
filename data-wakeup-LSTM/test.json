@@ -1,6 +1,238 @@
-{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data/Hey_FOOBY/Hey_FOOBY_7819145e035e4af38edc4426ed37c62d_67648d7669b3410c9203c075304aab5a.ogg", "label": 1}
-{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data/other/Vogel_7819145e035e4af38edc4426ed37c62d_2a4d18bd8b7e46bcbeffea8d13712d8d.ogg", "label": 0}
-{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data/other/Frohlich_d88fb26508c94dadb48bab48808cd243_94ec6f7c820d48219d33124bfb036f3b.ogg", "label": 0}
-{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data/Hey_FOOBY/Hey_FOOBY_7819145e035e4af38edc4426ed37c62d_d0c1bfe4d8c9409a9531882a3e7967bd.ogg", "label": 1}
-{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data/other/Ture_89aef8e8ae8844e7baaac3471350dd54_64e94497e8b1412f9761b0e08d44a702.ogg", "label": 0}
-{"key": "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data/other/Chatz_7bfa1aaab1fb4b1f967319c2af09bbbb_f0d71d1b8dc14492b13696732d892e25.ogg", "label": 0}
+[
+    {
+        "key": "common_voice_en_33338020.mp3",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_33339106.mp3",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_34925785.mp3",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_33163447.mp3",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_33338001.mp3",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_33337999.mp3",
+        "label": 0
+    },
+    {
+        "key": "Baum_fd57df1f237446e683d7e2b40654775a_5d5ce1fc391345d59e0c0cecc1fd69f1.wav",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_33339054.mp3",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_33336997.mp3",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_33342888.mp3",
+        "label": 0
+    },
+    {
+        "key": "0_Hey_FOOBY_89aef8e8ae8844e7baaac3471350dd54_381a06436bff49deaf1555110e1293c8.wav",
+        "label": 1
+    },
+    {
+        "key": "common_voice_en_34925818.mp3",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_33352793.mp3",
+        "label": 0
+    },
+    {
+        "key": "1_Hey_FOOBY_fd57df1f237446e683d7e2b40654775a_effbd8aea1424a63973d2b2ec254fca4.wav",
+        "label": 1
+    },
+    {
+        "key": "common_voice_en_34925845.mp3",
+        "label": 0
+    },
+    {
+        "key": "Fanschter_89aef8e8ae8844e7baaac3471350dd54_1041e8e673fa4e2391283c45240b7499.wav",
+        "label": 0
+    },
+    {
+        "key": "Toll_7bfa1aaab1fb4b1f967319c2af09bbbb_23d44ed8395c47a1a10003ef048829b5.wav",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_33152677.mp3",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_33352474.mp3",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_33152299.mp3",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_33163468.mp3",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_33337989.mp3",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_33152311.mp3",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_33342795.mp3",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_33339146.mp3",
+        "label": 0
+    },
+    {
+        "key": "Chatz_fd57df1f237446e683d7e2b40654775a_5891c4206c8347d0bf9463c47fa9e6f6.wav",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_34925819.mp3",
+        "label": 0
+    },
+    {
+        "key": "3_Hey_FOOBY_89aef8e8ae8844e7baaac3471350dd54_381a06436bff49deaf1555110e1293c8.wav",
+        "label": 1
+    },
+    {
+        "key": "common_voice_en_33339148.mp3",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_33155850.mp3",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_33162171.mp3",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_34925847.mp3",
+        "label": 0
+    },
+    {
+        "key": "Chatz_7819145e035e4af38edc4426ed37c62d_ee7dec4d05924d29b00c6f4819e9102e.wav",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_34925851.mp3",
+        "label": 0
+    },
+    {
+        "key": "2_Hey_FOOBY_7bfa1aaab1fb4b1f967319c2af09bbbb_71e3c6bd2f8f43888817d66cb4ff1c5e.wav",
+        "label": 1
+    },
+    {
+        "key": "common_voice_en_33163495.mp3",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_33352460.mp3",
+        "label": 0
+    },
+    {
+        "key": "0_Hey_FOOBY_fd57df1f237446e683d7e2b40654775a_effbd8aea1424a63973d2b2ec254fca4.wav",
+        "label": 1
+    },
+    {
+        "key": "Husli_7bfa1aaab1fb4b1f967319c2af09bbbb_93070e38957947728890ce7438d67e28.wav",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_33352464.mp3",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_33352498.mp3",
+        "label": 0
+    },
+    {
+        "key": "0_Hey_FOOBY_d88fb26508c94dadb48bab48808cd243_caac8cecbb2b4c86a201c813789fbdd2.wav",
+        "label": 1
+    },
+    {
+        "key": "common_voice_en_33339122.mp3",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_34925781.mp3",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_33162397.mp3",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_33152281.mp3",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_34925836.mp3",
+        "label": 0
+    },
+    {
+        "key": "0_Hey_FOOBY_d88fb26508c94dadb48bab48808cd243_6fa8f383af1a4b7ebd275a64b198084e.wav",
+        "label": 1
+    },
+    {
+        "key": "2_Hey_FOOBY_89aef8e8ae8844e7baaac3471350dd54_381a06436bff49deaf1555110e1293c8.wav",
+        "label": 1
+    },
+    {
+        "key": "common_voice_en_33347141.mp3",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_34925806.mp3",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_33342543.mp3",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_33339135.mp3",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_33352776.mp3",
+        "label": 0
+    },
+    {
+        "key": "Ture_89aef8e8ae8844e7baaac3471350dd54_64e94497e8b1412f9761b0e08d44a702.wav",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_33352475.mp3",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_33152282.mp3",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_33338561.mp3",
+        "label": 0
+    },
+    {
+        "key": "common_voice_en_33336978.mp3",
+        "label": 0
+    }
+]
