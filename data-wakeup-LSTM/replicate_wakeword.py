@@ -7,7 +7,7 @@ def main(args):
     files = os.listdir(args.wakewords_dir)
     
     for file in files:
-        if file.endswith(".ogg"):
+        if file.endswith(".wav"):
             for i in range(args.copy_number):
                 # Define source and destination file paths
                 src_file = os.path.join(args.wakewords_dir, file)
