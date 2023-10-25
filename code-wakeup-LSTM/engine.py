@@ -7,6 +7,8 @@ import torch
 import numpy as np
 from threading import Event
 
+from dataset import get_featurizer
+
 class Listener:
 
     def __init__(self, sample_rate=8000, record_seconds=10):
@@ -36,36 +38,41 @@ class WakeupEngine:
         self.listener = Listener(sample_rate=8000, record_seconds=10)
         self.model = torch.jit.load(model_file)
         self.model.eval().to('cpu')
-        self.featurizer = torchaudio.transforms.MFCC(
-            sample_rate=8000, n_mfcc=40, melkwargs={'n_fft': 400, 'hop_length': 160, 'n_mels': 40})
+        self.featurizer = get_featurizer(8000)
 
     def predict(self):
         if len(self.listener.audio_buffer) > 0:
             audio = np.concatenate(self.listener.audio_buffer)
+                        
+            # Normalize 
+            audio = audio / np.max(np.abs(audio))
+
             self.listener.audio_buffer.clear()
             with torch.no_grad():
                 waveform = torch.Tensor(audio).reshape(1, -1)
                 mfcc = self.featurizer(waveform).transpose(1, 2).transpose(0, 1)
                 out = self.model(mfcc)
-                out_value = out.item()
-                print(f"Model output: {out_value}")
-                threshold = 0.5  # Adjust as necessary
-                pred = 1.0 if out_value > threshold else 0.0
-                return pred
-                pred = torch.sigmoid(out)
-                return pred.item()
+                out_value = torch.sigmoid(out).item()
+
+                if np.isnan(out_value):
+                    out_value = 0  # handle NaN values
+
+                return out_value
         return 0  # No prediction if buffer is empty
 
     def inference_loop(self, action):
+        max_width = 30
+
         while True:
             prob = self.predict()
-            if prob > 0.01:
-                line = f"\rWakeup Word Probability: {prob:.10f}"
-                print(line)
+            line_length = int(prob * max_width)
 
+            line_visual = "|" + " " * (line_length - 1) + "♪" + " " * (max_width - line_length) + "|"
+            print(f"\rWakeup Word Probability: {prob * 100:05.2f}% {line_visual}")
 
             action(prob)
             time.sleep(0.05)
+
 
     def run(self, action):
         self.listener.run()

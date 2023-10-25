@@ -13,6 +13,9 @@ NEWEST_CHECKPOINT=$(ls -t "$CHECKPOINTS_DIR" | grep '^wakeup_' | head -1)
 # Construct the full path to the newest checkpoint file
 NEWEST_CHECKPOINT_PATH="$CHECKPOINTS_DIR/$NEWEST_CHECKPOINT"
 
+# print the path to the newest checkpoint file
+echo "Using checkpoint: $NEWEST_CHECKPOINT_PATH"
+
 # Construct the path for the optimized model
 SAVE_PATH="$OPTIMIZED_MODEL_DIR/optimized_model.pt"
 

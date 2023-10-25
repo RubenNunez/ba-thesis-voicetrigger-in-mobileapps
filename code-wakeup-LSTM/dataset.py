@@ -116,7 +116,7 @@ class WakeWordData(torch.utils.data.Dataset):
         file_path = None
         try:    
             file_path = self.data.key.iloc[idx]
-            waveform, sr = torchaudio.load(file_path)
+            waveform, sr = torchaudio.load(file_path, normalize=True)
             if sr > self.sr:
                 waveform = torchaudio.transforms.Resample(sr, self.sr)(waveform)
             mfcc = self.audio_transform(waveform)

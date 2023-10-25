@@ -50,7 +50,12 @@ def test(test_loader, model, device, epoch):
     accs = []
     preds = []
     labels = []
+
+    model.eval()  # set the model to evaluation mode
     with torch.no_grad():
+        total_acc = 0
+        total_samples = 0
+
         for idx, (mfcc, label) in enumerate(test_loader):
             mfcc, label = mfcc.to(device), label.to(device)
             output = model(mfcc)
@@ -59,7 +64,14 @@ def test(test_loader, model, device, epoch):
             preds += torch.flatten(torch.round(pred)).cpu()
             labels += torch.flatten(label).cpu()
             accs.append(acc)
+            total_acc += acc * mfcc.size(0)
+            total_samples += mfcc.size(0)
             print("Iter: {}/{}, accuracy: {}".format(idx, len(test_loader), acc), end="\r")
+        
+        overall_acc = total_acc / total_samples
+        print("\nOverall Accuracy: {:.2f}%".format(overall_acc * 100))
+
+
     average_acc = sum(accs)/len(accs) 
     print('Average test Accuracy:', average_acc, "\n")
     report = classification_report(labels, preds, zero_division=0)
@@ -68,15 +80,17 @@ def test(test_loader, model, device, epoch):
 
 
 def train(train_loader, model, optimizer, loss_fn, device, epoch):
-    print("\n starting train for epoch %s"%epoch)
+    model.train()  # set the model to training mode
+
+    print("\n starting train for epoch %s" % epoch)
     losses = []
     preds = []
     labels = []
+
     for idx, (mfcc, label) in enumerate(train_loader):
         mfcc, label = mfcc.to(device), label.to(device)
         optimizer.zero_grad()
         output = model(mfcc)
-        # pred = F.sigmoid(output)
         loss = loss_fn(torch.flatten(output), label)
         loss.backward()
         optimizer.step()
@@ -84,14 +98,15 @@ def train(train_loader, model, optimizer, loss_fn, device, epoch):
 
         # get predictions and labels for report
         pred = torch.sigmoid(output)
-        preds += torch.flatten(torch.round(pred)).cpu()
-        labels += torch.flatten(label).cpu()
+        preds += torch.flatten(torch.round(pred)).cpu().tolist()
+        labels += torch.flatten(label).cpu().tolist()
 
-        print("epoch: {}, Iter: {}/{}, loss: {}".format(epoch, idx, len(train_loader), loss.item()), end="\r")
-    avg_train_loss = sum(losses)/len(losses)
+        print("epoch: {}, Iter: {}/{}, loss: {:.4f}".format(epoch, idx, len(train_loader), loss.item()), end="\r")
+
+    avg_train_loss = sum(losses) / len(losses)
     acc = binary_accuracy(torch.Tensor(preds), torch.Tensor(labels))
-    print('avg train loss:', avg_train_loss, "avg train acc", acc)
-    report = classification_report(torch.Tensor(labels).numpy(), torch.Tensor(preds).numpy(), zero_division=0)  # or zero_division=1 if you prefer
+    print('\navg train loss:', avg_train_loss, "avg train acc", acc)
+    report = classification_report(labels, preds, zero_division=1)  # or zero_division=1 if you prefer
 
     print(report)
     return acc, report
@@ -126,7 +141,7 @@ def main(args):
     optimizer = optim.AdamW(model.parameters(), lr=args.lr)
     loss_fn = nn.BCEWithLogitsLoss()
 
-    scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='max', factor=0.5, patience=2)
+    scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor=0.5, patience=2)
 
     best_train_acc, best_train_report = 0, None
     best_test_acc, best_test_report = 0, None
