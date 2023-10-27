@@ -19,7 +19,7 @@ class TriggerWordDataset(Dataset):
         label = self.labels[idx]
         return audio_input, label
 
-def _load_audio(file_path, target_sample_rate=16000, max_length=24000):
+def _load_audio(file_path, target_sample_rate=16000, max_length=48000):
     waveform, sample_rate = torchaudio.load(file_path)
     if sample_rate != target_sample_rate:
         resampler = torchaudio.transforms.Resample(orig_freq=sample_rate, new_freq=target_sample_rate)
