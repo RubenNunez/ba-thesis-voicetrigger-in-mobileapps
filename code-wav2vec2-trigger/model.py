@@ -1,7 +1,7 @@
 from transformers import Wav2Vec2ForCTC, Wav2Vec2Config
 import torch.nn as nn
 
-config = Wav2Vec2Config.from_pretrained("../wav2vec2-base-960h")
+config = Wav2Vec2Config.from_pretrained("/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/wav2vec2-base-960h")
 
 # Create a new custom model based on the Wav2Vec2Model (not Wav2Vec2ForCTC)
 class TriggerWordWav2Vec2Model(nn.Module):

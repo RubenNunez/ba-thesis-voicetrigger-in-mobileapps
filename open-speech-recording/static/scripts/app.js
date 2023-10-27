@@ -292,7 +292,7 @@ function startRecording() {
   console.log(mediaRecorder.state);
   console.log("recorder started");
   record.style.background = "red";
-  setTimeout(endRecording, 1500);
+  setTimeout(endRecording, 3000);
 }
 
 function endRecording() {
