@@ -63,7 +63,7 @@ dependencies:
   - nest-asyncio=1.5.8=pyhd8ed1ab_0
   - networkx=3.2=pyhd8ed1ab_1
   - openjpeg=2.5.0=hbc2ba62_2
-  - openssl=3.1.3=h53f4e23_0
+  - openssl=3.1.4=h0d3ecfb_0
   - packaging=23.2=pyhd8ed1ab_0
   - parso=0.8.3=pyhd8ed1ab_0
   - pexpect=4.8.0=pyh1a96a4e_2
@@ -110,7 +110,11 @@ dependencies:
   - zipp=3.17.0=pyhd8ed1ab_0
   - zstd=1.5.5=h4f39d0f_0
   - pip:
+      - aiohttp==3.8.6
+      - aiosignal==1.3.1
       - argparse==1.4.0
+      - async-timeout==4.0.3
+      - attrs==23.1.0
       - blinker==1.6.3
       - cachetools==5.3.1
       - cffi==1.16.0
@@ -118,8 +122,11 @@ dependencies:
       - colorcet==3.0.1
       - contourpy==1.1.1
       - cycler==0.12.1
+      - datasets==2.14.6
+      - dill==0.3.7
       - flask==3.0.0
       - fonttools==4.43.1
+      - frozenlist==1.4.0
       - fsspec==2023.10.0
       - google-api-core==2.12.0
       - google-auth==2.23.3
@@ -134,10 +141,13 @@ dependencies:
       - joblib==1.3.2
       - kiwisolver==1.4.5
       - matplotlib==3.8.0
+      - multidict==6.0.4
+      - multiprocess==0.70.15
       - numpy==1.26.1
       - pandas==2.1.1
       - param==1.13.0
       - protobuf==4.24.4
+      - pyarrow==13.0.0
       - pyasn1==0.5.0
       - pyasn1-modules==0.3.0
       - pycparser==2.21
@@ -167,4 +177,6 @@ dependencies:
       - transformers==4.34.1
       - tzdata==2023.3
       - werkzeug==3.0.0
+      - xxhash==3.4.1
+      - yarl==1.9.2
 prefix: /Users/ruben/anaconda3/envs/ba-environment
