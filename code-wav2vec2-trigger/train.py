@@ -1,6 +1,8 @@
 import os
 from pathlib import Path
 
+from tqdm import tqdm
+
 import torch
 import torch.optim as optim
 import torch.nn as nn
@@ -28,8 +30,10 @@ model = TriggerWordWav2Vec2Model(config).to(device)
 optimizer = optim.AdamW(model.parameters(), lr=5e-5)
 criterion = nn.BCELoss()  # Binary Cross-Entropy loss
  
-loaded_checkpoint_path = str(root_dir) + "/checkpoints/checkpoint_epoch_8_loss_0.18035508620162163.pt"
-model, optimizer, start_epoch, last_loss = load_checkpoint(loaded_checkpoint_path, model, optimizer)
+# loaded_checkpoint_path = str(root_dir) + "/checkpoints/checkpoint_epoch_8_loss_0.3730935366993601.pt"
+# model, optimizer, start_epoch, last_loss = load_checkpoint(loaded_checkpoint_path, model, optimizer)
+
+start_epoch = 0
 
 # Data 
 audio_files = []
@@ -53,7 +57,7 @@ for epoch in range(epochs):
     total_loss = 0
     model.train()
 
-    for i, batch in enumerate(train_loader):
+    for i, batch in tqdm(enumerate(train_loader), total=len(train_loader), desc=f"Epoch {epoch+1}/{epochs}"):
         inputs, labels = batch
         inputs = inputs.squeeze()
         inputs, labels = inputs.to(device), labels.to(device)

@@ -24,7 +24,7 @@ model = TriggerWordWav2Vec2Model(config).to(device)
 optimizer = optim.AdamW(model.parameters(), lr=5e-5)
 
 # Initialize model and tokenizer once
-checkpoint_path = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wav2vec2-trigger/checkpoints/checkpoint_epoch_8_loss_0.18035508620162163.pt" 
+checkpoint_path = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wav2vec2-trigger/checkpoints/checkpoint_epoch_1_loss_0.18254610402501315.pt" 
 model, _, _, _ = load_checkpoint(checkpoint_path, model, optimizer)
 
 processor = Wav2Vec2Processor.from_pretrained("/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/wav2vec2-base-960h")
@@ -62,10 +62,22 @@ def process_chunk(audio_chunk):
     return probabilities
 
 
+def print_level(probability):
+    # Determine the number of blocks to display based on probability
+    num_blocks = int(probability * 10)  # Using 10 blocks for full scale
+    blocks = '█' * num_blocks
+    spaces = ' ' * (10 - num_blocks)
+    
+    # Print the progress bar, overwrite the same line using \r
+    print(f"\r[{blocks}{spaces}] {probability:.2f}", end='', flush=True)
+
+
 if __name__ == "__main__":
     CHUNK_DURATION = 1  # seconds
     OVERLAP_DURATION = 0.5  # seconds
     overlap_buffer = np.array([])
+
+    toggle = False
 
     for audio_chunk in stream_audio(CHUNK_DURATION):
         audio_chunk = np.squeeze(audio_chunk)  # Convert to 1D array
@@ -73,8 +85,8 @@ if __name__ == "__main__":
         result = process_chunk(audio_chunk_with_overlap)
             
         # Check if probability crosses a threshold
-        if result[0] > 0.8:  # Change this threshold as per your requirement
-            print("Trigger detected!" + str(result))
+        print_level(result[0].item())
+        
 
         # Store overlap for next iteration
         overlap_buffer = audio_chunk[-int(OVERLAP_DURATION * 16000):]
