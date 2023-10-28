@@ -56,7 +56,6 @@ def process_chunk(audio_chunk):
 
     # Retrieve logits and apply sigmoid activation to get probabilities
     with torch.no_grad():
-        probabilities = model(input_values)
         probabilities = model(input_values).cpu().numpy()
     
     return probabilities
