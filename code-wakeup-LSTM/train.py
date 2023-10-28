@@ -113,40 +113,49 @@ def train(train_loader, model, optimizer, loss_fn, device, epoch):
 
 
 def main(args):
-    use_cuda = not args.no_cuda and torch.cuda.is_available()
+    sample_rate = 8000
+    epochs = 100
+    batch_size = 32
+    eval_batch_size = 32
+    lr = 1e-4
+    model_name = "wakeup"
+    save_checkpoint_path = None  # Replace with your path if needed
+    train_data_json = None  # Replace with your path
+    test_data_json = None  # Replace with your path
+    hidden_size = 128
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
     torch.manual_seed(1)
-    device = torch.device('cuda' if use_cuda else 'cpu')
 
-    train_dataset = WakeWordData(data_json=args.train_data_json, sample_rate=args.sample_rate, valid=False)
-    test_dataset = WakeWordData(data_json=args.test_data_json, sample_rate=args.sample_rate, valid=True)
-
-    kwargs = {'num_workers': args.num_workers, 'pin_memory': True} if use_cuda else {}
+    train_dataset = WakeWordData(data_json=train_data_json, sample_rate=sample_rate, valid=False)
+    test_dataset = WakeWordData(data_json=test_data_json, sample_rate=sample_rate, valid=True)
+    
     train_loader = data.DataLoader(dataset=train_dataset,
-                                        batch_size=args.batch_size,
+                                        batch_size=batch_size,
                                         shuffle=True,
-                                        collate_fn=collate_fn,
-                                        **kwargs)
+                                        collate_fn=collate_fn)
+    
     test_loader = data.DataLoader(dataset=test_dataset,
-                                        batch_size=args.eval_batch_size,
+                                        batch_size=eval_batch_size,
                                         shuffle=True,
-                                        collate_fn=collate_fn,
-                                        **kwargs)
+                                        collate_fn=collate_fn)
 
     model_params = {
-        "num_classes": 1, "feature_size": 40, "hidden_size": args.hidden_size,
+        "num_classes": 1, "feature_size": 40, "hidden_size": hidden_size,
         "num_layers": 1, "dropout" :0.1, "bidirectional": False
     }
     model = WakeupModel_LSTM(**model_params, device=device)
     model = model.to(device)
-    optimizer = optim.AdamW(model.parameters(), lr=args.lr)
-    loss_fn = nn.BCEWithLogitsLoss()
 
+    optimizer = optim.AdamW(model.parameters(), lr=lr)
+    loss_fn = nn.BCEWithLogitsLoss() # Binary Cross-Entropy loss
     scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor=0.5, patience=2)
 
     best_train_acc, best_train_report = 0, None
     best_test_acc, best_test_report = 0, None
     best_epoch = 0
-    for epoch in range(args.epochs):
+    
+    for epoch in range(epochs):
         print("\nstarting training with learning rate", optimizer.param_groups[0]['lr'])
         train_acc, train_report = train(train_loader, model, optimizer, loss_fn, device, epoch)
         test_acc, test_report = test(test_loader, model, device, epoch)
@@ -158,10 +167,10 @@ def main(args):
             best_test_acc = test_acc
 
         # saves checkpoint if metrics are better than last
-        if args.save_checkpoint_path and test_acc >= best_test_acc:
+        if save_checkpoint_path and test_acc >= best_test_acc:
             # Create a string representing the current date and hour
             current_datetime = datetime.now().strftime("%Y-%m-%d_%H")
-            checkpoint_path = os.path.join(args.save_checkpoint_path, f"{args.model_name}_{current_datetime}.pt")
+            checkpoint_path = os.path.join(save_checkpoint_path, f"{model_name}_{current_datetime}.pt")
             print("found best checkpoint. saving model as", checkpoint_path)
             save_checkpoint(
                 checkpoint_path, model, optimizer, scheduler, model_params,
@@ -174,10 +183,8 @@ def main(args):
         table = [["Train ACC", train_acc], ["Test ACC", test_acc],
                 ["Best Train ACC", best_train_acc], ["Best Test ACC", best_test_acc],
                 ["Best Epoch", best_epoch]]
-        # print("\ntrain acc:", train_acc, "test acc:", test_acc, "\n",
-        #     "best train acc", best_train_acc, "best test acc", best_test_acc)
+        
         print(tabulate(table))
-
         scheduler.step(train_acc)
 
     print("Done Training...")
@@ -190,20 +197,4 @@ def main(args):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Wake Word Training Script")
-    parser.add_argument('--sample_rate', type=int, default=8000, help='sample_rate for data')
-    parser.add_argument('--epochs', type=int, default=100, help='epoch size')
-    parser.add_argument('--batch_size', type=int, default=32, help='size of batch')
-    parser.add_argument('--eval_batch_size', type=int, default=32, help='size of batch')
-    parser.add_argument('--lr', type=float, default=1e-4, help='learning rate')
-    parser.add_argument('--model_name', type=str, default="wakeup", required=False, help='name of model to save')
-    parser.add_argument('--save_checkpoint_path', type=str, default=None, help='Path to save the best checkpoint')
-    parser.add_argument('--train_data_json', type=str, default=None, required=True, help='path to train data json file')
-    parser.add_argument('--test_data_json', type=str, default=None, required=True, help='path to test data json file')
-    parser.add_argument('--no_cuda', action='store_true', default=False, help='disables CUDA training')
-    parser.add_argument('--num_workers', type=int, default=1, help='number of data loading workers')
-    parser.add_argument('--hidden_size', type=int, default=128, help='lstm hidden size')
-
-    args = parser.parse_args()
-
-    main(args)
+    main()

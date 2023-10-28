@@ -11,7 +11,7 @@ import random
 
 def main(args):
     others = os.listdir(args.other_label_dir)
-    foobies = os.listdir(args.hey_fooby_label_dir)
+    foobies = os.listdir(args.fooby_label_dir)
     percent = args.percent
     data = []
     for other in others:
@@ -30,7 +30,7 @@ def main(args):
 
 
         data.append({
-            "key": os.path.join(args.hey_fooby_label_dir, fooby),
+            "key": os.path.join(args.fooby_label_dir, fooby),
             "label": 1
         })
     random.shuffle(data)
@@ -65,7 +65,7 @@ if __name__ == "__main__":
     )
     parser.add_argument('--other_label_dir', type=str, default=None, required=True,
                         help='directory of clips with zero labels')
-    parser.add_argument('--hey_fooby_label_dir', type=str, default=None, required=True,
+    parser.add_argument('--fooby_label_dir', type=str, default=None, required=True,
                         help='directory of clips with one labels')
     parser.add_argument('--save_json_path', type=str, default=None, required=True,
                         help='path to save json file')

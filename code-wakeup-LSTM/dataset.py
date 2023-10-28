@@ -144,6 +144,5 @@ def collate_fn(data):
     mfccs = nn.utils.rnn.pad_sequence(mfccs, batch_first=True)  # batch, seq_len, feature
     mfccs = mfccs.transpose(0, 1) # seq_len, batch, feature
     mfccs = rand_cut(mfccs)
-    #print(mfccs.shape)
     labels = torch.Tensor(labels)
     return mfccs, labels

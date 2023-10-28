@@ -6,8 +6,8 @@ import torch.nn as nn
 
 
 class WakeupModel_LSTM(nn.Module):
-    def __init__(self, num_classes, feature_size, hidden_size,
-                num_layers, dropout, bidirectional, device='cpu'):
+    def __init__(self, feature_size, hidden_size,
+                num_layers, dropout, bidirectional, num_classes=2, device='cpu'):
         super(WakeupModel_LSTM, self).__init__()
         self.num_layers = num_layers
         self.hidden_size = hidden_size
@@ -25,7 +25,7 @@ class WakeupModel_LSTM(nn.Module):
                 torch.zeros(n*d, batch_size, hs).to(self.device))
 
     def forward(self, x):
-        # x.shape => seq_len, batch, feature
+        # (seq_len, batch, feature)
         x = self.layernorm(x)
         hidden = self._init_hidden(x.size()[1])
         out, (hn, cn) = self.lstm(x, hidden)
