@@ -1,7 +1,11 @@
 import os
 import shutil
 
-base_directory = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-LSTM"
+base_directory_osx = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM"
+base_directory_win = "D:\\Projects\\ba-thesis-voicetrigger-in-mobileapps\\data-wakeup-ConvLSTM"
+
+# Set the base directory
+base_directory = base_directory_win
 
 # Define known prefixes
 known_prefixes = ["Hey_FOOBY", "Hello_FOOBY", "Hi_FOOBY", "OK_FOOBY", "FOOBY"]
