@@ -5,6 +5,7 @@ from tqdm import tqdm
 
 import torch
 import torch.optim as optim
+from torch.optim.lr_scheduler import StepLR
 import torch.nn as nn
 
 from tensorboardX import SummaryWriter
@@ -17,19 +18,27 @@ root_dir = Path("/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 model = WakeupTriggerConvLSTM(device=device).to(device)
-optimizer = optim.AdamW(model.parameters(), lr=5e-5)
-criterion = nn.BCELoss()  # Binary Cross-Entropy loss
+
+optimizer = optim.AdamW(model.parameters(), lr=1e-5)
+scheduler = StepLR(optimizer, step_size=10, gamma=0.1)
+
+num_negative = 4030 # sum of all negative samples
+num_positive = 556 # sum of all positive samples
+pos_weight = torch.tensor([num_negative / num_positive]).to(device)
+
+# Assign this weight to the criterion
+criterion = nn.BCEWithLogitsLoss(pos_weight=pos_weight)
 
 start_epoch = 0
 
 # Load the checkpoint if one exists
-checkpoint_path = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM/checkpoints/checkpoint_epoch_10_loss_0.6916766758594248.pt"
-checkpoint = torch.load(checkpoint_path)
-
-# Update model and optimizer with the saved states
-model.load_state_dict(checkpoint['model_state_dict'])
-optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
-start_epoch = checkpoint['epoch'] + 1
+# checkpoint_path = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM/checkpoints/checkpoint_epoch_66_loss_0.6524184110263983.pt"
+# checkpoint = torch.load(checkpoint_path)
+# 
+# # Update model and optimizer with the saved states
+# model.load_state_dict(checkpoint['model_state_dict'])
+# optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+# start_epoch = checkpoint['epoch']
 
 # Data
 audio_files = []
@@ -48,7 +57,7 @@ train_loader = get_train_loader(audio_files, labels)
 
 writer = SummaryWriter('runs/training_logs')
 
-epochs = 10
+epochs = 20
 for epoch in range(epochs):
     total_loss = 0
     model.train()
@@ -61,12 +70,11 @@ for epoch in range(epochs):
         inputs = inputs.unsqueeze(1)  # [batch_size, channels, height, width]
 
         optimizer.zero_grad()
-        outputs = torch.sigmoid(model(inputs)).squeeze()
+        # outputs = torch.sigmoid(model(inputs)).squeeze() # BCELoss
+        outputs = model(inputs).squeeze() # BCEWithLogitsLoss
+
         loss = criterion(outputs, labels.float())
         loss.backward()
-
-        # Clip gradients
-        torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
 
         optimizer.step()
 
@@ -80,6 +88,8 @@ for epoch in range(epochs):
     writer.add_scalar('Epoch Loss', avg_loss, (start_epoch + epoch + 1))
 
     print(f"Epoch {epoch+1}/{epochs}, Loss: {avg_loss}")
+
+    scheduler.step() # Step the scheduler
 
     # Save model checkpoint
     checkpoint_path = str(root_dir) + f"/checkpoints/checkpoint_epoch_{start_epoch + epoch + 1}_loss_{avg_loss}.pt"
