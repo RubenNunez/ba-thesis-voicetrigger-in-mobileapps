@@ -72,3 +72,28 @@ class AudioToSpectrogramTransform:
         assert db_spectrogram.shape == (1, 128, 128)
         
         return db_spectrogram
+
+# 
+# import matplotlib.pyplot as plt
+# import torchaudio
+# 
+#         
+# transform = AudioToSpectrogramTransform()
+# waveform, sample_rate = torchaudio.load("/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM/FOOBY/FOOBY_3bc31366e8af480483d580d16e9870db_3b3995e89cf742788cbe192b94f3aaae copy_time_shifted_pitch_shifted.wav")
+# 
+# if len(waveform.shape) == 1:
+#     waveform = waveform.unsqueeze(0)
+# 
+# db_spectrogram = transform(waveform)
+# db_spectrogram = db_spectrogram.squeeze(0)
+# 
+# # Plot and save the spectrogram
+# plt.figure(figsize=(10, 4))
+# plt.imshow(db_spectrogram.numpy(), cmap='viridis', origin='lower', aspect='auto')
+# plt.colorbar(format='%+2.0f dB')
+# plt.title('Mel-scaled Spectrogram')
+# plt.ylabel('Mel Bin')
+# plt.xlabel('Time Frame')
+# plt.tight_layout()
+# plt.savefig('spectrogram.png')
+# plt.show()
