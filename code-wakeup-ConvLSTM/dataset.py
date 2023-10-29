@@ -16,6 +16,9 @@ class WakeupTriggerDataset(Dataset):
 
     def __getitem__(self, idx):
         audio_waveform, sample_rate = torchaudio.load(self.audio_files[idx])
+
+        assert audio_waveform.shape[1] > 0, f"Empty waveform for file: {self.audio_files[idx]}"
+
         
         if sample_rate != self.transform.mel_spectrogram_transform.sample_rate:
             resampler = T.Resample(orig_freq=sample_rate, new_freq=self.transform.mel_spectrogram_transform.sample_rate)

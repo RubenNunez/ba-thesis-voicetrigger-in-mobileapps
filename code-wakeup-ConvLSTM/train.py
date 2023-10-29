@@ -14,6 +14,31 @@ from tensorboardX import SummaryWriter
 from model import WakeupTriggerConvLSTM
 from dataset import get_train_loader
 
+# metrics
+def get_metrics_for_logits(logits):
+    # Convert the logits to probabilities
+    probs = torch.sigmoid(logits)
+    predictions = (probs > 0.5).float()
+
+    # Calculate the accuracy for this batch
+    correct_predictions = torch.eq(predictions, labels.float()).sum().item()
+    batch_accuracy = correct_predictions / inputs.size(0)
+
+    # Calculate true positives, false positives, and false negatives
+    TP = (predictions * labels.float()).sum().item()
+    FP = (predictions * (1 - labels.float())).sum().item()
+    FN = ((1 - predictions) * labels.float()).sum().item()
+
+    # Calculate precision and recall
+    precision = TP / (TP + FP + 1e-10) # adding a small value to avoid division by zero
+    recall = TP / (TP + FN + 1e-10)    # adding a small value to avoid division by zero
+
+    # Calculate F1 score for this batch
+    batch_f1_score = 2 * (precision * recall) / (precision + recall + 1e-10)  # adding a small value to avoid division by zero
+    
+    return batch_accuracy, batch_f1_score
+
+
 root_dir = Path("/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM")
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -22,8 +47,8 @@ model = WakeupTriggerConvLSTM(device=device).to(device)
 optimizer = optim.AdamW(model.parameters(), lr=1e-5) 
 scheduler = StepLR(optimizer, step_size=10, gamma=0.01)
 
-num_negative = 4080 # sum of all negative samples
-num_positive = 1191  # sum of all positive samples
+num_negative = 13000     # sum of all negative samples
+num_positive = 10000    # sum of all positive samples
 pos_weight = torch.tensor([num_negative / num_positive]).to(device)
 
 # Assign this weight to the criterion
@@ -60,6 +85,9 @@ writer = SummaryWriter('runs/training_logs')
 epochs = 50
 for epoch in range(epochs):
     total_loss = 0
+    total_accuracy = 0
+    total_f1_score = 0
+
     model.train()
 
     for i, batch in tqdm(enumerate(train_loader), total=len(train_loader), desc=f"Epoch {epoch+1}/{epochs}"):
@@ -71,9 +99,10 @@ for epoch in range(epochs):
 
         optimizer.zero_grad()
         # outputs = torch.sigmoid(model(inputs)).squeeze() # BCELoss
-        outputs = model(inputs).squeeze() # BCEWithLogitsLoss
+        logits = model(inputs).squeeze() # BCEWithLogitsLoss
 
-        loss = criterion(outputs, labels.float())
+        loss = criterion(logits, labels.float())
+
         loss.backward()
 
         optimizer.step()
@@ -81,13 +110,26 @@ for epoch in range(epochs):
         total_loss += loss.item()
 
         # Log the batch loss
+        batch_accuracy, batch_f1_score = get_metrics_for_logits(logits)
+
+        total_accuracy += batch_accuracy
+        total_f1_score += batch_f1_score
+
+        # Log the metrics to TensorBoardX
+        writer.add_scalar('Batch Accuracy', batch_accuracy, (start_epoch + epoch + 1)*len(train_loader) + i)
+        writer.add_scalar('Batch F1 Score', batch_f1_score, (start_epoch + epoch + 1)*len(train_loader) + i)
         writer.add_scalar('Batch Loss', loss.item(), (start_epoch + epoch + 1)*len(train_loader) + i)
 
     # Log the epoch loss
     avg_loss = total_loss / len(train_loader)
+    avg_accuracy = total_accuracy / len(train_loader)
+    avg_f1_score = total_f1_score / len(train_loader)
+
+    writer.add_scalar('Epoch Accuracy', avg_accuracy, (start_epoch + epoch + 1))
+    writer.add_scalar('Epoch F1 Score', avg_f1_score, (start_epoch + epoch + 1))
     writer.add_scalar('Epoch Loss', avg_loss, (start_epoch + epoch + 1))
 
-    print(f"Epoch {epoch+1}/{epochs}, Loss: {avg_loss}")
+    print(f"Epoch {epoch+1}/{epochs}, Loss: {avg_loss} Accuracy: {avg_accuracy} F1 Score: {avg_f1_score}")
 
     scheduler.step() # Step the scheduler
 
