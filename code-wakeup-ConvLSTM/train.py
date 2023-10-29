@@ -22,6 +22,15 @@ criterion = nn.BCELoss()  # Binary Cross-Entropy loss
 
 start_epoch = 0
 
+# Load the checkpoint if one exists
+checkpoint_path = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM/checkpoints/checkpoint_epoch_10_loss_0.6916766758594248.pt"
+checkpoint = torch.load(checkpoint_path)
+
+# Update model and optimizer with the saved states
+model.load_state_dict(checkpoint['model_state_dict'])
+optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+start_epoch = checkpoint['epoch'] + 1
+
 # Data
 audio_files = []
 labels = []
@@ -64,18 +73,18 @@ for epoch in range(epochs):
         total_loss += loss.item()
 
         # Log the batch loss
-        writer.add_scalar('Batch Loss', loss.item(), epoch*len(train_loader) + i)
+        writer.add_scalar('Batch Loss', loss.item(), (start_epoch + epoch + 1)*len(train_loader) + i)
 
     # Log the epoch loss
     avg_loss = total_loss / len(train_loader)
-    writer.add_scalar('Epoch Loss', avg_loss, epoch)
+    writer.add_scalar('Epoch Loss', avg_loss, (start_epoch + epoch + 1))
 
     print(f"Epoch {epoch+1}/{epochs}, Loss: {avg_loss}")
 
     # Save model checkpoint
-    checkpoint_path = str(root_dir) + f"/checkpoints/checkpoint_epoch_{start_epoch + epoch+1}_loss_{avg_loss}.pt"
+    checkpoint_path = str(root_dir) + f"/checkpoints/checkpoint_epoch_{start_epoch + epoch + 1}_loss_{avg_loss}.pt"
     torch.save({
-        'epoch': epoch,
+        'epoch': start_epoch + epoch + 1,
         'model_state_dict': model.state_dict(),
         'optimizer_state_dict': optimizer.state_dict(),
         'loss': loss,
