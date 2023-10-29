@@ -44,7 +44,7 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 
 model = WakeupTriggerConvLSTM(device=device).to(device)
 
-optimizer = optim.AdamW(model.parameters(), lr=1e-5) 
+optimizer = optim.AdamW(model.parameters(), lr=1e-5, weight_decay=0.01) 
 scheduler = StepLR(optimizer, step_size=10, gamma=0.01)
 
 num_negative = 13000     # sum of all negative samples

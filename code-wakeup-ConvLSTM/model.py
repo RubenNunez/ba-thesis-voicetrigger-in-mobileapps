@@ -11,6 +11,8 @@ class WakeupTriggerConvLSTM(nn.Module):
 
         self.device = device
 
+        self.dropout = nn.Dropout(0.5) # 50% dropout
+
         # Convolutional Layers
         self.conv1 = nn.Conv2d(1, 32, kernel_size=4, stride=4)
         self.bn1 = nn.BatchNorm2d(32)
@@ -30,7 +32,8 @@ class WakeupTriggerConvLSTM(nn.Module):
         # Fully Connected Layers
         self.fc6 = nn.Linear(64 + 16, 32) # 64 from fc4 and 16 from LSTM
         self.fc7 = nn.Linear(32, 1)
-
+    
+    # Input: [Batch_Size, Channels, Height, Width] = [Batch_Size, 1, 128, 128]
     def forward(self, x):
         x = F.relu(self.conv1(x))
         x = self.bn1(x)
@@ -46,6 +49,7 @@ class WakeupTriggerConvLSTM(nn.Module):
         
         # Pass through fc4
         x_fc4 = F.relu(self.fc4(x))
+        x_fc4 = self.dropout(x_fc4)
         
         # Reshape for LSTM: [Batch_Size, Sequence_Length, Feature_Size]
         x_fc4 = x_fc4.unsqueeze(-1)  # adds the feature dimension
