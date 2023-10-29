@@ -27,7 +27,7 @@ optimizer = optim.AdamW(model.parameters(), lr=5e-5)
 transform = AudioToSpectrogramTransform()
 
 # Initialize model and tokenizer once
-checkpoint_path = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM/checkpoints/checkpoint_epoch_10_loss_0.6916766758594248.pt" 
+checkpoint_path = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM/checkpoints/checkpoint_epoch_6_loss_0.8428615515882318.pt" 
 model, _, _, _ = load_checkpoint(checkpoint_path, model, optimizer)
 
 
@@ -50,15 +50,13 @@ def process_chunk(audio_chunk):
 
     # Transform audio
     input_values = transform(audio_chunk_tensor)
-    input_values = input_values.unsqueeze(1)  # Add channel dimension
+    input_values = input_values.unsqueeze(1)  # [batch_size, channels, height, width]
     input_values = input_values.to(device)
 
     # Retrieve logits and apply sigmoid activation to get probabilities
     with torch.no_grad():
-        # TODO: needs shape [Batch_Size, 1, 128, 128]
-        # has actual shape torch.Size([1, 128, 128])
-        # what to do with the batch size?
-        probabilities = model(input_values).cpu().numpy()
+        logits = model(input_values)
+        probabilities = torch.sigmoid(logits).numpy()
 
     return probabilities
 

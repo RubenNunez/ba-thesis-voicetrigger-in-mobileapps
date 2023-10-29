@@ -22,7 +22,7 @@ class WakeupTriggerConvLSTM (nn.Module):
         self.bn3 = nn.BatchNorm2d(64)
 
         # LSTM Layer
-        self.lstm = nn.LSTM(input_size=64, hidden_size=16, num_layers=1, batch_first=True, bidirectional=True)
+        self.lstm = nn.LSTM(input_size=64, hidden_size=16, num_layers=10, batch_first=True, bidirectional=True)
 
         # Fully Connected Layers
         self.fc4 = nn.Linear(256, 64)

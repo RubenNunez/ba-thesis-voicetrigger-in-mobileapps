@@ -19,11 +19,11 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 
 model = WakeupTriggerConvLSTM(device=device).to(device)
 
-optimizer = optim.AdamW(model.parameters(), lr=1e-5)
+optimizer = optim.AdamW(model.parameters(), lr=0.001) # 1e-5
 scheduler = StepLR(optimizer, step_size=10, gamma=0.1)
 
-num_negative = 4030 # sum of all negative samples
-num_positive = 556 # sum of all positive samples
+num_negative = 4080 # sum of all negative samples
+num_positive = 1191  # sum of all positive samples
 pos_weight = torch.tensor([num_negative / num_positive]).to(device)
 
 # Assign this weight to the criterion
@@ -57,7 +57,7 @@ train_loader = get_train_loader(audio_files, labels)
 
 writer = SummaryWriter('runs/training_logs')
 
-epochs = 20
+epochs = 50
 for epoch in range(epochs):
     total_loss = 0
     model.train()
