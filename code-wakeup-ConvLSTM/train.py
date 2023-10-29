@@ -1,4 +1,5 @@
 import os
+import numpy as np
 from pathlib import Path
 
 from tqdm import tqdm
@@ -13,14 +14,13 @@ from tensorboardX import SummaryWriter
 from model import WakeupTriggerConvLSTM
 from dataset import get_train_loader
 
-
 root_dir = Path("/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM")
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 model = WakeupTriggerConvLSTM(device=device).to(device)
 
-optimizer = optim.AdamW(model.parameters(), lr=0.001) # 1e-5
-scheduler = StepLR(optimizer, step_size=10, gamma=0.1)
+optimizer = optim.AdamW(model.parameters(), lr=1e-5) 
+scheduler = StepLR(optimizer, step_size=10, gamma=0.01)
 
 num_negative = 4080 # sum of all negative samples
 num_positive = 1191  # sum of all positive samples
@@ -54,8 +54,8 @@ for folder in root_dir.iterdir():
 
 train_loader = get_train_loader(audio_files, labels)
 
-
 writer = SummaryWriter('runs/training_logs')
+
 
 epochs = 50
 for epoch in range(epochs):
