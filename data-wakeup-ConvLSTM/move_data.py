@@ -5,7 +5,7 @@ base_directory_osx = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps
 base_directory_win = "D:\\Projects\\ba-thesis-voicetrigger-in-mobileapps\\data-wakeup-ConvLSTM"
 
 # Set the base directory
-base_directory = base_directory_win
+base_directory = base_directory_osx
 
 # Define known prefixes
 known_prefixes = ["Hey_FOOBY", "Hello_FOOBY", "Hi_FOOBY", "OK_FOOBY", "FOOBY"]

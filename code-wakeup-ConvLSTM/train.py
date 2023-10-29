@@ -16,7 +16,7 @@ from dataset import get_train_loader
 root_dir = Path("/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM")
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
-model = WakeupTriggerConvLSTM(use_cuda=True).to(device)
+model = WakeupTriggerConvLSTM(device=device).to(device)
 optimizer = optim.AdamW(model.parameters(), lr=5e-5)
 criterion = nn.BCELoss()  # Binary Cross-Entropy loss
 
@@ -46,13 +46,19 @@ for epoch in range(epochs):
 
     for i, batch in tqdm(enumerate(train_loader), total=len(train_loader), desc=f"Epoch {epoch+1}/{epochs}"):
         inputs, labels = batch
-        inputs = inputs.squeeze()
+        inputs = inputs.squeeze(1)
         inputs, labels = inputs.to(device), labels.to(device)
 
+        inputs = inputs.unsqueeze(1)  # [batch_size, channels, height, width]
+
         optimizer.zero_grad()
-        outputs = model(inputs).squeeze()
+        outputs = torch.sigmoid(model(inputs)).squeeze()
         loss = criterion(outputs, labels.float())
         loss.backward()
+
+        # Clip gradients
+        torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
+
         optimizer.step()
 
         total_loss += loss.item()
@@ -61,7 +67,7 @@ for epoch in range(epochs):
         writer.add_scalar('Batch Loss', loss.item(), epoch*len(train_loader) + i)
 
     # Log the epoch loss
-    avg_loss = total_loss/len(train_loader)
+    avg_loss = total_loss / len(train_loader)
     writer.add_scalar('Epoch Loss', avg_loss, epoch)
 
     print(f"Epoch {epoch+1}/{epochs}, Loss: {avg_loss}")

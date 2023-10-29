@@ -21,10 +21,15 @@ def load_checkpoint(checkpoint_path, model, optimizer):
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
-model = WakeupTriggerConvLSTM(use_cuda=True).to(device)
+model = WakeupTriggerConvLSTM(device=device).to(device)
 optimizer = optim.AdamW(model.parameters(), lr=5e-5)
 
 transform = AudioToSpectrogramTransform()
+
+# Initialize model and tokenizer once
+checkpoint_path = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM/checkpoints/checkpoint_epoch_10_loss_0.6916766758594248.pt" 
+model, _, _, _ = load_checkpoint(checkpoint_path, model, optimizer)
+
 
 def stream_audio(chunk_duration, samplerate=16000):
     """Stream audio in chunks."""
@@ -39,12 +44,20 @@ def process_chunk(audio_chunk):
     if len(audio_chunk.shape) > 1:
         audio_chunk = np.mean(audio_chunk, axis=1)
 
+    # Ensure audio is 1D array
+    audio_chunk = audio_chunk.reshape(1, -1)
+    audio_chunk_tensor = torch.tensor(audio_chunk).float()
+
     # Transform audio
-    input_values = transform(audio_chunk)
+    input_values = transform(audio_chunk_tensor)
+    input_values = input_values.unsqueeze(1)  # Add channel dimension
     input_values = input_values.to(device)
 
     # Retrieve logits and apply sigmoid activation to get probabilities
     with torch.no_grad():
+        # TODO: needs shape [Batch_Size, 1, 128, 128]
+        # has actual shape torch.Size([1, 128, 128])
+        # what to do with the batch size?
         probabilities = model(input_values).cpu().numpy()
 
     return probabilities
