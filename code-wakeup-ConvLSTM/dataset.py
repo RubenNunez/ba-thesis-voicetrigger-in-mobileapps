@@ -40,7 +40,7 @@ def get_train_loader(audio_files, labels, batch_size=32):
 
 
 class AudioToSpectrogramTransform:
-    def __init__(self, sample_rate=16000, n_fft=400, n_mels=128):
+    def __init__(self, sample_rate=16000, n_fft=800, n_mels=128):
         self.mel_spectrogram_transform = T.MelSpectrogram(
             sample_rate=sample_rate,
             n_fft=n_fft,

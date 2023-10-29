@@ -27,9 +27,10 @@ optimizer = optim.AdamW(model.parameters(), lr=5e-5)
 transform = AudioToSpectrogramTransform()
 
 # Initialize model and tokenizer once
-checkpoint_path = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM/checkpoints/checkpoint_epoch_21_loss_0.6923060977521042.pt" 
+checkpoint_path = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM/checkpoints/checkpoint_epoch_42_loss_0.6654437208392968.pt" 
 model, _, _, _ = load_checkpoint(checkpoint_path, model, optimizer)
 
+model.eval()
 
 def stream_audio(chunk_duration, samplerate=16000):
     """Stream audio in chunks."""
