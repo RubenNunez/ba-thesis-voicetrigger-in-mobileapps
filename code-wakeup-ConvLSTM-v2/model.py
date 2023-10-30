@@ -31,7 +31,7 @@ class WakeupTriggerConvLSTM2s(nn.Module):
         self.bn3 = nn.BatchNorm2d(128)
 
         # LSTM
-        self.lstm = nn.LSTM(input_size=128, hidden_size=32, num_layers=3, batch_first=True, dropout=0.5)
+        self.lstm = nn.LSTM(input_size=896, hidden_size=32, num_layers=3, batch_first=True, dropout=0.5)
 
         # Fully connected layers
         self.fc1 = nn.Linear(32, 32)
@@ -45,7 +45,7 @@ class WakeupTriggerConvLSTM2s(nn.Module):
 
         # Preparing data for LSTM
         B, C, H, W = x.shape
-        x = x.squeeze(-1).transpose(1, 2)
+        x = x.view(B, H, C*W)
         
         # LSTM layer
         h0 = torch.zeros(3, B, 32).to(self.device)
@@ -57,5 +57,5 @@ class WakeupTriggerConvLSTM2s(nn.Module):
         x = F.relu(self.fc1(x))
         x = self.dropout(x)
         x = torch.sigmoid(self.fc2(x))
-        
+
         return x
