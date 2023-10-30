@@ -4,22 +4,30 @@ import torch.nn.functional as F
 
 
 # inspiration: https://github.com/omarzanji/ditto_activation/blob/main/main.py
-# Input: [Batch_Size, Channels, Height, Width] = [Batch_Size, 1, 128, 128]
-class WakeupTriggerConvLSTM(nn.Module):
+# Input: [Batch_Size, Channels, Height, Width] = [Batch_Size, 1, 128, 256]
+# represents 2 seconds of audio at 16kHz
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+class WakeupTriggerConvLSTM2s(nn.Module):
     def __init__(self, device):
-        super(WakeupTriggerConvLSTM, self).__init__()
+        super(WakeupTriggerConvLSTM2s, self).__init__()
 
         self.device = device
         self.dropout = nn.Dropout(0.5)
 
+        # Adjust the convolution layers to accommodate the new input shape
+        # Input: [Batch_Size, 1, 128, 256]
+
         # Convolutional layers
-        self.conv1 = nn.Conv2d(1, 32, kernel_size=(4, 128), stride=4)
+        self.conv1 = nn.Conv2d(1, 32, kernel_size=(4, 4), stride=4)  # Adjust kernel size and stride
         self.bn1 = nn.BatchNorm2d(32)
         
-        self.conv2 = nn.Conv2d(32, 64, kernel_size=(3, 1), stride=4)
+        self.conv2 = nn.Conv2d(32, 64, kernel_size=(3, 4), stride=4)  # Adjust kernel size and stride
         self.bn2 = nn.BatchNorm2d(64)
 
-        self.conv3 = nn.Conv2d(64, 128, kernel_size=(2, 1), stride=2)
+        self.conv3 = nn.Conv2d(64, 128, kernel_size=(2, 4), stride=2)  # Adjust kernel size and stride
         self.bn3 = nn.BatchNorm2d(128)
 
         # LSTM
@@ -51,4 +59,3 @@ class WakeupTriggerConvLSTM(nn.Module):
         x = torch.sigmoid(self.fc2(x))
         
         return x
-
