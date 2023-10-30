@@ -177,9 +177,26 @@ function visualize(stream) {
   }
 }
 
-var wantedWords = ["Hey FOOBY", "Hi FOOBY", "Hello FOOBY", "FOOBY"];
+var wantedWords = [
+  "Hey FOOBY",
+  "Hey FOOBY",
+  "Hey FOOBY",
+  "Hi FOOBY", 
+  "Hi FOOBY", 
+  "Hello FOOBY", 
+  "Hello FOOBY", 
+  "Ok FOOBY",
+  "Ok FOOBY",
+  "FOOBY",
+  "FOOBY"
+];
 
 var fillerWords = [
+  "<silence>",
+  "<silence>",
+  "<silence>",
+  "<silence>",
+  "<silence>",
   "Hund",
   "Chatz",
   "Vogel",
