@@ -47,7 +47,7 @@ optimizer = optim.AdamW(model.parameters(), lr=5e-3, weight_decay=0.0001)
 scheduler = StepLR(optimizer, step_size=10, gamma=0.5)
 print(f"the model has {sum(p.numel() for p in model.parameters() if p.requires_grad)} trainable parameters")
 
-num_negative = 13000     # sum of all negative samples
+num_negative = 26000     # sum of all negative samples
 num_positive = 10000    # sum of all positive samples
 pos_weight = torch.tensor([num_negative / num_positive]).to(device)
 
@@ -69,6 +69,8 @@ start_epoch = 0
 audio_files = []
 labels = []
 
+silence_file_path = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM/silence/silence-3s.mp3"
+
 for folder in root_dir.iterdir():
     if folder.is_dir():
         label = 1 if folder.name == "FOOBY" else 0
@@ -76,12 +78,16 @@ for folder in root_dir.iterdir():
             if audio_file.suffix in ['.wav', '.mp3']:
                 audio_files.append(str(audio_file))
                 labels.append(label)
+                
+                if label == 0: # add silence file for negative samples
+                    audio_files.append(silence_file_path)
+                    labels.append(label)
 
 train_loader = get_train_loader(audio_files, labels)
 
-writer = SummaryWriter('runs/training_logs')
+writer = SummaryWriter('runs/training_logs-v2')
 
-epochs = 50
+epochs = 100
 for epoch in range(epochs):
     model.train()
 

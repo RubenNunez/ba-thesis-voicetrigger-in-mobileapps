@@ -51,9 +51,13 @@ class AudioToSpectrogramTransform:
         self.amplitude_to_db = T.AmplitudeToDB(stype='power', top_db=80.0)
 
     def __call__(self, audio_waveform):
-        # Check if audio waveform is shorter than 2 second (16000 samples)
+        # Convert to mono if stereo
+        if audio_waveform.shape[0] == 2:
+            audio_waveform = audio_waveform.mean(dim=0, keepdim=True)
+
+        # Check if audio waveform is shorter than 2 second (16000 * 2 samples)
         if audio_waveform.shape[1] < self.mel_spectrogram_transform.sample_rate * 2:
-            num_missing_samples = self.mel_spectrogram_transform.sample_rate - audio_waveform.shape[1]
+            num_missing_samples = (self.mel_spectrogram_transform.sample_rate * 2) - audio_waveform.shape[1]
             audio_waveform = torch.nn.functional.pad(audio_waveform, (0, num_missing_samples))
 
         audio_waveform = audio_waveform[:, :self.mel_spectrogram_transform.sample_rate * 2]
@@ -73,20 +77,20 @@ class AudioToSpectrogramTransform:
         
         return db_spectrogram
 
-# 
+
 # import matplotlib.pyplot as plt
 # import torchaudio
-# 
-#         
+
+        
 # transform = AudioToSpectrogramTransform()
 # waveform, sample_rate = torchaudio.load("/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM/FOOBY/FOOBY_3bc31366e8af480483d580d16e9870db_3b3995e89cf742788cbe192b94f3aaae copy_time_shifted_pitch_shifted.wav")
-# 
+
 # if len(waveform.shape) == 1:
 #     waveform = waveform.unsqueeze(0)
-# 
+
 # db_spectrogram = transform(waveform)
 # db_spectrogram = db_spectrogram.squeeze(0)
-# 
+
 # # Plot and save the spectrogram
 # plt.figure(figsize=(10, 4))
 # plt.imshow(db_spectrogram.numpy(), cmap='viridis', origin='lower', aspect='auto')
@@ -95,5 +99,5 @@ class AudioToSpectrogramTransform:
 # plt.ylabel('Mel Bin')
 # plt.xlabel('Time Frame')
 # plt.tight_layout()
-# plt.savefig('spectrogram.png')
+# plt.savefig('spectrogram-2s.png')
 # plt.show()
