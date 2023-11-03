@@ -87,7 +87,7 @@
 \newpage
 
 \newpage \section*{Abstract}
-Das Problem dieser Arbeit ist im wesentlichen die Erkennung von Triggerwörtern innerhalb
+Das Problem dieser Arbeit ist im wesentlichen die Erkennung von Wake-up Wörter innerhalb
 des Kontext einer App. Grundsätzlich ist es unüblich, dass mobile Apps eine
 integrierte Sprachsteuerungsfunktion anbieten. 
 
@@ -98,53 +98,33 @@ integrierte Sprachsteuerungsfunktion anbieten.
 \newpage
 
 \newpage \section{Problem, Fragestellung, Vision}
-
-\begin{itemize}
-\item TODO: - Die dominierenden Sprachassistenten wie Siri und Alexa sind nicht für App-spezifische 
-Interaktionen optimiert.
-\item TODO: - Es gibt eine Marktlücke für integrierte Spracherkennung innerhalb mobiler Apps.
-\end{itemize}
-
-\noindent
-Das Kernproblem dieser Bachelorarbeit ist die Entwicklung einer integrierten
-Spracherkennungsfunktion die bestimmte Triggerwörter innerhalb einer mobilen App erkennt. Obwohl
-Sprachsteuerungstechnologien ein erhebliches Potenzial aufweisen und Assistenten wie Siri oder
-Alexa weit verbreitet sind, bieten mobile Apps selten eine integrierte Spracherkennung. Dies führt
-zu einer Lücke, da solche Assistenten nicht spezifisch für App-Kontexte optimiert sind.
-Diese Arbeit verfolgt das Ziel, diese Lücke zu schliessen und eine integrierte
-Spracherkennungsfunktion zu entwickeln, die Triggerwörter in einer App effektiv erkennt.
+\subsection{Problemstellung}
+Sprachsteuerungstechnologien haben ein grosses Potenzial und werden bisher vor allem als 
+Sprachsteuerungsassistenten genutzt. Während es etablierte Sprachassistenten wie Siri, Google 
+oder Alexa gibt, fehlt es an Lösungen für eine integrierte Sprachsteuerung in Mobile Apps, 
+insbesondere in Bezug auf das Erkennen von \textit{Wake-up} Wörtern. Daher gibt es eine Lücke
+zwischen eigenen Sprachassistenten und Mobile Apps. Diese Lücke soll mit dieser Arbeit 
+geschlossen werden.
 
 \subsection{Fragestellung}
+Wie kann eine integrierte Sprachsteuerung für eine Mobile App entwickelt werden, die speziell 
+das Erkennen von \textit{Wake-up} Wörtern oder \textit{Wake-up} Wortsequenzen ermöglicht?"
 
-\begin{itemize}
-\item TODO: - Wie kann man eine App-spezifische integrierte Spracherkennung entwickeln, die mit Machine Learning 
-bestimmte Triggerwörter effizient erkennt?
-\end{itemize}
-
-\noindent
-Die Fragestellung dieser Arbeit lautet: \textit{Wie kann eine integrierte Sprachsteuerung für eine
-	Mobile Apps entwickelt werden, die speziell das Erkennen von Triggerwörtern ermöglicht, indem
-	Methoden des Machine Learnings genutzt werden?}.
 
 \subsection{Vision}
+Als Vision dieser Arbeit soll eine Grundlage geschaffen werden, um ein \textit{Wake-up} Wort 
+oder eine Sequenz von \textit{Wake-up} Wörtern in der akustischen Sprache erkennen zu können.
+Dabei sollen Methoden und Werkzeuge aus dem Bereich des Machine Learnings verwendet werden.
+Zum anderen soll diese Erkenntnise in eine mobile Plattform wie iOS oder Android integriert 
+werden. Für den Rahmen dieser Arbeit genügt die Integration in eine der genannten Plattformen. 
+Weiterhin ist Anliegen dieser Arbeit, dass das Thema Datenschutz und die ethischen Aspekte 
+berücksichtigt werden.
 
-\begin{itemize}
-    \item Erkennung eines oder mehrerer Triggerwörter in gesprochener Sprache.
-    \item Implementierung in eine Hauptmobile-Plattform (entweder iOS oder Android).
-    \item Betrachtung von Datenschutz- und ethischen Überlegungen.
-\end{itemize}
-
-Das Ziel sowie die Vision der Arbeit ist es zum einen, eine Grundlage zu schaffen, um ein
-Triggerwort oder eine Sequenz von Triggerwörtern in der akustischen Sprache erkennen zu können.
-Dabei werden Methoden und Werkzeuge aus dem Bereich des Machine Learnings verwendet. Zum anderen
-soll diese Erkenntnis in eine mobile Plattform wie iOS oder Android integriert werden. Für den
-Rahmen dieser Arbeit genügt die Integration in eine der genannten Plattformen. Weiterhin
-werden das Thema Datenschutz und die ethischen Aspekte berücksichtigt.
 
 \newpage \section{Grundlagen}
 Um diese Arbeit fundiert anzugehen, ist ein Verständnis der Grundlagen in den Bereichen
 Audioverarbeitung und Machine Learning essenziell. Daher wird in diesem Kapitel ein Überblick
-über die wichtigsten Themen gegeben. ...
+über die wichtigsten Themen gegeben.
 
 \subsection{Audio}
 In der digitalen Welt repräsentiert Audio Schallwellen, die durch eine Reihe von numerischen Werten
@@ -524,10 +504,10 @@ Zugriff auf die Audio-Hardware generiert.
 \end{figure}
 
 \subsection{Machine Learning}
-Um die Grundlagen des Machine Learnings im Bereich der Spracherkennung zu verstehen, ist es 
-wichtig, die grundlegenden Konzepte des Machine Learnings zu verstehen. Dazu gehört das Verständnis
-von Neuronalen Netzen. Für den Anwendungsbereich der Spracherkennung sind vor allem die 
-Convolutional Neural Networks (CNN) und die Recurrent Neural Networks (RNN) von Bedeutung. Um diese
+Um die Grundlagen von Machine Learning im Bereich der Spracherkennung zu verstehen, ist es 
+wichtig, die grundlegenden Konzepte von Neuronalen Netzen zu verstehen. Für den Anwendungsbereich 
+der Spracherkennung sind vor allem die Deep Neural Networks (DNN), die Convolutional Neural Networks 
+(CNN) und die Recurrent Neural Networks (RNN) von Bedeutung. Um diese
 wird es in diesem Kapitel gehen.
 
 \subsubsection{Neuronale Netze}
