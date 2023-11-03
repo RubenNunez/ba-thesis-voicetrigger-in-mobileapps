@@ -28,6 +28,8 @@
 %     anchorcolor=blue
 % ]{hyperref}
 
+\usetikzlibrary{matrix, positioning, calc, fit}
+
 \makeglossaries
 
 \newglossaryentry{wake-up-word}{
@@ -571,9 +573,59 @@ und den Bias \(b\) zu finden, um die gewünschte Ausgabe zu erhalten. Um ein det
 von neuronalen Netzen zu erhalten, empfiehlt sich die Lektüre von (\cite{weidman2019deep}).
 
 \subsubsection{Convolutional Neural Networks}
-Convolutional Neural Networks (CNN) sind eine spezielle Art von neuronalen Netzen, die sich auf
-Bilderkennungsaufgaben spezialisiert haben. Sie sind in der Lage, komplexe Muster in Bildern zu
-erkennen. (\cite{weidman2019deep}) beschreibt CNNs wie folgt:
+Convolutional Neural Networks (CNN) sind eine spezielle Art von neuronalen Netzen, die vor allem
+in der Bilderkennung eingesetzt werden. Sie sind in der Lage, komplexe Muster in Bildern zu 
+erkennen. In CNNs sind \textit{Convolutional Layers} zentral. Sie nutzen einen Filter, der über den 
+Input gleitet und mit diesem verrechnet wird, wie Abbildung \ref{fig:convolution} zeigt.
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}[scale=0.6, every node/.style={scale=0.6}]
+		% Input Image
+		\matrix (input) [matrix of nodes, nodes in empty cells, nodes={draw, minimum size=1cm, anchor=center}]{
+		5 & 3 & 1 & 0 & 9 \\
+		12 & 4 & 1 & 0 & 2 \\
+		5 & 3 & 1 & 0 & 2 \\
+		5 & 21 & 1 & 0 & 1 \\
+		0 & 0 & 1 & 0 & 9 \\
+		};
+		\node[below=0.5cm of input] {Input Image};
+	
+		% Filter
+		\matrix (detector) [matrix of nodes, nodes in empty cells, nodes={draw, minimum size=1cm, anchor=center}, right=2cm of input]{
+		1 & 0 & 1 \\
+		29 & 1 & 0.5 \\
+		0 & 1 & 1 \\
+		};
+		\node[below=0.5cm of detector] {Filter};
+	
+		% Output
+		\matrix (map) [matrix of nodes, nodes in empty cells, nodes={draw, minimum size=1cm, anchor=center}, right=2cm of detector]{
+		53. & 10. & 62.5 \\
+		56.5 & 28.5 & 61.5 \\
+		61.5 & 15.5 & 40.5 \\
+		};
+		\node[below=0.5cm of map] {Output};
+	
+		% Operators
+		\node (conv) [circle, draw, gray, minimum size=1cm, right=0.5cm of input] {conv};
+		\node (eq) [circle, draw, gray, minimum size=1cm, right=0.5cm of detector] {=};
+	
+		% Thicker border around the first 3x3 on the input
+		\node[draw, thick, rectangle, fit={(input-1-1.north west) (input-3-3.south east)}, line width=1.5pt, inner sep=17pt] {};
+	
+	\end{tikzpicture}
+
+	\caption{Convolution}
+	\label{fig:convolution}
+
+\end{figure}
+
+\noindent
+Bei CNNs sind die Gewichte \(w_{1}, w_{2}, \dots, w_{n}\) und der Bias \(b\) die Filter. 
+Filter werden während des Trainings optimiert, um die gewünschte Ausgabe zu erhalten. Der grosse 
+Vorteil gegenüber herkömmlichen neuronalen Netzen ist, dass die Gewichte geteilt werden können.
+(\cite{weidman2019deep}) beschreibt CNNs wie folgt:
 
 \begin{displayquote}
 	''CNNs are the standard neural network architecture used for prediction when the input 
@@ -582,10 +634,9 @@ erkennen. (\cite{weidman2019deep}) beschreibt CNNs wie folgt:
 
 \noindent
 Speziell für CNNs sind die sogenannten \textit{Convolutional Layers}. Diese Layer bestehen aus
-einem Filter, der über das Bild geschoben wird. Der Filter ist eine Matrix, die mit dem Bild
-multipliziert wird. Die Abbildung XX zeigt ein Beispiel eines
-
-
+einem Filter, der über den Input von Links nach Rechts und von Oben nach Unten geschoben wird. 
+Der Filter ist eine Matrix, die mit dem Input verrechnet wird. Die Abbildung \ref{fig:convolution} 
+zeigt ein Beispiel einer Convolution.
 
 
 
