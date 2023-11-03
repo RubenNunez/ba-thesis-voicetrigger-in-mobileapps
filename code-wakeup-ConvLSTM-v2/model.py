@@ -56,6 +56,6 @@ class WakeupTriggerConvLSTM2s(nn.Module):
         x = x[:, -1, :]
         x = F.relu(self.fc1(x))
         x = self.dropout(x)
-        x = torch.sigmoid(self.fc2(x))
+        x = self.fc2(x)
 
         return x

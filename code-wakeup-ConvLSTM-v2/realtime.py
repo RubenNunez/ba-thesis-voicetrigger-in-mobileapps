@@ -4,7 +4,7 @@ import numpy as np
 import torch
 import torch.optim as optim
 
-from model import WakeupTriggerConvLSTM
+from model import WakeupTriggerConvLSTM2s
 from dataset import AudioToSpectrogramTransform
 
 # Load a checkpoint
@@ -21,13 +21,13 @@ def load_checkpoint(checkpoint_path, model, optimizer):
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
-model = WakeupTriggerConvLSTM(device=device).to(device)
+model = WakeupTriggerConvLSTM2s(device=device).to(device)
 optimizer = optim.AdamW(model.parameters(), lr=5e-5)
 
 transform = AudioToSpectrogramTransform()
 
-# Initialize model and tokenizer once
-checkpoint_path = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM/checkpoints/checkpoint_epoch_50_loss_0.6587403395678848.pt" 
+# Initialize model
+checkpoint_path = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM/checkpoints-v2/checkpoint_epoch_42_loss_0.010789588726497367.pt" 
 model, _, _, _ = load_checkpoint(checkpoint_path, model, optimizer)
 
 model.eval()
@@ -71,8 +71,8 @@ def print_level(probability):
     print(f"\r[{blocks}{spaces}] {probability:.2f}", end='', flush=True)
 
 if __name__ == "__main__":
-    CHUNK_DURATION = 1  # seconds
-    OVERLAP_DURATION = 0.5  # seconds
+    CHUNK_DURATION = 2  # seconds
+    OVERLAP_DURATION = 0.25  # seconds
     overlap_buffer = np.array([])
 
     toggle = False
