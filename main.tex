@@ -10,6 +10,7 @@
 \usepackage{amsmath}
 \usepackage{tabularx}
 \usepackage{listings}
+\usepackage[acronyms, toc]{glossaries}
 \usepackage{colortbl}
 \usepackage{color}
 \usepackage[rgb]{xcolor}
@@ -26,6 +27,18 @@
 %     citecolor=blue,
 %     anchorcolor=blue
 % ]{hyperref}
+
+\makeglossaries
+
+\newglossaryentry{wake-up-word}{
+	name={Wake-up Wort},
+  	description={Ein Wake-up Wort ist ein Wort oder eine Wortsequenz, die ein System aktiviert.},
+  	plural={Wake-up Wörter}
+}
+
+\newacronym{ai}{AI}{Künstliche Intelligenz}
+
+
 
 \addbibresource{references.bib}
 \geometry{a4paper, total={170mm,257mm}, left=20mm, top=20mm}
@@ -102,23 +115,23 @@ integrierte Sprachsteuerungsfunktion anbieten.
 Sprachsteuerungstechnologien haben ein grosses Potenzial und werden bisher vor allem als 
 Sprachsteuerungsassistenten genutzt. Während es etablierte Sprachassistenten wie Siri, Google 
 oder Alexa gibt, fehlt es an Lösungen für eine integrierte Sprachsteuerung in Mobile Apps, 
-insbesondere in Bezug auf das Erkennen von \textit{Wake-up} Wörtern. Daher gibt es eine Lücke
+insbesondere in Bezug auf das Erkennen von \gls{wake-up-word}. Daher gibt es eine Lücke
 zwischen eigenen Sprachassistenten und Mobile Apps. Diese Lücke soll mit dieser Arbeit 
 geschlossen werden.
 
 \subsection{Fragestellung}
 Wie kann eine integrierte Sprachsteuerung für eine Mobile App entwickelt werden, die speziell 
-das Erkennen von \textit{Wake-up} Wörtern oder \textit{Wake-up} Wortsequenzen ermöglicht?"
+das Erkennen von \glspl{wake-up-word} oder \textit{Wake-up Wortsequenzen} ermöglicht?
 
 
 \subsection{Vision}
 Als Vision dieser Arbeit soll eine Grundlage geschaffen werden, um ein \textit{Wake-up} Wort 
-oder eine Sequenz von \textit{Wake-up} Wörtern in der akustischen Sprache erkennen zu können.
+oder eine Sequenz von \textit{Wake-up Wörtern} in der akustischen Sprache erkennen zu können.
 Dabei sollen Methoden und Werkzeuge aus dem Bereich des Machine Learnings verwendet werden.
 Zum anderen soll diese Erkenntnise in eine mobile Plattform wie iOS oder Android integriert 
 werden. Für den Rahmen dieser Arbeit genügt die Integration in eine der genannten Plattformen. 
-Weiterhin ist Anliegen dieser Arbeit, dass das Thema Datenschutz und die ethischen Aspekte 
-berücksichtigt werden.
+Weiterhin ist es ein Anliegen dieser Arbeit, dass das Thema Datenschutz und die ethischen Aspekte 
+zu berücksichtigen sind.
 
 
 \newpage \section{Grundlagen}
@@ -504,17 +517,78 @@ Zugriff auf die Audio-Hardware generiert.
 \end{figure}
 
 \subsection{Machine Learning}
-Um die Grundlagen von Machine Learning im Bereich der Spracherkennung zu verstehen, ist es 
-wichtig, die grundlegenden Konzepte von Neuronalen Netzen zu verstehen. Für den Anwendungsbereich 
-der Spracherkennung sind vor allem die Deep Neural Networks (DNN), die Convolutional Neural Networks 
-(CNN) und die Recurrent Neural Networks (RNN) von Bedeutung. Um diese
-wird es in diesem Kapitel gehen.
+Dieses Kapitel erläutert die grundlegenden Konzepte von Machine Learning, die für die 
+Spracherkennung relevant sind. Es fokussiert sich auf Deep Neural Networks (DNN), Convolutional 
+Neural Networks (CNN) und Recurrent Neural Networks (RNN). (\cite{weidman2019deep})
 
 \subsubsection{Neuronale Netze}
+Unter Neuronalen Netzen versteht man im Allgemeinen eine Reihe von Berechnungen, die von der
+Funktionsweise des menschlichen Gehirns inspiriert sind. Im Grunde sind es mathematische Modelle,
+die aus einer Reihe von miteinander verbundenen Knoten bestehen, die als Neuronen bezeichnet werden.
+Im einfachsten Fall bestehen Neuronen aus Inputs \(x_{1}, x_{2}, \dots, x_{n}\), Gewichten 
+\(w_{1}, w_{2}, \dots, w_{n}\), einem Bias \(b\) einer Aktivierungsfunktion \(f\) und einem Output 
+\(y\). Die Abbildung \ref{fig:neuron} zeigt ein einfaches Beispiel davon:
 
-\subsubsection{Deep Neural Networks}
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		% Nodes for x1, x2
+		\foreach \i/\y in {1/-1,2/-2} {
+			\node[circle,fill=gray!30,minimum size=1cm] (x\i) at (0,\y) {$x_{\i}$};
+			\node (w\i) at (2,\y) {$w_{\i}$};
+			\draw[->] (x\i) -- (w\i) -- (4,-2.5);
+		}
+		
+		% Nodes for xn
+		\node[circle,fill=gray!30,minimum size=1cm] (xn) at (0,-4) {$x_{n}$};
+		\node (wn) at (2,-4) {$w_{n}$};
+		\draw[->] (xn) -- (wn) -- (4,-2.5);
+	
+		% Dots
+		\node at (0,-3) {$\vdots$};
+		\node at (2,-3) {$\vdots$};
+	
+		% Summation and Activation
+		\node[circle,draw,minimum size=2cm] (sum) at (5,-2.5) {$\Sigma | f$};
+		\node (activation) at (9,-2.5) {$f\left(b+\sum_{i=1}^{n}x_{i}\cdot w_{i}\right) = y$};
+		\draw[->] (sum) -- (activation);
+	
+		% Bias
+		\node (b) at (3,0) {$b$};
+		\draw[->] (b) -- (sum);
+	\end{tikzpicture}
+	
+	\caption{Neuronale Netze}
+	\label{fig:neuron}
+
+\end{figure}
+
+\noindent
+Neuronale Netze sind gut geeignet, um komplexe Probleme zu lösen, die nicht mit traditionellen
+Algorithmen gelöst werden können. Ein Beispiel dafür ist die Spracherkennung oder auch die
+Bilderkennung. Netzwerke werden trainiert, um die richtigen Gewichte \(w_{1}, w_{2}, \dots, w_{n}\)
+und den Bias \(b\) zu finden, um die gewünschte Ausgabe zu erhalten. Um ein detailiertes Verständnis
+von neuronalen Netzen zu erhalten, empfiehlt sich die Lektüre von (\cite{weidman2019deep}).
 
 \subsubsection{Convolutional Neural Networks}
+Convolutional Neural Networks (CNN) sind eine spezielle Art von neuronalen Netzen, die sich auf
+Bilderkennungsaufgaben spezialisiert haben. Sie sind in der Lage, komplexe Muster in Bildern zu
+erkennen. (\cite{weidman2019deep}) beschreibt CNNs wie folgt:
+
+\begin{displayquote}
+	''CNNs are the standard neural network architecture used for prediction when the input 
+	observations are images, which is the case in a wide range of neural network applications.''
+\end{displayquote}
+
+\noindent
+Speziell für CNNs sind die sogenannten \textit{Convolutional Layers}. Diese Layer bestehen aus
+einem Filter, der über das Bild geschoben wird. Der Filter ist eine Matrix, die mit dem Bild
+multipliziert wird. Die Abbildung XX zeigt ein Beispiel eines
+
+
+
+
+
 
 \subsubsection{Recurrent Neural Networks}
 
@@ -840,12 +914,17 @@ integrierte Sprachsteuerungsfunktion anbieten.
 \subfile{projectmanagement.tex}
 
 \clearpage
+% Glossar
+\addcontentsline{toc}{section}{Glossar}
+\printglossary[type=\acronymtype,title=Akronyme]
+\printglossary[title=Glossar]
 % Verzeichnisse
 \addcontentsline{toc}{section}{Abbildungsverzeichnis}
 \listoffigures
 \addcontentsline{toc}{section}{Tabellenverzeichnis}
 \listoftables
 \printbibliography[title=Literaturverzeichnis, heading=bibintoc]
+
 
 
 %       %%%%%   %    %   %%%
