@@ -526,7 +526,7 @@ Neural Networks (CNN) und Recurrent Neural Networks (RNN). (\cite{weidman2019dee
 \subsubsection{Neuronale Netze}
 Unter Neuronalen Netzen versteht man im Allgemeinen eine Reihe von Berechnungen, die von der
 Funktionsweise des menschlichen Gehirns inspiriert sind. Im Grunde sind es mathematische Modelle,
-die aus einer Reihe von miteinander verbundenen Knoten bestehen, die als Neuronen bezeichnet werden.
+die aus einer Reihe von miteinander verbundenen Nodes bestehen, die als Neuronen bezeichnet werden.
 Im einfachsten Fall bestehen Neuronen aus Inputs \(x_{1}, x_{2}, \dots, x_{n}\), Gewichten 
 \(w_{1}, w_{2}, \dots, w_{n}\), einem Bias \(b\) einer Aktivierungsfunktion \(f\) und einem Output 
 \(y\). Die Abbildung \ref{fig:neuron} zeigt ein einfaches Beispiel davon:
@@ -571,6 +571,64 @@ Algorithmen gelöst werden können. Ein Beispiel dafür ist die Spracherkennung 
 Bilderkennung. Netzwerke werden trainiert, um die richtigen Gewichte \(w_{1}, w_{2}, \dots, w_{n}\)
 und den Bias \(b\) zu finden, um die gewünschte Ausgabe zu erhalten. Um ein detailiertes Verständnis
 von neuronalen Netzen zu erhalten, empfiehlt sich die Lektüre von (\cite{weidman2019deep}).
+
+\noindent
+Als nächtest betrachten wir ein grösseres Beispiel eines neuronalen Netzes. Die Abbildung 
+\ref{fig:neural_network} zeigt ein Beispiel eines neuronalen Netzes mit drei Layern.
+
+
+\begin{figure}[h!]
+	\centering
+	\begin{tikzpicture}[
+		neuron/.style={circle, draw=black, minimum size=1cm},
+		layer/.style={anchor=center}
+	]
+
+	\foreach \i in {1,...,5} { % Input Layer
+		\node[neuron] (I-\i) at (0, \i*1.5) {$x_{\pgfmathtruncatemacro\result{6-\i}\result}$};
+	}
+
+	\foreach \i in {1,...,3} { % Hidden Layer
+		\node[neuron] (H-\i) at (3, \i*2.5 -0.5) {$h_{\pgfmathtruncatemacro\result{4-\i}\result}$};
+	}
+
+	\foreach \i in {1,...,2} { % Output Layer
+		\node[neuron] (O-\i) at (6, \i*3.5 -0.5) {$y_{\pgfmathtruncatemacro\result{3-\i}\result}$};
+	}
+
+	% Connect Input Layer to Hidden Layer
+	\foreach \i in {1,...,5}
+		\foreach \j in {1,...,3} {
+			\draw[->, thick] (I-\i) -- (H-\j);
+		}
+
+	% Connect Hidden Layer to Output Layer
+	\foreach \i in {1,...,3}
+		\foreach \j in {1,...,2} {
+			\draw[->, thick] (H-\i) -- (O-\j);
+		}
+
+	\end{tikzpicture}
+	\caption{Ein neuronales Netzwerk mit drei Layern.}
+	\label{fig:neural_network}
+\end{figure}
+
+
+
+
+\noindent \newline \textbf{Aktivierungsfunktionen} \newline
+Aktivierungsfunktionen sind ein wichtiger Bestandteil von neuronalen Netzen. Sie werden verwendet,
+um die Ausgabe eines Neurons zu berechnen. Es gibt verschiedene Arten von Aktivierungsfunktionen.
+Die bekanntesten sind die \textit{Sigmoid}, \textit{ReLU} und \textit{Softmax} Funktionen 
+(\cite{weidman2019deep}).
+
+
+\noindent \newline \textbf{Forward Pass und Backward Pass} \newline
+Zwei wichtige Konzepte in neuronalen Netzen sind der \textit{Forward Pass} und der
+\textit{Backward Pass}. Der Forward Pass ist der Vorgang, bei dem die Eingabe \(x\) durch das
+Netzwerk geleitet wird, um die Ausgabe \(y\) zu erhalten. Der Backward Pass ist der Vorgang, bei
+dem die Gewichte \(w_{1}, w_{2}, \dots, w_{n}\) und der Bias \(b\) optimiert werden. Das Optimieren
+der Gewichte und des Bias wird als \textit{Training} bezeichnet. 
 
 \subsubsection{Convolutional Neural Networks}
 Convolutional Neural Networks (CNN) sind eine spezielle Art von neuronalen Netzen, die vor allem
