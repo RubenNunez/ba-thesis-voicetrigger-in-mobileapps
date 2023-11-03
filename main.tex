@@ -117,13 +117,13 @@ integrierte Sprachsteuerungsfunktion anbieten.
 Sprachsteuerungstechnologien haben ein grosses Potenzial und werden bisher vor allem als 
 Sprachsteuerungsassistenten genutzt. Während es etablierte Sprachassistenten wie Siri, Google 
 oder Alexa gibt, fehlt es an Lösungen für eine integrierte Sprachsteuerung in Mobile Apps, 
-insbesondere in Bezug auf das Erkennen von \gls{wake-up-word}. Daher gibt es eine Lücke
+insbesondere in Bezug auf das Erkennen von Triggerwörtern. Daher gibt es eine Lücke
 zwischen eigenen Sprachassistenten und Mobile Apps. Diese Lücke soll mit dieser Arbeit 
 geschlossen werden.
 
 \subsection{Fragestellung}
 Wie kann eine integrierte Sprachsteuerung für eine Mobile App entwickelt werden, die speziell 
-das Erkennen von \glspl{wake-up-word} oder \textit{Wake-up Wortsequenzen} ermöglicht?
+das Erkennen von Triggerwörter oder Triggerwortsequenzen ermöglicht?
 
 
 \subsection{Vision}
@@ -521,7 +521,8 @@ Zugriff auf die Audio-Hardware generiert.
 \subsection{Machine Learning}
 Dieses Kapitel erläutert die grundlegenden Konzepte von Machine Learning, die für die 
 Spracherkennung relevant sind. Es fokussiert sich auf Deep Neural Networks (DNN), Convolutional 
-Neural Networks (CNN) und Recurrent Neural Networks (RNN). (\cite{weidman2019deep})
+Neural Networks (CNN) und Recurrent Neural Networks (RNN). Um ein detailiertes Verständnis von 
+neuronalen Netzen zu erhalten, empfiehlt sich die Lektüre von (\cite{weidman2019deep}).
 
 \subsubsection{Neuronale Netze}
 Unter Neuronalen Netzen versteht man im Allgemeinen eine Reihe von Berechnungen, die von der
@@ -529,7 +530,7 @@ Funktionsweise des menschlichen Gehirns inspiriert sind. Im Grunde sind es mathe
 die aus einer Reihe von miteinander verbundenen Nodes bestehen, die als Neuronen bezeichnet werden.
 Im einfachsten Fall bestehen Neuronen aus Inputs \(x_{1}, x_{2}, \dots, x_{n}\), Gewichten 
 \(w_{1}, w_{2}, \dots, w_{n}\), einem Bias \(b\) einer Aktivierungsfunktion \(f\) und einem Output 
-\(y\). Die Abbildung \ref{fig:neuron} zeigt ein einfaches Beispiel davon:
+\(y\). Die Abbildung \ref{fig:neuron} zeigt ein einfaches Beispiel eines Neurons.
 
 \begin{figure}[h]
 	\centering
@@ -565,17 +566,18 @@ Im einfachsten Fall bestehen Neuronen aus Inputs \(x_{1}, x_{2}, \dots, x_{n}\),
 
 \end{figure}
 
-\noindent
-Neuronale Netze sind gut geeignet, um komplexe Probleme zu lösen, die nicht mit traditionellen
-Algorithmen gelöst werden können. Ein Beispiel dafür ist die Spracherkennung oder auch die
-Bilderkennung. Netzwerke werden trainiert, um die richtigen Gewichte \(w_{1}, w_{2}, \dots, w_{n}\)
-und den Bias \(b\) zu finden, um die gewünschte Ausgabe zu erhalten. Um ein detailiertes Verständnis
-von neuronalen Netzen zu erhalten, empfiehlt sich die Lektüre von (\cite{weidman2019deep}).
 
 \noindent
-Als nächtest betrachten wir ein grösseres Beispiel eines neuronalen Netzes. Die Abbildung 
-\ref{fig:neural_network} zeigt ein Beispiel eines neuronalen Netzes mit drei Layern.
+Neuronale Netze sind gut geeignet, um komplexe Probleme zu lösen, die nicht besonders einfach mit 
+traditionellenAlgorithmen gelöst werden können. Ein Beispiel dafür ist die Spracherkennung oder 
+auch die Bilderkennung. Netzwerke werden trainiert, um die richtigen Gewichte 
+\(w_{1}, w_{2}, \dots, w_{n}\) und den Bias \(b\) zu finden, um die gewünschte Ausgabe zu erhalten.
 
+\noindent \newline 
+Als nächtest betrachten wir ein kleines Beispiel eines neuronalen Netzes mit drei Layern.
+Die Abbildung \ref{fig:neural_network} soll das Konzept eines neuronalen Netzes veranschaulichen.
+
+\vspace{0.5cm}
 
 \begin{figure}[h!]
 	\centering
@@ -595,15 +597,13 @@ Als nächtest betrachten wir ein grösseres Beispiel eines neuronalen Netzes. Di
 	\foreach \i in {1,...,2} { % Output Layer
 		\node[neuron] (O-\i) at (6, \i*3.5 -0.5) {$y_{\pgfmathtruncatemacro\result{3-\i}\result}$};
 	}
-
-	% Connect Input Layer to Hidden Layer
-	\foreach \i in {1,...,5}
+	
+	\foreach \i in {1,...,5} % Connect Input Layer to Hidden Layer
 		\foreach \j in {1,...,3} {
 			\draw[->, thick] (I-\i) -- (H-\j);
 		}
 
-	% Connect Hidden Layer to Output Layer
-	\foreach \i in {1,...,3}
+	\foreach \i in {1,...,3} % Connect Hidden Layer to Output Layer
 		\foreach \j in {1,...,2} {
 			\draw[->, thick] (H-\i) -- (O-\j);
 		}
@@ -612,8 +612,6 @@ Als nächtest betrachten wir ein grösseres Beispiel eines neuronalen Netzes. Di
 	\caption{Ein neuronales Netzwerk mit drei Layern.}
 	\label{fig:neural_network}
 \end{figure}
-
-
 
 
 \noindent \newline \textbf{Aktivierungsfunktionen} \newline
@@ -629,6 +627,7 @@ Zwei wichtige Konzepte in neuronalen Netzen sind der \textit{Forward Pass} und d
 Netzwerk geleitet wird, um die Ausgabe \(y\) zu erhalten. Der Backward Pass ist der Vorgang, bei
 dem die Gewichte \(w_{1}, w_{2}, \dots, w_{n}\) und der Bias \(b\) optimiert werden. Das Optimieren
 der Gewichte und des Bias wird als \textit{Training} bezeichnet. 
+
 
 \subsubsection{Convolutional Neural Networks}
 Convolutional Neural Networks (CNN) sind eine spezielle Art von neuronalen Netzen, die vor allem
@@ -821,7 +820,46 @@ Frames transformiert, wobei jeder dieser Frames das Spektrum von ungefähr 0,01 
 Zwanzig Frames, die sich über 0,2 Sekunden erstrecken, werden dann als Eingabe für das DNN 
 verwendet.
  
-e ....
+\noindent \newline
+Die Architektur der für Siri verwendeten DNNs bestehen typischerweise aus fünf Layers. In der 
+nachfolgenden Abbildung \ref{fig:siri_dnn} ist die Architektur des DNNs dargestellt. Die Quelle der
+Abbildung ist der Beitrag ``Hey Siri: An On-device DNN-powered Voice Trigger for Apple’s Personal
+Assistant'' \cite{siri2017hey}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.75\linewidth]{img/siri_dnn.png}
+	\caption{DNN Architektur von Siri}
+	\label{fig:siri_dnn}
+\end{figure}
+
+\noindent
+Die Siri DNNs werden je nach Gerätetyp und Leistung in verschiedenen Grössen implementiert. 
+Typische Hidden Layer Grössen sind 32, 128 oder 192. Bei Siri werden mehrheitlich fully-connected 
+Layers verwendet. Siri verwendet beim obersten Layer einen RNN Layer. Dies um die zeitliche
+Abfolge der Frames zu berücksichtigen und basierend darauf einen Score zu berechnen. Siri verwendet 
+nicht nur ein Neuronales Netz, sondern gleich zwei. Das erste wird für die erste Erkennung von 
+'Hey Siri' verwendet. Das zweite dient als Bestätigung bzw. zusätzlichen Checker.
+
+\noindent \newline
+Weiter wird im Beitrag ``Hey Siri: An On-device DNN-powered Voice Trigger for Apple’s Personal
+Assistant'' \cite{siri2017hey} beschrieben, dass die Erkennung von 'Hey Siri' nicht nur schnell sein
+muss, sondern auch sehr energieeffizient. Das folgende Zitat aus dem Beitrag beschreibt die
+Anforderungen an die Erkennung von 'Hey Siri' sehr gut:
+
+\begin{displayquote}
+	``The Hey Siri detector not only has to be accurate, but it needs to be fast 
+	and not have a significant effect on battery life.''
+\end{displayquote}
+
+\subsubsection{Takeaways}
+Es ist sehr interessant zu sehen, wie der Trigger Mechanismus von Siri funktioniert. Der simple
+Aufbau mit einem DNN, welches die Wahrscheinlichkeiten für jedes Phonem berechnet, ist sehr 
+interessant. Die Verwendung von zwei DNNs ist ebenfalls wertvoll und kann auch in dieser Arbeit
+für die Umsetzung verwendet werden. Ebenfalls wird die Notwendigkeit von schneller und 
+energieeffizienter Erkennung von 'Hey Siri' deutlich. Dies ist auch für die Umsetzung dieser Arbeit
+ein wichtiger Punkt.
+
 
 
 \noindent \newline
@@ -841,15 +879,54 @@ TODO: Offenlegung der Funktionsweise von Siri. Wie funktioniert Siri? Als Beispi
 \end{itemize}
 
 \subsection{In App Sprachsteuerung}
-TODO: Siri bietet API für In App Sprachsteuerung. Wie funktioniert das? Wie kann das verwendet.
-Keine eigenen Triggerwörter möglich. Gibt es alternativen?
+Siri sowie Google selbst stellen API's zur Verfügung, um Apps zu öffnen oder auch direkte Befehle 
+auszuführen. Daher stellt sich die Frage, warum überhaupt eine eigene In App Sprachsteuerung? Wenn 
+ein Sprachassistent wie Siri bereits API's zur Verfügung stellt, um beispielsweise eine App 
+zu öffnen oder auch direkte Befehle auszuführen. Als Beispiel hat Spotify eine Integration mit Siri.
+Es können Befehle wie ``Hey Siri, play music on Spotify'' verwendet werden. Um nur einiges zu 
+nennen, gibt es folgende Gründe, weshalb eine eigene In App Sprachsteuerung sinnvoll ist:
+
+\begin{itemize}
+    \item \textbf{Individuell}: Die Sprachsteuerung kann individuell auf die App angepasst werden.
+    \item \textbf{Unabhängigkeit}: Die App ist nicht von Siri oder anderen Sprachassistenten 
+	abhängig.
+    \item \textbf{Erweiterte Funktionen}: Die Sprachsteuerung kann erweiterte Funktionen bieten,
+	welche von Siri nicht unterstützt werden.
+    \item \textbf{Datenschutz}: Die Sprachsteuerung kann auf dem Gerät selbst laufen und somit
+	keine Daten in die Cloud senden.
+    \item \textbf{Branding}: Die Sprachsteuerung kann das Branding der App stärken.
+\end{itemize}
+
 
 \subsection{Marktanalyse - Benchmarking}
+Während der Recherche für diese Arbeit wurden natürlich auch die bestehenden Lösungen auf dem Markt
+analysiert. Dabei wurde der folgende Anbieter gefunden, welcher exakt eine Lösung für die Trigger 
+Wort Erkennung anbietet. Der Anbieter heisst Picovoice und bietet eine Lösung mit dem Namen
+Porcupine an. Sie beschreiben ihre Lösung wie folgt:
 
-die machen es komerziell, ich mache es open source
-https://picovoice.ai/platform/porcupine/ 
+\begin{displayquote}
+	``Porcupine Wake Word is a wake word detection engine that recognizes unique signals to 
+	transition software from passive to active listening. Porcupine Wake Word enables enterprises 
+	to offer hands-free experiences by training and deploying custom wake words like Big Tech - 
+	but with superior technology.'' (\cite{picovoice2023porcupine})
+\end{displayquote}
+
+\noindent \newline
+Porcupine verspricht eine sehr hohe Genauigkeit und eine sehr schnelle Erkennung. Ebenfalls bieten
+sie eine grosse Auswahl an Integrationen für verschidenste Programmiersprachen bzw. Plattformen an. 
+Um nur einige zu nennen: Python, C, Flutter, Java, JavaScript, Android, iOS, NodeJS, Unity, React 
+und viele mehr. Die Integrationen sehen sehr vielversprechend aus und sind sehr einfach zu 
+implementieren. Bei den Preisen bietet Picovoice drei verschiedene Modelle an. Individuell, 
+Developer und Enterprise. Für ein grösseres Projekt mit dem Bedarf nach einer individuellen 
+Wake Word Erkennung könnte es genau die richtige Lösung sein.
+
 
 \subsection{Diskussion}
+Die Trigger Wort Erkennung ist ein aktives Forschungsgebiet. Es gibt viele verschiedene Ansätze und
+Lösungen. Die in diesem Kapitel betrachteten Lösungen und Ansätze haben einen guten Einblick in die
+Funktionsweise von Trigger Wort Erkennung gegeben. Die Funktionsweise von Siri hat hierbei einen
+besonderen Einblick gegeben.
+
 
 
 
@@ -950,10 +1027,9 @@ Am besten dieses Paper verwenden (\cite{choi2018tutorial}).
 \end{itemize}
 
 \newpage \section{Realisierung}
-Das Problem dieser Arbeit ist im wesentlichen die Erkennung von Triggerwörtern innerhalb
-des Kontext einer App. Grundsätzlich ist es unüblich, dass mobile Apps eine
-integrierte Sprachsteuerungsfunktion anbieten.
-
+Als Teil der Realisierung wurde ein eigenes Modell trainiert, welches Triggerwörter erkennt.
+Dazu wurden einige Tests wie auch Experimente durchgeführt. 
+Projektphasen der Modell Erstellung, der Integration und der Evaluation.
 
 \subsection{Google Cloud Platform}
 TODO: Google Cloud Platform um Datensätze zu hosten auf Sorage Bucket. 
