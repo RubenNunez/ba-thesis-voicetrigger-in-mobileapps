@@ -24,16 +24,11 @@
 \geometry{a4paper, total={170mm,257mm}, left=20mm, top=20mm}
 \usetikzlibrary{matrix, positioning, calc, fit}
 
+\input{glossary.tex}
 \makeglossaries
-\newglossaryentry{wake-up-word}{
-	name={Wake-up Wort},
-	description={Ein Wake-up Wort ist ein Wort oder eine Wortsequenz, die ein System aktiviert.},
-	plural={Wake-up Wörter}
-}
-\newacronym{ai}{AI}{Künstliche Intelligenz}
+\renewcommand*{\glstextformat}[1]{\textit{#1}}
 
 \addbibresource{references.bib}
-
 
 \definecolor{ba-gray}{rgb}{0.9,0.9,0.9}
 \newcommand\blankpage{
@@ -114,11 +109,24 @@ integrierte Sprachsteuerungsfunktion anbieten.
 Sprachsteuerungstechnologien haben ein grosses Potenzial und werden bisher vor allem als
 Sprachsteuerungsassistenten genutzt. Während es etablierte Sprachassistenten wie Siri, Google
 oder Alexa gibt, fehlt es an Lösungen für eine integrierte Sprachsteuerung in Mobile Apps,
-insbesondere in Bezug auf das Erkennen von Triggerwörtern. Daher gibt es eine Lücke
-zwischen eigenen Sprachassistenten und Mobile Apps. Diese Lücke soll mit dieser Arbeit
-geschlossen werden.
+insbesondere in Bezug auf das Erkennen von Triggerwörtern. Daher besteht ein grosses 
+Ausbaupotenzial für Sprachassistenten in Mobile Apps. 
 
-\subsubsection{Klarstellung des Proble}
+\noindent \newline
+Für die Problemstellung dieser Arbeit ist es wichtig, anfänglich die Spracherkennung zu 
+differenzieren. Die Spracherkennung kann in unterschiedliche Disziplinen unterteilt werden.
+Diese Arbeit befasst sich vorallem mit der \gls{twd}. Die nachfolgende Abbildung
+\ref{fig:asr_twd} zeigt die wichtigsten Teilgebiete der Spracherkennung und soll einen 
+Überblick über die Thematik geben.
+
+\vspace{1em}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\linewidth]{img/asr_twd.pdf}
+	\caption{Teilgebiete der Spracherkennung}
+	\label{fig:asr_twd}
+
+\end{figure}
 
 \subsection{Fragestellung}
 Wie kann eine integrierte Sprachsteuerung für eine Mobile App entwickelt werden, die speziell
@@ -877,7 +885,7 @@ TODO: Offenlegung der Funktionsweise von Siri. Wie funktioniert Siri? Als Beispi
 	      \end{itemize}
 \end{itemize}
 
-\subsection{In App Sprachsteuerung}
+\subsection{Sprachassistenten in Apps} 
 Siri sowie Google selbst stellen API's zur Verfügung, um Apps zu öffnen oder auch direkte Befehle
 auszuführen. Daher stellt sich die Frage, warum überhaupt eine eigene In App Sprachsteuerung? Wenn
 ein Sprachassistent wie Siri bereits API's zur Verfügung stellt, um beispielsweise eine App
