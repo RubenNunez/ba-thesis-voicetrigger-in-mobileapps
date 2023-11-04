@@ -1,4 +1,6 @@
 \documentclass[11pt,a4paper]{article}
+\usepackage[style=apa, backend=biber]{biblatex}
+\usepackage[acronyms, toc]{glossaries}
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
 \usepackage{csquotes}
@@ -10,49 +12,37 @@
 \usepackage{amsmath}
 \usepackage{tabularx}
 \usepackage{listings}
-\usepackage[acronyms, toc]{glossaries}
 \usepackage{colortbl}
 \usepackage{color}
 \usepackage[rgb]{xcolor}
 \usepackage{afterpage}
-\usepackage{pdflscape} 
-\usepackage[style=apa, backend=biber]{biblatex}
-
+\usepackage{pdflscape}
 \usepackage{tikz}
-% \usepackage{indentfirst} 
-% \usepackage[
-%     colorlinks=true, 
-%     linkcolor=blue,
-%     urlcolor=blue,
-%     citecolor=blue,
-%     anchorcolor=blue
-% ]{hyperref}
 
+
+
+\geometry{a4paper, total={170mm,257mm}, left=20mm, top=20mm}
 \usetikzlibrary{matrix, positioning, calc, fit}
 
 \makeglossaries
-
 \newglossaryentry{wake-up-word}{
 	name={Wake-up Wort},
-  	description={Ein Wake-up Wort ist ein Wort oder eine Wortsequenz, die ein System aktiviert.},
-  	plural={Wake-up Wörter}
+	description={Ein Wake-up Wort ist ein Wort oder eine Wortsequenz, die ein System aktiviert.},
+	plural={Wake-up Wörter}
 }
-
 \newacronym{ai}{AI}{Künstliche Intelligenz}
 
-
-
 \addbibresource{references.bib}
-\geometry{a4paper, total={170mm,257mm}, left=20mm, top=20mm}
-\definecolor{ba-gray}{rgb}{0.9,0.9,0.9}
 
-\newcommand\blankpage{%
+
+\definecolor{ba-gray}{rgb}{0.9,0.9,0.9}
+\newcommand\blankpage{
 	\null
-	\thispagestyle{empty}%
-	\addtocounter{page}{-1}%
+	\thispagestyle{empty}
+	\addtocounter{page}{-1}
 	\newpage}
 
-\newcommand\redpage{%
+\newcommand\redpage{
 	\newpage
 	\pagecolor{red}
 	\blankpage
@@ -84,6 +74,13 @@
 }
 
 
+%        %%%%%%%%  %%%%%%%%%  %%%      %%
+%       %			   %	  %  %	   %
+%       %%%%%%%%	   %	  % % %    %
+%       		%	   %	  %    %   %
+%       %%%%%%%% 	   %	  %     %  %
+
+
 \title{
 {\LARGE Bachelorarbeit}\\[2em]
 {\textbf{Integration einer Sprachsteuerungsfunktion {\break} in Mobile Apps}}
@@ -104,7 +101,7 @@
 \newpage \section*{Abstract}
 Das Problem dieser Arbeit ist im wesentlichen die Erkennung von Wake-up Wörter innerhalb
 des Kontext einer App. Grundsätzlich ist es unüblich, dass mobile Apps eine
-integrierte Sprachsteuerungsfunktion anbieten. 
+integrierte Sprachsteuerungsfunktion anbieten.
 
 
 \newpage
@@ -114,25 +111,25 @@ integrierte Sprachsteuerungsfunktion anbieten.
 
 \newpage \section{Problem, Fragestellung, Vision}
 \subsection{Problemstellung}
-Sprachsteuerungstechnologien haben ein grosses Potenzial und werden bisher vor allem als 
-Sprachsteuerungsassistenten genutzt. Während es etablierte Sprachassistenten wie Siri, Google 
-oder Alexa gibt, fehlt es an Lösungen für eine integrierte Sprachsteuerung in Mobile Apps, 
+Sprachsteuerungstechnologien haben ein grosses Potenzial und werden bisher vor allem als
+Sprachsteuerungsassistenten genutzt. Während es etablierte Sprachassistenten wie Siri, Google
+oder Alexa gibt, fehlt es an Lösungen für eine integrierte Sprachsteuerung in Mobile Apps,
 insbesondere in Bezug auf das Erkennen von Triggerwörtern. Daher gibt es eine Lücke
-zwischen eigenen Sprachassistenten und Mobile Apps. Diese Lücke soll mit dieser Arbeit 
+zwischen eigenen Sprachassistenten und Mobile Apps. Diese Lücke soll mit dieser Arbeit
 geschlossen werden.
 
 \subsection{Fragestellung}
-Wie kann eine integrierte Sprachsteuerung für eine Mobile App entwickelt werden, die speziell 
+Wie kann eine integrierte Sprachsteuerung für eine Mobile App entwickelt werden, die speziell
 das Erkennen von Triggerwörter oder Triggerwortsequenzen ermöglicht?
 
 
 \subsection{Vision}
-Als Vision dieser Arbeit soll eine Grundlage geschaffen werden, um ein \textit{Wake-up} Wort 
-oder eine Sequenz von \textit{Wake-up Wörtern} in der akustischen Sprache erkennen zu können.
+Als Vision dieser Arbeit soll eine Grundlage geschaffen werden, um ein Triggerwort
+oder eine Sequenz von Triggerwörtern in der akustischen Sprache erkennen zu können.
 Dabei sollen Methoden und Werkzeuge aus dem Bereich des Machine Learnings verwendet werden.
-Zum anderen soll diese Erkenntnise in eine mobile Plattform wie iOS oder Android integriert 
-werden. Für den Rahmen dieser Arbeit genügt die Integration in eine der genannten Plattformen. 
-Weiterhin ist es ein Anliegen dieser Arbeit, dass das Thema Datenschutz und die ethischen Aspekte 
+Zum anderen soll diese Erkenntnise in eine mobile Plattform wie iOS oder Android integriert
+werden. Für den Rahmen dieser Arbeit genügt die Integration in eine der genannten Plattformen.
+Weiterhin ist es ein Anliegen dieser Arbeit, dass das Thema Datenschutz und die ethischen Aspekte
 zu berücksichtigen sind.
 
 
@@ -246,48 +243,48 @@ Anwendung ist es wichtig zu verstehen, mit welcher Anordnung die verwendete API 
 
 \subsection{Audio APIs}
 Audio APIs sind im Bereich der Audioverarbeitung von essentieller Bedeutung. Sie bieten eine
-Schnittstelle, welche den Zugriff auf vielfältige Audiofunktionen erlaubt. Ohne solche APIs müssten 
-Entwickler die Audioverarbeitung von Grund auf neu implementieren. 
+Schnittstelle, welche den Zugriff auf vielfältige Audiofunktionen erlaubt. Ohne solche APIs müssten
+Entwickler die Audioverarbeitung von Grund auf neu implementieren.
 
 \noindent \newline
-In der Erarbeitungsphase dieser Arbeit kristallisierten sich zwei primäre Anwendungsgebiete heraus. 
-Erstens die intensive Auseinandersetzung mit Audioverarbeitung in Python, um tieferes Verständnis 
-für die Materie zu entwickeln. Zweitens die Notwendigkeit, eine Audio API in eine mobile 
-Applikation zu integrieren. Im Kontext dieser Arbeit werden sie als \textit{Audio API für Analyse} 
+In der Erarbeitungsphase dieser Arbeit kristallisierten sich zwei primäre Anwendungsgebiete heraus.
+Erstens die intensive Auseinandersetzung mit Audioverarbeitung in Python, um tieferes Verständnis
+für die Materie zu entwickeln. Zweitens die Notwendigkeit, eine Audio API in eine mobile
+Applikation zu integrieren. Im Kontext dieser Arbeit werden sie als \textit{Audio API für Analyse}
 und \textit{Audio API für Integration} bezeichnet.
 
-El sol es grande 
+El sol es grande
 
 \noindent \newline
 Im Bereich der \textit{Analyse} fiel die Wahl auf folgende APIs:
 
 \begin{itemize}
-\item \textbf{PyAudio:} Eine verbreitete Schnittstelle in Python zur Audioverarbeitung.
-\item \textbf{SoundDevice:} Eine vielseitige Python-Bibliothek für Audioverarbeitungsaufgaben.
-\item \textbf{librosa:} Eine Bibliothek, die speziell auf die Analyse von Audiosignalen 
-ausgerichtet ist.
+	\item \textbf{PyAudio:} Eine verbreitete Schnittstelle in Python zur Audioverarbeitung.
+	\item \textbf{SoundDevice:} Eine vielseitige Python-Bibliothek für Audioverarbeitungsaufgaben.
+	\item \textbf{librosa:} Eine Bibliothek, die speziell auf die Analyse von Audiosignalen
+	      ausgerichtet ist.
 \end{itemize}
 
 \noindent
 Im Kontext der \textit{Integration} standen folgende APIs im Fokus:
 
 \begin{itemize}
-	\item \textbf{AVAudioEngine:} Eine leistungsfähige Schnittstelle primär für die Plattformen iOS 
-    und macOS.
+	\item \textbf{AVAudioEngine:} Eine leistungsfähige Schnittstelle primär für die Plattformen iOS
+	      und macOS.
 	\item \textbf{AudioTrack:} Eine spezialisierte API für Audioanwendungen auf Android-Geräten.
 \end{itemize}
 
 \noindent
-Die folgenden Abschnitte werden tiefer auf die jeweiligen Eigenschaften und Möglichkeiten dieser 
-APIs eingehen, insbesondere im Hinblick darauf, wie sie sich für die Aufnahme, Wiedergabe und 
+Die folgenden Abschnitte werden tiefer auf die jeweiligen Eigenschaften und Möglichkeiten dieser
+APIs eingehen, insbesondere im Hinblick darauf, wie sie sich für die Aufnahme, Wiedergabe und
 Echtzeitverarbeitung von Audiodaten eignen.
 
 \subsubsection{Audio API für Analyse}
-Python zeichnet sich durch eine beeindruckende Auswahl an Bibliotheken für datenanalytische Aufgaben 
-aus, zu denen auch NumPy, SciPy, Pandas und Matplotlib gehören. In dieser Arbeit wurde zunächst 
-\textbf{PyAudio} in Erwägung gezogen. PyAudio ist als Schnittstelle zur PortAudio-Bibliothek 
-bekannt, die plattformübergreifende Audioverarbeitungsfunktionen bereitstellt. Trotz ihrer 
-intuitiven Funktionen für Aufnahme und Wiedergabe wurde PyAudio letztlich aufgrund von 
+Python zeichnet sich durch eine beeindruckende Auswahl an Bibliotheken für datenanalytische Aufgaben
+aus, zu denen auch NumPy, SciPy, Pandas und Matplotlib gehören. In dieser Arbeit wurde zunächst
+\textbf{PyAudio} in Erwägung gezogen. PyAudio ist als Schnittstelle zur PortAudio-Bibliothek
+bekannt, die plattformübergreifende Audioverarbeitungsfunktionen bereitstellt. Trotz ihrer
+intuitiven Funktionen für Aufnahme und Wiedergabe wurde PyAudio letztlich aufgrund von
 Inkompatibilitäten mit der gewählten Entwicklungsumgebung verworfen.
 TODO: PyAudio/SoundDevice/librosa vergleichen
 
@@ -519,17 +516,17 @@ Zugriff auf die Audio-Hardware generiert.
 \end{figure}
 
 \subsection{Machine Learning}
-Dieses Kapitel erläutert die grundlegenden Konzepte von Machine Learning, die für die 
-Spracherkennung relevant sind. Es fokussiert sich auf Deep Neural Networks (DNN), Convolutional 
-Neural Networks (CNN) und Recurrent Neural Networks (RNN). Um ein detailiertes Verständnis von 
+Dieses Kapitel erläutert die grundlegenden Konzepte von Machine Learning, die für die
+Spracherkennung relevant sind. Es fokussiert sich auf Deep Neural Networks (DNN), Convolutional
+Neural Networks (CNN) und Recurrent Neural Networks (RNN). Um ein detailiertes Verständnis von
 neuronalen Netzen zu erhalten, empfiehlt sich die Lektüre von (\cite{weidman2019deep}).
 
 \subsubsection{Neuronale Netze}
 Unter Neuronalen Netzen versteht man im Allgemeinen eine Reihe von Berechnungen, die von der
 Funktionsweise des menschlichen Gehirns inspiriert sind. Im Grunde sind es mathematische Modelle,
 die aus einer Reihe von miteinander verbundenen Nodes bestehen, die als Neuronen bezeichnet werden.
-Im einfachsten Fall bestehen Neuronen aus Inputs \(x_{1}, x_{2}, \dots, x_{n}\), Gewichten 
-\(w_{1}, w_{2}, \dots, w_{n}\), einem Bias \(b\) einer Aktivierungsfunktion \(f\) und einem Output 
+Im einfachsten Fall bestehen Neuronen aus Inputs \(x_{1}, x_{2}, \dots, x_{n}\), Gewichten
+\(w_{1}, w_{2}, \dots, w_{n}\), einem Bias \(b\) einer Aktivierungsfunktion \(f\) und einem Output
 \(y\). Die Abbildung \ref{fig:neuron} zeigt ein einfaches Beispiel eines Neurons.
 
 \begin{figure}[h]
@@ -537,30 +534,30 @@ Im einfachsten Fall bestehen Neuronen aus Inputs \(x_{1}, x_{2}, \dots, x_{n}\),
 	\begin{tikzpicture}
 		% Nodes for x1, x2
 		\foreach \i/\y in {1/-1,2/-2} {
-			\node[circle,fill=gray!30,minimum size=1cm] (x\i) at (0,\y) {$x_{\i}$};
-			\node (w\i) at (2,\y) {$w_{\i}$};
-			\draw[->] (x\i) -- (w\i) -- (4,-2.5);
-		}
-		
+				\node[circle,fill=gray!30,minimum size=1cm] (x\i) at (0,\y) {$x_{\i}$};
+				\node (w\i) at (2,\y) {$w_{\i}$};
+				\draw[->] (x\i) -- (w\i) -- (4,-2.5);
+			}
+
 		% Nodes for xn
 		\node[circle,fill=gray!30,minimum size=1cm] (xn) at (0,-4) {$x_{n}$};
 		\node (wn) at (2,-4) {$w_{n}$};
 		\draw[->] (xn) -- (wn) -- (4,-2.5);
-	
+
 		% Dots
 		\node at (0,-3) {$\vdots$};
 		\node at (2,-3) {$\vdots$};
-	
+
 		% Summation and Activation
 		\node[circle,draw,minimum size=2cm] (sum) at (5,-2.5) {$\Sigma | f$};
 		\node (activation) at (9,-2.5) {$f\left(b+\sum_{i=1}^{n}x_{i}\cdot w_{i}\right) = y$};
 		\draw[->] (sum) -- (activation);
-	
+
 		% Bias
 		\node (b) at (3,0) {$b$};
 		\draw[->] (b) -- (sum);
 	\end{tikzpicture}
-	
+
 	\caption{Neuronale Netze}
 	\label{fig:neuron}
 
@@ -568,12 +565,12 @@ Im einfachsten Fall bestehen Neuronen aus Inputs \(x_{1}, x_{2}, \dots, x_{n}\),
 
 
 \noindent
-Neuronale Netze sind gut geeignet, um komplexe Probleme zu lösen, die nicht besonders einfach mit 
-traditionellenAlgorithmen gelöst werden können. Ein Beispiel dafür ist die Spracherkennung oder 
-auch die Bilderkennung. Netzwerke werden trainiert, um die richtigen Gewichte 
+Neuronale Netze sind gut geeignet, um komplexe Probleme zu lösen, die nicht besonders einfach mit
+traditionellen Algorithmen gelöst werden können. Ein Beispiel dafür ist die Spracherkennung oder
+auch die Bilderkennung. Netzwerke werden trainiert, um die richtigen Gewichte
 \(w_{1}, w_{2}, \dots, w_{n}\) und den Bias \(b\) zu finden, um die gewünschte Ausgabe zu erhalten.
 
-\noindent \newline 
+\noindent \newline
 Als nächtest betrachten wir ein kleines Beispiel eines neuronalen Netzes mit drei Layern.
 Die Abbildung \ref{fig:neural_network} soll das Konzept eines neuronalen Netzes veranschaulichen.
 
@@ -582,31 +579,31 @@ Die Abbildung \ref{fig:neural_network} soll das Konzept eines neuronalen Netzes 
 \begin{figure}[h!]
 	\centering
 	\begin{tikzpicture}[
-		neuron/.style={circle, draw=black, minimum size=1cm},
-		layer/.style={anchor=center}
-	]
+			neuron/.style={circle, draw=black, minimum size=1cm},
+			layer/.style={anchor=center}
+		]
 
-	\foreach \i in {1,...,5} { % Input Layer
-		\node[neuron] (I-\i) at (0, \i*1.5) {$x_{\pgfmathtruncatemacro\result{6-\i}\result}$};
-	}
+		\foreach \i in {1,...,5} { % Input Layer
+				\node[neuron] (I-\i) at (0, \i*1.5) {$x_{\pgfmathtruncatemacro\result{6-\i}\result}$};
+			}
 
-	\foreach \i in {1,...,3} { % Hidden Layer
-		\node[neuron] (H-\i) at (3, \i*2.5 -0.5) {$h_{\pgfmathtruncatemacro\result{4-\i}\result}$};
-	}
+		\foreach \i in {1,...,3} { % Hidden Layer
+				\node[neuron] (H-\i) at (3, \i*2.5 -0.5) {$h_{\pgfmathtruncatemacro\result{4-\i}\result}$};
+			}
 
-	\foreach \i in {1,...,2} { % Output Layer
-		\node[neuron] (O-\i) at (6, \i*3.5 -0.5) {$y_{\pgfmathtruncatemacro\result{3-\i}\result}$};
-	}
-	
-	\foreach \i in {1,...,5} % Connect Input Layer to Hidden Layer
+		\foreach \i in {1,...,2} { % Output Layer
+				\node[neuron] (O-\i) at (6, \i*3.5 -0.5) {$y_{\pgfmathtruncatemacro\result{3-\i}\result}$};
+			}
+
+		\foreach \i in {1,...,5} % Connect Input Layer to Hidden Layer
 		\foreach \j in {1,...,3} {
-			\draw[->, thick] (I-\i) -- (H-\j);
-		}
+				\draw[->, thick] (I-\i) -- (H-\j);
+			}
 
-	\foreach \i in {1,...,3} % Connect Hidden Layer to Output Layer
+		\foreach \i in {1,...,3} % Connect Hidden Layer to Output Layer
 		\foreach \j in {1,...,2} {
-			\draw[->, thick] (H-\i) -- (O-\j);
-		}
+				\draw[->, thick] (H-\i) -- (O-\j);
+			}
 
 	\end{tikzpicture}
 	\caption{Ein neuronales Netzwerk mit drei Layern.}
@@ -617,7 +614,7 @@ Die Abbildung \ref{fig:neural_network} soll das Konzept eines neuronalen Netzes 
 \noindent \newline \textbf{Aktivierungsfunktionen} \newline
 Aktivierungsfunktionen sind ein wichtiger Bestandteil von neuronalen Netzen. Sie werden verwendet,
 um die Ausgabe eines Neurons zu berechnen. Es gibt verschiedene Arten von Aktivierungsfunktionen.
-Die bekanntesten sind die \textit{Sigmoid}, \textit{ReLU} und \textit{Softmax} Funktionen 
+Die bekanntesten sind die \textit{Sigmoid}, \textit{ReLU} und \textit{Softmax} Funktionen
 (\cite{weidman2019deep}).
 
 
@@ -626,13 +623,13 @@ Zwei wichtige Konzepte in neuronalen Netzen sind der \textit{Forward Pass} und d
 \textit{Backward Pass}. Der Forward Pass ist der Vorgang, bei dem die Eingabe \(x\) durch das
 Netzwerk geleitet wird, um die Ausgabe \(y\) zu erhalten. Der Backward Pass ist der Vorgang, bei
 dem die Gewichte \(w_{1}, w_{2}, \dots, w_{n}\) und der Bias \(b\) optimiert werden. Das Optimieren
-der Gewichte und des Bias wird als \textit{Training} bezeichnet. 
+der Gewichte und des Bias wird als \textit{Training} bezeichnet.
 
 
 \subsubsection{Convolutional Neural Networks}
 Convolutional Neural Networks (CNN) sind eine spezielle Art von neuronalen Netzen, die vor allem
-in der Bilderkennung eingesetzt werden. Sie sind in der Lage, komplexe Muster in Bildern zu 
-erkennen. In CNNs sind \textit{Convolutional Layers} zentral. Sie nutzen einen Filter, der über den 
+in der Bilderkennung eingesetzt werden. Sie sind in der Lage, komplexe Muster in Bildern zu
+erkennen. In CNNs sind \textit{Convolutional Layers} zentral. Sie nutzen einen Filter, der über den
 Input gleitet und mit diesem verrechnet wird, wie Abbildung \ref{fig:convolution} zeigt.
 
 \begin{figure}[h]
@@ -640,37 +637,37 @@ Input gleitet und mit diesem verrechnet wird, wie Abbildung \ref{fig:convolution
 	\begin{tikzpicture}[scale=0.6, every node/.style={scale=0.6}]
 		% Input Image
 		\matrix (input) [matrix of nodes, nodes in empty cells, nodes={draw, minimum size=1cm, anchor=center}]{
-		5 & 3 & 1 & 0 & 9 \\
-		12 & 4 & 1 & 0 & 2 \\
-		5 & 3 & 1 & 0 & 2 \\
-		5 & 21 & 1 & 0 & 1 \\
-		0 & 0 & 1 & 0 & 9 \\
+			5  & 3  & 1 & 0 & 9 \\
+			12 & 4  & 1 & 0 & 2 \\
+			5  & 3  & 1 & 0 & 2 \\
+			5  & 21 & 1 & 0 & 1 \\
+			0  & 0  & 1 & 0 & 9 \\
 		};
 		\node[below=0.5cm of input] {Input Image};
-	
+
 		% Filter
 		\matrix (detector) [matrix of nodes, nodes in empty cells, nodes={draw, minimum size=1cm, anchor=center}, right=2cm of input]{
-		1 & 0 & 1 \\
-		29 & 1 & 0.5 \\
-		0 & 1 & 1 \\
+			1  & 0 & 1   \\
+			29 & 1 & 0.5 \\
+			0  & 1 & 1   \\
 		};
 		\node[below=0.5cm of detector] {Filter};
-	
+
 		% Output
 		\matrix (map) [matrix of nodes, nodes in empty cells, nodes={draw, minimum size=1cm, anchor=center}, right=2cm of detector]{
-		53. & 10. & 62.5 \\
-		56.5 & 28.5 & 61.5 \\
-		61.5 & 15.5 & 40.5 \\
+			53.  & 10.  & 62.5 \\
+			56.5 & 28.5 & 61.5 \\
+			61.5 & 15.5 & 40.5 \\
 		};
 		\node[below=0.5cm of map] {Output};
-	
+
 		% Operators
 		\node (conv) [circle, draw, gray, minimum size=1cm, right=0.5cm of input] {conv};
 		\node (eq) [circle, draw, gray, minimum size=1cm, right=0.5cm of detector] {=};
-	
+
 		% Thicker border around the first 3x3 on the input
 		\node[draw, thick, rectangle, fit={(input-1-1.north west) (input-3-3.south east)}, line width=1.5pt, inner sep=17pt] {};
-	
+
 	\end{tikzpicture}
 
 	\caption{Convolution}
@@ -679,20 +676,20 @@ Input gleitet und mit diesem verrechnet wird, wie Abbildung \ref{fig:convolution
 \end{figure}
 
 \noindent
-Bei CNNs sind die Gewichte \(w_{1}, w_{2}, \dots, w_{n}\) und der Bias \(b\) die Filter. 
-Filter werden während des Trainings optimiert, um die gewünschte Ausgabe zu erhalten. Der grosse 
+Bei CNNs sind die Gewichte \(w_{1}, w_{2}, \dots, w_{n}\) und der Bias \(b\) die Filter.
+Filter werden während des Trainings optimiert, um die gewünschte Ausgabe zu erhalten. Der grosse
 Vorteil gegenüber herkömmlichen neuronalen Netzen ist, dass die Gewichte geteilt werden können.
 (\cite{weidman2019deep}) beschreibt CNNs wie folgt:
 
 \begin{displayquote}
-	''CNNs are the standard neural network architecture used for prediction when the input 
+	''CNNs are the standard neural network architecture used for prediction when the input
 	observations are images, which is the case in a wide range of neural network applications.''
 \end{displayquote}
 
 \noindent
 Speziell für CNNs sind die sogenannten \textit{Convolutional Layers}. Diese Layer bestehen aus
-einem Filter, der über den Input von Links nach Rechts und von Oben nach Unten geschoben wird. 
-Der Filter ist eine Matrix, die mit dem Input verrechnet wird. Die Abbildung \ref{fig:convolution} 
+einem Filter, der über den Input von Links nach Rechts und von Oben nach Unten geschoben wird.
+Der Filter ist eine Matrix, die mit dem Input verrechnet wird. Die Abbildung \ref{fig:convolution}
 zeigt ein Beispiel einer Convolution.
 
 
@@ -702,50 +699,50 @@ zeigt ein Beispiel einer Convolution.
 
 
 \newpage \section{Stand der Forschung}
-Der Stand der Forschung ist ein wichtiger Teil dieser Arbeit. Darin werden die wichtigsten 
-zeitlichen Entwicklungen im Bereich der Spracherkennung dargestellt. Weiter werden die 
+Der Stand der Forschung ist ein wichtiger Teil dieser Arbeit. Darin werden die wichtigsten
+zeitlichen Entwicklungen im Bereich der Spracherkennung dargestellt. Weiter werden die
 Sprachassistenten verglichen und die verwendeten Technologien aufgezeigt. Ein wichtiger Teil ist
-die Funktionsweise vom Sprachassistent Siri. Apple veröffentlichte seinen Sprachassistenten 
+die Funktionsweise vom Sprachassistent Siri. Apple veröffentlichte seinen Sprachassistenten
 im Jahr 2011 mit dem Release von iOS 5. Ebenfalls werden InApp Sprachassistenten im
-Markt verglichen. Die Forschung im Bereich der Spracherkennung ist ein aktives Forschungsgebiet. 
-Die Jahre 2010 bis 2020 haben laut (\cite{hannun2021history}) einen grossen Fortschritt in der 
-Spracherkennung erlebt. Dieser Fortschritt ist vor allem auf die Verwendung von Deep Learning 
-zurückzuführen. In der Allgemeinheit ist Spracherkennung vor allem durch die Sprachassistenten von 
-Apple, Google und Amazon bekannt. 
+Markt verglichen. Die Forschung im Bereich der Spracherkennung ist ein aktives Forschungsgebiet.
+Die Jahre 2010 bis 2020 haben laut (\cite{hannun2021history}) einen grossen Fortschritt in der
+Spracherkennung erlebt. Dieser Fortschritt ist vor allem auf die Verwendung von Deep Learning
+zurückzuführen. In der Allgemeinheit ist Spracherkennung vor allem durch die Sprachassistenten von
+Apple, Google und Amazon bekannt.
 
 
-\subsection{Zeitliche Entwicklung der Spracherkennung} 
+\subsection{Zeitliche Entwicklung der Spracherkennung}
 Die Spracherkennung entwickelte sich von 2010 bis 2020 mit enormen Fortschritten. In der heutigen
 Zeit wird die Spracherkennung in Form von Sprachassistenten wie Siri, Alexa und Google Assistant von
-vielen Menschen genutzt. Die Nutzung der Sprachassistenten wird vor allem für Suchanfragen 
+vielen Menschen genutzt. Die Nutzung der Sprachassistenten wird vor allem für Suchanfragen
 verwendet. Angesichts des Fortschritts der letzten Jahre stellt sich die Frage, was die Zukunft
 bringen wird (\cite{hannun2021history}).
 
 \noindent \newline
-Die Abbildung \ref{fig:updated_timeline} zeigt eine Timeline der wichtigsten Entwicklungen im 
-Zeitraum von 2010 bis 2020. Die Timeline wurde basierend auf der Timeline von 
-(\cite{hannun2021history}) erstellt aber mit einem Zusatz für das Jahr 2020, welches die neuste 
+Die Abbildung \ref{fig:updated_timeline} zeigt eine Timeline der wichtigsten Entwicklungen im
+Zeitraum von 2010 bis 2020. Die Timeline wurde basierend auf der Timeline von
+(\cite{hannun2021history}) erstellt aber mit einem Zusatz für das Jahr 2020, welches die neuste
 Entwicklung von Facebook AI's wav2vec2 aufzeigt (\cite{baevski2020wav2vec}).
 
 \begin{figure}[htb]
-    \centering
-    \begin{tikzpicture}[scale=1.5, every node/.style={scale=0.8}] 
-        % Drawing the horizontal line
-        \draw[->, thick] (0,0) -- (10,0);
-        \foreach \x in {0,10} {
-            \draw (\x,-0.1) -- (\x,0.1);
-        }
+	\centering
+	\begin{tikzpicture}[scale=1.5, every node/.style={scale=0.8}]
+		% Drawing the horizontal line
+		\draw[->, thick] (0,0) -- (10,0);
+		\foreach \x in {0,10} {
+				\draw (\x,-0.1) -- (\x,0.1);
+			}
 
 		\foreach \x [count=\xi] in {2010,...,2020} {
-			\draw (\xi-1,-0.1) -- (\xi-1,0.1); % draws the tick mark
-			% \node[below] at (\xi-1,-0.2) {\x}; % labels the tick mark
-		}
+				\draw (\xi-1,-0.1) -- (\xi-1,0.1); % draws the tick mark
+				% \node[below] at (\xi-1,-0.2) {\x}; % labels the tick mark
+			}
 
-        % Labeling
-        \node[align=center, below] at (0,-0.8) {2010};
-        \node[align=center, below] at (10,-0.8) {2020};
+		% Labeling
+		\node[align=center, below] at (0,-0.8) {2010};
+		\node[align=center, below] at (10,-0.8) {2020};
 
-        % Events
+		% Events
 		\node[align=center, above] (kaldi) at (1.25,0.5) {Kaldi};
 		\node[align=center, above] (hybrid) at (2.4,1) {Hybrid\\HMM/DNN};
 		\node[align=center, above] (deepspeech) at (4.75,0.5) {Deep\\Speech};
@@ -772,59 +769,59 @@ Entwicklung von Facebook AI's wav2vec2 aufzeigt (\cite{baevski2020wav2vec}).
 		\draw (encoder) -- (5.8,-0.1);
 		\draw (deepspeech2) -- (6.75,-0.1);
 		\draw (googletransducer) -- (9,-0.1);
-    \end{tikzpicture}
-    \caption{Timeline of Speech Recognition Developments (2010-2020)}
+	\end{tikzpicture}
+	\caption{Timeline of Speech Recognition Developments (2010-2020)}
 	\label{fig:updated_timeline} % for later references
 \end{figure}
 
 \noindent \newline
 
 \noindent \newline
-Deep Learning hat zum grossen Teilen die Spracherkennung revolutioniert, insbesondere durch die 
-Sammlung grosser transkribierter Datensätze und Fortschritte in der Hardware. Spätestens seit 
+Deep Learning hat zum grossen Teilen die Spracherkennung revolutioniert, insbesondere durch die
+Sammlung grosser transkribierter Datensätze und Fortschritte in der Hardware. Spätestens seit
 (\textit{Deep Speech}) sind Fähigkeiten der akustischen Sprachmodelle mit denen von Menschen
-vergleichbar (\cite{hannun2021history}). 
+vergleichbar (\cite{hannun2021history}).
 
 \noindent \newline
-Als offene Vorhersage für die Zukunft der Spracherkennung bezieht sich (\cite{hannun2021history}) 
-auf die Entwicklung bis 2030. Bis 2030 wird die Spracherkennungs-Forschung eine Verlagerung zu 
+Als offene Vorhersage für die Zukunft der Spracherkennung bezieht sich (\cite{hannun2021history})
+auf die Entwicklung bis 2030. Bis 2030 wird die Spracherkennungs-Forschung eine Verlagerung zu
 self-supervised Modellen und On-Device-Training erleben, wobei der Fokus auf kleine sparsame Modelle
-und personalisierten Modellen liegt. Die Wortfehlerrate wird weiter sinken, während die 
+und personalisierten Modellen liegt. Die Wortfehlerrate wird weiter sinken, während die
 Sprachqualität steigt (\cite{hannun2021history}).
 
 \subsection{Komparative Analyse von Sprachassistenten}
-TODO: - (\cite{matarneh2017speechrecognition}) bietet eine komparative Analyse von 
-Sprachassistenten. Die Analyse "Voice control implementation may be conditionally divided into 
+TODO: - (\cite{matarneh2017speechrecognition}) bietet eine komparative Analyse von
+Sprachassistenten. Die Analyse "Voice control implementation may be conditionally divided into
 parts: speech, recognition, translation, and execution of commands (Fig. 1)."
 
 \subsection{Funktionsweise von Siri}
-Die Implementation von Siri ist nicht öffentlich zugänglich, aber Apple selbst dokumentiert 
-das Grundlegende Konzept von Siri sehr detailliert. Der Beitrag ``Hey Siri: An On-device DNN-powered 
-Voice Trigger for Apple’s Personal Assistant'' \cite{siri2017hey} von der ML Research Group von 
+Die Implementation von Siri ist nicht öffentlich zugänglich, aber Apple selbst dokumentiert
+das Grundlegende Konzept von Siri sehr detailliert. Der Beitrag ``Hey Siri: An On-device DNN-powered
+Voice Trigger for Apple’s Personal Assistant'' (\cite{siri2017hey}) von der ML Research Group von
 Apple gibt einen sehr detaillierten Einblick in die Funktionsweise von Siri. Siri besteht aus
-diversen Komponenten, welche mehrheitlich in der Cloud laufen. ``Most of the implementation of Siri 
-is in the Cloud, including the main automatic speech recognition, the natural language 
+diversen Komponenten, welche mehrheitlich in der Cloud laufen. ``Most of the implementation of Siri
+is in the Cloud, including the main automatic speech recognition, the natural language
 interpretation and the various information services.'' (\cite{siri2017hey}). Der Trigger von Siri
 läuft jedoch auf dem Gerät selbst. Um diesen geht es im wesentlichen in diesem Kapitel.
 
 \noindent \newline
-Siri verwendet für den Voice Trigger ein Deep Neural Network (DNN) um das akustische Muster jedes 
-Frames in eine Verteilung von Wahrscheinlichkeiten für jeden Phonem zu übersetzen. Die Phoneme sind 
-die Bausteine der akustischen Sprache. Aus den Wahrscheinlichkeiten wird in einen zeitlichen 
+Siri verwendet für den Voice Trigger ein Deep Neural Network (DNN) um das akustische Muster jedes
+Frames in eine Verteilung von Wahrscheinlichkeiten für jeden Phonem zu übersetzen. Die Phoneme sind
+die Bausteine der akustischen Sprache. Aus den Wahrscheinlichkeiten wird in einen zeitlichen
 Integrationsprozess bestimmt, wie sicher es ist, dass das Gesagte 'Hey Siri' war.
 
 \noindent \newline
-Das Mikrofon des Geräts wandelt das Audiosignal in einen kontinuierlichen Stream von 16000 Samples 
-pro Sekunde um. Diese Samples werden anschliessend durch eine Spektralanalyse in eine Abfolge von 
+Das Mikrofon des Geräts wandelt das Audiosignal in einen kontinuierlichen Stream von 16000 Samples
+pro Sekunde um. Diese Samples werden anschliessend durch eine Spektralanalyse in eine Abfolge von
 Frames transformiert, wobei jeder dieser Frames das Spektrum von ungefähr 0,01 Sekunden beschreibt.
-Zwanzig Frames, die sich über 0,2 Sekunden erstrecken, werden dann als Eingabe für das DNN 
+Zwanzig Frames, die sich über 0,2 Sekunden erstrecken, werden dann als Eingabe für das DNN
 verwendet.
- 
+
 \noindent \newline
-Die Architektur der für Siri verwendeten DNNs bestehen typischerweise aus fünf Layers. In der 
+Die Architektur der für Siri verwendeten DNNs bestehen typischerweise aus fünf Layers. In der
 nachfolgenden Abbildung \ref{fig:siri_dnn} ist die Architektur des DNNs dargestellt. Die Quelle der
 Abbildung ist der Beitrag ``Hey Siri: An On-device DNN-powered Voice Trigger for Apple’s Personal
-Assistant'' \cite{siri2017hey}.
+Assistant'' (\cite{siri2017hey}).
 
 \begin{figure}[h]
 	\centering
@@ -834,91 +831,96 @@ Assistant'' \cite{siri2017hey}.
 \end{figure}
 
 \noindent
-Die Siri DNNs werden je nach Gerätetyp und Leistung in verschiedenen Grössen implementiert. 
-Typische Hidden Layer Grössen sind 32, 128 oder 192. Bei Siri werden mehrheitlich fully-connected 
+Die Siri DNNs werden je nach Gerätetyp und Leistung in verschiedenen Grössen implementiert.
+Typische Hidden Layer Grössen sind 32, 128 oder 192. Bei Siri werden mehrheitlich fully-connected
 Layers verwendet. Siri verwendet beim obersten Layer einen RNN Layer. Dies um die zeitliche
-Abfolge der Frames zu berücksichtigen und basierend darauf einen Score zu berechnen. Siri verwendet 
-nicht nur ein Neuronales Netz, sondern gleich zwei. Das erste wird für die erste Erkennung von 
-'Hey Siri' verwendet. Das zweite dient als Bestätigung bzw. zusätzlichen Checker.
+Abfolge der Frames zu berücksichtigen und basierend darauf einen Score zu berechnen. Siri verwendet
+nicht nur ein Neuronales Netz, sondern gleich zwei. Das erste wird für die erste Erkennung von
+'Hey Siri' verwendet. Das zweite dient als Bestätigung bzw. als zusätzlichen Checker.
 
 \noindent \newline
 Weiter wird im Beitrag ``Hey Siri: An On-device DNN-powered Voice Trigger for Apple’s Personal
-Assistant'' \cite{siri2017hey} beschrieben, dass die Erkennung von 'Hey Siri' nicht nur schnell sein
+Assistant'' (\cite{siri2017hey}) beschrieben, dass die Erkennung von 'Hey Siri' nicht nur schnell sein
 muss, sondern auch sehr energieeffizient. Das folgende Zitat aus dem Beitrag beschreibt die
 Anforderungen an die Erkennung von 'Hey Siri' sehr gut:
 
 \begin{displayquote}
-	``The Hey Siri detector not only has to be accurate, but it needs to be fast 
+	``The Hey Siri detector not only has to be accurate, but it needs to be fast
 	and not have a significant effect on battery life.''
 \end{displayquote}
 
 \subsubsection{Takeaways}
 Es ist sehr interessant zu sehen, wie der Trigger Mechanismus von Siri funktioniert. Der simple
-Aufbau mit einem DNN, welches die Wahrscheinlichkeiten für jedes Phonem berechnet, ist sehr 
+Aufbau mit einem DNN, welches die Wahrscheinlichkeiten für jedes Phonem berechnet, ist sehr
 interessant. Die Verwendung von zwei DNNs ist ebenfalls wertvoll und kann auch in dieser Arbeit
-für die Umsetzung verwendet werden. Ebenfalls wird die Notwendigkeit von schneller und 
-energieeffizienter Erkennung von 'Hey Siri' deutlich. Dies ist auch für die Umsetzung dieser Arbeit
+in Betracht gezogen werden. Ebenfalls wird die Notwendigkeit von einer schnellen und
+energieeffizienten Erkennung von 'Hey Siri' deutlich. Dies ist auch für die Umsetzung dieser Arbeit
 ein wichtiger Punkt.
 
 
 
 \noindent \newline
-TODO: Offenlegung der Funktionsweise von Siri. Wie funktioniert Siri? Als Beispiel eines OS 
+TODO: Offenlegung der Funktionsweise von Siri. Wie funktioniert Siri? Als Beispiel eines OS
 übergreifenden Sprachassistenten.
-(\cite{siri2017hey}) und (\cite{apple2023voice}) 
+(\cite{siri2017hey}) und (\cite{apple2023voice})
 
 \begin{itemize}
-    \item Untersuchung und Darstellung der Funktionsweise von Siri.
-    \item Nutzung der Quellen \cite{siri2017hey} und \cite{apple2023voice} zur detaillierten 
-    Erklärung von Siris Arbeitsweise.
-    \item Überprüfen der Links für zusätzliche Informationen:
-    \begin{itemize}
-        \item \url{https://machinelearning.apple.com/research/hey-siri}
-        \item \url{https://machinelearning.apple.com/research/voice-trigger}
-    \end{itemize}
+	\item Untersuchung und Darstellung der Funktionsweise von Siri.
+	\item Nutzung der Quellen \cite{siri2017hey} und \cite{apple2023voice} zur detaillierten
+	      Erklärung von Siris Arbeitsweise.
+	\item Überprüfen der Links für zusätzliche Informationen:
+	      \begin{itemize}
+		      \item \url{https://machinelearning.apple.com/research/hey-siri}
+		      \item \url{https://machinelearning.apple.com/research/voice-trigger}
+	      \end{itemize}
 \end{itemize}
 
 \subsection{In App Sprachsteuerung}
-Siri sowie Google selbst stellen API's zur Verfügung, um Apps zu öffnen oder auch direkte Befehle 
-auszuführen. Daher stellt sich die Frage, warum überhaupt eine eigene In App Sprachsteuerung? Wenn 
-ein Sprachassistent wie Siri bereits API's zur Verfügung stellt, um beispielsweise eine App 
+Siri sowie Google selbst stellen API's zur Verfügung, um Apps zu öffnen oder auch direkte Befehle
+auszuführen. Daher stellt sich die Frage, warum überhaupt eine eigene In App Sprachsteuerung? Wenn
+ein Sprachassistent wie Siri bereits API's zur Verfügung stellt, um beispielsweise eine App
 zu öffnen oder auch direkte Befehle auszuführen. Als Beispiel hat Spotify eine Integration mit Siri.
-Es können Befehle wie ``Hey Siri, play music on Spotify'' verwendet werden. Um nur einiges zu 
+Es können Befehle wie ``Hey Siri, play music on Spotify'' verwendet werden. Um nur einiges zu
 nennen, gibt es folgende Gründe, weshalb eine eigene In App Sprachsteuerung sinnvoll ist:
 
 \begin{itemize}
-    \item \textbf{Individuell}: Die Sprachsteuerung kann individuell auf die App angepasst werden.
-    \item \textbf{Unabhängigkeit}: Die App ist nicht von Siri oder anderen Sprachassistenten 
-	abhängig.
-    \item \textbf{Erweiterte Funktionen}: Die Sprachsteuerung kann erweiterte Funktionen bieten,
-	welche von Siri nicht unterstützt werden.
-    \item \textbf{Datenschutz}: Die Sprachsteuerung kann auf dem Gerät selbst laufen und somit
-	keine Daten in die Cloud senden.
-    \item \textbf{Branding}: Die Sprachsteuerung kann das Branding der App stärken.
+	\item \textbf{Individuell}: Die Sprachsteuerung kann individuell auf die App angepasst werden.
+	\item \textbf{Unabhängigkeit}: Die App ist nicht von Siri oder anderen Sprachassistenten
+	      abhängig.
+	\item \textbf{Erweiterte Funktionen}: Die Sprachsteuerung kann erweiterte Funktionen bieten,
+	      welche von Siri nicht unterstützt werden.
+	\item \textbf{Datenschutz}: Die Sprachsteuerung kann auf dem Gerät selbst laufen und somit
+	      keine Daten in die Cloud senden.
+	\item \textbf{Branding}: Die Sprachsteuerung kann das Branding der App stärken.
 \end{itemize}
 
 
 \subsection{Marktanalyse - Benchmarking}
 Während der Recherche für diese Arbeit wurden natürlich auch die bestehenden Lösungen auf dem Markt
-analysiert. Dabei wurde der folgende Anbieter gefunden, welcher exakt eine Lösung für die Trigger 
+analysiert. Dabei wurde der folgende Anbieter gefunden, welcher exakt eine Lösung für die Trigger
 Wort Erkennung anbietet. Der Anbieter heisst Picovoice und bietet eine Lösung mit dem Namen
 Porcupine an. Sie beschreiben ihre Lösung wie folgt:
 
 \begin{displayquote}
-	``Porcupine Wake Word is a wake word detection engine that recognizes unique signals to 
-	transition software from passive to active listening. Porcupine Wake Word enables enterprises 
-	to offer hands-free experiences by training and deploying custom wake words like Big Tech - 
+	``Porcupine Wake Word is a wake word detection engine that recognizes unique signals to
+	transition software from passive to active listening. Porcupine Wake Word enables enterprises
+	to offer hands-free experiences by training and deploying custom wake words like Big Tech -
 	but with superior technology.'' (\cite{picovoice2023porcupine})
 \end{displayquote}
 
 \noindent \newline
 Porcupine verspricht eine sehr hohe Genauigkeit und eine sehr schnelle Erkennung. Ebenfalls bieten
-sie eine grosse Auswahl an Integrationen für verschidenste Programmiersprachen bzw. Plattformen an. 
-Um nur einige zu nennen: Python, C, Flutter, Java, JavaScript, Android, iOS, NodeJS, Unity, React 
-und viele mehr. Die Integrationen sehen sehr vielversprechend aus und sind sehr einfach zu 
-implementieren. Bei den Preisen bietet Picovoice drei verschiedene Modelle an. Individuell, 
-Developer und Enterprise. Für ein grösseres Projekt mit dem Bedarf nach einer individuellen 
-Wake Word Erkennung könnte es genau die richtige Lösung sein.
+sie eine grosse Auswahl an Integrationen für verschidenste Programmiersprachen bzw. Plattformen an.
+Um nur einige zu nennen: Python, C, Flutter, Java, JavaScript, Android, iOS, NodeJS, Unity, React
+und viele mehr. Die Integrationen sehen sehr vielversprechend aus und sind sehr einfach zu
+implementieren. Bei den Preisen bietet Picovoice drei verschiedene Modelle an. Individuell,
+Developer und Enterprise. Für ein grösseres Projekt mit dem Bedarf nach einer individuellen
+Triggerwort Erkennung könnte es genau die richtige Lösung sein. Dennoch ist gilt es zu erwähnen,
+dass die Lösung von Picovoice nicht Open Source ist. Die Preise sind ebenfalls nicht ganz ohne.
+Die Enterprise Lösung startet bei 2'500 USD pro Monat und ist somit für viele Projekte nicht
+finanzierbar. Die Preise sind auf der Webseite von Picovoice einsehbar
+(\cite{picovoice2023porcupine}).
+
 
 
 \subsection{Diskussion}
@@ -942,52 +944,52 @@ In einem ersten Schritt wird ein eigenes Modell trainiert, welches Triggerwörte
 Es gibt aber auch die Möglichkeit, ein bereits vortrainiertes Modell zu verwenden. Dieses Kapitel
 \subsection{Einleitung}
 \begin{itemize}
-    \item Kurze Wiederholung des Problems und der Vision für Ihr Projekt.
-    \item Einführung in die Ideen und Konzepte, die Sie in Betracht ziehen, um dieses Ziel zu erreichen.
+	\item Kurze Wiederholung des Problems und der Vision für Ihr Projekt.
+	\item Einführung in die Ideen und Konzepte, die Sie in Betracht ziehen, um dieses Ziel zu erreichen.
 \end{itemize}
 
 \subsection{Grundlegende Idee}
 \begin{itemize}
-    \item Erklärung, wie eine integrierte Spracherkennung den Benutzererfahrungen in mobilen Apps verbessern könnte.
-    \item Beispiel: Automatisierte To-Do-Liste-Einträge durch Sprachbefehle.
+	\item Erklärung, wie eine integrierte Spracherkennung den Benutzererfahrungen in mobilen Apps verbessern könnte.
+	\item Beispiel: Automatisierte To-Do-Liste-Einträge durch Sprachbefehle.
 \end{itemize}
 
 \subsection{Skizzenhafte Lösungsansätze}
 \begin{itemize}
-    \item Machine Learning: Verwendung von bereits trainierten Modellen oder Aufbau eigener Modelle zur Triggerwort-Erkennung.
-    \item Cloud vs. Edge Computing: Ob die Spracherkennung in der Cloud oder direkt auf dem Gerät erfolgen sollte.
-    \item Integration: SDKs oder APIs, die Entwicklern helfen, die Spracherkennungsfunktionalität in ihre Apps zu integrieren.
+	\item Machine Learning: Verwendung von bereits trainierten Modellen oder Aufbau eigener Modelle zur Triggerwort-Erkennung.
+	\item Cloud vs. Edge Computing: Ob die Spracherkennung in der Cloud oder direkt auf dem Gerät erfolgen sollte.
+	\item Integration: SDKs oder APIs, die Entwicklern helfen, die Spracherkennungsfunktionalität in ihre Apps zu integrieren.
 \end{itemize}
 
 \subsection{Systemarchitektur}
 \begin{itemize}
-    \item Überlegungen zur Systemarchitektur: Ist ein monolithisches System oder eine Microservice-Architektur sinnvoller?
-    \item Vorteile und Herausforderungen beider Ansätze im Kontext der Spracherkennung.
+	\item Überlegungen zur Systemarchitektur: Ist ein monolithisches System oder eine Microservice-Architektur sinnvoller?
+	\item Vorteile und Herausforderungen beider Ansätze im Kontext der Spracherkennung.
 \end{itemize}
 
 \subsection{Alternative Ansätze}
 \begin{itemize}
-    \item Untersuchung anderer Technologien oder Ansätze zur Spracherkennung, z.B. regelbasierte Systeme im Vergleich zu Machine Learning.
-    \item Warum Sie sich für einen bestimmten Ansatz entschieden haben oder warum Sie einen anderen verworfen haben.
+	\item Untersuchung anderer Technologien oder Ansätze zur Spracherkennung, z.B. regelbasierte Systeme im Vergleich zu Machine Learning.
+	\item Warum Sie sich für einen bestimmten Ansatz entschieden haben oder warum Sie einen anderen verworfen haben.
 \end{itemize}
 
 \subsection{Mögliche Problempunkte}
 \begin{itemize}
-    \item Datenschutz: Wie wird die Privatsphäre der Benutzer gewahrt?
-    \item Effizienz: Wie kann sichergestellt werden, dass die Spracherkennung schnell und akkurat ist?
-    \item Integration: Wie kann die Kompatibilität mit einer Vielzahl von Apps und Plattformen gewährleistet werden?
+	\item Datenschutz: Wie wird die Privatsphäre der Benutzer gewahrt?
+	\item Effizienz: Wie kann sichergestellt werden, dass die Spracherkennung schnell und akkurat ist?
+	\item Integration: Wie kann die Kompatibilität mit einer Vielzahl von Apps und Plattformen gewährleistet werden?
 \end{itemize}
 
 \subsection{Erste Überlegungen zu Tools und Technologien}
 \begin{itemize}
-    \item Welche Programmiersprachen oder Frameworks könnten verwendet werden?
-    \item Eventuelle Betrachtung von Open-Source-Optionen für Spracherkennung.
+	\item Welche Programmiersprachen oder Frameworks könnten verwendet werden?
+	\item Eventuelle Betrachtung von Open-Source-Optionen für Spracherkennung.
 \end{itemize}
 
 \subsection{Zusammenfassung und Ausblick}
 \begin{itemize}
-    \item Ein kurzer Überblick über die in diesem Kapitel vorgestellten Ideen und Konzepte.
-    \item Ein Vorgeschmack darauf, wie diese Konzepte in den kommenden Kapiteln weiter verfolgt werden.
+	\item Ein kurzer Überblick über die in diesem Kapitel vorgestellten Ideen und Konzepte.
+	\item Ein Vorgeschmack darauf, wie diese Konzepte in den kommenden Kapiteln weiter verfolgt werden.
 \end{itemize}
 
 
@@ -998,41 +1000,41 @@ Am besten dieses Paper verwenden (\cite{choi2018tutorial}).
 
 \subsection{Vorgehensmodell}
 \begin{itemize}
-    \item Auswahl des passenden Vorgehensmodells zur Integration einer Spracherkennungsfunktion, z.B. iteratives Modell.
-    \item Verweis auf den konkreten Terminplan mit Meilensteinen spezifisch für die Spracherkennungs-Integration (im Kapitel 5 oder im Anhang).
+	\item Auswahl des passenden Vorgehensmodells zur Integration einer Spracherkennungsfunktion, z.B. iteratives Modell.
+	\item Verweis auf den konkreten Terminplan mit Meilensteinen spezifisch für die Spracherkennungs-Integration (im Kapitel 5 oder im Anhang).
 \end{itemize}
 
 \subsection{Forschungsmethoden (falls anwendbar)}
 \begin{itemize}
-    \item Erwägung von Benutzertests, um zu prüfen, wie intuitiv und effizient die Spracherkennungsfunktion ist.
-    \item Interviews mit potenziellen Nutzern der App, um ihre Anforderungen und Erwartungen in Bezug auf Spracherkennung zu verstehen.
+	\item Erwägung von Benutzertests, um zu prüfen, wie intuitiv und effizient die Spracherkennungsfunktion ist.
+	\item Interviews mit potenziellen Nutzern der App, um ihre Anforderungen und Erwartungen in Bezug auf Spracherkennung zu verstehen.
 \end{itemize}
 
 \subsection{Technische Evaluierung}
 \begin{itemize}
-    \item Vergleich verschiedener Spracherkennungs-APIs oder Frameworks hinsichtlich Genauigkeit, Latenz, Sprachunterstützung und Kosten.
-    \item Technische Tests zur Prüfung der Performance und Genauigkeit der gewählten Spracherkennungslösung.
+	\item Vergleich verschiedener Spracherkennungs-APIs oder Frameworks hinsichtlich Genauigkeit, Latenz, Sprachunterstützung und Kosten.
+	\item Technische Tests zur Prüfung der Performance und Genauigkeit der gewählten Spracherkennungslösung.
 \end{itemize}
 
 \subsection{Integrationsmethode}
 \begin{itemize}
-    \item Beschreibung der geplanten Techniken zur Integration, z.B. Einbindung über API, Implementierung bestimmter Bibliotheken oder Nutzung nativer App-Funktionen.
-    \item Diskussion über potenzielle Herausforderungen bei der Integration und wie sie angegangen werden sollen.
+	\item Beschreibung der geplanten Techniken zur Integration, z.B. Einbindung über API, Implementierung bestimmter Bibliotheken oder Nutzung nativer App-Funktionen.
+	\item Diskussion über potenzielle Herausforderungen bei der Integration und wie sie angegangen werden sollen.
 \end{itemize}
 
 \subsection{Teststrategie}
 \begin{itemize}
-    \item Entwurf einer Teststrategie speziell für die Spracherkennungsfunktion: Testen unter verschiedenen Bedingungen (z.B. Hintergrundgeräusche, verschiedene Sprachen und Akzente).
-    \item Verweis darauf, dass die eigentliche Testdurchführung in einem anderen Kapitel oder Dokument beschrieben ist.
+	\item Entwurf einer Teststrategie speziell für die Spracherkennungsfunktion: Testen unter verschiedenen Bedingungen (z.B. Hintergrundgeräusche, verschiedene Sprachen und Akzente).
+	\item Verweis darauf, dass die eigentliche Testdurchführung in einem anderen Kapitel oder Dokument beschrieben ist.
 \end{itemize}
 
 \newpage \section{Realisierung}
 Als Teil der Realisierung wurde ein eigenes Modell trainiert, welches Triggerwörter erkennt.
-Dazu wurden einige Tests wie auch Experimente durchgeführt. 
+Dazu wurden einige Tests wie auch Experimente durchgeführt.
 Projektphasen der Modell Erstellung, der Integration und der Evaluation.
 
 \subsection{Google Cloud Platform}
-TODO: Google Cloud Platform um Datensätze zu hosten auf Sorage Bucket. 
+TODO: Google Cloud Platform um Datensätze zu hosten auf Sorage Bucket.
 TODO: Recorder Webseite für Aufnahme von Sprachsamples
 (\cite{warden2018speech}
 
@@ -1040,7 +1042,7 @@ In den Sample zu VoiceCommands wird eine Recorder Webseite angeboten, mit welche
 aufgenommen werden können. Selbsterstellen einer kleinen Seite Hosting dieser Webseite auf GCP
 https://github.com/petewarden/open-speech-recording/tree/master
 
-Fork 
+Fork
 (\cite{warden2018speech})
 
 
@@ -1052,34 +1054,34 @@ Um ein Modell zu trainieren, welches Triggerwörter erkennt, wird ein Datensatz 
 \subsubsection{Datensatz 'other}
 Am besten von Datenset (\cite{warden2018speech})
 \begin{itemize}
-    \item Datenset von Mozilla Common Voice
-    \item Datenset von Google Speech Commands
+	\item Datenset von Mozilla Common Voice
+	\item Datenset von Google Speech Commands
 \end{itemize}
 
 \subsubsection{Datensatz 'hey-fooby'}
 \begin{itemize}
-    \item TODO: Recorder Webseite für Aufnahme von Sprachsamples
-    \item Synthetische Sprachsamples mit verschiedenen Stimmen Geräuschen und Hintergrundgeräuschen
+	\item TODO: Recorder Webseite für Aufnahme von Sprachsamples
+	\item Synthetische Sprachsamples mit verschiedenen Stimmen Geräuschen und Hintergrundgeräuschen
 \end{itemize}
 
 \subsection{Modell}
 \begin{itemize}
-    \item Auswahl des Modells
-    \item Auswahl der Hyperparameter
-    \item Training des Modells
-    \item Evaluation des Modells
+	\item Auswahl des Modells
+	\item Auswahl der Hyperparameter
+	\item Training des Modells
+	\item Evaluation des Modells
 \end{itemize}
 
 \subsubsection{Modell 'CNN'}
 \begin{itemize}
-    \item Aufbau des Modells 
-    \item TODO: Beschreibung des Modells
+	\item Aufbau des Modells
+	\item TODO: Beschreibung des Modells
 \end{itemize}
 
 \subsubsection{Modell 'RNN'}
 \begin{itemize}
-    \item Aufbau des Modells 
-    \item TODO: Beschreibung des Modells
+	\item Aufbau des Modells
+	\item TODO: Beschreibung des Modells
 
 \end{itemize}
 
