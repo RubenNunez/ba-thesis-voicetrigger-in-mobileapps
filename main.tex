@@ -624,8 +624,8 @@ Die Abbildung \ref{fig:neural_network} soll das Konzept eines neuronalen Netzes 
 \noindent \newline \textbf{Aktivierungsfunktionen} \newline
 Aktivierungsfunktionen sind ein wichtiger Bestandteil von neuronalen Netzen. Sie werden verwendet,
 um die Ausgabe eines Neurons zu berechnen. Es gibt verschiedene Arten von Aktivierungsfunktionen.
-Die bekanntesten sind die \textit{Sigmoid}, \textit{ReLU} und \textit{Softmax} Funktionen
-(\cite{weidman2019deep}).
+Die bekanntesten sind die \textit{Sigmoid}, \textit{ReLU} und \textit{Softmax} Funktionen. Bei den 
+Aktivierungsfunktionen handelt es sich um nicht-lineare Funktionen (\cite{weidman2019deep}).
 
 
 \noindent \newline \textbf{Forward Pass und Backward Pass} \newline
@@ -633,7 +633,15 @@ Zwei wichtige Konzepte in neuronalen Netzen sind der \textit{Forward Pass} und d
 \textit{Backward Pass}. Der Forward Pass ist der Vorgang, bei dem die Eingabe \(x\) durch das
 Netzwerk geleitet wird, um die Ausgabe \(y\) zu erhalten. Der Backward Pass ist der Vorgang, bei
 dem die Gewichte \(w_{1}, w_{2}, \dots, w_{n}\) und der Bias \(b\) optimiert werden. Das Optimieren
-der Gewichte und des Bias wird als \textit{Training} bezeichnet.
+der Gewichte und des Bias wird als \textit{Training} bezeichnet. Das geschieht, indem der Fehler 
+ausgedrückt als \textit{Loss Function} minimiert wird.
+
+
+\noindent \newline \textbf{Loss Function} \newline
+Die Loss Function ist eine Funktion, die den Fehler zwischen der Ausgabe des neuronalen Netzes und
+dem gewünschten Output misst. Die Loss Function ist ein wichtiger Bestandteil des Trainingsprozesses
+eines neuronalen Netzes. Es gibt verschiedene Arten von Loss Functions. Die bekanntesten sind die
+\textit{Mean Squared Error} und die \textit{Cross Entropy} Funktionen.
 
 
 \subsubsection{Convolutional Neural Networks}
@@ -837,42 +845,82 @@ werden. Eine Möglichkeit ist einen Cloud-basierten Ansatz zu verwenden. Anbiete
 Amazon und Apple verwenden für ihre Sprachassistenten Cloud-basierte Ansätze 
 (\cite{matarneh2017speechrecognition}). 
 
-\subsubsection{Vergleich von Sprachassistenten}
+\subsubsection{Vergleich von Sprachassistenten}\label{sec:vergleich_sprachassistenten}
 
-In der Arbeit von \cite{matarneh2017speechrecognition} werden verschiedene Spracherkennungssysteme 
-anhand von Schlüsselparametern wie Genauigkeit, API-Qualität, Leistung, Echtzeitgeschwindigkeit, 
+In der Arbeit von (\cite{matarneh2017speechrecognition}) werden verschiedene Spracherkennungssysteme 
+anhand von Kriterien wie Genauigkeit, API-Qualität, Leistung, Echtzeitgeschwindigkeit, 
 Antwortzeit und Kompatibilität verglichen. Die Beurteilung umfasst sowohl Systeme mit offenem 
 (\textit{Open-Source}) als auch geschlossenem Sourcecode (\textit{Closed-Source}), mit einer 
 detaillierten Untersuchung von deren Fähigkeiten und Einschränkungen.
 
 \begin{multicols}{2}
-\noindent Closed-Source:
-\begin{itemize}
-\item Dragon Mobile SDK
-\item Google Speech Recognition
-\item SIRI
-\item Yandex SpeechKit
-\item Microsoft Speech API
-\end{itemize}
+	\small 
+	\setlength\itemsep{0em} 
+	
+	\noindent Closed-Source:
+	\begin{itemize}
+	\item Dragon Mobile SDK
+	\item Google Speech Recognition
+	\item SIRI
+	\item Yandex SpeechKit
+	\item Microsoft Speech API
+	\end{itemize}
+	
+	\columnbreak
+	
+	\noindent Open-Source:
+	\begin{itemize}
+	\item CMU Sphinx
+	\item Kaldi
+	\item Julius
+	\item HTK
+	\item iAtros
+	\item RWTH ASR
+	\item Simon
+	\end{itemize}
+	\end{multicols}
+	
+\noindent \newline
+Zusammenfassend kann festgestellt werden, dass das Dragon Mobile SDK bei den Closed-Source-Systemen 
+in Bezug auf Genauigkeit und Benutzerfreundlichkeit führend ist. Bei den Open-Source-Systemen 
+sticht CMU Sphinx besonders hervor. Dennoch hat die Evaluation ergeben, dass aktuell keine der 
+Systeme optimal und unkompliziert in mobile Apps integriert werden kann. Abgesehen von CMU Sphinx 
+liegt der Schwerpunkt zudem nicht wirklich auf dem Trigger Word Spotting sondern auf der
+Automatic Speech Recognition (ASR).
 
-\columnbreak
-\noindent Open-Source:
-\begin{itemize}
-\item CMU Sphinx
-\item Kaldi
-\item Julius
-\item HTK
-\item iAtros
-\item RWTH ASR
-\item Simon
-\end{itemize}
-\end{multicols}
+\subsection{Facebook AI wav2vec2}
+
+Im Jahr 2020 präsentierte Facebook AI mit wav2vec2 ein innovatives Modell im Bereich der 
+Spracherkennung. Dieses Modell stellt einen signifikanten Durchbruch in der Technologie dar und 
+nutzt eine Methode, die als \textit{Self-Supervised Learning} bezeichnet wird. Durch diese Methode 
+hat wav2vec2 das Potenzial, die Genauigkeit und Effizienz der Spracherkennung erheblich zu steigern 
+(\cite{baevski2020wav2vec}).
 
 \noindent \newline
-Zusammenfassend lässt sich sagen, dass Dragon Mobile SDK bei den Closed Source Systeme führend 
-in der Genauigkeit und Benutzerfreundlichkeit ist, während CMU Sphinx bei den Open Source Systemen
-hervor sticht.
+Für die Zielsetzung dieser Arbeit bietet wav2vec2 eine vielversprechende Perspektive. Obwohl es 
+primär nicht für die Triggerwort-Erkennung entwickelt wurde, besteht die Möglichkeit, eines seiner 
+Basis-Modelle entsprechend zu adaptieren. Durch gezielte Anpassungen könnte wav2vec2 so modifiziert 
+werden, dass es effektiv für die Triggerwort-Erkennung eingesetzt werden kann. Dies würde nicht nur 
+die Genauigkeit der Erkennung verbessern, sondern auch die Effizienz des gesamten Systems steigern. 
+Es lohnt sich daher, die Potenziale und Anpassungsmöglichkeiten von wav2vec2 für diese spezifische 
+Anwendung weiter zu untersuchen.
 
+\noindent \newline
+Darüber hinaus zeigt wav2vec2.0 das grosse Potenzial des Vortrainierens auf nicht beschrifteten 
+Daten für die Sprachverarbeitung. Selbst mit nur 10 Minuten beschrifteter Trainingsdaten erreicht 
+das Modell beeindruckende Ergebnisse auf dem Librispeech-Test (\cite{baevski2020wav2vec}). Es stellt 
+auch einen neuen Standard in der Librispeech-Benchmark für verrauschte Sprache dar und übertrifft 
+Modelle, die mit 100 Stunden Daten trainiert wurden, obwohl es 100-mal weniger beschriftete Daten 
+verwendet.
+
+\noindent \newline
+Für das Vorhaben dieser Arbeit könnte wav2vec2 von grossem Nutzen sein. Da es einen signifikanten
+Durchbruch in der Technologie darstellt, könnte es die Genauigkeit und Effizienz der Spracherkennung
+erheblich steigern. Es ist zwar im Bezug auf die Trigger Word Erkennung nicht direkt anwendbar, 
+aber durch adaptieren eines der Basis Modelle könnte es umfunktioniert werden.
+
+
+\newpage
 \subsection{Funktionsweise von Siri}
 Die Implementation von Siri ist nicht öffentlich zugänglich, aber Apple selbst dokumentiert
 das Grundlegende Konzept von Siri sehr detailliert. Der Beitrag ``Hey Siri: An On-device DNN-powered
@@ -934,25 +982,9 @@ Aufbau mit einem DNN, welches die Wahrscheinlichkeiten für jedes Phonem berechn
 interessant. Die Verwendung von zwei DNNs ist ebenfalls wertvoll und kann auch in dieser Arbeit
 in Betracht gezogen werden. Ebenfalls wird die Notwendigkeit von einer schnellen und
 energieeffizienten Erkennung von 'Hey Siri' deutlich. Dies ist auch für die Umsetzung dieser Arbeit
-ein wichtiger Punkt.
-
-
-
-\noindent \newline
-TODO: Offenlegung der Funktionsweise von Siri. Wie funktioniert Siri? Als Beispiel eines OS
-übergreifenden Sprachassistenten.
-(\cite{siri2017hey}) und (\cite{apple2023voice})
-
-\begin{itemize}
-	\item Untersuchung und Darstellung der Funktionsweise von Siri.
-	\item Nutzung der Quellen \cite{siri2017hey} und \cite{apple2023voice} zur detaillierten
-	      Erklärung von Siris Arbeitsweise.
-	\item Überprüfen der Links für zusätzliche Informationen:
-	      \begin{itemize}
-		      \item \url{https://machinelearning.apple.com/research/hey-siri}
-		      \item \url{https://machinelearning.apple.com/research/voice-trigger}
-	      \end{itemize}
-\end{itemize}
+ein wichtiger Punkt. Die beiden Beiträge (\cite{siri2017hey}) und (\cite{apple2023voice}) geben
+einen sehr guten Einblick in die Funktionsweise von Siri und sind essentiell für die Umsetzung
+dieser Arbeit.
 
 \subsection{Sprachassistenten in Apps} 
 Siri sowie Google selbst stellen API's zur Verfügung, um Apps zu öffnen oder auch direkte Befehle
@@ -973,12 +1005,16 @@ nennen, gibt es folgende Gründe, weshalb eine eigene In App Sprachsteuerung sin
 	\item \textbf{Branding}: Die Sprachsteuerung kann das Branding der App stärken.
 \end{itemize}
 
+\noindent \newline
+Das nächste Kapitel verdeutlicht die Vorteile einer In App Sprachsteuerung anhand des kommerziellen
+Bedarfs.
 
-\subsection{Marktanalyse - Benchmarking}
-Während der Recherche für diese Arbeit wurden natürlich auch die bestehenden Lösungen auf dem Markt
-analysiert. Dabei wurde der folgende Anbieter gefunden, welcher exakt eine Lösung für die Trigger
-Wort Erkennung anbietet. Der Anbieter heisst Picovoice und bietet eine Lösung mit dem Namen
-Porcupine an. Sie beschreiben ihre Lösung wie folgt:
+\subsection{Marktanalyse - Trigger Wort Erkennung}
+Während der Recherche für diese Arbeit wurden bestehende Lösungen auf dem Markt gesucht. Nebst den 
+bereits erwähnten Lösungen im Unterkapitel \ref{sec:vergleich_sprachassistenten} wurde eine Lösung 
+gefunden. Es wurde ein Anbieter gefunden, welcher exakt eine Lösung für die Trigger Wort Erkennung 
+anbietet. Der Anbieter heisst Picovoice und bietet eine Lösung mit dem Namen Porcupine an. Sie 
+beschreiben ihre Lösung wie folgt:
 
 \begin{displayquote}
 	``Porcupine Wake Word is a wake word detection engine that recognizes unique signals to
@@ -1014,20 +1050,19 @@ Dieses Kapitel beschreibt die Ideen und Konzepte, die für die Umsetzung der Arb
 werden. Es wird auch auf die verwendeten Technologien eingegangen. Die Grob Idee ist es im 
 wesentlichen, ein eigenes Modell zu trainieren, ganz nach dem Vorbild von (\cite{siri2017hey}), 
 welches Triggerwörter erkennt. Dazu wird ein Datensatz erstellt, welcher die Triggerwörter, 
-sowie andere Wörter enthält.
-
-In einem ersten Schritt wird ein eigenes Modell trainiert, welches Triggerwörter erkennt.
-Es gibt aber auch die Möglichkeit, ein bereits vortrainiertes Modell zu verwenden. Dieses Kapitel
-\subsection{Einleitung}
-\begin{itemize}
-	\item Kurze Wiederholung des Problems und der Vision für Ihr Projekt.
-	\item Einführung in die Ideen und Konzepte, die Sie in Betracht ziehen, um dieses Ziel zu erreichen.
-\end{itemize}
+sowie andere Wörter enthält. Weiter sollen weitere Datensätze untersucht werden, um die 
+Genauigkeit des Modells zu verbessern. Eines der gefundenen Datensätze ist der 
+\textit{Mozilla Common Voice} Datensatz (\cite{ardila2020common}). Dieser Datensatz enthält 
+unzählige Sprachaufnahmen von Menschen, welche freiwillig ihre Stimme aufgenommen haben. 
 
 \subsection{Grundlegende Idee}
-Die grundlegende Idee ist es, ein eigenes Modell zu trainieren, ganz nach dem Vorbild von
-(\cite{siri2017hey}), welches Triggerwörter erkennt. Die folgende Abbildung \ref{fig:basic_idea}
-zeigt die grundlegende Idee als grobe Skizze.
+Um die Grundlegende Idee zu beschreiben wird die Abbildung \ref{fig:basic_idea} verwendet. Darin 
+wird illustrativ dargestellt, wie die Grundlegende Idee umgesetzt werden soll. Es startet mit der
+erarbeitung der Grundlagen in Bezug auf Audio und Machine Learning. Danach wird eine Möglichkeit
+erarbeitet, um Sprachaufnahmen zu machen. Ein Schritt weiter ist es, die Sprachaufnahmen
+aufzubereiten und in ein Format zu bringen, welches für das Training eines Modells verwendet werden
+kann. Ebenfalls soll eine Modelarchitektur erarbeitet werden, welche für die Triggerwort Erkennung
+verwendet werden kann. Nachdem das Modell trainiert wurde, soll es in eine App integriert werden.
 
 \begin{figure}[h]
 	\centering
@@ -1036,12 +1071,17 @@ zeigt die grundlegende Idee als grobe Skizze.
 	\label{fig:basic_idea}
 \end{figure}
 
+\noindent \newline
+Das Ergebnis soll eine App sein, welche ein Triggerwort erkennt. Das Resultat dieser Bachelorarbeit
+ist sozusagen eine Teilkomponente einer Sprachsteuerung. Denn wie wir im Kapitel Stand der Forschung
+gesehen haben, besteht eine Sprachsteuerung aus mehreren Komponenten. Um einen möglichen Use Case
+zu nennen, könnte die App als Triggerwort Erkennung für eine Sprachsteuerung in einer Koch App
+verwendet werden. Die App könnte dann beispielsweise folgende Befehle verstehen: ``Hey FOOBY, 
+nächster Kochschritt'' oder ``Hey FOOBY, vorheriger Kochschritt''. Eine Sprachsteuerung für eine Koch App
+würde somit den Anwendern ermöglichen, die Hände frei zu haben und sich voll und ganz auf das
+Kochen zu konzentrieren. Die Nutzererfahrung könnte mit einem solchen Feature massiv verbessert
+werden.
 
-
-\begin{itemize}
-	\item Erklärung, wie eine integrierte Spracherkennung den Benutzererfahrungen in mobilen Apps verbessern könnte.
-	\item Beispiel: Automatisierte To-Do-Liste-Einträge durch Sprachbefehle.
-\end{itemize}
 
 \subsection{Skizzenhafte Lösungsansätze}
 \begin{itemize}
@@ -1085,9 +1125,17 @@ zeigt die grundlegende Idee als grobe Skizze.
 ....
 
 \newpage \section{Methoden}
-Am besten dieses Paper verwenden (\cite{choi2018tutorial}).
+Als Methode für das Vorgehen dieser Arbeit wurde eine hybride Methode gewählt. Die hybride Methode
+ist eine Kombination aus Agilem Vorgehen und dem Wasserfallmodell. Grundsätzlich hat die 
+Projektplanung schon einige Arbeitsschritte im Voraus geplant. Dennoch hat sich während der 
+Erarbeitung der Arbeit gezeigt, dass einige Tätigkeiten nicht im Voraus geplant werden können.
+Vor allem bei der Realisierung eines eigenen Modells für die Triggerwort Erkennung hat sich
+gezeigt, dass die Arbeitsschritte nicht im Voraus geplant werden können.
 
 \subsection{Vorgehensmodell}
+Am besten dieses Paper verwenden (\cite{choi2018tutorial}). Hat Grundwissern über 
+Following their success in Computer Vision and other ar- eas, deep learning techniques have 
+recently become widely adopted in Music Information Retrieval (MIR) research
 \begin{itemize}
 	\item Auswahl des passenden Vorgehensmodells zur Integration einer Spracherkennungsfunktion, z.B. iteratives Modell.
 	\item Verweis auf den konkreten Terminplan mit Meilensteinen spezifisch für die Spracherkennungs-Integration (im Kapitel 5 oder im Anhang).
@@ -1118,24 +1166,84 @@ Am besten dieses Paper verwenden (\cite{choi2018tutorial}).
 \end{itemize}
 
 \newpage \section{Realisierung}
+Die Realisierung dieser Arbeit besteht aus zwei Teilen. Zum einen wurde ein eigenes Modell
+trainiert, welches Triggerwörter erkennt. Zum anderen wurde das Modell in eine App integriert.
+
+\begin{itemize}
+	\item Wichtigkeit von PyTorch 
+	\item Probleme beim erstellen des Modells
+	\item Versuche mit wav2vec2
+	\item Versuche mit LiteFEW
+	\item Versuche mit ConvLSTM
+	\item Realisierung der Integration
+\end{itemize}
+
+
+Am besten dieses Paper verwenden (\cite{choi2018tutorial}). Hat Grundwissern über 
+Following their success in Computer Vision and other ar- eas, deep learning techniques have 
+recently become widely adopted in Music Information Retrieval (MIR) research
+
 Als Teil der Realisierung wurde ein eigenes Modell trainiert, welches Triggerwörter erkennt.
 Dazu wurden einige Tests wie auch Experimente durchgeführt.
 Projektphasen der Modell Erstellung, der Integration und der Evaluation.
 
 \subsection{Google Cloud Platform}
-TODO: Google Cloud Platform um Datensätze zu hosten auf Sorage Bucket.
-TODO: Recorder Webseite für Aufnahme von Sprachsamples
-(\cite{warden2018speech}
+Die Google Cloud Platform (GCP) ist eine Sammlung von Cloud Computing-Diensten. In dieser Arbeit
+wurde die GCP verwendet, um die Recorder Webseite zu hosten. Ebenfalls wurde in betracht gezogen,
+die Modelle auf der GCP zu trainieren. Die GCP bietet Services für Machine Learning an. Eines der
+Services ist Vertex AI. Darin können beispielsweise Jupiter Notebooks verwendet werden, um Modelle
+zu trainieren. Das Training kann beispielsweise auf CUDA-fähigen GPUs ausgeführt werden.
 
-In den Sample zu VoiceCommands wird eine Recorder Webseite angeboten, mit welcher Sprachsamples
-aufgenommen werden können. Selbsterstellen einer kleinen Seite Hosting dieser Webseite auf GCP
-https://github.com/petewarden/open-speech-recording/tree/master
-
-Fork
-(\cite{warden2018speech})
-
+\noindent \newline
+Die Sprachdaten wurden auf Google Cloud Storage (GCS) gespeichert. GCS ist ein Objektspeicher, der
+für die Speicherung und Verteilung von grossen Datenmengen optimiert ist. Die Sprachdaten wurden
+in einem Bucket gespeichert. Um mit der Datenschutzverordnung konform zu sein, wurde eine 
+Löschrichtlinie für die Sprachdaten erstellt. Art. 17 Abs. 1 DSGVO besagt, dass Daten gelöscht 
+werden müssen, wenn sie für den ursprünglichen Zweck nicht mehr erforderlich sind. Die
+Löschrichtlinie wurde so konfiguriert, dass die Sprachdaten nach einem Jahr gelöscht werden.
 
 \subsubsection{Recorder Webseite}
+
+Die Recorder Webseite stellt ein nützliches Tool dar, das die Aufnahme von Sprachsamples ermöglicht. 
+Ursprünglich von Pete Warden entwickelt, bietet sie eine einfache und effiziente Möglichkeit, 
+Sprachdaten zu sammeln \cite{warden2018speech}. 
+
+\noindent \newline
+Im Kontext der VoiceCommands-Samples wird eine spezielle Version dieser Recorder Webseite 
+bereitgestellt, die speziell für die Aufnahme von Sprachsamples konzipiert ist. Die ursprüngliche 
+Webseite, die auf GitHub unter 
+\href{https://github.com/petewarden/open-speech-recording/tree/master}{Pete Warden's Repository} zu 
+finden ist, wurde im Rahmen dieser Bachelorarbeit umfassend modifiziert und erweitert.
+
+\noindent \newline
+Einige der wesentlichen Anpassungen umfassen:
+
+\begin{itemize}
+    \item \textbf{Hosting auf GCP}: Die Webseite wurde auf Google Cloud Platform (GCP) gehostet, um 
+	eine zuverlässige und skalierbare Lösung zu gewährleisten.
+    \item \textbf{Dockerisierung und Aktualisierung}: Die Anwendung wurde dockerisiert, was die 
+	Bereitstellung und Skalierung erleichtert. Zudem wurde sie auf den neuesten Stand gebracht, um 
+	sicherzustellen, dass sie mit aktuellen Technologien kompatibel ist.
+    \item \textbf{Technische Details}: Bei der zugrunde liegenden Anwendung handelt es sich um eine 
+	Python Flask App, die für ihre Leichtigkeit und Flexibilität bekannt ist.
+    \item \textbf{Anpassungen für die Bachelorarbeit}: Die Zielwörter und die Länge der Aufnahmen 
+	wurden modifiziert, um den spezifischen Anforderungen dieser Arbeit gerecht zu werden. Darüber 
+	hinaus wurde die Webseite nahtlos in das Repository dieser Bachelorarbeit integriert.
+\end{itemize}
+
+\noindent \newline
+Die überarbeitete Recorder Webseite stellte einen wichtigen Bestandteil dieser Arbeit dar. Sie
+ermöglichte es, einen eigenen Datensatz zu erstellen, der für das Training eines Modells zur
+Triggerwort-Erkennung verwendet werden konnte. Die nachstehende Abbildung gibt einen visuellen 
+Überblick über das Erscheinungsbild und die Funktionalität der Webseite.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/ba-recorder-website.png} 
+    \caption{Die überarbeitete Recorder Webseite}
+    \label{fig:recorder_webseite}
+\end{figure}
+
 
 \subsection{Datensatz}
 Um ein Modell zu trainieren, welches Triggerwörter erkennt, wird ein Datensatz benötigt.
