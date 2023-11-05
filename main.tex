@@ -18,11 +18,11 @@
 \usepackage{afterpage}
 \usepackage{pdflscape}
 \usepackage{tikz}
-
+\usepackage{multicol}
 
 
 \geometry{a4paper, total={170mm,257mm}, left=20mm, top=20mm}
-\usetikzlibrary{matrix, positioning, calc, fit}
+\usetikzlibrary{matrix, positioning, calc, fit, arrows.meta}
 
 \input{glossary.tex}
 \makeglossaries
@@ -799,10 +799,79 @@ self-supervised Modellen und On-Device-Training erleben, wobei der Fokus auf kle
 und personalisierten Modellen liegt. Die Wortfehlerrate wird weiter sinken, während die
 Sprachqualität steigt (\cite{hannun2021history}).
 
-\subsection{Komparative Analyse von Sprachassistenten}
-TODO: - (\cite{matarneh2017speechrecognition}) bietet eine komparative Analyse von
-Sprachassistenten. Die Analyse "Voice control implementation may be conditionally divided into
-parts: speech, recognition, translation, and execution of commands (Fig. 1)."
+\subsection{Aufbau von Sprachassistenten}
+Sprachassistenten können laut (\cite{matarneh2017speechrecognition}) in folgende Komponenten
+unterteilt werden: Sprache, Erkennung, Übersetzung und Ausführung von Befehlen. Die nachfolgende
+Abbildung \ref{fig:voice_control} zeigt die Komponenten eines Sprachassistenten. Abbildung basiert
+auf (\cite{matarneh2017speechrecognition}). Zudem wurde aber die Komponente des \gls{twd} 
+hinzugefügt.
+
+\vspace{1em}
+\begin{figure}[h!]
+	\centering
+	\begin{tikzpicture}[node distance=3.75cm, auto, thick, >=Latex]
+		% Defining style for the blocks
+		\tikzset{block/.style= {draw, rectangle, align=center, minimum width=2.5cm, minimum height=1.25cm, font=\scriptsize}}
+		% Nodes
+		\node[block] (detector) {Trigger Word\\Detector};
+		\node[block, right of=detector] (recognition) {Recognition of\\the speech};
+		\node[block, right of=recognition] (translation) {Translation of speech\\into commands};
+		\node[block, right of=translation] (execution) {Execution of\\commands};
+		\node[block, left of=detector] (speech) {Speech};
+		% Arrows
+		\draw[->] (speech) -- (detector);
+		\draw[->] (detector) -- (recognition);
+		\draw[->] (recognition) -- (translation);
+		\draw[->] (translation) -- (execution);
+	\end{tikzpicture}	
+	\caption{Voice control implementation.}
+	\label{fig:voice_control}
+\end{figure}
+
+\noindent \newline
+Sprachassistenten sind funktionieren mehrheitlich nach dem gleichen Prinzip. Die Sprache wird
+durch ein Mikrofon aufgenommen und in ein digitales Signal umgewandelt. Das digitale Signal wird
+durch einen Trigger Word Detector (TWD) analysiert. Der TWD erkennt, ob das gesprochene Wort die 
+Erkennung aktivieren soll. Für die effektive \gls{asr} können verschiedene Ansätze verwendet
+werden. Eine Möglichkeit ist einen Cloud-basierten Ansatz zu verwenden. Anbieter wie Google,
+Amazon und Apple verwenden für ihre Sprachassistenten Cloud-basierte Ansätze 
+(\cite{matarneh2017speechrecognition}). 
+
+\subsubsection{Vergleich von Sprachassistenten}
+
+In der Arbeit von \cite{matarneh2017speechrecognition} werden verschiedene Spracherkennungssysteme 
+anhand von Schlüsselparametern wie Genauigkeit, API-Qualität, Leistung, Echtzeitgeschwindigkeit, 
+Antwortzeit und Kompatibilität verglichen. Die Beurteilung umfasst sowohl Systeme mit offenem 
+(\textit{Open-Source}) als auch geschlossenem Sourcecode (\textit{Closed-Source}), mit einer 
+detaillierten Untersuchung von deren Fähigkeiten und Einschränkungen.
+
+\begin{multicols}{2}
+\noindent Closed-Source:
+\begin{itemize}
+\item Dragon Mobile SDK
+\item Google Speech Recognition
+\item SIRI
+\item Yandex SpeechKit
+\item Microsoft Speech API
+\end{itemize}
+
+\columnbreak
+\noindent Open-Source:
+\begin{itemize}
+\item CMU Sphinx
+\item Kaldi
+\item Julius
+\item HTK
+\item iAtros
+\item RWTH ASR
+\item Simon
+\end{itemize}
+\end{multicols}
+
+\noindent \newline
+Zusammenfassend lässt sich sagen, dass Dragon Mobile SDK bei den Closed Source Systeme führend 
+in der Genauigkeit und Benutzerfreundlichkeit ist, während CMU Sphinx bei den Open Source Systemen
+hervor sticht.
 
 \subsection{Funktionsweise von Siri}
 Die Implementation von Siri ist nicht öffentlich zugänglich, aber Apple selbst dokumentiert
@@ -940,15 +1009,12 @@ Funktionsweise von Trigger Wort Erkennung gegeben. Die Funktionsweise von Siri h
 besonderen Einblick gegeben.
 
 
-
-
 \newpage \section{Ideen und Konzepte}
 Dieses Kapitel beschreibt die Ideen und Konzepte, die für die Umsetzung der Arbeit verwendet
-werden. Es wird auch auf die verwendeten Technologien eingegangen.
-
-Die Grob Idee ist es im wesentlichen, ein eigenes Modell zu trainieren, welches Triggerwörter
-erkennt. Dazu wird ein Datensatz erstellt, welcher die Triggerwörter, sowie andere Wörter
-enthält.
+werden. Es wird auch auf die verwendeten Technologien eingegangen. Die Grob Idee ist es im 
+wesentlichen, ein eigenes Modell zu trainieren, ganz nach dem Vorbild von (\cite{siri2017hey}), 
+welches Triggerwörter erkennt. Dazu wird ein Datensatz erstellt, welcher die Triggerwörter, 
+sowie andere Wörter enthält.
 
 In einem ersten Schritt wird ein eigenes Modell trainiert, welches Triggerwörter erkennt.
 Es gibt aber auch die Möglichkeit, ein bereits vortrainiertes Modell zu verwenden. Dieses Kapitel
@@ -959,6 +1025,19 @@ Es gibt aber auch die Möglichkeit, ein bereits vortrainiertes Modell zu verwend
 \end{itemize}
 
 \subsection{Grundlegende Idee}
+Die grundlegende Idee ist es, ein eigenes Modell zu trainieren, ganz nach dem Vorbild von
+(\cite{siri2017hey}), welches Triggerwörter erkennt. Die folgende Abbildung \ref{fig:basic_idea}
+zeigt die grundlegende Idee als grobe Skizze.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.85\linewidth]{img/basic_idea.pdf}
+	\caption{Grundlegende Idee}
+	\label{fig:basic_idea}
+\end{figure}
+
+
+
 \begin{itemize}
 	\item Erklärung, wie eine integrierte Spracherkennung den Benutzererfahrungen in mobilen Apps verbessern könnte.
 	\item Beispiel: Automatisierte To-Do-Liste-Einträge durch Sprachbefehle.
@@ -1112,7 +1191,6 @@ integrierte Sprachsteuerungsfunktion anbieten.
 
 \clearpage
 % Glossar
-\addcontentsline{toc}{section}{Glossar}
 \printglossary[type=\acronymtype,title=Akronyme]
 \printglossary[title=Glossar]
 % Verzeichnisse
