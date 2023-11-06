@@ -1143,6 +1143,14 @@ recently become widely adopted in Music Information Retrieval (MIR) research
 
 \subsection{Forschungsmethoden (falls anwendbar)}
 \begin{itemize}
+	\item Wichtigkeit von PyTorch 
+	\item Probleme beim erstellen des Modells
+	\item Versuche mit wav2vec2
+	\item Versuche mit LiteFEW
+	\item Versuche mit ConvLSTM
+	\item Realisierung der Integration
+\end{itemize}
+\begin{itemize}
 	\item Erwägung von Benutzertests, um zu prüfen, wie intuitiv und effizient die Spracherkennungsfunktion ist.
 	\item Interviews mit potenziellen Nutzern der App, um ihre Anforderungen und Erwartungen in Bezug auf Spracherkennung zu verstehen.
 \end{itemize}
@@ -1167,16 +1175,16 @@ recently become widely adopted in Music Information Retrieval (MIR) research
 
 \newpage \section{Realisierung}
 Die Realisierung dieser Arbeit besteht aus zwei Teilen. Zum einen wurde ein eigenes Modell
-trainiert, welches Triggerwörter erkennt. Zum anderen wurde das Modell in eine App integriert.
+trainiert, welches Triggerwörter erkennt. Zum anderen wurde das Modell in eine App integriert. 
+Diese zwei Bereiche wurden Bereits bei der Planung der Arbeit definiert. Für die Realisierung
+des Modells wurde PyTorch verwendet. Die Architektur des Modells wurde von (\cite{siri2017hey})
+inspiriert. In etlichen Experimenten wurde die Architektur angepasst und optimiert.
 
-\begin{itemize}
-	\item Wichtigkeit von PyTorch 
-	\item Probleme beim erstellen des Modells
-	\item Versuche mit wav2vec2
-	\item Versuche mit LiteFEW
-	\item Versuche mit ConvLSTM
-	\item Realisierung der Integration
-\end{itemize}
+\subsection{Verwendete Architektur des Modells}
+
+\subsection{Versuche mit PyTorch}
+
+
 
 
 Am besten dieses Paper verwenden (\cite{choi2018tutorial}). Hat Grundwissern über 
