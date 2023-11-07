@@ -4,31 +4,16 @@ import numpy as np
 import torch
 import torch.optim as optim
 
-from model import WakeupTriggerConvLSTM2s
-from dataset import AudioToSpectrogramTransform
 
-# Load a checkpoint
-def load_checkpoint(checkpoint_path, model, optimizer):
-    checkpoint = torch.load(checkpoint_path)
-    model.load_state_dict(checkpoint['model_state_dict'])
-    optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
-    epoch = checkpoint['epoch']
-    loss = checkpoint['loss']
-
-    return model, optimizer, epoch, loss
-
-
-
+# Device configuration
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
-model = WakeupTriggerConvLSTM2s(device=device).to(device)
-optimizer = optim.AdamW(model.parameters(), lr=5e-5)
+# Load scripted model and transform
+scripted_model_path = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM/checkpoints-best/model.ptl"
+scripted_transform_path = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM/checkpoints-best/transform.ptl"
 
-transform = AudioToSpectrogramTransform()
-
-# Initialize model
-checkpoint_path = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM/checkpoints-v2/checkpoint_epoch_42_loss_0.010789588726497367.pt" 
-model, _, _, _ = load_checkpoint(checkpoint_path, model, optimizer)
+model = torch.jit.load(scripted_model_path).to(device)
+transform = torch.jit.load(scripted_transform_path)
 
 model.eval()
 
@@ -41,25 +26,10 @@ def stream_audio(chunk_duration, samplerate=16000):
 
 def process_chunk(audio_chunk):
     """Process an audio chunk and return model output probabilities."""
-
-    # Ensure audio is mono
-    if len(audio_chunk.shape) > 1:
-        audio_chunk = np.mean(audio_chunk, axis=1)
-
-    # Ensure audio is 1D array
-    audio_chunk = audio_chunk.reshape(1, -1)
+    
     audio_chunk_tensor = torch.tensor(audio_chunk).float()
-
-    # Print audio chunk tensor info
-    # print(audio_chunk_tensor.dtype)
-    print(audio_chunk_tensor.min(), audio_chunk_tensor.max())
-
-    # Transform audio
     input_values = transform(audio_chunk_tensor)
-    input_values = input_values.unsqueeze(1)  # [batch_size, channels, height, width]
-    input_values = input_values.to(device)
-
-    # Retrieve logits and apply sigmoid activation to get probabilities
+    
     with torch.no_grad():
         logits = model(input_values)
         probabilities = torch.sigmoid(logits).numpy()
@@ -91,8 +61,7 @@ if __name__ == "__main__":
         overlap_buffer[-len(audio_chunk):] = audio_chunk
 
         result = process_chunk(overlap_buffer)
-                
-        # Check if probability crosses a threshold
+            
         print_level(result[0].item())
-        # print(result[0].item())
+        
         
