@@ -41,6 +41,7 @@ def stream_audio(chunk_duration, samplerate=16000):
 
 def process_chunk(audio_chunk):
     """Process an audio chunk and return model output probabilities."""
+
     # Ensure audio is mono
     if len(audio_chunk.shape) > 1:
         audio_chunk = np.mean(audio_chunk, axis=1)
@@ -48,6 +49,10 @@ def process_chunk(audio_chunk):
     # Ensure audio is 1D array
     audio_chunk = audio_chunk.reshape(1, -1)
     audio_chunk_tensor = torch.tensor(audio_chunk).float()
+
+    # Print audio chunk tensor info
+    # print(audio_chunk_tensor.dtype)
+    print(audio_chunk_tensor.min(), audio_chunk_tensor.max())
 
     # Transform audio
     input_values = transform(audio_chunk_tensor)
@@ -69,23 +74,25 @@ def print_level(probability):
     
     # Print the progress bar, overwrite the same line using \r
     print(f"\r[{blocks}{spaces}] {probability:.2f}", end='', flush=True)
+    
 
 if __name__ == "__main__":
+
+    SAMPLE_RATE = 16000
     CHUNK_DURATION = 2  # seconds
-    OVERLAP_DURATION = 0.25  # seconds
-    overlap_buffer = np.array([])
+    OVERLAP_DURATION = 0.1  # seconds
+    overlap_buffer = np.zeros(int(SAMPLE_RATE * CHUNK_DURATION))  # Initialize with zeros 2s width
 
-    toggle = False
-
-    for audio_chunk in stream_audio(CHUNK_DURATION):
+    for audio_chunk in stream_audio(OVERLAP_DURATION, samplerate=SAMPLE_RATE):
         audio_chunk = np.squeeze(audio_chunk)  # Convert to 1D array
-        audio_chunk_with_overlap = np.concatenate([overlap_buffer, audio_chunk])
-        result = process_chunk(audio_chunk_with_overlap)
-            
+    
+        # Roll the overlap buffer to remove old audio and append new audio
+        overlap_buffer = np.roll(overlap_buffer, shift=-len(audio_chunk))
+        overlap_buffer[-len(audio_chunk):] = audio_chunk
+
+        result = process_chunk(overlap_buffer)
+                
         # Check if probability crosses a threshold
         print_level(result[0].item())
+        # print(result[0].item())
         
-
-        # Store overlap for next iteration
-        overlap_buffer = audio_chunk[-int(OVERLAP_DURATION * 16000):]
-
