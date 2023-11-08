@@ -21,7 +21,10 @@ class AudioDataManager: ObservableObject, AudioInputManagerDelegate {
     private lazy var module: TorchModule = {
         if let modelFilePath = Bundle.main.path(forResource: "model", ofType: "ptl"),
            let transformFilePath = Bundle.main.path(forResource: "transform", ofType: "ptl"),
-           let module = TorchModule(modelPath: modelFilePath, andTransformPath: transformFilePath) {
+           let wav2vecFilePat = Bundle.main.path(forResource: "wav2vec2", ofType: "ptl"),
+           let module = TorchModule(modelPath: modelFilePath,
+                                    andTransformPath: transformFilePath,
+                                    andWav2VecFromPath: wav2vecFilePat) {
             return module
         } else {
             fatalError("Can't find the model or transform file!")
@@ -61,19 +64,24 @@ class AudioDataManager: ObservableObject, AudioInputManagerDelegate {
             self.lastCapturedData.withUnsafeMutableBufferPointer { pointer in
                 if let baseAddress = pointer.baseAddress {
                     if let results = self.module.predict(withBuffer: baseAddress) as? [Float], let resultValue = results.first {
-                        self.printLevel(probability: resultValue)
+                        var text = ""
+                        if(resultValue > 0.5){
+                            //text = self.module.recognize(baseAddress, bufferLength: 32000)
+                        }
+                        
+                        self.printLevel(probability: resultValue, text: text)
                     }
                 }
             }
         }
     }
     
-    func printLevel(probability: Float) {
+    func printLevel(probability: Float, text: String) {
         let numBlocks = Int(probability * 10)
         let blocks = String(repeating: "█", count: numBlocks)
         let spaces = String(repeating: " ", count: 10 - numBlocks)
         
-        print("\r[\(blocks)\(spaces)] \(probability)", terminator: "")
+        print("\r[\(blocks)\(spaces)] \(probability) -> \(text)", terminator: "")
     }
 }
 
@@ -132,12 +140,10 @@ public class AudioInputManager {
         let audioSession = AVAudioSession.sharedInstance()
         do {
             try audioSession.setCategory(.playAndRecord)
-            try audioSession.setPreferredSampleRate(Double(sampleRate))
+            // try audioSession.setPreferredSampleRate(Double(sampleRate))
             // try audioSession.setPreferredIOBufferDuration(bufferTimeInterval)
             try audioSession.setMode(.default)
-            if audioSession.isInputGainSettable {
-                    try audioSession.setInputGain(1.0) // Set maximum gain
-                }
+            if audioSession.isInputGainSettable {try audioSession.setInputGain(1.0)}
             /*if let desc = audioSession.availableInputs?.first(where: { (desc) -> Bool in
                 return desc.portType == AVAudioSession.Port.builtInMic || desc.portType == AVAudioSession.Port.bluetoothA2DP
             }){

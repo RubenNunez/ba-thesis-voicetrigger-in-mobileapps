@@ -7,12 +7,20 @@
     
 @protected
     torch::jit::mobile::Module _transform;
+    
+@protected
+    torch::jit::mobile::Module _wav2vec;
 }
 
-- (nullable instancetype)initWithModelPath:(NSString*)modelPath andTransformPath:(NSString*)transformPath {
+- (nullable instancetype)initWithModelPath:(NSString*)modelPath andTransformPath:(NSString*)transformPath andWav2VecFromPath: (NSString*)wav2vecPath{
     self = [super init];
     if (self) {
         try {
+            auto qengines = at::globalContext().supportedQEngines();
+            if (std::find(qengines.begin(), qengines.end(), at::QEngine::QNNPACK) != qengines.end()) {
+                at::globalContext().setQEngine(at::QEngine::QNNPACK);
+            }
+            _wav2vec = torch::jit::_load_for_mobile(wav2vecPath.UTF8String);
             _model = torch::jit::_load_for_mobile(modelPath.UTF8String);
             _transform = torch::jit::_load_for_mobile(transformPath.UTF8String);
         } catch (const std::exception& exception) {
@@ -51,6 +59,34 @@
         return [results copy];
         
     } catch (const std::exception& exception) {
+        NSLog(@"%s", exception.what());
+    }
+    return nil;
+}
+
+- (NSString*)recognize:(void*)wavBuffer bufferLength:(int)bufferLength{
+    try {
+        at::Tensor tensorInputs = torch::from_blob((void*)wavBuffer, {1, bufferLength}, at::kFloat);
+        
+        float* floatInput = tensorInputs.data_ptr<float>();
+        if (!floatInput) {
+            return nil;
+        }
+        NSMutableArray* inputs = [[NSMutableArray alloc] init];
+        for (int i = 0; i < bufferLength; i++) {
+            [inputs addObject:@(floatInput[i])];
+        }
+        
+        c10::InferenceMode guard;
+        
+        //CFTimeInterval startTime = CACurrentMediaTime();
+        auto result = _wav2vec.forward({ tensorInputs }).toStringRef();
+        //CFTimeInterval elapsedTime = CACurrentMediaTime() - startTime;
+        //NSLog(@"inference time:%f", elapsedTime);
+            
+        return [NSString stringWithCString:result.c_str() encoding:[NSString defaultCStringEncoding]];
+    }
+    catch (const std::exception& exception) {
         NSLog(@"%s", exception.what());
     }
     return nil;

@@ -5,7 +5,7 @@ from model import WakeupTriggerConvLSTM2s
 from transform import AudioToSpectrogramTransformJit
 
 base_path = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM/checkpoints-best/"
-model_path = base_path + "checkpoint_epoch_42_loss_0.010789588726497367.pt"
+model_path = base_path + "checkpoint_epoch_3_loss_0.26515502861744705.pt"
 
 # Load model
 model = WakeupTriggerConvLSTM2s(device="cpu")
