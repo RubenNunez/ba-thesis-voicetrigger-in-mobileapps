@@ -13,15 +13,12 @@ class AudioListener: ObservableObject {
     @Published var latestSamples: [Float] = []
     @Published var isStreaming: Bool = false
     
-    
     private var audioEngine = AVAudioEngine()
     private var sampleBuffer: [Float] = []
-    private let sampleRate: Double = 16000
+    private let sampleRate: Int = 16000
     private let bufferDuration: Double = 2.0
     private let bufferTimeInterval: Double = 0.1
-    private var requiredSamplesCount: Int {
-        return Int(sampleRate * bufferDuration)
-    }
+    private let requiredSamplesCount: Int = 32000
     
     private lazy var module: TorchModule = {
         if let modelFilePath = Bundle.main.path(forResource: "model", ofType: "ptl"),
@@ -35,40 +32,70 @@ class AudioListener: ObservableObject {
     
     
     func startStreaming() {
-        sampleBuffer = Array(repeating: 0.0, count: requiredSamplesCount)
-        // Initialize with zeros (2s width)
+        self.sampleBuffer = Array(repeating: 0.0, count: Int(requiredSamplesCount))
+        
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(.record)
+            try audioSession.setPreferredSampleRate(Double(sampleRate))
+            // try audioSession.setPreferredIOBufferDuration(bufferTimeInterval)
+            try audioSession.setMode(.default)
+            /*if let desc = audioSession.availableInputs?.first(where: { (desc) -> Bool in
+                return desc.portType == AVAudioSession.Port.builtInMic || desc.portType == AVAudioSession.Port.bluetoothA2DP
+            }){
+                    try audioSession.setPreferredInput(desc)
+                } catch let error{
+                    print(error)
+                }
+            }*/
+            try audioSession.setActive(true)
+        } catch {                   
+            print("Error configuring the audio session: \(error.localizedDescription)")
+            return // Early return if audio session setup fails
+        }
+        
+        /*let settings = [
+            AVFormatIDKey: Int(kAudioFormatLinearPCM),
+            AVSampleRateKey: sampleRate,
+            AVNumberOfChannelsKey: 1,
+            AVLinearPCMBitDepthKey: 32,
+            AVLinearPCMIsFloatKey: true,
+            AVLinearPCMIsBigEndianKey: false,
+            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+        ] as [String : Any]*/
+        
         
         let inputNode = audioEngine.inputNode
-        let recordingFormat = inputNode.outputFormat(forBus: 0)
+        let inputFormat = inputNode.outputFormat(forBus: 0)
+        print("Current input node sample rate: \(inputFormat.sampleRate)")
         
-        // Setup callback for processing audio samples
-        inputNode.installTap(onBus: 0, bufferSize: AVAudioFrameCount(sampleRate * bufferTimeInterval), format: recordingFormat) { [weak self] (buffer, time) in
+        //let recordingFormat = AVAudioFormat(settings: settings)
+        let recordingFormat = AVAudioFormat(commonFormat: .pcmFormatFloat32, sampleRate: 16000, channels: 1, interleaved: true)
+        // assert(inputFormat.sampleRate == 16000)
+        assert(recordingFormat?.sampleRate == 16000)
+        
+        inputNode.installTap(onBus: 0, bufferSize: AVAudioFrameCount(recordingFormat!.sampleRate * bufferTimeInterval), format: recordingFormat) { [weak self] (buffer, when) in
             guard let self = self else { return }
             
             let dataPointer = buffer.floatChannelData![0]
             let arr = Array(UnsafeBufferPointer(start: dataPointer, count: Int(buffer.frameLength)))
-            
-            let minVal = arr.min()
-            let maxVal = arr.max()
-            print("Min Value: \(minVal ?? 0) Max Value: \(maxVal ?? 0)")
 
-            
             // Roll the sample buffer to remove old audio and append new audio
             self.sampleBuffer = Array(self.sampleBuffer.dropFirst(arr.count))
             self.sampleBuffer.append(contentsOf: arr)
             
+            assert(self.sampleBuffer.count == 32000)
+
             // Pass the buffer for inference
             self.sampleBuffer.withUnsafeMutableBufferPointer { pointer in
                 if let baseAddress = pointer.baseAddress {
                     if let results = self.module.predict(withBuffer: baseAddress) as? [Float], let resultValue = results.first {
                         self.printLevel(probability: resultValue)
                     }
-                    
                 }
             }
             
             DispatchQueue.main.async {
-                // Updatethe latest samples for waveform
                 self.latestSamples = Array(self.sampleBuffer)
             }
         }
@@ -81,9 +108,7 @@ class AudioListener: ObservableObject {
         } catch {
             print("Error starting the audio engine: \(error.localizedDescription)")
         }
-        
     }
-    
     
     func stopStreaming() {
         audioEngine.stop()
@@ -92,82 +117,12 @@ class AudioListener: ObservableObject {
     }
     
     func printLevel(probability: Float) {
-        // Determine the number of blocks to display based on probability
-        let numBlocks = Int(probability * 10)  // Using 10 blocks for full scale
+        let numBlocks = Int(probability * 10)
         let blocks = String(repeating: "█", count: numBlocks)
         let spaces = String(repeating: " ", count: 10 - numBlocks)
         
-        // Print the progress bar
         print("\r[\(blocks)\(spaces)] \(probability)", terminator: "")
         fflush(stdout)  // Force the print to display immediately
     }
-    var recordingFormat: AVAudioFormat!
-
-    func recordTwoSecondClip(completion: @escaping ([Float]) -> Void) {
-        var recordedSamples: [Float] = []
-        let requiredSamplesCount = Int(sampleRate * 2.0) // 2 seconds of samples
-        
-        let inputNode = audioEngine.inputNode
-        self.recordingFormat = inputNode.outputFormat(forBus: 0)
-        
-        let tap: Void = inputNode.installTap(onBus: 0, bufferSize: AVAudioFrameCount(sampleRate * bufferTimeInterval), format: recordingFormat) { (buffer, time) in
-            
-            let dataPointer = buffer.floatChannelData![0]
-            let arr = Array(UnsafeBufferPointer(start: dataPointer, count: Int(buffer.frameLength)))
-            
-            recordedSamples.append(contentsOf: arr)
-            
-            if recordedSamples.count >= requiredSamplesCount {
-                // When we have captured 2 seconds of audio, remove the tap and stop the engine
-                inputNode.removeTap(onBus: 0)
-                self.audioEngine.stop()
-                
-                // Trim the array to have exactly 2 seconds of samples
-                recordedSamples = Array(recordedSamples.prefix(requiredSamplesCount))
-                
-                // Call completion with the recorded samples
-                completion(recordedSamples)
-            }
-        }
-        
-        audioEngine.prepare()
-        
-        do {
-            try audioEngine.start()
-        } catch {
-            print("Error starting the audio engine: \(error.localizedDescription)")
-        }
-    }
-    
-    
-    
-    func saveAudioToFile(samples: [Float]) {
-        let buffer = AVAudioPCMBuffer(pcmFormat: recordingFormat, frameCapacity: AVAudioFrameCount(samples.count))!
-        buffer.frameLength = AVAudioFrameCount(samples.count)
-        let channelMemory = buffer.floatChannelData![0]
-        for i in 0..<samples.count {
-            channelMemory[i] = samples[i]
-        }
-        
-        let docsDir = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first!
-        let audioURL = docsDir.appendingPathComponent("audioClip.caf")
-        
-        guard let audioFile = try? AVAudioFile(forWriting: audioURL, settings: buffer.format.settings) else {
-            print("Error: Could not create AVAudioFile")
-            return
-        }
-        
-        do {
-            try audioFile.write(from: buffer)
-            print("Saved audio to:", audioURL)
-        } catch {
-            print("Error saving audio:", error)
-        }
-    }
-    
-    
-    
-    
-    
     
 }

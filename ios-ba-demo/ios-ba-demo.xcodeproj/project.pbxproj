@@ -11,10 +11,9 @@
 		45498A232AF96AAB007D3DB2 /* WaveformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45498A222AF96AAB007D3DB2 /* WaveformView.swift */; };
 		45498A292AF981B2007D3DB2 /* wav2vec2.ptl in Resources */ = {isa = PBXBuildFile; fileRef = 45498A262AF981B2007D3DB2 /* wav2vec2.ptl */; };
 		45498A312AF98721007D3DB2 /* TorchModule.mm in Sources */ = {isa = PBXBuildFile; fileRef = 45498A2D2AF9846F007D3DB2 /* TorchModule.mm */; };
-		45498A3D2AF992D0007D3DB2 /* transform_jit.ptl in Resources */ = {isa = PBXBuildFile; fileRef = 45498A3B2AF992D0007D3DB2 /* transform_jit.ptl */; };
-		45498A3E2AF992D0007D3DB2 /* optimized_model.ptl in Resources */ = {isa = PBXBuildFile; fileRef = 45498A3C2AF992D0007D3DB2 /* optimized_model.ptl */; };
 		45498A452AFA62C0007D3DB2 /* model.ptl in Resources */ = {isa = PBXBuildFile; fileRef = 45498A432AFA62C0007D3DB2 /* model.ptl */; };
 		45498A462AFA62C0007D3DB2 /* transform.ptl in Resources */ = {isa = PBXBuildFile; fileRef = 45498A442AFA62C0007D3DB2 /* transform.ptl */; };
+		45498A4A2AFB5DF0007D3DB2 /* AudioInputManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45498A492AFB5DF0007D3DB2 /* AudioInputManager.swift */; };
 		4570DAC52AF95089002BD062 /* ios_ba_demoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4570DAC42AF95089002BD062 /* ios_ba_demoApp.swift */; };
 		4570DAC72AF95089002BD062 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4570DAC62AF95089002BD062 /* ContentView.swift */; };
 		4570DAC92AF9508A002BD062 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4570DAC82AF9508A002BD062 /* Assets.xcassets */; };
@@ -30,10 +29,9 @@
 		45498A2D2AF9846F007D3DB2 /* TorchModule.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TorchModule.mm; sourceTree = "<group>"; };
 		45498A2F2AF98719007D3DB2 /* TorchModule.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = TorchModule.h; sourceTree = "<group>"; };
 		45498A302AF98719007D3DB2 /* ios-ba-demo-Bridging-Header.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = "ios-ba-demo-Bridging-Header.h"; sourceTree = "<group>"; };
-		45498A3B2AF992D0007D3DB2 /* transform_jit.ptl */ = {isa = PBXFileReference; lastKnownFileType = file; path = transform_jit.ptl; sourceTree = "<group>"; };
-		45498A3C2AF992D0007D3DB2 /* optimized_model.ptl */ = {isa = PBXFileReference; lastKnownFileType = file; path = optimized_model.ptl; sourceTree = "<group>"; };
 		45498A432AFA62C0007D3DB2 /* model.ptl */ = {isa = PBXFileReference; lastKnownFileType = file; path = model.ptl; sourceTree = "<group>"; };
 		45498A442AFA62C0007D3DB2 /* transform.ptl */ = {isa = PBXFileReference; lastKnownFileType = file; path = transform.ptl; sourceTree = "<group>"; };
+		45498A492AFB5DF0007D3DB2 /* AudioInputManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioInputManager.swift; sourceTree = "<group>"; };
 		4570DAC12AF95089002BD062 /* ios-ba-demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-ba-demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4570DAC42AF95089002BD062 /* ios_ba_demoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_ba_demoApp.swift; sourceTree = "<group>"; };
 		4570DAC62AF95089002BD062 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -93,6 +91,7 @@
 				4570DAD72AF96623002BD062 /* Models */,
 				4570DAC42AF95089002BD062 /* ios_ba_demoApp.swift */,
 				45498A202AF96933007D3DB2 /* AudioListener.swift */,
+				45498A492AFB5DF0007D3DB2 /* AudioInputManager.swift */,
 				45498A222AF96AAB007D3DB2 /* WaveformView.swift */,
 				4570DAC62AF95089002BD062 /* ContentView.swift */,
 				4570DAC82AF9508A002BD062 /* Assets.xcassets */,
@@ -115,8 +114,6 @@
 			children = (
 				45498A432AFA62C0007D3DB2 /* model.ptl */,
 				45498A442AFA62C0007D3DB2 /* transform.ptl */,
-				45498A3C2AF992D0007D3DB2 /* optimized_model.ptl */,
-				45498A3B2AF992D0007D3DB2 /* transform_jit.ptl */,
 				45498A262AF981B2007D3DB2 /* wav2vec2.ptl */,
 			);
 			path = Models;
@@ -200,10 +197,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				45498A292AF981B2007D3DB2 /* wav2vec2.ptl in Resources */,
-				45498A3E2AF992D0007D3DB2 /* optimized_model.ptl in Resources */,
 				45498A462AFA62C0007D3DB2 /* transform.ptl in Resources */,
 				45498A452AFA62C0007D3DB2 /* model.ptl in Resources */,
-				45498A3D2AF992D0007D3DB2 /* transform_jit.ptl in Resources */,
 				4570DACD2AF9508A002BD062 /* Preview Assets.xcassets in Resources */,
 				4570DAC92AF9508A002BD062 /* Assets.xcassets in Resources */,
 			);
@@ -246,6 +241,7 @@
 				4570DAC52AF95089002BD062 /* ios_ba_demoApp.swift in Sources */,
 				45498A312AF98721007D3DB2 /* TorchModule.mm in Sources */,
 				45498A232AF96AAB007D3DB2 /* WaveformView.swift in Sources */,
+				45498A4A2AFB5DF0007D3DB2 /* AudioInputManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -26,7 +26,8 @@ def stream_audio(chunk_duration, samplerate=16000):
 
 def process_chunk(audio_chunk):
     """Process an audio chunk and return model output probabilities."""
-    
+    # check count in audio_chunk
+
     audio_chunk_tensor = torch.tensor(audio_chunk).float()
     input_values = transform(audio_chunk_tensor)
     
@@ -43,7 +44,7 @@ def print_level(probability):
     spaces = ' ' * (10 - num_blocks)
     
     # Print the progress bar, overwrite the same line using \r
-    print(f"\r[{blocks}{spaces}] {probability:.2f}", end='', flush=True)
+    print(f"\r[{blocks}{spaces}] {probability:.10f}",) #end='' , flush=True)
     
 
 if __name__ == "__main__":

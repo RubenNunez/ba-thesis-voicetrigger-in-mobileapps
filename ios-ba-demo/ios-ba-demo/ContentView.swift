@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var audioListener = AudioListener()
+    //@ObservedObject var audioListener = AudioListener()
+    @ObservedObject var audioDataManager = AudioDataManager() // V2
+    
     var body: some View {
         VStack {
-            WaveformView(samples: audioListener.latestSamples)
+            WaveformView(samples: self.audioDataManager.lastCapturedData)
                 
-            if audioListener.isStreaming {
+            if audioDataManager.isStreaming {
                 Button(action: {
-                    self.audioListener.stopStreaming()
+                    self.audioDataManager.stopAudioCapture()
                 }) {
                     Image(systemName: "stop.circle.fill")
                         .resizable()
@@ -25,7 +27,7 @@ struct ContentView: View {
                 }
             } else {
                 Button(action: {
-                    self.audioListener.startStreaming()
+                    self.audioDataManager.startAudioCapture()
                 }) {
                     Image(systemName: "mic.circle.fill")
                         .resizable()
@@ -34,15 +36,6 @@ struct ContentView: View {
                         .padding()
                 }
             }
-            
-            /*Button(action: {
-                self.audioListener.recordTwoSecondClip { clip in
-                    self.audioListener.saveAudioToFile(samples: clip)
-                }
-            }){
-                Text("Record")
-            }*/
-
         }
         .padding()
     }
