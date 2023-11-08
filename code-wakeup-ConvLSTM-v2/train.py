@@ -42,12 +42,12 @@ def get_metrics_for_logits(logits):
 root_dir = Path("/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM")
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
-model = WakeupTriggerConvLSTM2s(device=device).to(device)
+model = WakeupTriggerConvLSTM2s(device).to(device)
 optimizer = optim.AdamW(model.parameters(), lr=5e-3, weight_decay=0.0001) 
 scheduler = StepLR(optimizer, step_size=10, gamma=0.5)
 print(f"the model has {sum(p.numel() for p in model.parameters() if p.requires_grad)} trainable parameters")
 
-num_negative = 26000     # sum of all negative samples
+num_negative = 20000     # sum of all negative samples
 num_positive = 10000    # sum of all positive samples
 pos_weight = torch.tensor([num_negative / num_positive]).to(device)
 
@@ -57,13 +57,13 @@ criterion = nn.BCEWithLogitsLoss(pos_weight=pos_weight)
 start_epoch = 0
 
 # Load the checkpoint if one exists
-# checkpoint_path = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM/checkpoints-v2/checkpoint_epoch_66_loss_0.6524184110263983.pt"
-# checkpoint = torch.load(checkpoint_path)
+checkpoint_path = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM/checkpoints-best/checkpoint_epoch_35_loss_0.08726639538489951.pt"
+checkpoint = torch.load(checkpoint_path)
 # 
 # # Update model and optimizer with the saved states
-# model.load_state_dict(checkpoint['model_state_dict'])
-# optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
-# start_epoch = checkpoint['epoch']
+model.load_state_dict(checkpoint['model_state_dict'])
+optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+start_epoch = checkpoint['epoch']
 
 # Data
 audio_files = []
@@ -79,9 +79,9 @@ for folder in root_dir.iterdir():
                 audio_files.append(str(audio_file))
                 labels.append(label)
                 
-                if label == 0: # add silence file for negative samples
-                    audio_files.append(silence_file_path)
-                    labels.append(label)
+                # if label == 0: # add silence file for negative samples
+                #     audio_files.append(silence_file_path)
+                #     labels.append(label)
 
 train_loader = get_train_loader(audio_files, labels)
 

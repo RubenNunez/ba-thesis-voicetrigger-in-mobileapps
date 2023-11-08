@@ -35,9 +35,28 @@ struct ContentView: View {
                         .foregroundColor(.green)
                         .padding()
                 }
+                
             }
         }
         .padding()
+        .sheet(item: $audioDataManager.fileURL) { identifiableURL in
+            DocumentPickerView(fileURL: identifiableURL.url)
+               }
+    }
+}
+
+
+
+struct DocumentPickerView: UIViewControllerRepresentable {
+    var fileURL: URL
+
+    func makeUIViewController(context: Context) -> UIDocumentPickerViewController {
+        let picker = UIDocumentPickerViewController(forExporting: [fileURL])
+        return picker
+    }
+
+    func updateUIViewController(_ uiViewController: UIDocumentPickerViewController, context: Context) {
+        // You can update the picker if required here
     }
 }
 

@@ -11,10 +11,16 @@ import AVFoundation
 import SwiftUI
 import Combine
 
+struct IdentifiableURL: Identifiable {
+    let id: UUID = UUID() // This provides a unique identifier
+    let url: URL
+}
+
 class AudioDataManager: ObservableObject, AudioInputManagerDelegate {
     
-    @Published var lastCapturedData: [Float] = Array(repeating: 0.0, count: Int(32000))
+    @Published var lastCapturedData: [Float32] = Array(repeating: 0.0, count: Int(32000))
     @Published var isStreaming: Bool = false
+    @Published var fileURL: IdentifiableURL?
     
     private var audioInputManager: AudioInputManager?
     
@@ -44,6 +50,13 @@ class AudioDataManager: ObservableObject, AudioInputManagerDelegate {
     func stopAudioCapture() {
         audioInputManager?.stopTappingMicrophone()
         isStreaming = false
+        
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let outputFileURL = paths[0].appendingPathComponent("output.wav")
+        
+        DispatchQueue.main.async {
+            self.fileURL = IdentifiableURL(url: outputFileURL)
+        }
     }
     
     func audioInputManagerDidFailToAchievePermission(_ audioInputManager: AudioInputManager) {
@@ -81,7 +94,9 @@ class AudioDataManager: ObservableObject, AudioInputManagerDelegate {
         let blocks = String(repeating: "█", count: numBlocks)
         let spaces = String(repeating: " ", count: 10 - numBlocks)
         
-        print("\r[\(blocks)\(spaces)] \(probability) -> \(text)", terminator: "")
+        let formattedNumber = String(format: "%.3f", probability)
+        
+        print("\r[\(blocks)\(spaces)] \(formattedNumber) -> \(text)", terminator: "")
     }
 }
 
@@ -103,6 +118,7 @@ public class AudioInputManager {
     public weak var delegate: AudioInputManagerDelegate?
     
     private var audioEngine = AVAudioEngine()
+    private var outputFile: AVAudioFile?
     
     // MARK: - Methods
     
@@ -140,19 +156,19 @@ public class AudioInputManager {
         let audioSession = AVAudioSession.sharedInstance()
         do {
             try audioSession.setCategory(.playAndRecord)
-            // try audioSession.setPreferredSampleRate(Double(sampleRate))
+            try audioSession.setPreferredSampleRate(Double(sampleRate))
             // try audioSession.setPreferredIOBufferDuration(bufferTimeInterval)
             try audioSession.setMode(.default)
-            if audioSession.isInputGainSettable {try audioSession.setInputGain(1.0)}
+            // if audioSession.isInputGainSettable {try audioSession.setInputGain(1)}
             /*if let desc = audioSession.availableInputs?.first(where: { (desc) -> Bool in
-                return desc.portType == AVAudioSession.Port.builtInMic || desc.portType == AVAudioSession.Port.bluetoothA2DP
-            }){
-                do{
-                    try audioSession.setPreferredInput(desc)
-                } catch let error{
-                    print(error)
-                }
-            }*/
+             return desc.portType == AVAudioSession.Port.builtInMic || desc.portType == AVAudioSession.Port.bluetoothA2DP
+             }){
+             do{
+             try audioSession.setPreferredInput(desc)
+             } catch let error{
+             print(error)
+             }
+             }*/
             try audioSession.setActive(true)
         } catch {
             print("Error configuring the audio session: \(error.localizedDescription)")
@@ -167,27 +183,46 @@ public class AudioInputManager {
             commonFormat: .pcmFormatFloat32,
             sampleRate: Double(sampleRate),
             channels: 1,
-            interleaved: true
+            interleaved: false
         ), let formatConverter = AVAudioConverter(from:inputFormat, to: recordingFormat) else { return }
+        
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let fileURL = paths[0].appendingPathComponent("output.wav")
+        
+        
+        do {
+            self.outputFile = try AVAudioFile(forWriting: fileURL, settings: recordingFormat.settings)
+        } catch {
+            print(error.localizedDescription)
+            return
+        }
         
         // installs a tap on the audio engine and specifying the buffer size and the input format.
         inputNode.installTap(onBus: 0, bufferSize: AVAudioFrameCount(recordingFormat.sampleRate * bufferTimeInterval), format: inputFormat) {
             buffer, _ in
             
             self.conversionQueue.async { [self] in
+                
                 // An AVAudioConverter is used to convert the microphone input to the format required
                 guard let pcmBuffer = AVAudioPCMBuffer(
                     pcmFormat: recordingFormat,
                     frameCapacity: AVAudioFrameCount(recordingFormat.sampleRate * bufferTimeInterval)
                 ) else { return }
                 
-                var error: NSError?
                 let inputBlock: AVAudioConverterInputBlock = { _, outStatus in
                     outStatus.pointee = AVAudioConverterInputStatus.haveData
                     return buffer
                 }
                 
+                var error: NSError?
                 formatConverter.convert(to: pcmBuffer, error: &error, withInputFrom: inputBlock)
+                
+                // Write buffer to file
+                do {
+                    try self.outputFile?.write(from: pcmBuffer)
+                } catch {
+                    print(error.localizedDescription)
+                }
                 
                 if let error = error {
                     print(error.localizedDescription)
@@ -200,7 +235,6 @@ public class AudioInputManager {
                         to: Int(pcmBuffer.frameLength),
                         by: buffer.stride
                     ).map { channelDataValue[$0] }
-                    
                     
                     self.delegate?.audioInputManager(self, didCaptureChannelData: channelDataValueArray)
                 }

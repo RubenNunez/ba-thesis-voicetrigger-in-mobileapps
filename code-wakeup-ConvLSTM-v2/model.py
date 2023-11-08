@@ -15,7 +15,7 @@ class WakeupTriggerConvLSTM2s(nn.Module):
         super(WakeupTriggerConvLSTM2s, self).__init__()
 
         self.device = device
-        self.dropout = nn.Dropout(0.5)
+        self.dropout = nn.Dropout(0.75)
 
         # Convolutional layers
         self.conv1 = nn.Conv2d(1, 32, kernel_size=(4, 4), stride=4)
@@ -28,11 +28,10 @@ class WakeupTriggerConvLSTM2s(nn.Module):
         self.bn3 = nn.BatchNorm2d(128)
 
         # LSTM
-        # You need to adjust the input_size based on the actual output of the last conv layer
-        self.lstm = nn.LSTM(input_size=896, hidden_size=32, num_layers=1, batch_first=True, dropout=0.0)
+        self.lstm = nn.LSTM(input_size=896, hidden_size=8, num_layers=2, batch_first=True, dropout=0.0)
 
         # Fully connected layers
-        self.fc1 = nn.Linear(32, 32)
+        self.fc1 = nn.Linear(8, 32)
         self.fc2 = nn.Linear(32, 1)
 
     def forward(self, x):
@@ -48,8 +47,8 @@ class WakeupTriggerConvLSTM2s(nn.Module):
         x = x.reshape(B, H, -1)  # Flatten the features
 
         # LSTM layer
-        h0 = torch.zeros(1, B, 32).to(self.device)
-        c0 = torch.zeros(1, B, 32).to(self.device)
+        h0 = torch.zeros(2, B, 8).to(self.device)
+        c0 = torch.zeros(2, B, 8).to(self.device)
         x, _ = self.lstm(x, (h0, c0))
 
         

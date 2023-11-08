@@ -12,7 +12,7 @@ signal.signal(signal.SIGINT, signal.SIG_DFL)
 
 # https://colorcet.holoviz.org/
 # Default colormap
-colormap = pg.colormap.get("CET-R1")  # 'CET-R1', 'CET-D1', 'magma', 'inferno', 'plasma',
+colormap = pg.colormap.get("plasma")  # 'CET-R1', 'CET-D1', 'magma', 'inferno', 'plasma',
 default_lut = colormap.getLookupTable()
 
 colors = plt.get_cmap(cc.m_fire)(np.linspace(0, 1, 256))
