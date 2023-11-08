@@ -23,6 +23,7 @@
             _wav2vec = torch::jit::_load_for_mobile(wav2vecPath.UTF8String);
             _model = torch::jit::_load_for_mobile(modelPath.UTF8String);
             _transform = torch::jit::_load_for_mobile(transformPath.UTF8String);
+            
         } catch (const std::exception& exception) {
             NSLog(@"%s", exception.what());
             return nil;
@@ -32,7 +33,7 @@
 }
 - (NSArray<NSNumber*>*)predictWithBuffer:(void*)buffer {
     try {
-        at::Tensor tensor = torch::from_blob(buffer, {1, 32000}, at::kFloat);  // assuming 2 seconds * 16000 samples/sec
+        at::Tensor tensor = torch::from_blob((void*)buffer, {32000}, at::kFloat);  // assuming 2 seconds * 16000 samples/sec
         //NSLog(@"Input Tensor shape to transform: %s", tensorSizesToStr(tensor).c_str());
         
         c10::InferenceMode guard;
