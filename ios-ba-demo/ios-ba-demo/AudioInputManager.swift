@@ -189,7 +189,6 @@ public class AudioInputManager {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let fileURL = paths[0].appendingPathComponent("output.wav")
         
-        
         do {
             self.outputFile = try AVAudioFile(forWriting: fileURL, settings: recordingFormat.settings)
         } catch {
@@ -217,7 +216,6 @@ public class AudioInputManager {
                 var error: NSError?
                 formatConverter.convert(to: pcmBuffer, error: &error, withInputFrom: inputBlock)
                 
-                // Write buffer to file
                 do {
                     try self.outputFile?.write(from: pcmBuffer)
                 } catch {
@@ -253,5 +251,4 @@ public class AudioInputManager {
         audioEngine.stop()
         audioEngine.inputNode.removeTap(onBus: 0)
     }
-    
 }
