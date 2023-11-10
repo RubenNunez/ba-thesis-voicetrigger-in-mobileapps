@@ -141,7 +141,7 @@ Zudem sollen die gewonnenen Erkenntnise in eine mobile Plattform wie iOS oder An
 werden. Für den Rahmen dieser Arbeit genügt die Integration in eine der genannten Plattformen.
 Weiterhin soll auch das Thema Datenschutz und die ethischen Aspekte zu berücksichtigen werden. 
 
-\newpage \section{Grundlagen}
+\newpage \section{Grundlagen}\label{sec:grundlagen}
 In diesem Kapitel werden die Grundlagen für die Arbeit erläutert. Dabei wird auf die Themen
 Audioverarbeitung und Machine Learning eingegangen.
 
@@ -766,7 +766,8 @@ Entwicklung von Facebook AI's wav2vec2 aufzeigt (\cite{baevski2020wav2vec}).
 		\node[align=center, below] (amazonecho) at (4.55,-0.5) {Amazon Echo};
 		\node[align=center, below] (encoder) at (5.8,-1.175) {Encoder-decoder\\models for ASR};
 		\node[align=center, below] (deepspeech2) at (6.75,-0.5) {Deep Speech 2};
-		\node[align=center, below] (googletransducer) at (9,-1) {Google streaming\\on-device transducer};
+		\node[align=center, below] (googletransducer) at (9,-1) 
+		{Google streaming\\on-device transducer};
 
 		% Lines to the events
 		\draw (kaldi) -- (1.25,0.1);
@@ -813,7 +814,8 @@ hinzugefügt.
 	\centering
 	\begin{tikzpicture}[node distance=3.75cm, auto, thick, >=Latex]
 		% Defining style for the blocks
-		\tikzset{block/.style= {draw, rectangle, align=center, minimum width=2.5cm, minimum height=1.25cm, font=\scriptsize}}
+		\tikzset{block/.style= {draw, rectangle, align=center, minimum width=2.5cm, 
+		minimum height=1.25cm, font=\scriptsize}}
 		% Nodes
 		\node[block] (detector) {Trigger Word\\Detector};
 		\node[block, right of=detector] (recognition) {Recognition of\\the speech};
@@ -1119,11 +1121,10 @@ werden.
 ....
 
 \newpage \section{Methoden}
-Als Methode für das Vorgehen dieser Arbeit wurde eine hybride Methode gewählt. Die hybride Methode
-ist eine Kombination aus Agilem Vorgehen und dem Wasserfallmodell. Grundsätzlich hat die 
-Projektplanung schon einige Arbeitsschritte im Voraus geplant. Eines der im Vorfeld geplanten 
-Arbeitsschritte war die Erstellung eines eigenen Modells für die Triggerwort Erkennung. So
-Dennoch hat sich während der 
+Als Methode für das Vorgehen dieser Arbeit wurde eine hybride Methode gewählt, es ist eine 
+Kombination aus Agilem Vorgehen und dem Wasserfallmodell. Grundsätzlich hat die Projektplanung 
+schon einige Arbeitsschritte im Voraus geplant. Eines der im Vorfeld geplanten Arbeitsschritte war 
+die Erstellung eines eigenen Modells für die Triggerwort Erkennung. So Dennoch hat sich während der 
 Erarbeitung der Arbeit gezeigt, dass einige Tätigkeiten nicht im Voraus geplant werden können.
 Vor allem bei der Realisierung eines eigenen Modells für die Triggerwort Erkennung hat sich
 gezeigt, dass die Arbeitsschritte nicht im Voraus geplant werden können.
@@ -1170,16 +1171,38 @@ recently become widely adopted in Music Information Retrieval (MIR) research
 \end{itemize}
 
 \newpage \section{Realisierung}
-Die Realisierung dieser Arbeit besteht aus zwei Teilen. Zum einen wurde ein eigenes Modell
-trainiert, welches Triggerwörter erkennt. Zum anderen wurde das Modell in eine App integriert. 
+Die Realisierung dieser Arbeit besteht aus zwei Teilen. Zum einen wurde ein eigenes Model
+trainiert, welches Triggerwörter erkennt. Zum anderen wurde das Model in eine App integriert. 
 Diese zwei Bereiche wurden Bereits bei der Planung der Arbeit definiert. Für die Realisierung
-des Modells wurde PyTorch verwendet. Die Architektur des Modells wurde von (\cite{siri2017hey})
-inspiriert. In etlichen Experimenten wurde die Architektur angepasst und optimiert.
+des Modells wurde PyTorch verwendet. Dieses Framework hat sich als sehr hilfreich erwiesen. 
 
 \subsection{Verwendete Architektur des Modells}
+Die Architektur des Models wurde in ersten Linie von (\cite{siri2017hey}) inspiriert. Dennoch 
+wurde schlussendlich eine andere Architektur umgsetzt die sich aber ähnlich in Bezug auf Performance
+und Genauigkeit verhält. Der Grundgedanke war es die zeitliche Komponente der Sprache zu
+berücksichtigen. Dies wurde mit Convolutional Layers und einem Long Short-Term Memory (LSTM)
+Layer umgesetzt. Die Kombination dieser beiden Layer hat sich als sehr effektiv erwiesen. Das Paper
+(\cite{khamees2021classifying}) zeigt diesen Ansatz sehr gut auf. Es bezieht sich zwar nicht auf 
+die Triggerwort Erkennung, aber auf die Klassifizierung von Music Genres. Die finale Architektur 
+des Models ist in der Abbildung \ref{fig:model_architecture} dargestellt.
 
-\subsection{Versuche mit PyTorch}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1.0\linewidth]{img/model_architecture.pdf}
+	\caption{Architektur des Modells}
+	\label{fig:model_architecture}
+\end{figure}
 
+\noindent \newline
+Diese Art von Modelarchitektur setzt eine Transformation der Sprachdaten in ein Spektrogramm voraus.
+Die Transformation der Sprachdaten wurde im Kapiel \ref{sec:grundlagen} der Grundlagen bereits
+beschrieben.
+
+\subsection{PyTorch als Framework}
+Pytorch ist ein Open Source Machine Learning Framework, welches von Facebook entwickelt wurde. Es
+bietet eine grosse Flexibilität und ist sehr gut dokumentiert. Die Gründe für die Wahl von PyTorch
+waren, dass es zum einen eine sehr einfache und intuitive API bietet. Zum anderen bietet es die 
+Möglichkeit, die trainierten Models in eine mobile App zu integrieren.
 
 
 
