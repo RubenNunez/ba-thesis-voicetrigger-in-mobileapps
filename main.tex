@@ -78,7 +78,7 @@
 
 \title{
 {\LARGE Bachelorarbeit}\\[2em]
-{\textbf{Integration einer Sprachsteuerungsfunktion {\break} in Mobile Apps}}
+{\textbf{Integration von Sprachsteuerung {\break} in Mobile Apps}}
 }
 \author{Rubén Nuñez}
 \date{Herbstsemester 2023}
@@ -106,18 +106,17 @@ integrierte Sprachsteuerungsfunktion anbieten.
 
 \newpage \section{Problem, Fragestellung, Vision}
 \subsection{Problemstellung}
-Sprachsteuerungstechnologien haben ein grosses Potenzial und werden bisher vor allem als
+Die Sprachsteuerung birgt grosses Potenzial und wird bisher vor allem für
 Sprachsteuerungsassistenten genutzt. Während es etablierte Sprachassistenten wie Siri, Google
 oder Alexa gibt, fehlt es an Lösungen für eine integrierte Sprachsteuerung in Mobile Apps,
 insbesondere in Bezug auf das Erkennen von Triggerwörtern. Daher besteht ein grosses 
 Ausbaupotenzial für Sprachassistenten in Mobile Apps. 
 
 \noindent \newline
-Für die Problemstellung dieser Arbeit ist es wichtig, anfänglich die Spracherkennung zu 
-differenzieren. Die Spracherkennung kann in unterschiedliche Disziplinen unterteilt werden.
-Diese Arbeit befasst sich vorallem mit der \gls{twd}. Die nachfolgende Abbildung
-\ref{fig:asr_twd} zeigt die wichtigsten Teilgebiete der Spracherkennung und soll einen 
-Überblick über die Thematik geben.
+Für die Problemstellung dieser Arbeit ist es wichtig, die verschiedenen Disziplinen der
+Spracherkennung zu differenzieren. Diese Arbeit befasst sich vorallem mit der \gls{twd}. Die 
+nachfolgende Abbildung \ref{fig:asr_twd} zeigt die wichtigsten Teilgebiete der Spracherkennung und 
+soll einen Überblick über die Thematik vermitten. 
 
 \vspace{1em}
 \begin{figure}[h]
@@ -129,44 +128,42 @@ Diese Arbeit befasst sich vorallem mit der \gls{twd}. Die nachfolgende Abbildung
 \end{figure}
 
 \subsection{Fragestellung}
-Wie kann eine integrierte Sprachsteuerung für eine Mobile App entwickelt werden, die speziell
-das Erkennen von Triggerwörter oder Triggerwortsequenzen ermöglicht?
+Wie kann eine integrierte Sprachsteuerung für eine Mobile App entwickelt werden, welche
+das Erkennen von Triggerwörtern ermöglicht und wie kann diese Sprachsteuerung in eine
+Mobile App integriert werden?
 
 
 \subsection{Vision}
 Als Vision dieser Arbeit soll eine Grundlage geschaffen werden, um ein Triggerwort
 oder eine Sequenz von Triggerwörtern in der akustischen Sprache erkennen zu können.
-Dabei sollen Methoden und Werkzeuge aus dem Bereich des Machine Learnings verwendet werden.
-Zum anderen soll diese Erkenntnise in eine mobile Plattform wie iOS oder Android integriert
+Dabei sollen Methoden und Werkzeuge aus dem Bereich des Machine Learning verwendet werden.
+Zudem sollen die gewonnenen Erkenntnise in eine mobile Plattform wie iOS oder Android integriert
 werden. Für den Rahmen dieser Arbeit genügt die Integration in eine der genannten Plattformen.
-Weiterhin ist es ein Anliegen dieser Arbeit, dass das Thema Datenschutz und die ethischen Aspekte
-zu berücksichtigen sind.
-
+Weiterhin soll auch das Thema Datenschutz und die ethischen Aspekte zu berücksichtigen werden. 
 
 \newpage \section{Grundlagen}
-Um diese Arbeit fundiert anzugehen, ist ein Verständnis der Grundlagen in den Bereichen
-Audioverarbeitung und Machine Learning essenziell. Daher wird in diesem Kapitel ein Überblick
-über die wichtigsten Themen gegeben.
+In diesem Kapitel werden die Grundlagen für die Arbeit erläutert. Dabei wird auf die Themen
+Audioverarbeitung und Machine Learning eingegangen.
 
 \subsection{Audio}
-In der digitalen Welt repräsentiert Audio Schallwellen, die durch eine Reihe von numerischen Werten
-dargestellt werden. (\cite[p.9]{somberg2019audioapi}) beschreibt Audio als: \glqq Fundamentally,
+In der digitalen Welt werden Schallwellen, die durch eine Reihe von numerischen Werten
+repräsentiert. (\cite[p.9]{somberg2019audioapi}) beschreibt Audio als: \glqq Fundamentally,
 audio can be modeled as waves in an elastic medium. In our normal everyday experience, the elastic
 medium is air, and the waves are air pressure waves.\grqq \ Audiosignale werden durch die Funktion
 \(A(t)\) repräsentiert, wobei \(t\) die Zeit und \(A(t)\) die Amplitude zum
 Zeitpunkt \(t\) angibt. Die Amplitude ist die Stärke des Signals und die Zeit repräsentiert die
-Position des Signals in der Zeit. Diese Betrachtung ist vor allem in der Elektrotechnik
-von Bedeutung, da die Amplitude als Spannung angesehen werden kann. Grundsätzlich ist Audio ein
-kontinuierliches Signal. In der digitalen Welt können wir jedoch nur diskrete Werte darstellen.
-Daher wird das kontinuierliche Signal in diskrete Werte umgewandelt. Dieser Vorgang wird als
-\textit{Sampling} bezeichnet (\cite[Chapter~3.1]{tarr2018hackaudio}).
+Position des Signals. Diese Betrachtung ist vor allem in der Elektrotechnik
+von Bedeutung, da die Amplitude als Spannung intepretiert werden kann. Grundsätzlich Audio ist ein 
+kontinuierliches Signal, in der digitalen Welt können jedoch nur diskrete Werte dargestellt werden.
+Das kontinuierliche Signal muss somit in diskrete Werte umgewandelt werden. Dieser Vorgang wird als
+\textit{Sampling} bezeichnet (\cite[Chapter~3.1]{tarr2018hackaudio}). 
 
 
 \subsubsection{Sampling}
 Ein früher Ansatz zur digitalen Darstellung von analogen Signalen war die Pulse-Code-Modulation
-(PCM). Dieses Verfahren wurde bereits in den 1930er Jahren von Alec H. Reeves entwickelt,
-parallel zum Aufkommen der digitalen Telekommunikation (\cite[p.~57]{deloraine1965pcm}).
-Im Grundsatz wird es heute noch in modernen Computersystemen nach dem gleichen Verfahren angewendet.
+(PCM). Dieses Verfahren wurde bereits in den 1930er Jahren von Alec H. Reeves, parallel zum 
+Aufkommen der digitalen Telekommunikation, entwickelt (\cite[p.~57]{deloraine1965pcm}). Im Grundsatz 
+wird es heute noch in modernen Computersystemen nach dem gleichen Verfahren angewendet.
 
 \noindent \newline
 Es folgt eine Definition von Sampling. Ein kontinuierliches Signal \(A(t)\)
@@ -175,20 +172,18 @@ Sampling-Periode bezeichnet. Die Sampling-Rate \(F_s = \displaystyle\frac{1}{T_s
 der Samples pro Sekunde an. Angenommen wir haben ein Signal mit einer Sampling-Periode
 von \(T_s = 0.001\). Um nun die Sampling-Rate zu berechnen, müssen wir den Kehrwert der
 Sampling-Periode berechnen. \(F_s = \displaystyle\frac{1}{0.001} = 1000\). Somit erhalten wir eine
-Sampling-Rate von \(1000\) Samples pro Sekunde. Nun typische Sampling-Raten sind \(44100\) Hz
-oder \(48000\) Hz. Bei Sampling-Raten wird die Einheit \textit{Hertz} verwendet. Ein Hertz entspricht
-einer Frequenz von einem Sample pro Sekunde. Ein weiter wichtiger Begriff ist die
-\textit{Nyquist-Frequenz}. Die Nyquist-Frequenz \(F_n\) ist die Hälfte der Sampling-Rate.
-Also \(F_n = \displaystyle\frac{F_s}{2}\). Die Idee hinter der Nyquist-Frequenz ist, dass die
-Sampling-Rate mindestens doppelt so hoch sein muss wie die höchste Frequenz des Signals. Wenn diese
-Eigenschaft erfüllt ist, kann das Signal ohne Informationsverlust rekonstruiert werden
-(\cite[Chapter~3.1]{tarr2018hackaudio}). Mehr dazu folgt im Unterkapitel
-\textit{Fourier-Analyse}.
+Sampling-Rate von \(1000\) Samples pro Sekunde. Typische Sampling-Raten sind \(44100\) Hz
+oder \(48000\) Hz. Ein Hertz entspricht einer Frequenz von einem Sample pro Sekunde. 
+Ein weiter wichtiger Begriff ist die \textit{Nyquist-Frequenz}. Die Nyquist-Frequenz \(F_n\) ist 
+die Hälfte der Sampling-Rate \(F_n = \displaystyle\frac{F_s}{2}\) und muss mindestens doppelt so 
+hoch sein wie die höchste Frequenz des Signals. Ist diese Eigenschaft erfüllt, kann das 
+Signal ohne Informationsverlust rekonstruiert werden (\cite[Chapter~3.1]{tarr2018hackaudio}). 
+Mehr dazu folgt im Unterkapitel \textit{Fourier-Analyse}.
 
 \noindent \newline
-Weiter ist es wichtig zu verstehen, dass ein Sample ein diskreter Wert ist. Und dieser wird in
-digitalen Systemen durch eine bestimmte Anzahl von Bits dargestellt. Die Anzahl der Bits wird
-als \textit{Bit-Depth} bezeichnet. Die Bit-Depth bestimmt die Auflösung des Signals. Typische
+Weiter ist es wichtig zu verstehen, dass ein Sample ein diskreter Wert ist und in digitalen 
+Systemen durch eine bestimmte Anzahl von Bits dargestellt wird. Die Anzahl der Bits wird
+als \textit{Bit-Depth} bezeichnet und bestimmt die Auflösung des Signals. Typische
 Bit-Depth Werte sind \(16\) oder \(24\) Bit (\cite[p.10]{somberg2019audioapi}).
 
 \subsubsection{Frames, Channels, Buffers}
@@ -1334,7 +1329,7 @@ integrierte Sprachsteuerungsfunktion anbieten.
 \newpage
 
 \section*{Aufgabenstellung}
-Integration von Sprachsteuerungstechnologien in Mobile Apps, insbesondere zur Erkennung
+Integration von Sprachsteuerung in Mobile Apps, insbesondere zur Erkennung
 von Triggerwörtern.
 
 \section*{Projektteam}
