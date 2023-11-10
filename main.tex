@@ -11,6 +11,7 @@
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{tabularx}
+\usepackage{booktabs}
 \usepackage{listings}
 \usepackage{colortbl}
 \usepackage{color}
@@ -147,21 +148,28 @@ Zudem sollen die gewonnenen Erkenntnise in eine mobile Plattform wie iOS oder An
 werden. Für den Rahmen dieser Arbeit genügt die Integration in eine der genannten Plattformen.
 Weiterhin soll auch das Thema Datenschutz und die ethischen Aspekte zu berücksichtigen werden.
 
-\subsection{Rechtfertigung} 
-Siri sowie Google selbst stellen API's zur Verfügung, um Apps zu öffnen oder auch direkte Befehle
-auszuführen. Daher stellt sich die Frage, warum überhaupt eine eigene In App Sprachsteuerung? Wenn
-ein Sprachassistent wie Siri bereits API's zur Verfügung stellt, um beispielsweise eine App
-zu öffnen oder auch direkte Befehle auszuführen. Als Beispiel hat Spotify eine Integration mit Siri.
-Es können Befehle wie ``Hey Siri, play music on Spotify'' verwendet werden. Um nur einiges zu
-nennen, gibt es folgende Gründe, weshalb eine eigene In App Sprachsteuerung sinnvoll ist:
+\subsection{Rechtfertigung}
+Apple sowie Google selbst stellen mit Siri und Google Assistant bereits Sprachassistenten zur 
+Verfügung, um Apps zu öffnen oder auch direkte Befehle auszuführen. Daher stellt sich die Frage, 
+warum überhaupt eine eigene In App Sprachsteuerung? Wenn ein Sprachassistent wie Siri bereits 
+API's anbieten. Als Beispiel hat Spotify eine Integration mit Siri. Es können Befehle wie 
+``Hey Siri, play music on Spotify'' verwendet werden. Die Integration einer eigens entwickelten 
+Sprachsteuerung in Apps ist trotz verfügbarer Lösungen wie Siri und Google Assistant aus mehreren 
+Gründen vorteilhaft:
 
 \begin{itemize}[noitemsep]
-	\item \textbf{Individualisierbar}: Anpassbare Sprachsteuerung für die App.
-	\item \textbf{Unabhängig}: Keine Abhängigkeit von externen Sprachassistenten.
-	\item \textbf{Erweiterte Funktionen}: Bietet Funktionen, die über Siri hinausgehen.
-	\item \textbf{Datenschutz}: Läuft lokal für mehr Datensicherheit.
-	\item \textbf{Branding}: Verstärkt das Markenbild der App.
-	\end{itemize}
+    \item \textbf{Personalisierung:} Sie ermöglicht eine massgeschneiderte Nutzererfahrung, die 
+	exakt auf die App und ihre Nutzer zugeschnitten ist.
+    \item \textbf{Unabhängigkeit:} Apps bleiben unabhängig von den Schnittstellen und 
+	Einschränkungen externer Assistenten.
+    \item \textbf{Funktionalität:} Es können spezifische Funktionen implementiert werden, die über 
+	das hinausgehen, was standardisierte Assistenten bieten.
+    \item \textbf{Datenschutz:} Durch lokale Verarbeitung von Sprachdaten wird die Privatsphäre der 
+	Nutzer besser gewahrt.
+    \item \textbf{Markenidentität:} Eine einzigartige Sprachsteuerung verstärkt das Markenbild und 
+	bietet ein differenziertes Nutzererlebnis.
+\end{itemize}
+
 \noindent 
 
 \newpage \section{Grundlagen}\label{sec:grundlagen}
@@ -910,12 +918,13 @@ Antwortzeit und Kompatibilität verglichen. Die Beurteilung umfasst sowohl Syste
 (\textit{Open-Source}) als auch geschlossenem Sourcecode (\textit{Closed-Source}), mit einer 
 detaillierten Untersuchung von deren Fähigkeiten und Einschränkungen.
 
+\raggedcolumns
 \begin{multicols}{2}
 	\small 
 	\setlength\itemsep{0em} 
 	
 	\noindent Closed-Source:
-	\begin{itemize}
+	\begin{itemize}[itemsep=0px, parsep=0px]
 	\item Dragon Mobile SDK
 	\item Google Speech Recognition
 	\item SIRI
@@ -926,7 +935,7 @@ detaillierten Untersuchung von deren Fähigkeiten und Einschränkungen.
 	\columnbreak
 	
 	\noindent Open-Source:
-	\begin{itemize}
+	\begin{itemize}[itemsep=0px, parsep=0px]
 	\item CMU Sphinx
 	\item Kaldi
 	\item Julius
@@ -935,7 +944,7 @@ detaillierten Untersuchung von deren Fähigkeiten und Einschränkungen.
 	\item RWTH ASR
 	\item Simon
 	\end{itemize}
-	\end{multicols}
+\end{multicols}
 	
 \noindent \newline
 Zusammenfassend kann festgestellt werden, dass das Dragon Mobile SDK bei den Closed-Source-Systemen 
@@ -1164,7 +1173,7 @@ Das Vorgehen dieser Arbeit kann als eine hybride Methode beschrieben werden. Aus
 Aufgabenstellung ging schon hervor, dass ein eigenes Deep Learning Modell für die Triggerwort 
 Erkennung erarbeitet werden soll. Zum andren soll das Modell in eine mobile App integriert werden.
 Diese zwei Bereiche wurden Bereits bei der Planung der Arbeit definiert und haben daher die 
-Planung der Arbeit stark beeinflusst. 
+Planung der Arbeit stark beeinflusst.
 
 \subsection{Projektphasen}
 Im Projektmanagement wurden die Projektphasen definiert. Diese bestehen aus vier Phasen. Die erste
@@ -1177,7 +1186,7 @@ dritten Phase namens \textit{Prototype} wird das Modell in eine mobile App integ
 Die letzte Phase ist das \textit{Refinement}. In dieser Phase wird die Arbeit sowie die
 Dokumentation fertiggestellt. 
 
-\subfile{projectmanagement.tex}
+\subfile{projectmanagement.tex} % Projektmanagement separat
 
 \subsection{Forschungsmethoden (falls anwendbar)}
 \begin{itemize}

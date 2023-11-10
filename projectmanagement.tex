@@ -4,10 +4,10 @@
 \begin{document}
 
 \subsection{Projektmanagement}
-Das Projektmanagement spielt eine zentrale Rolle in der Vorbereitungsphase meiner Bachelorarbeit 
+Das Projektmanagement spielt eine zentrale Rolle in der Vorbereitungsphase der Bachelorarbeit 
 und bildet die Grundlage für den Erfolg des gesamten Vorhabens. Dabei geht es nicht nur um die 
 reine Planung, sondern auch um eine effiziente Steuerung und kontinuierliche Kontrolle aller 
-Arbeitspakete und derer Ergebnisse. Die besondere Herausforderung meiner Arbeit liegt darin, 
+Arbeitspakete und derer Ergebnisse. Die besondere Herausforderung der Arbeit liegt darin, 
 das umfangreiche Themengebiet, das für diese Bachelorarbeit relevant ist, innerhalb des engen 
 Zeitrahmens von 14 Wochen sinnvoll und fundiert zu bearbeiten. Das Themengebiet umfasst diverse 
 Bereiche der Informatik. Darunter fallen Audioverarbeitung, maschinelles Lernen, 
@@ -17,20 +17,47 @@ Zyklen unterteilt sind. Während es zu Beginn eine grobe Struktur und Zielsetzun
 diese Herangehensweise Flexibilität in der Durchführung. Dadurch können Veränderungen oder 
 unerwartete Ereignisse leichter integriert und die Bachelorarbeit fortlaufend optimiert werden.
 
+\newpage
 \subsubsection{Produkt Backlog}
 
-Der Product Backlog beinhaltet alle Anforderungen die für dir Erstellung des 
-Spracherkennungssystems. Die Erstellung des Models, die Entwicklung der 
-mobile App und die Dokumentation sind dabei die Hauptaufgaben.
+Der Product Backlog besteht primär aus den Arbeitspaketen, die in der Grobplanung definiert werden.
+Gewisse Arbeitspakete nehmen mehr Zeit in Anspruch als andere und erstrecken sich über mehrere
+Semesterwochen. Die Arbeitspakete werden in der Tabelle \ref{fig:backlog_table} aufgeführt.
 
 
-
-\begin{figure}[h]
+\begin{table}[ht]
     \centering
-    \includegraphics[width=0.4\linewidth]{img/placeholder.png}
-    \caption{Tabelle für das anfängliche Product Backlog}
+    \begin{tabularx}{\textwidth}{llX}
+    \toprule
+    \textbf{Phase} & \textbf{Semesterwoche} & \textbf{Beschreibung des Arbeitspakets} \\
+    \midrule
+    Stand der Forschung     & SW1/2  & Setup (git, tes, usw.) \\
+                            & SW2    & Siri research  \\
+                            & SW2/3  & Marktanlyse \\
+                            & SW3    & Audio Allg., Audio API \\
+                            & SW3/4  & Fourier Transform, Spektrogramm \\
+    \addlinespace
+    Erstellung des Modells  & SW4/5  & DNN \\
+                            & SW4/6  & Collect Data "Hey FOOBY" \\
+                            & SW5    & RNNs verstehen \\
+                            & SW5/6  & Privacy und Ethik,  \\
+                            & SW5/6  & Datasets "andere" evaluation \\
+                            & SW6/7  & Training \\
+                            & SW7/8  & Evaluation \\
+    \addlinespace
+    Prototype               & SW9       & PyTorch Mobile integration \\ 
+                            & SW10/11   & Mobile Demo App Entwicklung \\
+                            & SW12      & Video für Bachelorarbeit \\
+                            & SW11/12   & Feedback der App sammeln \\
+                            & SW12/14   & Dokumentation fertigstellen \\
+
+    \bottomrule
+    \end{tabularx}
+    \caption{Hierarchische Auflistung der Arbeitspakete}
     \label{fig:backlog_table}
-\end{figure}
+\end{table}
+
+
 
 \subsubsection{Risikomanagement}
 Als mögliche Risiken wurden im Projekt zum einen die Komplexität des Themas und zum anderen die
