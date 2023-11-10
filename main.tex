@@ -19,6 +19,8 @@
 \usepackage{pdflscape}
 \usepackage{tikz}
 \usepackage{multicol}
+\usepackage{enumitem}
+
 
 
 \geometry{a4paper, total={170mm,257mm}, left=20mm, top=20mm}
@@ -99,6 +101,10 @@ des Kontext einer App. Grundsätzlich ist es unüblich, dass mobile Apps eine
 integrierte Sprachsteuerungsfunktion anbieten.
 
 
+
+El sol es grande
+
+
 \newpage
 \tableofcontents
 
@@ -121,7 +127,7 @@ soll einen Überblick über die Thematik vermitten.
 \vspace{1em}
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.8\linewidth]{img/asr_twd.pdf}
+	\includegraphics[width=1.0\linewidth]{img/asr_twd.pdf}
 	\caption{Teilgebiete der Spracherkennung}
 	\label{fig:asr_twd}
 
@@ -139,7 +145,24 @@ oder eine Sequenz von Triggerwörtern in der akustischen Sprache erkennen zu kö
 Dabei sollen Methoden und Werkzeuge aus dem Bereich des Machine Learning verwendet werden.
 Zudem sollen die gewonnenen Erkenntnise in eine mobile Plattform wie iOS oder Android integriert
 werden. Für den Rahmen dieser Arbeit genügt die Integration in eine der genannten Plattformen.
-Weiterhin soll auch das Thema Datenschutz und die ethischen Aspekte zu berücksichtigen werden. 
+Weiterhin soll auch das Thema Datenschutz und die ethischen Aspekte zu berücksichtigen werden.
+
+\subsection{Rechtfertigung} 
+Siri sowie Google selbst stellen API's zur Verfügung, um Apps zu öffnen oder auch direkte Befehle
+auszuführen. Daher stellt sich die Frage, warum überhaupt eine eigene In App Sprachsteuerung? Wenn
+ein Sprachassistent wie Siri bereits API's zur Verfügung stellt, um beispielsweise eine App
+zu öffnen oder auch direkte Befehle auszuführen. Als Beispiel hat Spotify eine Integration mit Siri.
+Es können Befehle wie ``Hey Siri, play music on Spotify'' verwendet werden. Um nur einiges zu
+nennen, gibt es folgende Gründe, weshalb eine eigene In App Sprachsteuerung sinnvoll ist:
+
+\begin{itemize}[noitemsep]
+	\item \textbf{Individualisierbar}: Anpassbare Sprachsteuerung für die App.
+	\item \textbf{Unabhängig}: Keine Abhängigkeit von externen Sprachassistenten.
+	\item \textbf{Erweiterte Funktionen}: Bietet Funktionen, die über Siri hinausgehen.
+	\item \textbf{Datenschutz}: Läuft lokal für mehr Datensicherheit.
+	\item \textbf{Branding}: Verstärkt das Markenbild der App.
+	\end{itemize}
+\noindent 
 
 \newpage \section{Grundlagen}\label{sec:grundlagen}
 In diesem Kapitel werden die Grundlagen für die Arbeit erläutert. Dabei wird auf die Themen
@@ -152,11 +175,10 @@ audio can be modeled as waves in an elastic medium. In our normal everyday exper
 medium is air, and the waves are air pressure waves.\grqq \ Audiosignale werden durch die Funktion
 \(A(t)\) repräsentiert, wobei \(t\) die Zeit und \(A(t)\) die Amplitude zum
 Zeitpunkt \(t\) angibt. Die Amplitude ist die Stärke des Signals und die Zeit repräsentiert die
-Position des Signals. Diese Betrachtung ist vor allem in der Elektrotechnik
-von Bedeutung, da die Amplitude als Spannung intepretiert werden kann. Grundsätzlich Audio ist ein 
-kontinuierliches Signal, in der digitalen Welt können jedoch nur diskrete Werte dargestellt werden.
-Das kontinuierliche Signal muss somit in diskrete Werte umgewandelt werden. Dieser Vorgang wird als
-\textit{Sampling} bezeichnet (\cite[Chapter~3.1]{tarr2018hackaudio}). 
+Position des Signals. Grundsätzlich ist Audio ein kontinuierliches Signal, in der digitalen Welt 
+können jedoch nur diskrete Werte dargestellt werden. Das kontinuierliche Signal muss somit in 
+diskrete Werte umgewandelt werden. Dieser Vorgang wird als \textit{Sampling} bezeichnet 
+(\cite[Chapter~3.1]{tarr2018hackaudio}). 
 
 
 \subsubsection{Sampling}
@@ -190,7 +212,7 @@ Bit-Depth Werte sind \(16\) oder \(24\) Bit (\cite[p.10]{somberg2019audioapi}).
 Ebendfalls wichtig ist das Verständnis von Frames, Channels und Buffers. Da diese Arbeit sich mit
 Audio-Systemen beschäftigt, ist es wichtig, die Begriffe \textit{Frame}, \textit{Channel} und
 \textit{Buffer} zu verstehen. Fangen wir mit dem Begriff \textit{Channel} an. Ein Channel kann als
-ein einzelnes Audio-Signal angesehen werden. Ein Mono-Signal hat genau nur einen Channel. Ein
+ein einzelnes Audio-Signal verstanden werden. Ein Mono-Signal hat genau nur einen Channel. Ein
 Stereo-Signal hat zwei Channels. Ein Surround-Signal hat mehr als zwei Channels. usw.
 Nun zum Begriff \textit{Frame}. Ein Frame entspricht einem Sample pro Channel. Weiter sind Frames
 in Buffers organisiert. Ein Buffer ist eine Sammlung von Frames. Typischerweise werden Buffers in
@@ -216,8 +238,8 @@ Das liegt daran, dass bei kleinen Buffer-Grössen die CPU häufiger aufgerufen w
 zu verarbeiten.
 
 \noindent \newline
-Nun betrachten wir die mögliche Anordnung eines Buffers, wie in den folgenden Abbildungen
-dargestellt. Es gibt zwei Möglichkeiten, wie Buffers angeordnet werden
+Nun betrachten wir die mögliche Anordnung eines Buffers, wie in der folgenden Tablle 
+\ref{tab:frames_buffers} dargestellt. Es gibt zwei Möglichkeiten, wie Buffers angeordnet werden
 können: \textit{Interleaved} und \textit{Non-Interleaved}. Bei der \textit{Interleaved}-Anordnung
 werden die Samples der einzelnen Channels nacheinander in sequentieller Reihenfolge in den Buffer
 geschrieben. Im Gegensatz dazu werden bei der \textit{Non-Interleaved}-Variante die Samples
@@ -258,12 +280,10 @@ für die Materie zu entwickeln. Zweitens die Notwendigkeit, eine Audio API in ei
 Applikation zu integrieren. Im Kontext dieser Arbeit werden sie als \textit{Audio API für Analyse}
 und \textit{Audio API für Integration} bezeichnet.
 
-El sol es grande
-
 \noindent \newline
 Im Bereich der \textit{Analyse} fiel die Wahl auf folgende APIs:
 
-\begin{itemize}
+\begin{itemize}[itemsep=0pt, parsep=0pt]
 	\item \textbf{PyAudio:} Eine verbreitete Schnittstelle in Python zur Audioverarbeitung.
 	\item \textbf{SoundDevice:} Eine vielseitige Python-Bibliothek für Audioverarbeitungsaufgaben.
 	\item \textbf{librosa:} Eine Bibliothek, die speziell auf die Analyse von Audiosignalen
@@ -273,16 +293,16 @@ Im Bereich der \textit{Analyse} fiel die Wahl auf folgende APIs:
 \noindent
 Im Kontext der \textit{Integration} standen folgende APIs im Fokus:
 
-\begin{itemize}
+\begin{itemize}[itemsep=0pt, parsep=0pt]
 	\item \textbf{AVAudioEngine:} Eine leistungsfähige Schnittstelle primär für die Plattformen iOS
 	      und macOS.
 	\item \textbf{AudioTrack:} Eine spezialisierte API für Audioanwendungen auf Android-Geräten.
 \end{itemize}
 
 \noindent
-Die folgenden Abschnitte werden tiefer auf die jeweiligen Eigenschaften und Möglichkeiten dieser
-APIs eingehen, insbesondere im Hinblick darauf, wie sie sich für die Aufnahme, Wiedergabe und
-Echtzeitverarbeitung von Audiodaten eignen.
+Die folgenden Abschnitte werden tiefer auf jeweils eine API pro Anwendungsgebiet eingehen. 
+Insbesondere wird auf die Echtzeitverarbeitung von Audiodaten eingegangen und Beispiele dazu
+gezeigt.
 
 \subsubsection{Audio API für Analyse}
 Python zeichnet sich durch eine beeindruckende Auswahl an Bibliotheken für datenanalytische Aufgaben
@@ -291,10 +311,51 @@ aus, zu denen auch NumPy, SciPy, Pandas und Matplotlib gehören. In dieser Arbei
 bekannt, die plattformübergreifende Audioverarbeitungsfunktionen bereitstellt. Trotz ihrer
 intuitiven Funktionen für Aufnahme und Wiedergabe wurde PyAudio letztlich aufgrund von
 Inkompatibilitäten mit der gewählten Entwicklungsumgebung verworfen.
-TODO: PyAudio/SoundDevice/librosa vergleichen
 
+
+\noindent \newline
+In dieser Arbeit wurde \textbf{SoundDevice} als Alternative zu PyAudio verwendet. Daher wird eine 
+kurze Implementierung von SoundDevice gezeigt, welches das kontinuierliche Streamen von Audio in
+Chunks ermöglicht.
+
+\begin{lstlisting}
+import sounddevice as sd
+
+def stream_audio(chunk_duration, samplerate=16000):
+    """Stream audio in chunks."""
+    with sd.InputStream(samplerate=samplerate, channels=1) as stream:
+        while True:
+            audio_chunk, _ = stream.read(int(samplerate * chunk_duration))
+            yield audio_chunk
+\end{lstlisting}
+
+\noindent
+Mit praktisch fünf Zeilen Code kann ein Audio-Stream in Chunks mit einer bestimmten Dauer
+erzeugt werden. Diese Einfachheit und Abstraktion ist ein grosser Vorteil von SoundDevice. Wie wir 
+sehen werden, wird die Implementierung mit der \textbf{AVAudioEngine} API für iOS und macOS nicht
+so einfach sein.
+
+
+\newpage
 \subsubsection{Audio API für Integration}
-TODO: AVAudioEngine, AudioTrack und kurze Codebeispiele
+Dieser Abschnitt befasst sich mit dem Thema Audio API für Integration in eine iOS App. Die Wahl 
+fiel auf die \textbf{AVAudioEngine} API für iOS und macOS. Im folgenden Code-Beispiel wird gezeigt, 
+wie ein kontinuierlicher Audio-Stream mit AVAudioEngine aufgenommen werden kann.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1.0\linewidth]{img/avaudioengine.png}
+	\caption{AVAudioEngine}
+	\label{fig:avaudioengine}
+\end{figure}
+
+
+\noindent \newline
+Im Gegensatz zu SoundDevice ist die Implementierung mit AVAudioEngine nicht so abstrakt. Man muss
+einige Konzepte verstehen, um die API effektiv nutzen zu können. Beispielsweise wird in diesem Code
+eine Konvertierung der Samplerate von \(48000\) Hz auf \(16000\) Hz durchgeführt. Ebenfalls müssen 
+die Buffer-Grösse, Bit-Depth, Channels und die Anordnung der Frames definiert werden.
+
 
 \newpage \subsection{Fourier-Analyse}
 Die Fourier-Analyse befasst sich mit der Zerlegung von Funktionen in Frequenzkomponenten. Die
@@ -833,7 +894,7 @@ hinzugefügt.
 \end{figure}
 
 \noindent \newline
-Sprachassistenten sind funktionieren mehrheitlich nach dem gleichen Prinzip. Die Sprache wird
+Sprachassistenten funktionieren mehrheitlich nach dem gleichen Prinzip. Die Sprache wird
 durch ein Mikrofon aufgenommen und in ein digitales Signal umgewandelt. Das digitale Signal wird
 durch einen Trigger Word Detector (TWD) analysiert. Der TWD erkennt, ob das gesprochene Wort die 
 Erkennung aktivieren soll. Für die effektive \gls{asr} können verschiedene Ansätze verwendet
@@ -982,28 +1043,6 @@ ein wichtiger Punkt. Die beiden Beiträge (\cite{siri2017hey}) und (\cite{apple2
 einen sehr guten Einblick in die Funktionsweise von Siri und sind essentiell für die Umsetzung
 dieser Arbeit.
 
-\subsection{Sprachassistenten in Apps} 
-Siri sowie Google selbst stellen API's zur Verfügung, um Apps zu öffnen oder auch direkte Befehle
-auszuführen. Daher stellt sich die Frage, warum überhaupt eine eigene In App Sprachsteuerung? Wenn
-ein Sprachassistent wie Siri bereits API's zur Verfügung stellt, um beispielsweise eine App
-zu öffnen oder auch direkte Befehle auszuführen. Als Beispiel hat Spotify eine Integration mit Siri.
-Es können Befehle wie ``Hey Siri, play music on Spotify'' verwendet werden. Um nur einiges zu
-nennen, gibt es folgende Gründe, weshalb eine eigene In App Sprachsteuerung sinnvoll ist:
-
-\begin{itemize}
-	\item \textbf{Individuell}: Die Sprachsteuerung kann individuell auf die App angepasst werden.
-	\item \textbf{Unabhängigkeit}: Die App ist nicht von Siri oder anderen Sprachassistenten
-	      abhängig.
-	\item \textbf{Erweiterte Funktionen}: Die Sprachsteuerung kann erweiterte Funktionen bieten,
-	      welche von Siri nicht unterstützt werden.
-	\item \textbf{Datenschutz}: Die Sprachsteuerung kann auf dem Gerät selbst laufen und somit
-	      keine Daten in die Cloud senden.
-	\item \textbf{Branding}: Die Sprachsteuerung kann das Branding der App stärken.
-\end{itemize}
-
-\noindent \newline
-Das nächste Kapitel verdeutlicht die Vorteile einer In App Sprachsteuerung anhand des kommerziellen
-Bedarfs.
 
 \subsection{Marktanalyse - Trigger Wort Erkennung}
 Während der Recherche für diese Arbeit wurden bestehende Lösungen auf dem Markt gesucht. Nebst den 
@@ -1121,22 +1160,24 @@ werden.
 ....
 
 \newpage \section{Methoden}
-Als Methode für das Vorgehen dieser Arbeit wurde eine hybride Methode gewählt, es ist eine 
-Kombination aus Agilem Vorgehen und dem Wasserfallmodell. Grundsätzlich hat die Projektplanung 
-schon einige Arbeitsschritte im Voraus geplant. Eines der im Vorfeld geplanten Arbeitsschritte war 
-die Erstellung eines eigenen Modells für die Triggerwort Erkennung. So Dennoch hat sich während der 
-Erarbeitung der Arbeit gezeigt, dass einige Tätigkeiten nicht im Voraus geplant werden können.
-Vor allem bei der Realisierung eines eigenen Modells für die Triggerwort Erkennung hat sich
-gezeigt, dass die Arbeitsschritte nicht im Voraus geplant werden können.
+Das Vorgehen dieser Arbeit kann als eine hybride Methode beschrieben werden. Aus der 
+Aufgabenstellung ging schon hervor, dass ein eigenes Deep Learning Modell für die Triggerwort 
+Erkennung erarbeitet werden soll. Zum andren soll das Modell in eine mobile App integriert werden.
+Diese zwei Bereiche wurden Bereits bei der Planung der Arbeit definiert und haben daher die 
+Planung der Arbeit stark beeinflusst. 
 
-\subsection{Vorgehensmodell}
-Am besten dieses Paper verwenden (\cite{choi2018tutorial}). Hat Grundwissern über 
-Following their success in Computer Vision and other ar- eas, deep learning techniques have 
-recently become widely adopted in Music Information Retrieval (MIR) research
-\begin{itemize}
-	\item Auswahl des passenden Vorgehensmodells zur Integration einer Spracherkennungsfunktion, z.B. iteratives Modell.
-	\item Verweis auf den konkreten Terminplan mit Meilensteinen spezifisch für die Spracherkennungs-Integration (im Kapitel 5 oder im Anhang).
-\end{itemize}
+\subsection{Projektphasen}
+Im Projektmanagement wurden die Projektphasen definiert. Diese bestehen aus vier Phasen. Die erste
+Phase widmet sich der \textit{Stand der Forschung}. Darin wurden aber bereits einige Punkte der 
+Planung definiert sowie dem Setup der Entwicklungsumgebung. Der Bestandteil liegt aber in der 
+Erarbeitung der Grundlagen sowie der Recherche von bestehenden Lösungen. Die zweite Phase ist die 
+\textit{Erstellung des Modells}. In dieser Phase wird das Modell entwickelt, trainiert und 
+evaluiert. Ebenfalls wird auch eine Möglichkeit erarbeitet um ein Datenstaz zu erstellen. In der 
+dritten Phase namens \textit{Prototype} wird das Modell in eine mobile App integriert. 
+Die letzte Phase ist das \textit{Refinement}. In dieser Phase wird die Arbeit sowie die
+Dokumentation fertiggestellt. 
+
+\subfile{projectmanagement.tex}
 
 \subsection{Forschungsmethoden (falls anwendbar)}
 \begin{itemize}
@@ -1322,7 +1363,6 @@ des Kontext einer App. Grundsätzlich ist es unüblich, dass mobile Apps eine
 integrierte Sprachsteuerungsfunktion anbieten.
 
 \newpage \section{Anhang}
-\subfile{projectmanagement.tex}
 
 \clearpage
 % Glossar
