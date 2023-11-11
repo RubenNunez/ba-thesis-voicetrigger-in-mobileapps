@@ -1,7 +1,7 @@
 \documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
 \usepackage[style=apa, backend=biber]{biblatex}
 \usepackage[acronyms, toc]{glossaries}
-\usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
 \usepackage{csquotes}
 \usepackage{graphicx}
@@ -23,7 +23,6 @@
 \usepackage{enumitem}
 
 
-
 \geometry{a4paper, total={170mm,257mm}, left=20mm, top=20mm}
 \usetikzlibrary{matrix, positioning, calc, fit, arrows.meta}
 
@@ -31,22 +30,10 @@
 \makeglossaries
 \renewcommand*{\glstextformat}[1]{\textit{#1}}
 
+
 \addbibresource{references.bib}
 
 \definecolor{ba-gray}{rgb}{0.9,0.9,0.9}
-\newcommand\blankpage{
-	\null
-	\thispagestyle{empty}
-	\addtocounter{page}{-1}
-	\newpage}
-
-\newcommand\redpage{
-	\newpage
-	\pagecolor{red}
-	\blankpage
-	\afterpage{\nopagecolor}}
-
-
 \definecolor{codeblack}{rgb}{0.1,0.1,0.23}
 \definecolor{codegreen}{rgb}{0.2,0.5,0.1}
 \definecolor{codepurple}{rgb}{0.5,0.0,0.5}
@@ -55,7 +42,7 @@
 
 \lstset{
 	language=Python,
-	basicstyle=\ttfamily\footnotesize, % footnotesize gibt eine kleinere Schriftgrösse
+	basicstyle=\ttfamily\footnotesize,
 	backgroundcolor=\color{white},
 	commentstyle=\color{codegreen},
 	keywordstyle=\color{codered},
@@ -72,17 +59,11 @@
 }
 
 
-%        %%%%%%%%  %%%%%%%%%  %%%      %%
-%       %			   %	  %  %	   %
-%       %%%%%%%%	   %	  % % %    %
-%       		%	   %	  %    %   %
-%       %%%%%%%% 	   %	  %     %  %
-
-
 \title{
-{\LARGE Bachelorarbeit}\\[2em]
-{\textbf{Integration von Sprachsteuerung {\break} in Mobile Apps}}
+	{\LARGE Bachelorarbeit}\\[2em] 
+	{\textbf{Integration von Sprachsteuerung {\break} in Mobile Apps}}
 }
+
 \author{Rubén Nuñez}
 \date{Herbstsemester 2023}
 
@@ -101,14 +82,11 @@ Das Problem dieser Arbeit ist im wesentlichen die Erkennung von Wake-up Wörter 
 des Kontext einer App. Grundsätzlich ist es unüblich, dass mobile Apps eine
 integrierte Sprachsteuerungsfunktion anbieten.
 
-
-
 El sol es grande
 
 
 \newpage
 \tableofcontents
-
 \newpage
 
 \newpage \section{Problem, Fragestellung, Vision}
@@ -121,9 +99,9 @@ Ausbaupotenzial für Sprachassistenten in Mobile Apps.
 
 \noindent \newline
 Für die Problemstellung dieser Arbeit ist es wichtig, die verschiedenen Disziplinen der
-Spracherkennung zu differenzieren. Diese Arbeit befasst sich vorallem mit der \gls{twd}. Die 
+Spracherkennung zu differenzieren. Diese Arbeit befasst sich vor allem mit der \gls{twd}. Die 
 nachfolgende Abbildung \ref{fig:asr_twd} zeigt die wichtigsten Teilgebiete der Spracherkennung und 
-soll einen Überblick über die Thematik vermitten. 
+soll einen Überblick über die Thematik verschaffen. 
 
 \vspace{1em}
 \begin{figure}[h]
@@ -148,6 +126,12 @@ Zudem sollen die gewonnenen Erkenntnise in eine mobile Plattform wie iOS oder An
 werden. Für den Rahmen dieser Arbeit genügt die Integration in eine der genannten Plattformen.
 Weiterhin soll auch das Thema Datenschutz und die ethischen Aspekte zu berücksichtigen werden.
 
+\subsection{Abgrenzung}
+Diese Arbeit befasst sich mit der Erkennung von Triggerwörtern in der akustischen Sprache. Es ist 
+kein Ziel dieser Arbeit, eine vollständigen Sprachassistenten zu entwickeln. Das würde den Rahmen
+dieser Arbeit sprengen. Die Resultate dieser Arbeit sollen als Grundlage für eine vollständige
+Sprachsteuerung dienen.
+
 \subsection{Rechtfertigung}
 Apple sowie Google selbst stellen mit Siri und Google Assistant bereits Sprachassistenten zur 
 Verfügung, um Apps zu öffnen oder auch direkte Befehle auszuführen. Daher stellt sich die Frage, 
@@ -157,7 +141,8 @@ API's anbieten. Als Beispiel hat Spotify eine Integration mit Siri. Es können B
 Sprachsteuerung in Apps ist trotz verfügbarer Lösungen wie Siri und Google Assistant aus mehreren 
 Gründen vorteilhaft:
 
-\begin{itemize}[noitemsep]
+
+\begin{itemize}[itemsep=0pt, parsep=0pt]
     \item \textbf{Personalisierung:} Sie ermöglicht eine massgeschneiderte Nutzererfahrung, die 
 	exakt auf die App und ihre Nutzer zugeschnitten ist.
     \item \textbf{Unabhängigkeit:} Apps bleiben unabhängig von den Schnittstellen und 
@@ -1127,7 +1112,24 @@ Kochen zu konzentrieren. Die Nutzererfahrung könnte mit einem solchen Feature m
 werden.
 
 
-\subsection{Skizzenhafte Lösungsansätze}
+\subsection{Erstellung eines Datensatzes}
+Die Erstellung eines Datensatzes ist ein wichtiger Bestandteil dieser Arbeit. Daher soll eine 
+Möglichkeit erarbeitet werden, um Sprachaufnahmen zu machen. Der Datensatz soll aus Sprachaufnahmen
+bestehen, welche Triggerwörter enthalten. Ebenfalls sollen die Sprachaufnahmen auch andere Wörter
+enthalten. Neben den eigenen Sprachaufnahmen sollen auch bestehende Datensätze untersucht werden.
+
+\noindent \newline
+Ein sehr verbreiteter Datensatz ist der \textit{Mozilla Common Voice} Datensatz
+(\cite{ardila2020common}). Dieser Datensatz enthält unzählige Sprachaufnahmen von Menschen, welche
+freiwillig ihre Stimme aufgenommen haben. 
+
+\subsection{Ehtische Überlegungen}
+Das Erstellen eines Datensatzes hat eine gewisse Verantwortung. Nicht nur das Datenschutzgesetz 
+soll eingehalten werden, sondern auch ethische Überlegungen sollen getroffen werden. Beispielsweise 
+sollte der Datensatz nicht nur aus Sprachaufnahmen von bestimmten Personen bestehen. 
+(\cite{papakyriakopoulos2023augmented})
+
+
 \begin{itemize}
 	\item Machine Learning: Verwendung von bereits trainierten Modellen oder Aufbau eigener Modelle zur Triggerwort-Erkennung.
 	\item Cloud vs. Edge Computing: Ob die Spracherkennung in der Cloud oder direkt auf dem Gerät erfolgen sollte.
@@ -1379,53 +1381,12 @@ integrierte Sprachsteuerungsfunktion anbieten.
 % Glossar
 \printglossary[type=\acronymtype,title=Akronyme]
 \printglossary[title=Glossar]
+
 % Verzeichnisse
 \addcontentsline{toc}{section}{Abbildungsverzeichnis}
 \listoffigures
 \addcontentsline{toc}{section}{Tabellenverzeichnis}
 \listoftables
 \printbibliography[title=Literaturverzeichnis, heading=bibintoc]
-
-
-
-%       %%%%%   %    %   %%%
-%       %       % %  %   %   %
-%       %%%%    %  % %   %    %
-%       %       %   %%   %   %
-%       %%%%%   %    %   %%%
-
-
-\newpage
-\pagecolor{ba-gray}
-\afterpage{\nopagecolor}
-\blankpage
-
-\newpage
-
-\section*{Aufgabenstellung}
-Integration von Sprachsteuerung in Mobile Apps, insbesondere zur Erkennung
-von Triggerwörtern.
-
-\section*{Projektteam}
-\begin{itemize}
-	\item Student:in: Rubén Nuñez
-	\item Betreuer:in: Herzog
-	\item Firma: Bitforge AG
-\end{itemize}
-
-\section*{Auftraggeber}
-\begin{itemize}
-	\item Firma: Bitforge AG
-	\item Ansprechperson: Stefan Reinhard
-	\item Funktion: Head of Mobile
-	\item Adresse: Zeughausstrasse 39, 8004 Zürich
-	\item Telefon: +41 55 211 02 41
-	\item E-Mail: stefan.reinhard@bitforge.ch
-	\item Website: www.bitforge.ch
-\end{itemize}
-
-\section*{Sonstige Bemerkungen}
-Grundkenntnisse in Machine Learning, speziell im Bereich der Spracherkennung, sowie
-Erfahrung mit entsprechenden APIs sind erforderlich.
 
 \end{document}
