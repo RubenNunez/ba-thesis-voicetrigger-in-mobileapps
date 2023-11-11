@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define directories
-BASE_DIR="/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM"
+BASE_DIR="/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM-v2"
 DIRS=("FOOBY" "Hello_FOOBY" "Hey_FOOBY" "Hi_FOOBY" "OK_FOOBY" "other" "other")
 
 # Function to convert ogg to wav and then remove the ogg file

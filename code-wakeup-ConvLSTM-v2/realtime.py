@@ -27,7 +27,7 @@ optimizer = optim.AdamW(model.parameters(), lr=5e-5)
 transform = AudioToSpectrogramTransform()
 
 # Initialize model
-checkpoint_path = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM/checkpoints-v2/checkpoint_epoch_42_loss_0.010789588726497367.pt" 
+checkpoint_path = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM-v2/checkpoints-v2/checkpoint_epoch_42_loss_0.010789588726497367.pt" 
 model, _, _, _ = load_checkpoint(checkpoint_path, model, optimizer)
 
 model.eval()

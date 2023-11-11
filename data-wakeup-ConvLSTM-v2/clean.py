@@ -6,7 +6,7 @@ from pydub import AudioSegment
 from tqdm import tqdm
 
 # Replace 'path_to_folders' with your specific folder path
-base_path = '/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM/other'
+base_path = '/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM-v2/other'
 
 # Iterate over all .wav and .mp3 files
 for audio_file in tqdm(glob.glob(os.path.join(base_path, '**/*'), recursive=True)):

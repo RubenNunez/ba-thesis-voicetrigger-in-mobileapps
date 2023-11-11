@@ -2,7 +2,7 @@
 setlocal enabledelayedexpansion
 
 :: Define directories
-set "BASE_DIR=D:\Projects\ba-thesis-voicetrigger-in-mobileapps\data-wakeup-ConvLSTM\"
+set "BASE_DIR=D:\Projects\ba-thesis-voicetrigger-in-mobileapps\data-wakeup-ConvLSTM-v2\"
 set "DIRS=FOOBY Hello_FOOBY Hey_FOOBY Hi_FOOBY OK_FOOBY other other"
 
 :: Define the full path to ffmpeg

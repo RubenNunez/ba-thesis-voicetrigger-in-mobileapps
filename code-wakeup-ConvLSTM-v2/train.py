@@ -39,7 +39,7 @@ def get_metrics_for_logits(logits):
     return batch_accuracy, batch_f1_score
 
 
-root_dir = Path("/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM")
+root_dir = Path("/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM-v2")
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 model = WakeupTriggerConvLSTM2s(device).to(device)
@@ -57,7 +57,7 @@ criterion = nn.BCEWithLogitsLoss(pos_weight=pos_weight)
 start_epoch = 0
 
 # Load the checkpoint if one exists
-checkpoint_path = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM/checkpoints-best/checkpoint_epoch_35_loss_0.08726639538489951.pt"
+checkpoint_path = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM-v2/checkpoints-best/checkpoint_epoch_35_loss_0.08726639538489951.pt"
 checkpoint = torch.load(checkpoint_path)
 # 
 # # Update model and optimizer with the saved states
@@ -69,7 +69,7 @@ start_epoch = checkpoint['epoch']
 audio_files = []
 labels = []
 
-silence_file_path = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM/silence/silence-3s.mp3"
+silence_file_path = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM-v2/silence/silence-3s.mp3"
 
 for folder in root_dir.iterdir():
     if folder.is_dir():

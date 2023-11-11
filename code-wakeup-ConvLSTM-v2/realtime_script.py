@@ -9,8 +9,8 @@ import torch.optim as optim
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 # Load scripted model and transform
-scripted_model_path = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM/checkpoints-best/model.ptl"
-scripted_transform_path = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM/checkpoints-best/transform.ptl"
+scripted_model_path = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM-v2/checkpoints-best/model.ptl"
+scripted_transform_path = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM-v2/checkpoints-best/transform.ptl"
 
 model = torch.jit.load(scripted_model_path).to(device)
 transform = torch.jit.load(scripted_transform_path)

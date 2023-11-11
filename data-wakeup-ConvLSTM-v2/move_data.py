@@ -1,8 +1,8 @@
 import os
 import shutil
 
-base_directory_osx = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM"
-base_directory_win = "D:\\Projects\\ba-thesis-voicetrigger-in-mobileapps\\data-wakeup-ConvLSTM"
+base_directory_osx = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM-v2"
+base_directory_win = "D:\\Projects\\ba-thesis-voicetrigger-in-mobileapps\\data-wakeup-ConvLSTM-v2"
 
 # Set the base directory
 base_directory = base_directory_osx

@@ -18,7 +18,7 @@ def load_checkpoint(checkpoint_path, model):
     return model
 
 
-checkpoint_path = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM/checkpoints-v2/checkpoint_epoch_42_loss_0.010789588726497367.pt" 
+checkpoint_path = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM-v2/checkpoints-v2/checkpoint_epoch_42_loss_0.010789588726497367.pt" 
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -28,9 +28,9 @@ model.eval()
 
 transform = AudioToSpectrogramTransform()
 
-#audio_waveform, sample_rate = torchaudio.load("/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM/FOOBY/FOOBY_1ffe7d0a46a04fe48a8bb3d8e0241ea9_998b96b8ae474fff8ef9e1b032f02a9f copy_volume_adjusted.wav")
-audio_waveform, sample_rate = torchaudio.load("/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM/other/Baum_d88fb26508c94dadb48bab48808cd243_f5cc92ba43f84fd699d71478ffe84bd4_time_stretched.wav")
-#audio_waveform, sample_rate = torchaudio.load("/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM/silence/silence-3s.mp3")
+#audio_waveform, sample_rate = torchaudio.load("/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM-v2/FOOBY/FOOBY_1ffe7d0a46a04fe48a8bb3d8e0241ea9_998b96b8ae474fff8ef9e1b032f02a9f copy_volume_adjusted.wav")
+audio_waveform, sample_rate = torchaudio.load("/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM-v2/other/Baum_d88fb26508c94dadb48bab48808cd243_f5cc92ba43f84fd699d71478ffe84bd4_time_stretched.wav")
+#audio_waveform, sample_rate = torchaudio.load("/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM-v2/silence/silence-3s.mp3")
 
 # Ensure audio is mono
 if len(audio_waveform.shape) > 1:
