@@ -4,7 +4,7 @@ import torch.utils.mobile_optimizer as mobile_optimizer
 from model import WakeupTriggerConvLSTM2s
 from transform import AudioToSpectrogramTransformJit
 
-base_path = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM/checkpoints-best/"
+base_path = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM-v2/checkpoints-best/"
 model_path = base_path + "checkpoint_epoch_42_loss_0.010789588726497367.pt"
 
 torch.backends.quantized.engine = 'qnnpack'  # set quantization engine
@@ -30,7 +30,7 @@ scripted_model = torch.jit.script(model) # quantized_model
 # optimized_model = mobile_optimizer.optimize_for_mobile(scripted_model)
 
 # Save model for Lite Interpreter
-scripted_model._save_for_lite_interpreter("/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM/checkpoints-best/optimized_model.ptl")
+scripted_model._save_for_lite_interpreter("/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM-v2/checkpoints-best/optimized_model.ptl")
 
 # Save transform for Lite Interpreter
-scripted_transform._save_for_lite_interpreter("/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM/checkpoints-best/transform_jit.ptl")
+scripted_transform._save_for_lite_interpreter("/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM-v2/checkpoints-best/transform_jit.ptl")

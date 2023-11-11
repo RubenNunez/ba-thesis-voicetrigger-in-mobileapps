@@ -1228,13 +1228,15 @@ des Modells wurde PyTorch verwendet. Dieses Framework hat sich als sehr hilfreic
 
 \subsection{Verwendete Architektur des Modells}
 Die Architektur des Models wurde in ersten Linie von (\cite{siri2017hey}) inspiriert. Dennoch 
-wurde schlussendlich eine andere Architektur umgsetzt die sich aber ähnlich in Bezug auf Performance
-und Genauigkeit verhält. Der Grundgedanke war es die zeitliche Komponente der Sprache zu
-berücksichtigen. Dies wurde mit Convolutional Layers und einem Long Short-Term Memory (LSTM)
-Layer umgesetzt. Die Kombination dieser beiden Layer hat sich als sehr effektiv erwiesen. Das Paper
-(\cite{khamees2021classifying}) zeigt diesen Ansatz sehr gut auf. Es bezieht sich zwar nicht auf 
-die Triggerwort Erkennung, aber auf die Klassifizierung von Music Genres. Die finale Architektur 
-des Models ist in der Abbildung \ref{fig:model_architecture} dargestellt.
+wurde schlussendlich der Ansatz von (\cite{barazanji2023heyditto}) verwendet. Die Architektur 
+besteht mehrheitlich aus Convolutional Layers und einem Long-Short-Term-Memory LSTM Layer. Der 
+Vorteil dieser Architektur ist, dass sie sehr energie effizient ist, wie auch sehr schnell in 
+der Inferenz. Mehr dazu im Kapitel \ref{sec:evaluation}. Was besonders Markant ist, ist die 
+Verwendung von Convolutional Layers in Kombination mit einem LSTM Layer, welcher die zeitliche 
+Komponente der Sprache berücksichtigt. Die Idee der Kombination von Convolutional Layers und
+LSTM Layers ist nicht neu. Es gibt diverse Paper, welche diesen Ansatz verwenden. Beispielsweise 
+verwendet (\cite{khamees2021classifying}) diesen Ansatz für die Klassifizierung von Music Genres.
+Die finale Architektur des Models ist in der Abbildung \ref{fig:model_architecture} dargestellt.
 
 \begin{figure}[h]
 	\centering

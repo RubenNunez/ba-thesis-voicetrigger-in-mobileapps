@@ -83,7 +83,7 @@ class AudioToSpectrogramTransform:
 
         
 # transform = AudioToSpectrogramTransform()
-# waveform, sample_rate = torchaudio.load("/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM/FOOBY/FOOBY_3bc31366e8af480483d580d16e9870db_3b3995e89cf742788cbe192b94f3aaae copy_time_shifted_pitch_shifted.wav")
+# waveform, sample_rate = torchaudio.load("/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM-v2/FOOBY/FOOBY_3bc31366e8af480483d580d16e9870db_3b3995e89cf742788cbe192b94f3aaae copy_time_shifted_pitch_shifted.wav")
 
 # if len(waveform.shape) == 1:
 #     waveform = waveform.unsqueeze(0)

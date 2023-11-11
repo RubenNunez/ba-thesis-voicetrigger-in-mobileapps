@@ -74,5 +74,5 @@ class AudioAugment:
 
 
 # Usage
-augmentor = AudioAugment("/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM/noise")
+augmentor = AudioAugment("/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM-v2/noise")
 augmentor.augment_and_save()
