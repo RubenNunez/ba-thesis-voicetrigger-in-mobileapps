@@ -1123,52 +1123,118 @@ Ein sehr verbreiteter Datensatz ist der \textit{Mozilla Common Voice} Datensatz
 (\cite{ardila2020common}). Dieser Datensatz enthält unzählige Sprachaufnahmen von Menschen, welche
 freiwillig ihre Stimme aufgenommen haben. 
 
-\subsection{Ehtische Überlegungen}
-Das Erstellen eines Datensatzes hat eine gewisse Verantwortung. Nicht nur das Datenschutzgesetz 
-soll eingehalten werden, sondern auch ethische Überlegungen sollen getroffen werden. Beispielsweise 
-sollte der Datensatz nicht nur aus Sprachaufnahmen von bestimmten Personen bestehen. 
-(\cite{papakyriakopoulos2023augmented})
+\subsection{Ethische Überlegungen}
+Das Erstellen eines Datensatzes hat eine gewisse Verantwortung. Es geht dabei nicht nur um die 
+Einhaltung des Datenschutzgesetzes, sondern auch um ethische Aspekte. Ein Datensatz sollte 
+vielfältige Sprachaufnahmen beinhalten und nicht nur Aufnahmen bestimmter Personengruppen. Das 
+Paper von Papakyriakopoulos et al. (\cite{papakyriakopoulos2023augmented}) betont die 
+Notwendigkeit der Diversität in Sprachdaten und die Auswirkungen auf Fairness und Robustheit von 
+Sprachtechnologien. Sie empfehlen, mehr Transparenz bei der Datensammlung zu schaffen, um ethische 
+Aspekte zu dokumentieren und die Überlegungen zum sozialen Kontext der Datennutzung zu vertiefen.
 
+\noindent \newline
+In Bezug auf die Erstellung eines Datensatzes für diese Arbeit ist es beispielsweise wichtig, dass 
+die Sprachaufnahmen aus diversen Sprachregionen stammen. In der Schweiz gibt es vier offizielle 
+Sprachen und unzählige Dialekte. St. Galler Dialekt hat einen anderen Klang als der Zürcher Dialekt.
+Ebenfalls gibt es Personen mit Sprachfehlern oder Personen, welche eine andere Sprache als 
+Muttersprache haben. All diese Aspekte sollten bei der Erstellung eines Datensatzes berücksichtigt 
+werden.
 
-\begin{itemize}
-	\item Machine Learning: Verwendung von bereits trainierten Modellen oder Aufbau eigener Modelle zur Triggerwort-Erkennung.
-	\item Cloud vs. Edge Computing: Ob die Spracherkennung in der Cloud oder direkt auf dem Gerät erfolgen sollte.
-	\item Integration: SDKs oder APIs, die Entwicklern helfen, die Spracherkennungsfunktionalität in ihre Apps zu integrieren.
-\end{itemize}
+\subsection{Datenschutz und Privatsphäre}
+TODO: Gestzte und Regeln für Datenschutz und Privatsphäre
 
-\subsection{Systemarchitektur}
-\begin{itemize}
-	\item Überlegungen zur Systemarchitektur: Ist ein monolithisches System oder eine Microservice-Architektur sinnvoller?
-	\item Vorteile und Herausforderungen beider Ansätze im Kontext der Spracherkennung.
-\end{itemize}
-
-\subsection{Alternative Ansätze}
-\begin{itemize}
-	\item Untersuchung anderer Technologien oder Ansätze zur Spracherkennung, z.B. regelbasierte Systeme im Vergleich zu Machine Learning.
-	\item Warum Sie sich für einen bestimmten Ansatz entschieden haben oder warum Sie einen anderen verworfen haben.
-\end{itemize}
-
-\subsection{Mögliche Problempunkte}
-\begin{itemize}
-	\item Datenschutz: Wie wird die Privatsphäre der Benutzer gewahrt?
-	\item Effizienz: Wie kann sichergestellt werden, dass die Spracherkennung schnell und akkurat ist?
-	\item Integration: Wie kann die Kompatibilität mit einer Vielzahl von Apps und Plattformen gewährleistet werden?
-\end{itemize}
 
 \subsection{Erste Überlegungen zu Tools und Technologien}
-\begin{itemize}
-	\item Welche Programmiersprachen oder Frameworks könnten verwendet werden?
-	\item Eventuelle Betrachtung von Open-Source-Optionen für Spracherkennung.
-\end{itemize}
+Für die Entwicklung von Machine-Learning-Modellen stehen mehrere Frameworks zur Verfügung. Eine 
+Schlüsselüberlegung für dieses Projekt war die Fähigkeit zur Integration in eine mobile App.
+Es gibt einge Frameworks, welche das ermöglichen. Um nur einige zu nennen: PyTorch, TensorFlow, 
+CoreML. Wobei CoreML nur für Apple Ekosysteme verwendet werden kann. Da nicht nur die Integration
+in eine mobile App wichtig ist, sondern auch die Entwicklung von Prototypen, wurde PyTorch gewählt.
+TensorFlow wäre ebenfalls eine gute Wahl gewesen, aber laut (\cite{valantis2023battle}) hat PyTorch 
+in den letzten Jahren an Popularität gewonnen. Ebenfalls ist PyTorch sehr beliebt für die 
+Forschung. Die Wahl von PyTorch ist somit eine gute Wahl.
 
-\subsection{Zusammenfassung und Ausblick}
-\begin{itemize}
-	\item Ein kurzer Überblick über die in diesem Kapitel vorgestellten Ideen und Konzepte.
-	\item Ein Vorgeschmack darauf, wie diese Konzepte in den kommenden Kapiteln weiter verfolgt werden.
-\end{itemize}
+\subsection{Erste Überlegungen zur Modelarchitektur}
+Mit der Wahl von PyTorch als Framework wurde zwar eine wichtige Entscheidung getroffen, aber die 
+Modelarchitektur ist noch nicht definiert. Die Inspiration für die Modelarchitektur kommt von 
+(\cite{siri2017hey}). Die Modelarchitektur von Siri ist sehr einfach und besteht aus einem DNN. 
+Daher war ein erster Gedanke, eine ähnliche Architektur zu verwenden. Im folgenden werden die 
+unterschiedlichen Versuche die im Rahmen dieser Arbeit gemacht wurden, beschrieben. Als Experiment 
+stand immer die Erkennung von 'Hey FOOBY' im Vordergrund. 
 
 
-....
+\subsubsection{Versuch 1: Facebook AI wav2vec2}
+Die ersten Versuche befassten sich mit der Verwendung von Facebook AI's wav2vec2. Dieses Modell 
+ist zwar nicht für die Triggerwort Erkennung entwickelt worden, aber es hat das Potenzial diese 
+Aufgabe zu erfüllen. Daher wurde ein Versuch gestartet, um zu sehen, ob es möglich ist mit wav2vec2 
+Triggerwörter zu erkennen. Die folgende Abbildung \ref{fig:wav2vec2_code} zeigt den Code 
+für die Verwendung von wav2vec2. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.80\linewidth]{img/wav2vec2_code.png}
+	\caption{Verwendung von wav2vec2}
+	\label{fig:wav2vec2_code}
+\end{figure}
+
+\noindent \newline
+Die ersten Versuche mit wav2vec2 zeigten, dass es möglich ist, Triggerwörter zu erkennen, auch 
+wenn es sich um ein Basismodell handelt, das noch nicht auf eine spezifische Aufgabe zugeschnitten 
+wurde. In einer Testreihe mit drei 10-sekündigen Tests, in dem die Wörter "Hey FOOBY" mehrmals 
+gesagt wurden, erkannte das Modell verschiedene Triggerwörter. Die zeitliche Abfolge dieser 
+Erkennungen ist in Tabelle \ref{tab:wav2vec2_results} dargestellt.
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		\textbf{Zeitabschnitt} & \textbf{Test 1} & \textbf{Test 2} & \textbf{Test 3} \\
+		\hline
+		0-2s & FOOBY & HEY FOOBE & E FOOBE \\
+		2-4s & F & B FOBE & E HA \\
+		4-6s & FHOBI & HEY & FUBI \\
+		6-8s & BE & FOOBE & HAL FUBI\\
+		\hline
+	\end{tabular}
+	\caption{Resultate der ersten Versuche mit wav2vec2}
+	\label{tab:wav2vec2_results}
+\end{table}
+
+\noindent \newline
+Diese Versuche haben gezeigt, dass es möglich ist ähnliche Wörter zu erkennen. Auch wenn die 
+Resultate in erster Linie nicht sehr gut erscheinen, sind sie dennoch vielversprechend. Als 
+Beispiel könnten die Wörter 'Hey FOOBY' und 'Hey FOOBE' als ähnliche Wörter betrachten werden. 
+Durch die Berechnung der Levenshtein-Distanz könnte die Ähnlichkeit dieser Wörter berechnet werden.
+Die Levenshtein-Distanz ist eine Metrik zur Berechnung der Ähnlichkeit zweier Zeichenketten. Dieser 
+Ansatz wurde jedoch nicht weiter verfolgt und stammt aus eigenen Überlegungen. 
+
+
+\subsubsection{Versuch 2: LiteFEW}
+Nach den Misserfolgen mit wav2vec2 wurde ein weiterer vielversprechender Versuch gestartet. Dieser 
+basiert auf dem Paper von lim et al. (\cite{lim2023lightweight}). Der Grundgedanke dieses Papers 
+ist es, ein Modell auf Basis von wav2vec2 zu entwickeln, welches optimiert ist für die Triggerwort 
+Erkennung auf mobilen Geräten. Das im Paper beschriebene Verfahren beinhaltet die Verwendung von 
+wav2vec2 als Teacher-Model und ein kleineres Modell als Student-Model. Doch an dieser Stelle 
+wurde der Versuch abgebrochen, da die Implementation des Papers sehr komplex ist und kein Code 
+veröffentlicht wurde.
+
+\subsubsection{Versuch 3: ConvLSTM}
+Nach den Misserfolgen mit wav2vec2 und LiteFEW war die Situation etwas frustrierend. Daher wurde 
+ein weiterer Versuch gestartet, um ein eigenes Modell zu entwickeln. Dieser Versuch basiert auf 
+dem Github Repository von Barazanji et al. (\cite{barazanji2023heyditto}). Das Github Repository 
+enthält eine Definition für ein Modell, welches mit TensorFlow implementiert wurde. Das von 
+Barazanji et al. (\cite{barazanji2023heyditto}) entwickelte Modell wurde für die Triggerwort 
+Erkennung entwickelt und kann die Wörter 'Hey Ditto' erkennen. Ein Kritikpunkt an das Repository 
+ist, dass es keine Dokumentation oder Quellenangaben enthält. Dennoch wurde das Modell als 
+Grundlage für einen weiteren Versuch verwendet. Dazu wurde es in PyTorch übersetzt und 
+entsprechend angepasst, sodass es auf den Anwendungsfall dieser Arbeit zugeschnitten ist. 
+Das Verfahren selbst ist sehr interessant und basiert auf der Verwendung von Convolutional Layers 
+in Kombination mit einem LSTM Layer. Hier konnte eine weitere Quelle gefunden werden, welche 
+diese Art von Modelarchitektur verwendet. Das Paper von Khamees et al. 
+(\cite{khamees2021classifying}) beschreibt das Klassifizieren von Musik Genres mit einer 
+ähnlichen Modelarchitektur. Eine detailierte Beschreibung der Modelarchitektur ist im Kapitel der 
+Realisierung zu finden.
+
 
 \newpage \section{Methoden}
 Das Vorgehen dieser Arbeit kann als eine hybride Methode beschrieben werden. Aus der 
@@ -1190,37 +1256,6 @@ Dokumentation fertiggestellt.
 
 \subfile{projectmanagement.tex} % Projektmanagement separat
 
-\subsection{Forschungsmethoden (falls anwendbar)}
-\begin{itemize}
-	\item Wichtigkeit von PyTorch 
-	\item Probleme beim erstellen des Modells
-	\item Versuche mit wav2vec2
-	\item Versuche mit LiteFEW
-	\item Versuche mit ConvLSTM
-	\item Realisierung der Integration
-\end{itemize}
-\begin{itemize}
-	\item Erwägung von Benutzertests, um zu prüfen, wie intuitiv und effizient die Spracherkennungsfunktion ist.
-	\item Interviews mit potenziellen Nutzern der App, um ihre Anforderungen und Erwartungen in Bezug auf Spracherkennung zu verstehen.
-\end{itemize}
-
-\subsection{Technische Evaluierung}
-\begin{itemize}
-	\item Vergleich verschiedener Spracherkennungs-APIs oder Frameworks hinsichtlich Genauigkeit, Latenz, Sprachunterstützung und Kosten.
-	\item Technische Tests zur Prüfung der Performance und Genauigkeit der gewählten Spracherkennungslösung.
-\end{itemize}
-
-\subsection{Integrationsmethode}
-\begin{itemize}
-	\item Beschreibung der geplanten Techniken zur Integration, z.B. Einbindung über API, Implementierung bestimmter Bibliotheken oder Nutzung nativer App-Funktionen.
-	\item Diskussion über potenzielle Herausforderungen bei der Integration und wie sie angegangen werden sollen.
-\end{itemize}
-
-\subsection{Teststrategie}
-\begin{itemize}
-	\item Entwurf einer Teststrategie speziell für die Spracherkennungsfunktion: Testen unter verschiedenen Bedingungen (z.B. Hintergrundgeräusche, verschiedene Sprachen und Akzente).
-	\item Verweis darauf, dass die eigentliche Testdurchführung in einem anderen Kapitel oder Dokument beschrieben ist.
-\end{itemize}
 
 \newpage \section{Realisierung}
 Die Realisierung dieser Arbeit besteht aus zwei Teilen. Zum einen wurde ein eigenes Model
@@ -1252,23 +1287,10 @@ Diese Art von Modelarchitektur setzt eine Transformation der Sprachdaten in ein 
 Die Transformation der Sprachdaten wurde im Kapiel \ref{sec:grundlagen} der Grundlagen bereits
 beschrieben.
 
-\subsection{PyTorch als Framework}
-Pytorch ist ein Open Source Machine Learning Framework, welches von Facebook entwickelt wurde. Es
-bietet eine grosse Flexibilität und ist sehr gut dokumentiert. Die Gründe für die Wahl von PyTorch
-waren, dass es zum einen eine sehr einfache und intuitive API bietet. Zum anderen bietet es die 
-Möglichkeit, die trainierten Models in eine mobile App zu integrieren.
+\subsection{Aufbau des Datensatzes}
 
 
-
-Am besten dieses Paper verwenden (\cite{choi2018tutorial}). Hat Grundwissern über 
-Following their success in Computer Vision and other ar- eas, deep learning techniques have 
-recently become widely adopted in Music Information Retrieval (MIR) research
-
-Als Teil der Realisierung wurde ein eigenes Modell trainiert, welches Triggerwörter erkennt.
-Dazu wurden einige Tests wie auch Experimente durchgeführt.
-Projektphasen der Modell Erstellung, der Integration und der Evaluation.
-
-\subsection{Google Cloud Platform}
+\subsection{Google Cloud Platform als Unterstützung}
 Die Google Cloud Platform (GCP) ist eine Sammlung von Cloud Computing-Diensten. In dieser Arbeit
 wurde die GCP verwendet, um die Recorder Webseite zu hosten. Ebenfalls wurde in betracht gezogen,
 die Modelle auf der GCP zu trainieren. Die GCP bietet Services für Machine Learning an. Eines der
