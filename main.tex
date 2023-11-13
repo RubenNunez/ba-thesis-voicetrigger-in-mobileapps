@@ -91,7 +91,7 @@ El sol es grande
 
 \newpage \section{Problem, Fragestellung, Vision}
 \subsection{Problemstellung}
-Die Sprachsteuerung birgt grosses Potenzial und wird bisher vor allem für
+Die Sprachsteuerung bietet grosses Potenzial und wird bisher vor allem für
 Sprachsteuerungsassistenten genutzt. Während es etablierte Sprachassistenten wie Siri, Google
 oder Alexa gibt, fehlt es an Lösungen für eine integrierte Sprachsteuerung in Mobile Apps,
 insbesondere in Bezug auf das Erkennen von Triggerwörtern. Daher besteht ein grosses 
@@ -100,8 +100,8 @@ Ausbaupotenzial für Sprachassistenten in Mobile Apps.
 \noindent \newline
 Für die Problemstellung dieser Arbeit ist es wichtig, die verschiedenen Disziplinen der
 Spracherkennung zu differenzieren. Diese Arbeit befasst sich vor allem mit der \gls{twd}. Die 
-nachfolgende Abbildung \ref{fig:asr_twd} zeigt die wichtigsten Teilgebiete der Spracherkennung und 
-soll einen Überblick über die Thematik verschaffen. 
+nachfolgende Abbildung \ref{fig:asr_twd} zeigt mögliche Teilgebiete der Spracherkennung und soll 
+einen Überblick über die Thematik verschaffen. 
 
 \vspace{1em}
 \begin{figure}[h]
@@ -128,7 +128,7 @@ Weiterhin soll auch das Thema Datenschutz und die ethischen Aspekte zu berücksi
 
 \subsection{Abgrenzung}
 Diese Arbeit befasst sich mit der Erkennung von Triggerwörtern in der akustischen Sprache. Es ist 
-kein Ziel dieser Arbeit, eine vollständigen Sprachassistenten zu entwickeln. Das würde den Rahmen
+kein Ziel dieser Arbeit, einen vollständigen Sprachassistenten zu entwickeln. Das würde den Rahmen
 dieser Arbeit sprengen. Die Resultate dieser Arbeit sollen als Grundlage für eine vollständige
 Sprachsteuerung dienen.
 
@@ -895,7 +895,7 @@ werden. Eine Möglichkeit ist einen Cloud-basierten Ansatz zu verwenden. Anbiete
 Amazon und Apple verwenden für ihre Sprachassistenten Cloud-basierte Ansätze 
 (\cite{matarneh2017speechrecognition}). 
 
-\subsubsection{Vergleich von Sprachassistenten}\label{sec:vergleich_sprachassistenten}
+\subsection{Vergleich von Sprachassistenten}\label{sec:vergleich_sprachassistenten}
 
 In der Arbeit von (\cite{matarneh2017speechrecognition}) werden verschiedene Spracherkennungssysteme 
 anhand von Kriterien wie Genauigkeit, API-Qualität, Leistung, Echtzeitgeschwindigkeit, 
@@ -1024,7 +1024,7 @@ Anforderungen an die Erkennung von 'Hey Siri' sehr gut:
 
 \begin{displayquote}
 	``The Hey Siri detector not only has to be accurate, but it needs to be fast
-	and not have a significant effect on battery life.''
+	and not have a significant effect on battery life.''  (\cite{siri2017hey})
 \end{displayquote}
 
 \subsubsection{Takeaways}
@@ -1087,7 +1087,7 @@ unzählige Sprachaufnahmen von Menschen, welche freiwillig ihre Stimme aufgenomm
 \subsection{Grundlegende Idee}
 Um die Grundlegende Idee zu beschreiben wird die Abbildung \ref{fig:basic_idea} verwendet. Darin 
 wird illustrativ dargestellt, wie die Grundlegende Idee umgesetzt werden soll. Es startet mit der
-erarbeitung der Grundlagen in Bezug auf Audio und Machine Learning. Danach wird eine Möglichkeit
+Erarbeitung der Grundlagen in Bezug auf Audio und Machine Learning. Danach wird eine Möglichkeit
 erarbeitet, um Sprachaufnahmen zu machen. Ein Schritt weiter ist es, die Sprachaufnahmen
 aufzubereiten und in ein Format zu bringen, welches für das Training eines Modells verwendet werden
 kann. Ebenfalls soll eine Modelarchitektur erarbeitet werden, welche für die Triggerwort Erkennung
@@ -1172,7 +1172,7 @@ für die Verwendung von wav2vec2.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.80\linewidth]{img/wav2vec2_code.png}
+	\includegraphics[width=0.75\linewidth]{img/wav2vec2_code.png}
 	\caption{Verwendung von wav2vec2}
 	\label{fig:wav2vec2_code}
 \end{figure}
@@ -1274,6 +1274,9 @@ Komponente der Sprache berücksichtigt. Die Idee der Kombination von Convolution
 LSTM Layers ist nicht neu. Es gibt diverse Paper, welche diesen Ansatz verwenden. Beispielsweise 
 verwendet (\cite{khamees2021classifying}) diesen Ansatz für die Klassifizierung von Music Genres.
 Die finale Architektur des Models ist in der Abbildung \ref{fig:model_architecture} dargestellt.
+Für den Namen des Models wurde der Name \textit{WakeupTriggerConvLSTM2s} gewählt. Der Name 
+beinhaltet information darüber, welche Architektur verwendet wurde. Die Zahl 2s steht für die 
+Anzahl Sekunden, welche das Model analysiert. Die Abbildung wurde mit Figma und Blender erstellt.
 
 \begin{figure}[h]
 	\centering
@@ -1290,7 +1293,7 @@ beschrieben.
 \subsection{Aufbau des Datensatzes}
 
 
-\subsection{Google Cloud Platform als Unterstützung}
+\subsubsection{Google Cloud Platform als Unterstützung}
 Die Google Cloud Platform (GCP) ist eine Sammlung von Cloud Computing-Diensten. In dieser Arbeit
 wurde die GCP verwendet, um die Recorder Webseite zu hosten. Ebenfalls wurde in betracht gezogen,
 die Modelle auf der GCP zu trainieren. Die GCP bietet Services für Machine Learning an. Eines der
