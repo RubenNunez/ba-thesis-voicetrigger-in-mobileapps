@@ -674,7 +674,8 @@ Die Abbildung \ref{fig:neural_network} soll das Konzept eines neuronalen Netzes 
 Aktivierungsfunktionen sind ein wichtiger Bestandteil von neuronalen Netzen. Sie werden verwendet,
 um die Ausgabe eines Neurons zu berechnen. Es gibt verschiedene Arten von Aktivierungsfunktionen.
 Die bekanntesten sind die \textit{Sigmoid}, \textit{ReLU} und \textit{Softmax} Funktionen. Bei den 
-Aktivierungsfunktionen handelt es sich um nicht-lineare Funktionen (\cite{weidman2019deep}).
+Aktivierungsfunktionen handelt es sich um nicht-lineare Funktionen (\cite{weidman2019deep}, 
+Chapter 4).
 
 
 \noindent \newline \textbf{Forward Pass und Backward Pass} \newline
@@ -760,10 +761,35 @@ Der Filter ist eine Matrix, die mit dem Input verrechnet wird. Die Abbildung \re
 zeigt ein Beispiel einer Convolution.
 
 
-
-
 \subsubsection{Recurrent Neural Networks}
+Recurrent Neural Networks (RNN) sind eine spezielle Art von neuronalen Netzen, die vor allem dazu 
+verwendet werden, um Sequenzen zu verarbeiten. Gewöhnliche neuronale Netze verarbeiten Daten als 
+unabhängige Einheiten, ohne die Beziehung zwischen den Daten zu berücksichtigen. RNNs hingegen sind 
+so aufgebaut, dass sie die Beziehung zwischen den Daten berücksichtigen. Die Abbildung \ref{fig:rnn} 
+zeigt ein Beispiel eines RNNs.
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\linewidth]{img/rnn.pdf}
+	\caption{Recurrent Neural Network}
+	\label{fig:rnn}
+\end{figure}
+
+\noindent \newline
+Eine wichtige Erweiterung der RNNs sind Long Short-Term Memory Networks (LSTMs). LSTMs wurden 
+entwickelt, um die Herausforderungen von RNNs, insbesondere das Problem des verschwindenden 
+Gradienten bei langen Sequenzen, zu überwinden. LSTMs behalten die grundlegenden Eigenschaften von 
+RNNs bei, führen jedoch eine zusätzliche Struktur ein: den Zellzustand. Neben dem versteckten 
+Zustand (hidden state), der bei traditionellen RNNs verwendet wird, haben LSTMs einen Zellzustand 
+(cell state), der es ihnen ermöglicht, Informationen über längere Zeiträume hinweg zu bewahren und 
+zu verarbeiten.
+
+\noindent \newline
+Dieser Zellzustand arbeitet als eine Art "Gedächtnis" der LSTM, das es ihm ermöglicht, sowohl 
+kurzfristige als auch langfristige Abhängigkeiten in Daten zu erkennen und zu lernen. Dies ist 
+besonders nützlich in Anwendungen wie der Spracherkennung oder der Vorhersage von Zeitreihen, wo 
+die Beziehung von Datenpunkten über längere Zeiträume hinweg entscheidend ist. 
+(\cite{weidman2019deep} Chapter 6).
 
 \newpage \section{Stand der Forschung}
 Der Stand der Forschung ist ein wichtiger Teil dieser Arbeit. Darin werden die wichtigsten
