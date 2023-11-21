@@ -1186,8 +1186,13 @@ Modelarchitektur ist noch nicht definiert. Die Inspiration für die Modelarchite
 (\cite{siri2017hey}). Die Modelarchitektur von Siri ist sehr einfach und besteht aus einem DNN. 
 Daher war ein erster Gedanke, eine ähnliche Architektur zu verwenden. Im folgenden werden die 
 unterschiedlichen Versuche die im Rahmen dieser Arbeit gemacht wurden, beschrieben. Als Experiment 
-stand immer die Erkennung von 'Hey FOOBY' im Vordergrund. 
+stand immer die Erkennung von 'Hey FOOBY' im Vordergrund.
 
+\subsection{Versuche}
+Als Teil der Ideen und Konzepte wurden verschiedene Versuche gestartet. Diese Versuche sind 
+wichtig, um die Machbarkeit der Ideen zu überprüfen. Die Versuche basieren mehrheitlich auf 
+die Verwendung des Basismodells von Facebook AI's wav2vec2. Die Versuche wurden mit dem Ziel 
+gestartet, ein eigenes Modell zu entwickeln, welches Triggerwörter erkennt.
 
 \subsubsection{Versuch 1: Facebook AI wav2vec2}
 Die ersten Versuche befassten sich mit der Verwendung von Facebook AI's wav2vec2. Dieses Modell 
@@ -1232,10 +1237,17 @@ Resultate in erster Linie nicht sehr gut erscheinen, sind sie dennoch vielverspr
 Beispiel könnten die Wörter 'Hey FOOBY' und 'Hey FOOBE' als ähnliche Wörter betrachten werden. 
 Durch die Berechnung der Levenshtein-Distanz könnte die Ähnlichkeit dieser Wörter berechnet werden.
 Die Levenshtein-Distanz ist eine Metrik zur Berechnung der Ähnlichkeit zweier Zeichenketten. Dieser 
-Ansatz wurde jedoch nicht weiter verfolgt und stammt aus eigenen Überlegungen. 
+Ansatz wurde jedoch nicht weiter verfolgt und stammt aus eigenen Überlegungen.
+
+\subsubsection{Versuch 2: Facebook AI wav2vec2 Fine-Tuning}
+Nach den ersten Versuchen mit wav2vec2 wurde ein weiterer Versuch gestartet. Nach einem Ansatz 
+welches als Fine-Tuning bezeichnet wird. Fine-Tuning ist ein Verfahren, bei dem ein bereits 
+vortrainiertes Modell als Basis verwendet wird. Dieses Modell kann dann für eine spezifische 
+Aufgabe weiter trainiert werden. Es reduziert dabei den Ökolgischen Fussabdruck, da weniger 
+Rechenleistung benötigt wird (\cite{huggingface2023finetune}).
 
 
-\subsubsection{Versuch 2: LiteFEW}
+\subsubsection{Versuch 3: LiteFEW}
 Nach den Misserfolgen mit wav2vec2 wurde ein weiterer vielversprechender Versuch gestartet. Dieser 
 basiert auf dem Paper von lim et al. (\cite{lim2023lightweight}). Der Grundgedanke dieses Papers 
 ist es, ein Modell auf Basis von wav2vec2 zu entwickeln, welches optimiert ist für die Triggerwort 
@@ -1244,7 +1256,7 @@ wav2vec2 als Teacher-Model und ein kleineres Modell als Student-Model. Doch an d
 wurde der Versuch abgebrochen, da die Implementation des Papers sehr komplex ist und kein Code 
 veröffentlicht wurde.
 
-\subsubsection{Versuch 3: ConvLSTM}
+\subsubsection{Versuch 4: ConvLSTM}
 Nach den Misserfolgen mit wav2vec2 und LiteFEW war die Situation etwas frustrierend. Daher wurde 
 ein weiterer Versuch gestartet, um ein eigenes Modell zu entwickeln. Dieser Versuch basiert auf 
 dem Github Repository von Barazanji et al. (\cite{barazanji2023heyditto}). Das Github Repository 
