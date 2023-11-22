@@ -1167,7 +1167,10 @@ Muttersprache haben. All diese Aspekte sollten bei der Erstellung eines Datensat
 werden.
 
 \subsection{Datenschutz und Privatsphäre}
-TODO: Gestzte und Regeln für Datenschutz und Privatsphäre
+Die Erestellung des Datensatzes und die Verwendung von Sprachaufnahmen soll unter Einhaltung des 
+Datenschutzgesetzes erfolgen. Die Sprachaufnahmen sollen nicht an Dritte weitergegeben werden. Die 
+Teilnehmer sollen über die Verwendung der Sprachaufnahmen informiert werden. Ebenfalls sollen die 
+Sprachaufnahmen nach der Verwendung gelöscht werden. 
 
 
 \subsection{Erste Überlegungen zu Tools und Technologien}
@@ -1189,10 +1192,12 @@ unterschiedlichen Versuche die im Rahmen dieser Arbeit gemacht wurden, beschrieb
 stand immer die Erkennung von 'Hey FOOBY' im Vordergrund.
 
 \subsection{Versuche}
-Als Teil der Ideen und Konzepte wurden verschiedene Versuche gestartet. Diese Versuche sind 
-wichtig, um die Machbarkeit der Ideen zu überprüfen. Die Versuche basieren mehrheitlich auf 
-die Verwendung des Basismodells von Facebook AI's wav2vec2. Die Versuche wurden mit dem Ziel 
-gestartet, ein eigenes Modell zu entwickeln, welches Triggerwörter erkennt.
+Als Teil der Ideen und Konzepte wurden verschiedene Versuche beziehungsweise Experimente gestartet. 
+Diese Versuche sind wichtig, um die Machbarkeit der Triggerwort Erkennung zu überprüfen. Da aus dem 
+Kapitel Stand der Forschung hervorgeht, dass das Model wav2vec2 von Facebook AI einen grossen 
+Fortschritt in der Spracherkennung darstellt, basieren die ersten drei Versuche auf der Verwendung 
+von wav2vec2.
+
 
 \subsubsection{Versuch 1: Facebook AI wav2vec2}
 Die ersten Versuche befassten sich mit der Verwendung von Facebook AI's wav2vec2. Dieses Modell 
@@ -1244,7 +1249,8 @@ Nach den ersten Versuchen mit wav2vec2 wurde ein weiterer Versuch gestartet. Nac
 welches als Fine-Tuning bezeichnet wird. Fine-Tuning ist ein Verfahren, bei dem ein bereits 
 vortrainiertes Modell als Basis verwendet wird. Dieses Modell kann dann für eine spezifische 
 Aufgabe weiter trainiert werden. Es reduziert dabei den Ökolgischen Fussabdruck, da weniger 
-Rechenleistung benötigt wird (\cite{huggingface2023finetune}).
+Rechenleistung benötigt wird (\cite{huggingface2023finetune}). Der Versuch binhaltete die 
+Erweiterung des Basis
 
 
 \subsubsection{Versuch 3: LiteFEW}
@@ -1439,6 +1445,7 @@ des Kontext einer App. Grundsätzlich ist es unüblich, dass mobile Apps eine
 integrierte Sprachsteuerungsfunktion anbieten.
 
 \newpage \section{Anhang}
+\subfile{thesis-video.tex} % Thesis Video separat
 
 \clearpage
 % Glossar
