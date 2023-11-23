@@ -29,7 +29,7 @@
 \input{glossary.tex}
 \makeglossaries
 \renewcommand*{\glstextformat}[1]{\textit{#1}}
-
+\renewcommand{\lstlistingname}{Source Code}
 
 \addbibresource{references.bib}
 
@@ -126,11 +126,57 @@ Zudem sollen die gewonnenen Erkenntnise in eine mobile Plattform wie iOS oder An
 werden. Für den Rahmen dieser Arbeit genügt die Integration in eine der genannten Plattformen.
 Weiterhin soll auch das Thema Datenschutz und die ethischen Aspekte zu berücksichtigen werden.
 
+\subsection{Ziele}
+Die Ziele dieser Arbeit sind als SMART-Ziele definiert. Die Tabelle \ref{tab:smart_goals} zeigt 
+die SMART-Ziele der Bachelorarbeit.
+
+\begin{table}[h]
+	\centering
+	\resizebox{\textwidth}{!}{%
+	\begin{tabular}{|l|p{12cm}|}
+	\hline
+	\textbf{Ziel} & \textbf{SMART-Kriterien} \\ \hline
+	Erkennen von Triggerwörtern & \textbf{Spezifisch:} Entwicklung eines Modells zur Erkennung von 
+								 von einem oder mehreren Triggerwörtern in der akustischen Sprache. 
+								 \textbf{Messbar:} Erfolgsrate der korrekten Erkennung.
+								 \textbf{Ausführbar:} Umsetzung mit aktuellen Machine 
+								 Learning-Methoden. 
+								 \textbf{Realistisch:} Realisierbar mit bestehenden Technologien. 
+								 \textbf{Terminiert:} Fertigstellung bis zum Ende der 
+								 Bachelorarbeit. \\ \hline
+	Integration in eine Mobile App & \textbf{Spezifisch:} Einbindung des erarbeiteten Modells in 
+									 eine iOS- oder Android-App. 
+									 \textbf{Messbar:} Funktionale und reibungslose Integration. 
+									 \textbf{Ausführbar:} Machbar mit vorhandenen 
+									 Entwicklungswerkzeugen und Plattformen. 
+									 \textbf{Realistisch:} Durchführbar innerhalb des 
+									 Projektzeitrahmens. 
+									 \textbf{Terminiert:} Integration bis zum Abschluss der 
+									 Bachelorarbeit. \\ \hline
+	Datenschutz und Ethik & \textbf{Spezifisch:} Gewährleistung von Datenschutz und ethischer 
+							Konformität bei der Erstellung des Datensatzes. 
+							\textbf{Messbar:} Erfüllung spezifischer Datenschutzrichtlinien und 
+							ethischer Standards im Datenerhebungsprozess. 
+							\textbf{Ausführbar:} Einhaltung von Best Practices und Richtlinien 
+							während der Datensammlung und -aufbereitung. 
+							\textbf{Realistisch:} Umsetzbar durch sorgfältige Planung und 
+							Überprüfung der Prozesse. 
+							\textbf{Terminiert:} Kontinuierliche Überwachung und Anpassung 
+							während der Datensatzerstellung.\\ \hline
+									 
+									 
+	\end{tabular}}
+	\caption{SMART Ziele der Bachelorarbeit}
+	\label{tab:smart_goals}
+\end{table}
+	
+
+
 \subsection{Abgrenzung}
 Diese Arbeit befasst sich mit der Erkennung von Triggerwörtern in der akustischen Sprache. Es ist 
 kein Ziel dieser Arbeit, einen vollständigen Sprachassistenten zu entwickeln. Das würde den Rahmen
 dieser Arbeit sprengen. Die Resultate dieser Arbeit sollen als Grundlage für eine vollständige
-Sprachsteuerung dienen.
+Implementierung eines Sprachassistenten dienen.
 
 \subsection{Rechtfertigung}
 Apple sowie Google selbst stellen mit Siri und Google Assistant bereits Sprachassistenten zur 
@@ -309,9 +355,9 @@ Inkompatibilitäten mit der gewählten Entwicklungsumgebung verworfen.
 \noindent \newline
 In dieser Arbeit wurde \textbf{SoundDevice} als Alternative zu PyAudio verwendet. Daher wird eine 
 kurze Implementierung von SoundDevice gezeigt, welches das kontinuierliche Streamen von Audio in
-Chunks ermöglicht.
+Chunks ermöglicht. Der folgende Source Code (\ref{lst:sounddevice}) zeigt die Implementierung.
 
-\begin{lstlisting}
+\begin{lstlisting}[caption={SoundDevice Audio Stream}, label={lst:sounddevice}]
 import sounddevice as sd
 
 def stream_audio(chunk_duration, samplerate=16000):
@@ -332,8 +378,9 @@ so einfach sein.
 \newpage
 \subsubsection{Audio API für Integration}
 Dieser Abschnitt befasst sich mit dem Thema Audio API für Integration in eine iOS App. Die Wahl 
-fiel auf die \textbf{AVAudioEngine} API für iOS und macOS. Im folgenden Code-Beispiel wird gezeigt, 
-wie ein kontinuierlicher Audio-Stream mit AVAudioEngine aufgenommen werden kann.
+fiel auf die \textbf{AVAudioEngine} API für iOS und macOS. Im der folgenden Abbildung 
+\ref{fig:avaudioengine} wird gezeigt, wie ein kontinuierlicher Audio-Stream mit AVAudioEngine 
+aufgenommen werden kann.
 
 \begin{figure}[h]
 	\centering
@@ -1244,13 +1291,63 @@ Durch die Berechnung der Levenshtein-Distanz könnte die Ähnlichkeit dieser Wö
 Die Levenshtein-Distanz ist eine Metrik zur Berechnung der Ähnlichkeit zweier Zeichenketten. Dieser 
 Ansatz wurde jedoch nicht weiter verfolgt und stammt aus eigenen Überlegungen.
 
-\subsubsection{Versuch 2: Facebook AI wav2vec2 Fine-Tuning}
-Nach den ersten Versuchen mit wav2vec2 wurde ein weiterer Versuch gestartet. Nach einem Ansatz 
-welches als Fine-Tuning bezeichnet wird. Fine-Tuning ist ein Verfahren, bei dem ein bereits 
-vortrainiertes Modell als Basis verwendet wird. Dieses Modell kann dann für eine spezifische 
-Aufgabe weiter trainiert werden. Es reduziert dabei den Ökolgischen Fussabdruck, da weniger 
-Rechenleistung benötigt wird (\cite{huggingface2023finetune}). Der Versuch binhaltete die 
-Erweiterung des Basis
+\subsubsection{Versuch 2: Fine-Tuning des Facebook AI wav2vec2-Modells}
+Nach ersten Versuchen mit wav2vec2 wurde ein weiterer Ansatz verfolgt, der als Fine-Tuning bekannt 
+ist. Hierbei wird ein bereits vortrainiertes Modell als Ausgangspunkt genutzt, welches dann für 
+spezifische Aufgaben weiterentwickelt wird. Dies reduziert den ökologischen Fussabdruck durch 
+geringeren Rechenaufwand (\cite{huggingface2023finetune}). Der Versuch umfasste die Anpassung des 
+Basismodells durch Hinzufügen eines Layers, um das spezifische Triggerwort in Audio zu erkennen. 
+
+\noindent \newline
+Das `TriggerWordWav2Vec2Model` im Source Code \ref{fig:wav2vec2_finetune} erweitert das 
+wav2vec2-Modell um ein Sequential Layer. Diese Komponente besteht aus einem Linear Layer, welcher 
+den Output des wav2vec2-Modells verarbeitet, und einer Sigmoid Activation Function. Der Linear 
+Layer verarbeitet die Average Pooling-Repräsentation der Hidden States des wav2vec2-Modells, um zu 
+entscheiden, ob das Triggerwort in der Audioeingabe vorhanden ist oder nicht. So die Grundidee.
+
+\begin{lstlisting}[caption={TriggerWordWav2Vec2Model}, label=fig:wav2vec2_finetune]
+
+class TriggerWordWav2Vec2Model(nn.Module):
+	def __init__(self, config):
+		super(TriggerWordWav2Vec2Model, self).__init__()
+		self.wav2vec2 = Wav2Vec2ForCTC(config).wav2vec2
+		self.classifier = nn.Sequential(
+			nn.Linear(config.hidden_size, 1),
+			nn.Sigmoid()
+		)
+
+	def forward(self, input_values):
+		transformer_outputs = self.wav2vec2(input_values).last_hidden_state
+		avg_pool = transformer_outputs.mean(dim=1)
+		return self.classifier(avg_pool)
+
+\end{lstlisting}
+
+\noindent \newline
+Im Forward-Durchlauf des Modells werden die Audioeingaben durch das wav2vec2-Modell verarbeitet, 
+das dabei relevante Merkmale aus den Audiodaten extrahiert. Vom Output des wav2vec2-Modells wird 
+der Durchschnitt der Hidden States berechnet. Danch wird der Durchschnitt dem Linear Layer 
+übergeben, welcher die Wahrscheinlichkeit berechnet, dass das Triggerwort in der Audioeingabe
+vorhanden ist. Die Wahrscheinlichkeit wird durch die Sigmoid Activation Function berechnet. Der 
+Prozess wird im Beitrag "Fine-tuning XLS-R for Multi-Lingual ASR with Transformers" von Patrick 
+von Platen beschrieben:
+
+\begin{displayquote}
+	``For fine-tuning, a single linear layer is added on top of the pre-trained network to train 
+	the model on labeled data of audio downstream tasks such as speech recognition, speech 
+	translation and audio classification'' 
+	(\cite{platen2021finetune})
+\end{displayquote}
+
+\noindent \newline
+Dieser Ansatz ermöglicht eine effiziente und zielgerichtete Anwendung des vortrainierten 
+wav2vec2-Modells für die spezifische Aufgabe der Triggerwort-Erkennung. Es nutzt die 
+fortschrittlichen Fähigkeiten des wav2vec2-Modells zur Merkmalsextraktion und kombiniert 
+diese mit einem massgeschneiderten Klassifikationsmechanismus, um hohe Genauigkeit bei der 
+Erkennung von Triggerwörtern zu erreichen. Dennoch wurde dieser Ansatz nicht weiter verfolgt, da 
+das resultierende Modell nicht den Anforderungen entsprechen in Bezug auf die Integration in eine 
+mobile App. Es ist zum einen zu gross und zum anderen zu energieintensiv in der Inferenz. 
+
 
 
 \subsubsection{Versuch 3: LiteFEW}
@@ -1302,10 +1399,125 @@ Dokumentation fertiggestellt.
 
 
 \newpage \section{Realisierung}
-Die Realisierung dieser Arbeit besteht aus zwei Teilen. Zum einen wurde ein eigenes Model
-trainiert, welches Triggerwörter erkennt. Zum anderen wurde das Model in eine App integriert. 
-Diese zwei Bereiche wurden Bereits bei der Planung der Arbeit definiert. Für die Realisierung
-des Modells wurde PyTorch verwendet. Dieses Framework hat sich als sehr hilfreich erwiesen. 
+Die Realisierung dieser Arbeit besteht im wesentlichen aus drei Teilen. Welche die Ziele der Arbeit 
+wiederspiegeln. Zum einen wurde ein Datensatz nach ethischen sowie rechtlichen Aspekten erstellt, 
+welcher die Grundlage für die Experimente so wie das Training des Modells bildet. Weiter wurde ein 
+Modell erarbeitet und anschliessend trainiert, welches Triggerwörter erkennt. Der letzte Teil der 
+Realisierung ist die Integration dieses Modells in eine Sample App.
+
+
+\subsection{Aufbau des Datensatzes}
+Der Aufbau eines Datensatzes war zu Beginn der Arbeit geplant. Es war klar, dass ein Datensatz 
+benötigt wird, um ein Modell zu trainieren. Der Datensatz wiederspiegelt die Grundlage des 
+Problemfeldes. Es geht ja darum ein spezifisches Wort oder Wörter zu erkennen. Die nachfolgende 
+Abbildung \ref{fig:dataset} zeigt die zwei Klassen des Datensatzes. Die Klasse 0 beinhaltet 
+Sprachaufnahmen, welche das Triggerwort nicht enthalten. Die Klasse 1 beinhaltet Sprachaufnahmen, 
+welche das Triggerwort enthalten. 
+
+\hspace*{-1.5cm}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.75\linewidth]{img/dataset.pdf}
+	\caption{Aufbau des Datensatzes}
+	\label{fig:dataset}
+\end{figure}
+
+\subsubsection{Recorder Webseite}
+Um den Datensatz zu erstellen, wurde eine Webseite entwickelt, welche die Aufnahme von Sprachsamples 
+ermöglicht. Die Webseite wurde auf Google Cloud Platform (GCP) gehostet, um eine zuverlässige und
+skalierbare Lösung zu gewährleisten. Die Webseite wurde dockerisiert, was die Bereitstellung und 
+Skalierung erleichtert. Zudem wurde sie auf den neuesten Stand gebracht, um sicherzustellen, dass 
+sie mit aktuellen Technologien kompatibel ist. Bei der zugrunde liegenden Anwendung handelt es sich 
+um eine Python Flask App, die für ihre Leichtigkeit und Flexibilität bekannt ist. Die Webseite 
+stellt ein nützliches Tool dar, das die Aufnahme von Sprachsamples ermöglicht. Ursprünglich von 
+Pete Warden entwickelt, bietet sie eine einfache und effiziente Möglichkeit, Sprachdaten zu sammeln 
+(\cite{warden2018speech}).
+
+\noindent \newline
+Die Anpassungen der Webseite für diese Arbeit umfassten die folgenden Punkte:
+
+\begin{itemize}
+    \item \textbf{Hosting auf GCP}: Die Webseite wurde auf Google Cloud Platform (GCP) gehostet, um 
+	eine zuverlässige und skalierbare Lösung zu gewährleisten.
+    \item \textbf{Dockerisierung und Aktualisierung}: Die Anwendung wurde dockerisiert, was die 
+	Bereitstellung und Skalierung erleichtert. Zudem wurde sie auf den neuesten Stand gebracht, um 
+	sicherzustellen, dass sie mit aktuellen Technologien kompatibel ist.
+    \item \textbf{Technische Details}: Bei der zugrunde liegenden Anwendung handelt es sich um eine 
+	Python Flask App, die für ihre Leichtigkeit und Flexibilität bekannt ist.
+    \item \textbf{Anpassungen für die Bachelorarbeit}: Die Zielwörter und die Länge der Aufnahmen 
+	wurden modifiziert, um den spezifischen Anforderungen dieser Arbeit gerecht zu werden. Darüber 
+	hinaus wurde die Webseite nahtlos in das Repository dieser Bachelorarbeit integriert.
+\end{itemize}
+
+\noindent \newline
+Mit der überarbeiteten Recorder Webseite wurden Sprachaufnahmen von zwei Sekunden Länge und einer 
+Sample Rate von 48kHz erstellt. Bei den freiwilligen Teilnehmern handelte es sich um Personen aus 
+dem Bekanntenkreis des Autors. Um den Datenschutz zu gewährleisten, wurden die Teilnehmer über die 
+Nutzung der Sprachaufnahmen informiert. Das Paper von Papakyriakopoulos et al. 
+(\cite{papakyriakopoulos2023augmented}) betont die Notwendigkeit der Diversität in Sprachdaten. Die 
+Aufnahmen beinhalten Aufnahmen von mindestens 10 verschiedenen Personen. Da die Variation der 
+Sprachaufnahmen relativ gering war, wurden zusätzlich Augmentierungen der Sprachaufnahmen 
+durchgeführt. Diese werden im Kapitel \ref{sec:augmentierung} beschrieben. Die nachstehende 
+Abbildung gibt einen visuellen Überblick über das Erscheinungsbild und die Funktionalität der 
+Webseite.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/ba-recorder-website.png} 
+    \caption{Die überarbeitete Recorder Webseite}
+    \label{fig:recorder_webseite}
+\end{figure}
+
+\subsubsection{Google Cloud Platform als Unterstützung}
+Die Google Cloud Platform (GCP) ist eine Sammlung von Cloud Computing-Diensten. In dieser Arbeit
+wurde die GCP verwendet, um die Recorder Webseite zu hosten. Ebenfalls wurde in betracht gezogen,
+die Modelle auf der GCP zu trainieren. Die GCP bietet Services für Machine Learning an. Eines der
+Services ist Vertex AI. Darin können beispielsweise Jupiter Notebooks verwendet werden, um Modelle
+zu trainieren. Das Training kann beispielsweise auf CUDA-fähigen GPUs ausgeführt werden.
+
+\noindent \newline
+Die Sprachdaten wurden auf Google Cloud Storage (GCS) gespeichert. GCS ist ein Objektspeicher, der
+für die Speicherung und Verteilung von grossen Datenmengen optimiert ist. Die Sprachdaten wurden
+in einem Bucket gespeichert. Um mit der Datenschutzverordnung konform zu sein, wurde eine 
+Löschrichtlinie für die Sprachdaten erstellt. Art. 17 Abs. 1 DSGVO besagt, dass Daten gelöscht 
+werden müssen, wenn sie für den ursprünglichen Zweck nicht mehr erforderlich sind. Die
+Löschrichtlinie wurde so konfiguriert, dass die Sprachdaten nach einem Jahr gelöscht werden.
+
+
+\subsubsection{Augmentierung der Sprachdaten} \label{sec:augmentierung}
+Um die Diversität und Robustheit der Sprachaufnahmen zu erhöhen und das Modell für die Erkennung 
+von Triggerwörtern zu stärken, wurden gezielte Augmentierungstechniken eingesetzt. Dabei kamen 
+Pitch Shifting zur Variation der Tonhöhe, Time Shifting zur Simulation zeitlicher Verschiebungen, 
+Volume Control für Lautstärkeanpassungen und Noise Injection zur Ergänzung von 
+Hintergrundgeräuschen zum Einsatz. Diese Massnahmen zielen darauf ab, die Generalisierungsfähigkeit 
+des Modells zu verbessern und seine Leistung unter verschiedenen akustischen Bedingungen zu 
+optimieren. Die Verwendung von Datenaugmentierung hat sich insbesondere bei einer begrenzten 
+Anzahl von Samples als wirkungsvoll erwiesen und ist eine etablierte Methode in der Praxis. In 
+Anlehnung an das Paper von Salamon et al. (\cite{salamon2017deep}), das den Einsatz verschiedener 
+Augmentierungstechniken zur Verbesserung der Klassifikation von Umgebungsgeräuschen diskutiert, 
+wurde das vorgeschlagene Verfahren angepasst, um die Herausforderungen bei der Erkennung von 
+spezifischen akustischen Signalen, wie Triggerwörtern, zu meistern. Die effektive Kombination 
+dieser Techniken im Trainingsprozess führte zu einem erweiterten und robusten Datensatz, der für 
+die Entwicklung eines leistungsfähigen Erkennungssystems unerlässlich ist.
+
+
+\subsubsection{Datensatz 'hey-fooby'}
+Insgesamt wurden etwa 700 Sprachaufnahmen mit dem Recorder erstellt. 300 davon enthielten das 
+Triggerwort 'Hey FOOBY', und 400 Aufnahmen bestanden aus anderen Wörtern. Durch 
+Augmentierungstechniken wurde die Anzahl der Samples auf 10'000 erhöht, wobei ein Verhältnis von 
+1 zu 2 im Vergleich zum 'other' Datensatz beibehalten wurde. Die daraus resultierende 
+Imbalance wurde bei der Schulung der finalen Modellarchitektur berücksichtigt.
+
+\subsubsection{Datensatz 'other'}
+Der 'other' Datensatz umfasst Sprachaufnahmen, die andere Wörter als das Triggerwort beinhalten. 
+Von den ursprünglich 400 Aufnahmen wurde die Menge durch Augmentierung und die Integration 
+weiterer Datensätze, darunter auch solche von Mozilla Common Voice (\cite{ardila2020common}), 
+erhöht. Während des Trainings stellte sich heraus, dass das Modell auf Silence nicht adäquat 
+reagierte, was die nachträgliche Hinzufügung von Silence Samples zum 'other' Datensatz motivierte. 
+Gleiches galt für das Hinzufügen von Noise Samples, um die Reaktion auf Hintergrundgeräusche zu 
+verbessern.
+
 
 \subsection{Verwendete Architektur des Modells}
 Die Architektur des Models wurde in ersten Linie von (\cite{siri2017hey}) inspiriert. Dennoch 
@@ -1334,82 +1546,6 @@ Diese Art von Modelarchitektur setzt eine Transformation der Sprachdaten in ein 
 Die Transformation der Sprachdaten wurde im Kapiel \ref{sec:grundlagen} der Grundlagen bereits
 beschrieben.
 
-\subsection{Aufbau des Datensatzes}
-
-
-\subsubsection{Google Cloud Platform als Unterstützung}
-Die Google Cloud Platform (GCP) ist eine Sammlung von Cloud Computing-Diensten. In dieser Arbeit
-wurde die GCP verwendet, um die Recorder Webseite zu hosten. Ebenfalls wurde in betracht gezogen,
-die Modelle auf der GCP zu trainieren. Die GCP bietet Services für Machine Learning an. Eines der
-Services ist Vertex AI. Darin können beispielsweise Jupiter Notebooks verwendet werden, um Modelle
-zu trainieren. Das Training kann beispielsweise auf CUDA-fähigen GPUs ausgeführt werden.
-
-\noindent \newline
-Die Sprachdaten wurden auf Google Cloud Storage (GCS) gespeichert. GCS ist ein Objektspeicher, der
-für die Speicherung und Verteilung von grossen Datenmengen optimiert ist. Die Sprachdaten wurden
-in einem Bucket gespeichert. Um mit der Datenschutzverordnung konform zu sein, wurde eine 
-Löschrichtlinie für die Sprachdaten erstellt. Art. 17 Abs. 1 DSGVO besagt, dass Daten gelöscht 
-werden müssen, wenn sie für den ursprünglichen Zweck nicht mehr erforderlich sind. Die
-Löschrichtlinie wurde so konfiguriert, dass die Sprachdaten nach einem Jahr gelöscht werden.
-
-\subsubsection{Recorder Webseite}
-
-Die Recorder Webseite stellt ein nützliches Tool dar, das die Aufnahme von Sprachsamples ermöglicht. 
-Ursprünglich von Pete Warden entwickelt, bietet sie eine einfache und effiziente Möglichkeit, 
-Sprachdaten zu sammeln \cite{warden2018speech}. 
-
-\noindent \newline
-Im Kontext der VoiceCommands-Samples wird eine spezielle Version dieser Recorder Webseite 
-bereitgestellt, die speziell für die Aufnahme von Sprachsamples konzipiert ist. Die ursprüngliche 
-Webseite, die auf GitHub unter 
-\href{https://github.com/petewarden/open-speech-recording/tree/master}{Pete Warden's Repository} zu 
-finden ist, wurde im Rahmen dieser Bachelorarbeit umfassend modifiziert und erweitert.
-
-\noindent \newline
-Einige der wesentlichen Anpassungen umfassen:
-
-\begin{itemize}
-    \item \textbf{Hosting auf GCP}: Die Webseite wurde auf Google Cloud Platform (GCP) gehostet, um 
-	eine zuverlässige und skalierbare Lösung zu gewährleisten.
-    \item \textbf{Dockerisierung und Aktualisierung}: Die Anwendung wurde dockerisiert, was die 
-	Bereitstellung und Skalierung erleichtert. Zudem wurde sie auf den neuesten Stand gebracht, um 
-	sicherzustellen, dass sie mit aktuellen Technologien kompatibel ist.
-    \item \textbf{Technische Details}: Bei der zugrunde liegenden Anwendung handelt es sich um eine 
-	Python Flask App, die für ihre Leichtigkeit und Flexibilität bekannt ist.
-    \item \textbf{Anpassungen für die Bachelorarbeit}: Die Zielwörter und die Länge der Aufnahmen 
-	wurden modifiziert, um den spezifischen Anforderungen dieser Arbeit gerecht zu werden. Darüber 
-	hinaus wurde die Webseite nahtlos in das Repository dieser Bachelorarbeit integriert.
-\end{itemize}
-
-\noindent \newline
-Die überarbeitete Recorder Webseite stellte einen wichtigen Bestandteil dieser Arbeit dar. Sie
-ermöglichte es, einen eigenen Datensatz zu erstellen, der für das Training eines Modells zur
-Triggerwort-Erkennung verwendet werden konnte. Die nachstehende Abbildung gibt einen visuellen 
-Überblick über das Erscheinungsbild und die Funktionalität der Webseite.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.8\textwidth]{img/ba-recorder-website.png} 
-    \caption{Die überarbeitete Recorder Webseite}
-    \label{fig:recorder_webseite}
-\end{figure}
-
-
-\subsection{Datensatz}
-Um ein Modell zu trainieren, welches Triggerwörter erkennt, wird ein Datensatz benötigt.
-
-\subsubsection{Datensatz 'other}
-Am besten von Datenset (\cite{warden2018speech})
-\begin{itemize}
-	\item Datenset von Mozilla Common Voice
-	\item Datenset von Google Speech Commands
-\end{itemize}
-
-\subsubsection{Datensatz 'hey-fooby'}
-\begin{itemize}
-	\item TODO: Recorder Webseite für Aufnahme von Sprachsamples
-	\item Synthetische Sprachsamples mit verschiedenen Stimmen Geräuschen und Hintergrundgeräuschen
-\end{itemize}
 
 \subsection{Modell}
 \begin{itemize}
