@@ -1146,7 +1146,6 @@ Lösungen. Die in diesem Kapitel betrachteten Lösungen und Ansätze haben einen
 Funktionsweise von Trigger Wort Erkennung gegeben. Die Funktionsweise von Siri hat hierbei einen
 besonderen Einblick gegeben.
 
-
 \newpage \section{Ideen und Konzepte}
 Dieses Kapitel beschreibt die Ideen und Konzepte, die für die Umsetzung der Arbeit verwendet
 werden. Es wird auch auf die verwendeten Technologien eingegangen. Die Grob Idee ist es im 
@@ -1376,7 +1375,6 @@ diese Art von Modelarchitektur verwendet. Das Paper von Khamees et al.
 ähnlichen Modelarchitektur. Eine detailierte Beschreibung der Modelarchitektur ist im Kapitel der 
 Realisierung zu finden.
 
-
 \newpage \section{Methoden}
 Das Vorgehen dieser Arbeit kann als eine hybride Methode beschrieben werden. Aus der 
 Aufgabenstellung ging schon hervor, dass ein eigenes Deep Learning Modell für die Triggerwort 
@@ -1397,14 +1395,12 @@ Dokumentation fertiggestellt.
 
 \subfile{projectmanagement.tex} % Projektmanagement separat
 
-
 \newpage \section{Realisierung}
 Die Realisierung dieser Arbeit besteht im wesentlichen aus drei Teilen. Welche die Ziele der Arbeit 
 wiederspiegeln. Zum einen wurde ein Datensatz nach ethischen sowie rechtlichen Aspekten erstellt, 
 welcher die Grundlage für die Experimente so wie das Training des Modells bildet. Weiter wurde ein 
 Modell erarbeitet und anschliessend trainiert, welches Triggerwörter erkennt. Der letzte Teil der 
 Realisierung ist die Integration dieses Modells in eine Sample App.
-
 
 \subsection{Aufbau des Datensatzes}
 Der Aufbau eines Datensatzes war zu Beginn der Arbeit geplant. Es war klar, dass ein Datensatz 
@@ -1507,7 +1503,7 @@ Insgesamt wurden etwa 700 Sprachaufnahmen mit dem Recorder erstellt. 300 davon e
 Triggerwort 'Hey FOOBY', und 400 Aufnahmen bestanden aus anderen Wörtern. Durch 
 Augmentierungstechniken wurde die Anzahl der Samples auf 10'000 erhöht, wobei ein Verhältnis von 
 1 zu 2 im Vergleich zum 'other' Datensatz beibehalten wurde. Die daraus resultierende 
-Imbalance wurde bei der Schulung der finalen Modellarchitektur berücksichtigt.
+Imbalance wurde bei dem Training der finalen Modellarchitektur berücksichtigt.
 
 \subsubsection{Datensatz 'other'}
 Der 'other' Datensatz umfasst Sprachaufnahmen, die andere Wörter als das Triggerwort beinhalten. 
@@ -1519,7 +1515,21 @@ Gleiches galt für das Hinzufügen von Noise Samples, um die Reaktion auf Hinter
 verbessern.
 
 
-\subsection{Verwendete Architektur des Modells}
+\newpage
+
+\subsection{Erstellung des Modells}
+Bei der Erstellung des Modells wurde die Architektur von Barazanji et al. 
+(\cite{barazanji2023heyditto}) verwendet. Das Modell wurde in PyTorch implementiert und 
+anschliessend trainiert. Das Training wurde auf einem MacBook Pro mit einem M1 Pro Chip 
+durchgeführt. Die Trainingszeit betrug für 100 Epochen etwa 8 Stunden. Neben der Architektur und 
+dem Training des Modells wurde ebenfalls die Implementierung in einer Echtzeitanwendung konzipiert. 
+Dabei war zu berücksichtigen, dass das Modell in eine mobile App integriert werden soll, weshalb 
+besonderer Wert auf eine energieeffiziente Inferenz gelegt wurde. Die Echtzeitanwendung, entwickelt 
+in Python, diente dazu, die Inferenzgeschwindigkeit des Modells zu testen, diese zu optimieren und 
+entsprechende Leistungsmessungen durchzuführen.
+
+
+\subsubsection{Verwendete Architektur des Modells}
 Die Architektur des Models wurde in ersten Linie von (\cite{siri2017hey}) inspiriert. Dennoch 
 wurde schlussendlich der Ansatz von (\cite{barazanji2023heyditto}) verwendet. Die Architektur 
 besteht mehrheitlich aus Convolutional Layers und einem Long-Short-Term-Memory LSTM Layer. Der 
@@ -1546,29 +1556,66 @@ Diese Art von Modelarchitektur setzt eine Transformation der Sprachdaten in ein 
 Die Transformation der Sprachdaten wurde im Kapiel \ref{sec:grundlagen} der Grundlagen bereits
 beschrieben.
 
+\subsubsection{Training des Modells}
+Hier werden die Resultate des Trainings beschrieben. Der Datensatz wurde in Trainingsdaten und 
+Validierungsdaten aufgeteilt. Die Trainingsdaten wurden für das Training des Modells verwendet. 
+Die Validierungsdaten wurden verwendet, um das Modell während des Trainings zu validieren. Neben 
+der Aufteilung der Daten in Trainings- und Validierungsdaten wurde auch ein finaler Testdatensatz
+erstellt. Dieser wurde verwendet, um das Modell nach dem Training zu evaluieren und eine Aussage 
+über die Leistungsfähigkeit des Modells zu treffen.
 
-\subsection{Modell}
-\begin{itemize}
-	\item Auswahl des Modells
-	\item Auswahl der Hyperparameter
-	\item Training des Modells
-	\item Evaluation des Modells
-\end{itemize}
+\noindent \newline
+Die nachfolgenden Abbildungen zeigen verschiedene Metriken, die während des Trainingsprozesses 
+aufgezeichnet wurden:
 
-\subsubsection{Modell 'CNN'}
-\begin{itemize}
-	\item Aufbau des Modells
-	\item TODO: Beschreibung des Modells
-\end{itemize}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{img/train/batch_accuracy.png}
+    \caption{Genauigkeit pro Batch während des Trainings}
+    \label{fig:batch_accuracy}
+\end{figure}
 
-\subsubsection{Modell 'RNN'}
-\begin{itemize}
-	\item Aufbau des Modells
-	\item TODO: Beschreibung des Modells
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{img/train/batch_f1.png}
+    \caption{F1-Score pro Batch während des Trainings}
+    \label{fig:batch_f1}
+\end{figure}
 
-\end{itemize}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{img/train/batch_loss.png}
+    \caption{Loss pro Batch während des Trainings}
+    \label{fig:batch_loss}
+\end{figure}
 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{img/train/epoch_accuracy.png}
+    \caption{Genauigkeit pro Epoche}
+    \label{fig:epoch_accuracy}
+\end{figure}
 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{img/train/epoch_f1.png}
+    \caption{F1-Score pro Epoche}
+    \label{fig:epoch_f1}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{img/train/epoch_loss.png}
+    \caption{Loss pro Epoche}
+    \label{fig:epoch_loss}
+\end{figure}
+
+\noindent \newline
+Diese Diagramme bieten eine detaillierte Übersicht über die Leistung des Modells während des 
+Trainingsprozesses und helfen, die Effektivität der angewandten Trainingsmethodik zu bewerten.
+
+\newpage
+\subsubsection{Real Time Anwendung}
 
 \newpage \section{Evaluation und Validation}
 Das Problem dieser Arbeit ist im wesentlichen die Erkennung von Triggerwörtern innerhalb
