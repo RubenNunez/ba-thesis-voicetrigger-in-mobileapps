@@ -466,7 +466,6 @@ primäre Energie der Funktion liegt bei \( \omega=0 \). Beispiel adaptiert von
 (\cite[Chapter~5 - Example~5.1]{hansen2014fourier}).
 
 
-
 \subsubsection{Diskrete Fourier-Transformation}
 
 Die diskrete Fourier-Transformation (DFT) stellt eine diskrete Variante der kontinuierlichen
@@ -904,8 +903,6 @@ wie folgt berechnet:
 	\text{Recall}}
 \end{equation*}
 
-
-
 \newpage \section{Stand der Forschung}
 Der Stand der Forschung ist ein wichtiger Teil dieser Arbeit. Darin werden die wichtigsten
 zeitlichen Entwicklungen im Bereich der Spracherkennung dargestellt. Die Forschung im Bereich 
@@ -1251,7 +1248,6 @@ würde somit den Anwendern ermöglichen, die Hände frei zu haben und sich voll 
 Kochen zu konzentrieren. Die Nutzererfahrung könnte mit einem solchen Feature massiv verbessert
 werden.
 
-
 \subsection{Erstellung eines Datensatzes}
 Die Erstellung eines Datensatzes ist ein wichtiger Bestandteil dieser Arbeit. Daher soll eine 
 Möglichkeit erarbeitet werden, um Sprachaufnahmen zu machen. Der Datensatz soll aus Sprachaufnahmen
@@ -1285,7 +1281,6 @@ Die Erestellung des Datensatzes und die Verwendung von Sprachaufnahmen soll unte
 Datenschutzgesetzes erfolgen. Die Sprachaufnahmen sollen nicht an Dritte weitergegeben werden. Die 
 Teilnehmer sollen über die Verwendung der Sprachaufnahmen informiert werden. Ebenfalls sollen die 
 Sprachaufnahmen nach der Verwendung gelöscht werden. 
-
 
 \subsection{Erste Überlegungen zu Tools und Technologien}
 Für die Entwicklung von Machine-Learning-Modellen stehen mehrere Frameworks zur Verfügung. Eine 
@@ -1586,8 +1581,8 @@ verbessern.
 
 \subsection{Erstellung des Modells}
 Bei der Erstellung des Modells wurde die Architektur von Barazanji et al. 
-(\cite{barazanji2023heyditto}) verwendet. Das Modell wurde in PyTorch implementiert und 
-anschliessend trainiert. Das Training wurde auf einem MacBook Pro mit einem M1 Pro Chip 
+(\cite{barazanji2023heyditto}) verwendet. Das Modell wurde in PyTorch implementiert als ein PyTorch 
+Modul und anschliessend trainiert. Das Training wurde auf einem MacBook Pro mit einem M1 Pro Chip 
 durchgeführt. Die Trainingszeit betrug für 120 Epochen etwa 8 Stunden. Neben der Architektur und 
 dem Training des Modells wurde ebenfalls die Implementierung in einer Echtzeitanwendung konzipiert. 
 Dabei war zu berücksichtigen, dass das Modell in eine mobile App integriert werden soll, weshalb 
@@ -1621,9 +1616,26 @@ Anzahl Sekunden, welche das Model analysiert. Die Abbildung wurde mit Figma und 
 \noindent \newline
 Diese Art von Modelarchitektur setzt eine Transformation der Sprachdaten in ein Spektrogramm voraus.
 Die Transformation der Sprachdaten wurde im Kapiel \ref{sec:grundlagen} der Grundlagen bereits
-beschrieben.
+beschrieben und wird im anschliessenden Kapitel nochmals genauer beschrieben.
 
-\subsubsection{Training des Modells}
+\subsubsection{Transformation, Preprocessing, Feature Extraction}
+Wie bereits in den Grundlagen beschrieben, werden die Sprachdaten in ein Spektrogramm transformiert.
+Diese Transformation ist essentiell der Modelarchitektur. Für die Transformation wurde ein Pytorch 
+Modul entwickelt, welches die Transformation der Sprachdaten übernimmt. Kurz zum Konzept von PyTorch 
+Module. PyTorch Module erben von der Klasse nn.Module und sind die Grundbausteine von PyTorch. Sie 
+haben einen Vorteil welcher vorallem bei der Integration in eine mobile App wichtig ist. Aber dazu 
+später mehr. Das PyTorch Modul für die Transformation der Sprachdaten ist in der Abbildung 
+\ref{fig:transform} dargestellt. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\linewidth]{img/transform.pdf}
+	\caption{PyTorch Modul für die Transformation der Sprachdaten}
+	\label{fig:transform}
+\end{figure}
+
+
+\newpage \subsubsection{Training des Modells}
 Hier werden die Resultate des Trainings beschrieben. Der Datensatz wurde in Trainingsdaten und 
 Validierungsdaten aufgeteilt. Die Trainingsdaten wurden für das Training des Modells verwendet. 
 Die Validierungsdaten wurden verwendet, um das Modell während des Trainings zu validieren. Neben 
@@ -1635,42 +1647,42 @@ erstellt. Dieser wurde verwendet, um das Modell nach dem Training zu evaluieren 
 Die nachfolgenden Abbildungen zeigen verschiedene Metriken, die während des Trainingsprozesses 
 aufgezeichnet wurden:
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{img/train/batch_accuracy.png}
     \caption{Genauigkeit pro Batch während des Trainings}
     \label{fig:batch_accuracy}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{img/train/batch_f1.png}
     \caption{F1-Score pro Batch während des Trainings}
     \label{fig:batch_f1}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{img/train/batch_loss.png}
     \caption{Loss pro Batch während des Trainings}
     \label{fig:batch_loss}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{img/train/epoch_accuracy.png}
     \caption{Genauigkeit pro Epoche}
     \label{fig:epoch_accuracy}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{img/train/epoch_f1.png}
     \caption{F1-Score pro Epoche}
     \label{fig:epoch_f1}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{img/train/epoch_loss.png}
     \caption{Loss pro Epoche}
@@ -1679,10 +1691,20 @@ aufgezeichnet wurden:
 
 \noindent \newline
 Diese Diagramme bieten eine detaillierte Übersicht über die Leistung des Modells während des 
-Trainingsprozesses und helfen, die Effektivität der angewandten Trainingsmethodik zu bewerten.
+Trainingsprozesses. Es zeigt das Das Model sich den Daten anpasst und die Metriken sich verbessern 
+über die Zeit. 
 
 \newpage
+
 \subsubsection{Real Time Anwendung}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\linewidth]{img/realtime-application.pdf}
+	\caption{Real Time Anwendung}
+	\label{fig:realtime-application}
+\end{figure}
+
 
 \newpage \section{Evaluation und Validation}
 Das Problem dieser Arbeit ist im wesentlichen die Erkennung von Triggerwörtern innerhalb
