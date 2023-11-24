@@ -21,6 +21,7 @@
 \usepackage{tikz}
 \usepackage{multicol}
 \usepackage{enumitem}
+\usepackage{float}
 
 
 \geometry{a4paper, total={170mm,257mm}, left=20mm, top=20mm}
@@ -146,7 +147,7 @@ die SMART-Ziele der Bachelorarbeit.
 								 Bachelorarbeit. \\ \hline
 	Integration in eine Mobile App & \textbf{Spezifisch:} Einbindung des erarbeiteten Modells in 
 									 eine iOS- oder Android-App. 
-									 \textbf{Messbar:} Funktionale und reibungslose Integration. 
+									 \textbf{Messbar:} Durch User-Tests und Messung der Erfolgsrate
 									 \textbf{Ausführbar:} Machbar mit vorhandenen 
 									 Entwicklungswerkzeugen und Plattformen. 
 									 \textbf{Realistisch:} Durchführbar innerhalb des 
@@ -179,7 +180,7 @@ dieser Arbeit sprengen. Die Resultate dieser Arbeit sollen als Grundlage für ei
 Implementierung eines Sprachassistenten dienen.
 
 \subsection{Rechtfertigung}
-Apple sowie Google selbst stellen mit Siri und Google Assistant bereits Sprachassistenten zur 
+Apple sowie Google stellen mit Siri und Google Assistant bereits Sprachassistenten zur 
 Verfügung, um Apps zu öffnen oder auch direkte Befehle auszuführen. Daher stellt sich die Frage, 
 warum überhaupt eine eigene In App Sprachsteuerung? Wenn ein Sprachassistent wie Siri bereits 
 API's anbieten. Als Beispiel hat Spotify eine Integration mit Siri. Es können Befehle wie 
@@ -396,7 +397,6 @@ einige Konzepte verstehen, um die API effektiv nutzen zu können. Beispielsweise
 eine Konvertierung der Samplerate von \(48000\) Hz auf \(16000\) Hz durchgeführt. Ebenfalls müssen 
 die Buffer-Grösse, Bit-Depth, Channels und die Anordnung der Frames definiert werden.
 
-
 \newpage \subsection{Fourier-Analyse}
 Die Fourier-Analyse befasst sich mit der Zerlegung von Funktionen in Frequenzkomponenten. Die
 Fourier-Analyse ist ein wichtiges Konzept in der Signalverarbeitung und findet breite Anwendung
@@ -479,16 +479,15 @@ besonders relevant für solche Anwendungen ist. Die mathematische Definition der
 	F(k) = \sum_{n=0}^{N-1} f(n) \cdot e^{-\frac{2\pi i}{N} kn}
 \]
 
-\noindent
-\newline
-Zur Veranschaulichung betrachten wir ein Code-Beispiel. Wir haben eine Funktion \(f(t)\) und unterteilen
-diese in \(N\) Samples. Die DFT berechnet nun die Frequenzkomponenten des Signals. Die Abbildung
-\ref{fig:dft_example} zeigt ein Beispiel für ein Signal \(f(t)\) mit \(N=5\) Samples.
+\noindent \newline
+Zur Veranschaulichung betrachten wir ein Source Code Beispiel (\ref{lst:dft_example}). 
+Wir haben eine Funktion \(f(t)\) und unterteilen diese in \(N\) Samples. Die DFT berechnet nun die 
+Frequenzkomponenten des Signals. Die Abbildung \ref{fig:dft_example} zeigt ein Beispiel für ein 
+Signal \(f(t)\) mit \(N=5\) Samples.
 
 \[ f(t) = 1.5 \cos(t) + 0.25 \sin(t) + 2 \sin(2t) + \sin(3t) \].
 
-
-\begin{lstlisting}
+\begin{lstlisting} [caption={Unterteilung der Funktion \(f(t)\) in 5 Samples}, label={lst:dft_example}]
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -664,7 +663,7 @@ Im einfachsten Fall bestehen Neuronen aus Inputs \(x_{1}, x_{2}, \dots, x_{n}\),
 		\draw[->] (b) -- (sum);
 	\end{tikzpicture}
 
-	\caption{Neuronale Netze}
+	\caption{Neuron eines neuronalen Netzes}
 	\label{fig:neuron}
 
 \end{figure}
@@ -837,6 +836,71 @@ kurzfristige als auch langfristige Abhängigkeiten in Daten zu erkennen und zu l
 besonders nützlich in Anwendungen wie der Spracherkennung oder der Vorhersage von Zeitreihen, wo 
 die Beziehung von Datenpunkten über längere Zeiträume hinweg entscheidend ist. 
 (\cite{weidman2019deep} Chapter 6).
+
+\subsubsection{Metriken}
+Neuronale Netze werden trainiert, um spezifische Ausgaben zu generieren. Zur Bewertung ihrer 
+Leistung dienen verschiedene Metriken, die in diesem Kapitel vorgestellt werden. Neben der bereits 
+besprochenen Loss Function, die den Unterschied zwischen der tatsächlichen und der gewünschten 
+Ausgabe quantifiziert, nutzen wir weitere Metriken. Die nachstehende Formel illustriert den 
+\textit{Mean Squared Error} (MSE), eine gängige Methode, um den Loss zu berechnen:
+
+\begin{equation*}
+    \text{MSE} = \frac{1}{n} \sum_{i=1}^{n} (y_{i} - \hat{y}_{i})^{2}
+\end{equation*}
+
+\noindent
+Vor der Betrachtung weiterer Metriken ist das Verständnis der \textit{Confusion Matrix} wesentlich. 
+Sie veranschaulicht die Anzahl korrekter und inkorrekter Vorhersagen des Modells. In dieser Arbeit 
+konzentrieren wir uns auf die Klassifizierung eines Triggerworts, für welche die Confusion Matrix 
+in Tabelle \ref{tab:confusion_matrix} abgebildet ist.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|c|}
+		\cline{2-3}
+		\multicolumn{1}{c|}{} & \multicolumn{2}{c|}{\textbf{Predicted}} \\ \hline
+		\textbf{Actual}     & \textbf{Triggerwort} & \textbf{Kein Triggerwort} \\ \hline
+		\textbf{Triggerwort} & True Positive (TP)   & False Negative (FN)       \\ \hline
+		\textbf{Kein Triggerwort} & False Positive (FP)  & True Negative (TN)        \\ \hline
+	\end{tabular}
+	\caption{Confusion Matrix}
+	\label{tab:confusion_matrix}	
+\end{table}
+
+\noindent \newline
+Mit der Confusion Matrix können wir nun die anderen Metriken betrachten. Die \textit{Accuracy} 
+zeigt den Anteil der korrekten Vorhersagen. Die Accuracy wird wie folgt berechnet:
+
+\begin{equation*}
+	\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}
+\end{equation*}
+
+\noindent \newline
+Die \textit{Precision} zeigt den Anteil der korrekten positiven Vorhersagen. Die Precision wird wie 
+folgt berechnet:
+
+\begin{equation*}
+	\text{Precision} = \frac{TP}{TP + FP}
+\end{equation*}
+
+\noindent \newline
+Die \textit{Recall} zeigt den Anteil der korrekten positiven Vorhersagen. Die Recall wird wie 
+folgt berechnet:
+
+\begin{equation*}
+	\text{Recall} = \frac{TP}{TP + FN}
+\end{equation*}
+
+\noindent  \newline
+Die \textit{F1-Score} ist das harmonische Mittel zwischen Precision und Recall. Die F1-Score wird 
+wie folgt berechnet:
+
+\begin{equation*}
+	\text{F1-Score} = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + 
+	\text{Recall}}
+\end{equation*}
+
+
 
 \newpage \section{Stand der Forschung}
 Der Stand der Forschung ist ein wichtiger Teil dieser Arbeit. Darin werden die wichtigsten
@@ -1408,15 +1472,14 @@ benötigt wird, um ein Modell zu trainieren. Der Datensatz wiederspiegelt die Gr
 Problemfeldes. Es geht ja darum ein spezifisches Wort oder Wörter zu erkennen. Die nachfolgende 
 Abbildung \ref{fig:dataset} zeigt die zwei Klassen des Datensatzes. Die Klasse 0 beinhaltet 
 Sprachaufnahmen, welche das Triggerwort nicht enthalten. Die Klasse 1 beinhaltet Sprachaufnahmen, 
-welche das Triggerwort enthalten. 
+welche das Triggerwort enthalten.
 
 \hspace*{-1.5cm}
-
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.75\linewidth]{img/dataset.pdf}
 	\caption{Aufbau des Datensatzes}
-	\label{fig:dataset}
+	\label{fig:dataset} 
 \end{figure}
 
 \subsubsection{Recorder Webseite}
@@ -1521,7 +1584,7 @@ verbessern.
 Bei der Erstellung des Modells wurde die Architektur von Barazanji et al. 
 (\cite{barazanji2023heyditto}) verwendet. Das Modell wurde in PyTorch implementiert und 
 anschliessend trainiert. Das Training wurde auf einem MacBook Pro mit einem M1 Pro Chip 
-durchgeführt. Die Trainingszeit betrug für 100 Epochen etwa 8 Stunden. Neben der Architektur und 
+durchgeführt. Die Trainingszeit betrug für 120 Epochen etwa 8 Stunden. Neben der Architektur und 
 dem Training des Modells wurde ebenfalls die Implementierung in einer Echtzeitanwendung konzipiert. 
 Dabei war zu berücksichtigen, dass das Modell in eine mobile App integriert werden soll, weshalb 
 besonderer Wert auf eine energieeffiziente Inferenz gelegt wurde. Die Echtzeitanwendung, entwickelt 
