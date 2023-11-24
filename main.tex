@@ -741,10 +741,12 @@ eines neuronalen Netzes. Es gibt verschiedene Arten von Loss Functions. Die beka
 
 
 \subsubsection{Convolutional Neural Networks}
-Convolutional Neural Networks (CNN) sind eine spezielle Art von neuronalen Netzen, die vor allem
-in der Bilderkennung eingesetzt werden. Sie sind in der Lage, komplexe Muster in Bildern zu
-erkennen. In CNNs sind \textit{Convolutional Layers} zentral. Sie nutzen einen Filter, der über den
-Input gleitet und mit diesem verrechnet wird, wie Abbildung \ref{fig:convolution} zeigt.
+Convolutional Neural Networks (CNN) sind spezialisierte neuronale Netze, hauptsächlich eingesetzt 
+in der Bilderkennung. Ihre Fähigkeit, komplexe Muster in Bildern zu erkennen, macht sie zu einem 
+unverzichtbaren Werkzeug in der Bildanalyse. Zentral für CNNs sind die 
+\textit{Convolutional Layers}, die durch einen Filter gekennzeichnet sind. Dieser Filter gleitet 
+über den Input, um spezifische Merkmale zu extrahieren, wie in Abbildung \ref{fig:convolution} 
+dargestellt.
 
 \begin{figure}[h]
 	\centering
@@ -790,10 +792,11 @@ Input gleitet und mit diesem verrechnet wird, wie Abbildung \ref{fig:convolution
 \end{figure}
 
 \noindent
-Bei CNNs sind die Gewichte \(w_{1}, w_{2}, \dots, w_{n}\) und der Bias \(b\) die Filter.
-Filter werden während des Trainings optimiert, um die gewünschte Ausgabe zu erhalten. Der grosse
-Vorteil gegenüber herkömmlichen neuronalen Netzen ist, dass die Gewichte geteilt werden können.
-(\cite{weidman2019deep}) beschreibt CNNs wie folgt:
+Im Kontext von CNNs repräsentieren die Gewichte \(w_{1}, w_{2}, \dots, w_{n}\) und der Bias \(b\) 
+die Elemente des Filters. Diese werden während des Trainings angepasst, um optimale Ergebnisse zu 
+erzielen. Ein signifikanter Vorteil von CNNs im Vergleich zu traditionellen neuronalen Netzen ist 
+die Fähigkeit, Gewichte zwischen verschiedenen Teilen des Netzwerks zu teilen, wodurch eine 
+effizientere Mustererkennung ermöglicht wird. (\cite{weidman2019deep}) beschreibt CNNs wie folgt:
 
 \begin{displayquote}
 	''CNNs are the standard neural network architecture used for prediction when the input
@@ -801,11 +804,12 @@ Vorteil gegenüber herkömmlichen neuronalen Netzen ist, dass die Gewichte getei
 \end{displayquote}
 
 \noindent
-Speziell für CNNs sind die sogenannten \textit{Convolutional Layers}. Diese Layer bestehen aus
-einem Filter, der über den Input von Links nach Rechts und von Oben nach Unten geschoben wird.
-Der Filter ist eine Matrix, die mit dem Input verrechnet wird. Die Abbildung \ref{fig:convolution}
-zeigt ein Beispiel einer Convolution.
-
+Die spezielle Funktionsweise von \textit{Convolutional Layers} in CNNs ermöglicht eine effektive 
+Verarbeitung von Bilddaten. Sie identifizieren und extrahieren relevante Merkmale direkt aus den 
+Rohdaten, was sie besonders für Bilderkennungsaufgaben geeignet macht. Dieses effiziente 
+Feature-Learning wird durch die einzigartige Struktur der Convolutional Layers ermöglicht, die in 
+der Fähigkeit besteht, komplexe Muster in den Daten zu identifizieren und zu verarbeiten 
+(\cite{weidman2019deep} Chapter 5). 
 
 \subsubsection{Recurrent Neural Networks}
 Recurrent Neural Networks (RNN) sind eine spezielle Art von neuronalen Netzen, die vor allem dazu 
@@ -1440,7 +1444,7 @@ diese Art von Modelarchitektur verwendet. Das Paper von Khamees et al.
 Realisierung zu finden.
 
 \newpage \section{Methoden}
-Das Vorgehen dieser Arbeit kann als eine hybride Methode beschrieben werden. Aus der 
+Das Vorgehen dieser Arbeit kann als eine klassische Projektvorgehen beschrieben werden. Aus der 
 Aufgabenstellung ging schon hervor, dass ein eigenes Deep Learning Modell für die Triggerwort 
 Erkennung erarbeitet werden soll. Zum andren soll das Modell in eine mobile App integriert werden.
 Diese zwei Bereiche wurden Bereits bei der Planung der Arbeit definiert und haben daher die 
