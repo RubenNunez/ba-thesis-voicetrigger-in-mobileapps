@@ -1592,12 +1592,10 @@ entsprechende Leistungsmessungen durchzuführen.
 
 
 \subsubsection{Verwendete Architektur des Modells}
-Die Architektur des Models wurde in ersten Linie von (\cite{siri2017hey}) inspiriert. Dennoch 
-wurde schlussendlich der Ansatz von (\cite{barazanji2023heyditto}) verwendet. Die Architektur 
-besteht mehrheitlich aus Convolutional Layers und einem Long-Short-Term-Memory LSTM Layer. Der 
-Vorteil dieser Architektur ist, dass sie sehr energie effizient ist, wie auch sehr schnell in 
-der Inferenz. Mehr dazu im Kapitel \ref{sec:evaluation}. Was besonders Markant ist, ist die 
-Verwendung von Convolutional Layers in Kombination mit einem LSTM Layer, welcher die zeitliche 
+Die Architektur besteht mehrheitlich aus Convolutional Layers und einem Long-Short-Term-Memory 
+LSTM Layer. Der Vorteil dieser Architektur ist, dass sie sehr energie effizient ist, wie auch sehr 
+schnell in der Inferenz. Mehr dazu im Kapitel \ref{sec:evaluation}. Was besonders Markant ist, ist 
+die Verwendung von Convolutional Layers in Kombination mit einem LSTM Layer, welcher die zeitliche 
 Komponente der Sprache berücksichtigt. Die Idee der Kombination von Convolutional Layers und
 LSTM Layers ist nicht neu. Es gibt diverse Paper, welche diesen Ansatz verwenden. Beispielsweise 
 verwendet (\cite{khamees2021classifying}) diesen Ansatz für die Klassifizierung von Music Genres.
@@ -1618,14 +1616,15 @@ Diese Art von Modelarchitektur setzt eine Transformation der Sprachdaten in ein 
 Die Transformation der Sprachdaten wurde im Kapiel \ref{sec:grundlagen} der Grundlagen bereits
 beschrieben und wird im anschliessenden Kapitel nochmals genauer beschrieben.
 
+
 \subsubsection{Transformation, Preprocessing, Feature Extraction}
-Wie bereits in den Grundlagen beschrieben, werden die Sprachdaten in ein Spektrogramm transformiert.
-Diese Transformation ist essentiell der Modelarchitektur. Für die Transformation wurde ein Pytorch 
-Modul entwickelt, welches die Transformation der Sprachdaten übernimmt. Kurz zum Konzept von PyTorch 
-Module. PyTorch Module erben von der Klasse nn.Module und sind die Grundbausteine von PyTorch. Sie 
-haben einen Vorteil welcher vorallem bei der Integration in eine mobile App wichtig ist. Aber dazu 
-später mehr. Das PyTorch Modul für die Transformation der Sprachdaten ist in der Abbildung 
-\ref{fig:transform} dargestellt. 
+Wie in den Grundlagen bereits erläutert, werden Sprachdaten in ein Spektrogramm transformiert. 
+Diese Transformation ist für die Architektur des Modells essentiell. Hierfür wurde ein spezifisches 
+Pytorch-Modul entwickelt, das für die Umwandlung der Sprachdaten zuständig ist. Eine kurze 
+Einführung zum Konzept von PyTorch-Modulen: Diese erben von der Klasse nn.Module und bilden die 
+Grundelemente in PyTorch. Sie bieten einen bedeutenden Vorteil, besonders bei der Integration in 
+mobile Apps. Nähere Informationen hierzu folgen später. Das PyTorch-Modul, welches für die 
+Transformation der Sprachdaten eingesetzt wird, ist in Abbildung \ref{fig:transform} visualisiert.
 
 \begin{figure}[H]
 	\centering
@@ -1635,13 +1634,12 @@ später mehr. Das PyTorch Modul für die Transformation der Sprachdaten ist in d
 \end{figure}
 
 
-\newpage \subsubsection{Training des Modells}
+\subsubsection{Training des Modells}
 Hier werden die Resultate des Trainings beschrieben. Der Datensatz wurde in Trainingsdaten und 
-Validierungsdaten aufgeteilt. Die Trainingsdaten wurden für das Training des Modells verwendet. 
-Die Validierungsdaten wurden verwendet, um das Modell während des Trainings zu validieren. Neben 
-der Aufteilung der Daten in Trainings- und Validierungsdaten wurde auch ein finaler Testdatensatz
-erstellt. Dieser wurde verwendet, um das Modell nach dem Training zu evaluieren und eine Aussage 
-über die Leistungsfähigkeit des Modells zu treffen.
+Testdaten aufgeteilt. Die Trainingsdaten wurden für das Training des Modells verwendet. 
+Die Testdate wurden verwendet, um das Modell nach dem Training zu evaluieren, das wird im 
+Kapitel \ref{sec:evaluation} beschrieben. Die Aufteilung der Daten erfolgte mit einem Verhältnis 
+von 80\% Trainingsdaten und 20\% Testdaten.
 
 \noindent \newline
 Die nachfolgenden Abbildungen zeigen verschiedene Metriken, die während des Trainingsprozesses 
@@ -1649,54 +1647,76 @@ aufgezeichnet wurden:
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{img/train/batch_accuracy.png}
-    \caption{Genauigkeit pro Batch während des Trainings}
-    \label{fig:batch_accuracy}
+    \begin{minipage}{0.48\textwidth}
+        \includegraphics[width=\textwidth]{img/train/batch_accuracy.png}
+        \caption{Genauigkeit pro Batch während des Trainings}
+        \label{fig:batch_accuracy}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\textwidth}
+        \includegraphics[width=\textwidth]{img/train/batch_f1.png}
+        \caption{F1-Score pro Batch während des Trainings}
+        \label{fig:batch_f1}
+    \end{minipage}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{img/train/batch_f1.png}
-    \caption{F1-Score pro Batch während des Trainings}
-    \label{fig:batch_f1}
+    \begin{minipage}{0.48\textwidth}
+        \includegraphics[width=\textwidth]{img/train/batch_loss.png}
+        \caption{Loss pro Batch während des Trainings}
+        \label{fig:batch_loss}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\textwidth}
+        \includegraphics[width=\textwidth]{img/train/epoch_accuracy.png}
+        \caption{Genauigkeit pro Epoche}
+        \label{fig:epoch_accuracy}
+    \end{minipage}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{img/train/batch_loss.png}
-    \caption{Loss pro Batch während des Trainings}
-    \label{fig:batch_loss}
+    \begin{minipage}{0.48\textwidth}
+        \includegraphics[width=\textwidth]{img/train/epoch_f1.png}
+        \caption{F1-Score pro Epoche}
+        \label{fig:epoch_f1}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\textwidth}
+        \includegraphics[width=\textwidth]{img/train/epoch_loss.png}
+        \caption{Loss pro Epoche}
+        \label{fig:epoch_loss}
+    \end{minipage}
 \end{figure}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{img/train/epoch_accuracy.png}
-    \caption{Genauigkeit pro Epoche}
-    \label{fig:epoch_accuracy}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{img/train/epoch_f1.png}
-    \caption{F1-Score pro Epoche}
-    \label{fig:epoch_f1}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{img/train/epoch_loss.png}
-    \caption{Loss pro Epoche}
-    \label{fig:epoch_loss}
-\end{figure}
 
 \noindent \newline
-Diese Diagramme bieten eine detaillierte Übersicht über die Leistung des Modells während des 
-Trainingsprozesses. Es zeigt das Das Model sich den Daten anpasst und die Metriken sich verbessern 
-über die Zeit. 
+Die Grafiken zeigen eine umfassende Übersicht über die Entwicklung der Metriken während des 
+Trainings. Die Modellgenauigkeit und der F1-Score steigen kontinuierlich an, während der Loss 
+kontinuierlich abnimmt. Kurz vor der 40. Epoche ist eine Unterbrechung des Trainings zu erkennen,
+welche durch einen Fehler im Training Loop verursacht wurde. Es wurden fälschlicherweise bei jedem 
+zweiten Sample 'Silence' hinzugefügt. Nach der Korrektur dieses Fehlers wurde das Training vom 
+Punkt vor der Unterbrechung fortgesetzt, da das Modell bis dahin bereits vielversprechende 
+Ergebnisse lieferte.
 
-\newpage
+\subsection{PyTorch Scripting}
+PyTorch Scripting ist eine Technik, die es ermöglicht, PyTorch-Module in ein Format zu konvertieren, 
+das für die Integration in mobile Apps geeignet ist. Beziehungsweise für die Integration in die 
+C++-API von PyTorch. Die C++-API von PyTorch ermöglicht die Verwendung von PyTorch-Modulen in 
+anderen Programmiersprachen wie C++, Java oder Swift. Dies ist ein wichtiger Aspekt dieser Arbeit, 
+da das Modell in eine mobile App integriert werden soll.
 
-\subsubsection{Real Time Anwendung}
+\subsubsection{Real Time Anwendung in Python}
+Die Realtime Anwendung wurde in ersten Linie von (\cite{siri2017hey}) inspiriert. Dies in Bezug 
+auf den Aufbau der Anwendung. Die Anwendung verarbeitet einen kontinuierlichen Audio Stream, eines 
+Mikrofons. Die Verarbeitung des Audio Streams erfolgt in Stücke von 2 Sekunden. Diese Stücke werden 
+alle 0.1 Sekunden verarbeitet. Zwei Sekunden sind 32000 Samples bei einer Sample Rate von 16kHz. 
+Somit werden pro Sekunde 10 Inferenzen durch die Pipeline durchgeführt. Bei dieser Variante der 
+Verarbeitung wird, falls das Triggerwort im Stream vorhanden ist, die Erkennung des Triggerwortes 
+mehrfach erkannt. Das bietet den Vorteil einer gewissen Redundanz. Die Rate der Inferenzen könnte 
+auch Variabel an die Systemleistung angepasst werden. Die nachfolgende Abbildung 
+\ref{fig:realtime-application} zeigt schematisch die Realtime Anwendung. Dabei wird ein Audio Chunk 
+von 2 Sekunden in ein Spektrogramm transformiert und anschliessend vom Modell verarbeitet. Das 
+Resultat der Inferenz wird anschliessend in einer Progress Bar dargestellt. Die Progress Bar zeigt 
+die Wahrscheinlichkeit an, dass das Triggerwort im Audio Chunk vorhanden ist. 
 
 \begin{figure}[H]
 	\centering
@@ -1705,8 +1725,31 @@ Trainingsprozesses. Es zeigt das Das Model sich den Daten anpasst und die Metrik
 	\label{fig:realtime-application}
 \end{figure}
 
+\noindent
+Mit der Ausgabe der Wahrscheinlichkeit für die verarbeiteten Audio Chunks, kann eine Entscheidung 
+getroffen werden, ob das Triggerwort vorhanden ist oder nicht. Dazu wird ein Gleitender Durchschnitt 
+über die Wahrscheinlichkeiten der letzten \textit{n} Audio Chunks berechnet. Ist der Durchschnitt 
+über einem bestimmten Schwellenwert, wird das Triggerwort als vorhanden erkannt. Das ist auch als 
+Simple Moving Average (SMA) bekannt. Die Formel für den Gleitenden Durchschnitt kann wie folgt 
+beschrieben werden:
 
-\newpage \section{Evaluation und Validation}
+\begin{equation*}
+	SMA = \frac{1}{n} \sum_{i=0}^{n} x_{i}
+\end{equation*}
+
+\noindent
+Die nachfolgende Abbildung \ref{fig:sma} zeigt die Berechnung des Gleitenden Durchschnitts über 
+die Wahrscheinlichkeiten der letzten 3, 5 und 10 Audio Chunks.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{img/sma.pdf}
+	\caption{Berechnung des Gleitenden Durchschnitts}
+	\label{fig:sma}
+\end{figure}
+
+
+\newpage \section{Evaluation und Validation} \label{sec:evaluation}
 Das Problem dieser Arbeit ist im wesentlichen die Erkennung von Triggerwörtern innerhalb
 des Kontext einer App. Grundsätzlich ist es unüblich, dass mobile Apps eine
 integrierte Sprachsteuerungsfunktion anbieten.
