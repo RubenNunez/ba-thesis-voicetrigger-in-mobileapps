@@ -78,12 +78,38 @@
 \subfile{affidavit.tex}
 \newpage
 
+% El sol es grande
 \newpage \section*{Abstract}
-Das Problem dieser Arbeit ist im wesentlichen die Erkennung von Wake-up Wörter innerhalb
-des Kontext einer App. Grundsätzlich ist es unüblich, dass mobile Apps eine
-integrierte Sprachsteuerungsfunktion anbieten.
+Diese Bachelorarbeit konzentriert sich auf die Herausforderung, die Grundlage für eine integrierte 
+Sprachsteuerung in mobilen Apps zu schaffen. Der Fokus liegt hierbei auf der Entwicklung einer 
+Triggerwort-Erkennung, die es ermöglicht, bestimmte Wörter oder Wortsequenzen in der akustischen 
+Sprache zu erkennen. Da integrierte Sprachsteuerungsfunktionen in mobilen Apps eher unüblich sind, 
+bietet diese Arbeit eine innovative Lösung an. Der Ansatz umfasst drei Hauptkomponenten: die 
+Erstellung eines ethisch und rechtlich einwandfreien Datensatzes, die Entwicklung und das Training 
+eines effizienten Modells zur Erkennung von Triggerwörtern, und die Integration dieses Modells in 
+eine mobile Anwendung.
 
-El sol es grande
+\noindent \newline
+Im Zentrum der Arbeit steht die Entwicklung eines Machine Learning-Modells, basierend auf einer 
+Kombination aus Convolutional und Long-Short-Term-Memory (LSTM) Layern. Diese Architektur, 
+implementiert in PyTorch, zeichnet sich durch Energieeffizienz und schnelle Inferenz aus. Das 
+Modell, benannt als WakeupTriggerConvLSTM2s, wurde daraufhin trainiert, Triggerwörter aus 
+akustischen Signalen zu erkennen, wobei die Sprachdaten in Spektrogramme umgewandelt wurden.
+
+\noindent \newline
+Ein entscheidender Aspekt der Arbeit war die Integration des Modells in eine Echtzeitanwendung für 
+mobile Plattformen. Hierfür wurde das Modell mithilfe von PyTorch Scripting in ein für mobile Apps 
+geeignetes Format konvertiert und in eine Anwendung eingebettet, die einen kontinuierlichen 
+Audio-Stream in Echtzeit verarbeitet. Die Anwendung kann Triggerwörter in 2-Sekunden-Abschnitten 
+erkennen, wobei die Inferenz 10-mal pro Sekunde durchgeführt wird, um eine hohe 
+Erkennungsgenauigkeit zu gewährleisten.
+
+\noindent \newline
+Insgesamt bietet diese Arbeit eine grundlegende Basis für die Entwicklung von 
+Sprachsteuerungsfunktionen in mobilen Anwendungen, mit besonderem Augenmerk auf Effizienz, 
+Datenschutz und ethische Aspekte. Die Ergebnisse können als Ausgangspunkt für die Implementierung 
+vollständiger Sprachassistenten in mobilen Apps dienen.
+
 
 
 \newpage
@@ -377,7 +403,7 @@ so einfach sein.
 
 
 \newpage
-\subsubsection{Audio API für Integration}
+\subsubsection{Audio API für Integration} \label{sec:audio_api_integration}
 Dieser Abschnitt befasst sich mit dem Thema Audio API für Integration in eine iOS App. Die Wahl 
 fiel auf die \textbf{AVAudioEngine} API für iOS und macOS. Im der folgenden Abbildung 
 \ref{fig:avaudioengine} wird gezeigt, wie ein kontinuierlicher Audio-Stream mit AVAudioEngine 
@@ -1290,7 +1316,8 @@ CoreML. Wobei CoreML nur für Apple Ekosysteme verwendet werden kann. Da nicht n
 in eine mobile App wichtig ist, sondern auch die Entwicklung von Prototypen, wurde PyTorch gewählt.
 TensorFlow wäre ebenfalls eine gute Wahl gewesen, aber laut (\cite{valantis2023battle}) hat PyTorch 
 in den letzten Jahren an Popularität gewonnen. Ebenfalls ist PyTorch sehr beliebt für die 
-Forschung. Die Wahl von PyTorch ist somit eine gute Wahl.
+Forschung und bietet eine Integration in mobile Apps. Daher wurde PyTorch als Framework für die 
+Entwicklung der hier beschriebenen Arbeit gewählt.
 
 \subsection{Erste Überlegungen zur Modelarchitektur}
 Mit der Wahl von PyTorch als Framework wurde zwar eine wichtige Entscheidung getroffen, aber die 
@@ -1329,7 +1356,7 @@ wurde. In einer Testreihe mit drei 10-sekündigen Tests, in dem die Wörter "Hey
 gesagt wurden, erkannte das Modell verschiedene Triggerwörter. Die zeitliche Abfolge dieser 
 Erkennungen ist in Tabelle \ref{tab:wav2vec2_results} dargestellt.
 
-\begin{table}[h]
+\begin{table}[H]
 	\centering
 	\begin{tabular}{|c|c|c|c|}
 		\hline
@@ -1592,12 +1619,12 @@ entsprechende Leistungsmessungen durchzuführen.
 
 
 \subsubsection{Verwendete Architektur des Modells}
-Die Architektur besteht mehrheitlich aus Convolutional Layers und einem Long-Short-Term-Memory 
-LSTM Layer. Der Vorteil dieser Architektur ist, dass sie sehr energie effizient ist, wie auch sehr 
+Die Architektur besteht aus drei Convolutional Layers und einem Long-Short-Term-Memory 
+(LSTM) Layer. Der Vorteil dieser Architektur ist, dass sie sehr energie effizient ist, wie auch sehr 
 schnell in der Inferenz. Mehr dazu im Kapitel \ref{sec:evaluation}. Was besonders Markant ist, ist 
-die Verwendung von Convolutional Layers in Kombination mit einem LSTM Layer, welcher die zeitliche 
+die Verwendung von Convolutional Layers in Kombination mit einem (LSTM) Layer, welcher die zeitliche 
 Komponente der Sprache berücksichtigt. Die Idee der Kombination von Convolutional Layers und
-LSTM Layers ist nicht neu. Es gibt diverse Paper, welche diesen Ansatz verwenden. Beispielsweise 
+(LSTM) Layers ist nicht neu. Es gibt diverse Paper, welche diesen Ansatz verwenden. Beispielsweise 
 verwendet (\cite{khamees2021classifying}) diesen Ansatz für die Klassifizierung von Music Genres.
 Die finale Architektur des Models ist in der Abbildung \ref{fig:model_architecture} dargestellt.
 Für den Namen des Models wurde der Name \textit{WakeupTriggerConvLSTM2s} gewählt. Der Name 
@@ -1637,7 +1664,7 @@ Transformation der Sprachdaten eingesetzt wird, ist in Abbildung \ref{fig:transf
 \subsubsection{Training des Modells}
 Hier werden die Resultate des Trainings beschrieben. Der Datensatz wurde in Trainingsdaten und 
 Testdaten aufgeteilt. Die Trainingsdaten wurden für das Training des Modells verwendet. 
-Die Testdate wurden verwendet, um das Modell nach dem Training zu evaluieren, das wird im 
+Die Testdaten wurden verwendet, um das Modell nach dem Training zu evaluieren, das wird im 
 Kapitel \ref{sec:evaluation} beschrieben. Die Aufteilung der Daten erfolgte mit einem Verhältnis 
 von 80\% Trainingsdaten und 20\% Testdaten.
 
@@ -1748,14 +1775,45 @@ die Wahrscheinlichkeiten der letzten 3, 5 und 10 Audio Chunks.
 	\label{fig:sma}
 \end{figure}
 
+
 \subsection{Integration in eine mobile App}
-Das folgende Kapitel beschreibt die Integration des Modells in eine mobile App. 
+Im Rahmen dieser Arbeit wurde das entwickelte Modell in eine mobile Anwendung integriert, wobei die 
+Entscheidung auf eine iOS-App fiel. Diese Entscheidung basierte auf der bereits bestehenden 
+Vertrautheit mit der iOS-API, insbesondere \textbf{AVAudioEngine}, die im Kapitel 
+\ref{sec:audio_api_integration} 'Audio API für Integration' thematisiert wurde. Die iOS-App wurde in 
+Swift/Objective-C entwickelt, was eine optimale Nutzung der iOS-spezifischen Features und eine 
+reibungslose Integration der PyTorch-Module ermöglichte.
+
+\noindent \newline
+Die grösste Herausforderung bei der Integration war die Anpassung der in PyTorch entwickelten Module 
+für die Verwendung in der iOS-App. PyTorch Scripting spielte hierbei eine entscheidende Rolle, da 
+es die Konvertierung der Module in ein Format ermöglichte, das mit der C++ API von PyTorch 
+kompatibel ist. Diese Kompatibilität war essentiell für die Integration der Modelle in die mobile 
+Anwendung.
+
+\noindent \newline
+Die Integration der C++ API von PyTorch in die iOS-App war ein komplexer und zeitintensiver Prozess. 
+Die Herausforderung lag insbesondere in der Erstellung spezifischer Objective-C Bindings, um die 
+Kommunikation zwischen der in PyTorch entwickelten Logik und der iOS-Anwendung zu ermöglichen. 
+Trotz der Komplexität dieser Aufgabe wurde sie erfolgreich gemeistert, unter anderem durch die 
+Nutzung von Anleitungen und Dokumentationen von PyTorch.
+
+\noindent \newline
+Während des Trainings des Modells wurden für jede Epoche Checkpoints erstellt. Für die endgültige 
+Implementierung in der App wurde der Checkpoint der Epoche 120 ausgewählt. Dieser Schritt war 
+entscheidend, um die bestmögliche Leistung und Genauigkeit des Modells in der App sicherzustellen. 
+Für weiterführende Informationen zur Konvertierung eines PyTorch-Modells in TorchScript und dessen 
+Ausführung in C++ wird auf das Tutorial \textit{Loading a PyTorch Model in C++} 
+\cite{pytorch2023jit} verwiesen.
+
+
 
 
 \newpage \section{Evaluation und Validation} \label{sec:evaluation}
 Das Problem dieser Arbeit ist im wesentlichen die Erkennung von Triggerwörtern innerhalb
 des Kontext einer App. Grundsätzlich ist es unüblich, dass mobile Apps eine
-integrierte Sprachsteuerungsfunktion anbieten.
+integrierte Sprachsteuerungsfunktion anbieten. 
+
 
 \newpage \section{Ausblick}
 Das Problem dieser Arbeit ist im wesentlichen die Erkennung von Triggerwörtern innerhalb
