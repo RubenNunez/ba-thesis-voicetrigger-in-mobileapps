@@ -87,22 +87,35 @@ Sprache zu erkennen. Da integrierte Sprachsteuerungsfunktionen in mobilen Apps e
 bietet diese Arbeit eine innovative Lösung an. Der Ansatz umfasst drei Hauptkomponenten: die 
 Erstellung eines ethisch und rechtlich einwandfreien Datensatzes, die Entwicklung und das Training 
 eines effizienten Modells zur Erkennung von Triggerwörtern, und die Integration dieses Modells in 
-eine mobile Anwendung.
+eine mobile Anwendung. Grundsätzlich beschreibt diese Arbeit einen veralgemeinerten Ansatz wie 
+Sprachsteuerungsfunktionen in mobile Apps integriert werden können. Dennoch wurde als möglicher 
+Use Case eine Integration in die FOOBY App gewählt. Aus diesem Grund wurde der Datensatz mit 
+Sprachsamples von 'Hey FOOBY' erstellt.
+
+
+\noindent \newline
+Die Erstellung des Datensatzes erfolgte durch die Aufnahme von Sprachdaten mit einer Webanwendung, 
+die speziell für diesen Zweck entwickelt wurde. Bei Aufnahme der Daten wurde besonderes Augenmerk 
+auf Datenschutz und ethische Aspekte gelegt. Das Ergebnis ist ein Datensatz, der die Grundlage für 
+die Entwicklung eines Modells zur Erkennung von Triggerwörtern bildet. Die ethischen Aspekte 
+befassen mit Überlegungen zu Diversität und Inklusion, sowie der Vermeidung von Diskriminierung. 
+Zu den Datenschutzaspekten gehören die Einhaltung von Datenschutzrichtlinien und die Vermeidung 
+von Datenschutzverletzungen.
+
 
 \noindent \newline
 Im Zentrum der Arbeit steht die Entwicklung eines Machine Learning-Modells, basierend auf einer 
 Kombination aus Convolutional und Long-Short-Term-Memory (LSTM) Layern. Diese Architektur, 
 implementiert in PyTorch, zeichnet sich durch Energieeffizienz und schnelle Inferenz aus. Das 
 Modell, benannt als WakeupTriggerConvLSTM2s, wurde daraufhin trainiert, Triggerwörter aus 
-akustischen Signalen zu erkennen. Das Ganze wird dabei in Echtzeit durchgeführt, wobei die 
-Sprachdaten in Real-Time in Spektrogramme umgewandelt und anschliessend in das Modell eingespeist 
-werden.
+akustischen Signalen zu erkennen. In einem Real-Time Verfahren werden die Sprachdaten in 
+Spektrogramme transformiert, die als Input für das Modell dienen. 
 
 \noindent \newline
 Ein entscheidender Aspekt der Arbeit war die Integration des Modells in mobile App. Hierfür wurde 
 das Modell mithilfe von PyTorch Scripting in ein für mobile Apps geeignetes Format konvertiert und 
-in eine Anwendung eingebettet, die einen kontinuierlichen Audio-Stream in Echtzeit verarbeitet. Die 
-Anwendung kann Triggerwörter in 2-Sekunden-Abschnitten erkennen, wobei die Inferenz 10-mal pro 
+in einem Prototyp eingebettet, der einen kontinuierlichen Audio-Stream in Echtzeit verarbeitet. Die 
+App kann Triggerwörter in 2-Sekunden-Abschnitten erkennen, wobei die Inferenz 10-mal pro 
 Sekunde durchgeführt wird, um eine hohe Erkennungsgenauigkeit zu gewährleisten.
 
 \noindent \newline
@@ -118,11 +131,11 @@ vollständiger Sprachassistenten in mobilen Apps dienen.
 
 \newpage \section{Problem, Fragestellung, Vision}
 \subsection{Problemstellung}
-Die Sprachsteuerung bietet grosses Potenzial und wird bisher vor allem für
-Sprachsteuerungsassistenten genutzt. Während es etablierte Sprachassistenten wie Siri, Google
-oder Alexa gibt, fehlt es an Lösungen für eine integrierte Sprachsteuerung in Mobile Apps,
-insbesondere in Bezug auf das Erkennen von Triggerwörtern. Daher besteht ein grosses 
-Ausbaupotenzial für Sprachassistenten in Mobile Apps. 
+Die Sprachsteuerung bietet grosses Potenzial in Mobile Apps und wird bisher vor allem für 
+Sprachassistenten genutzt. Während es etablierte Lösungen wie Siri, Google Assistant oder Alexa 
+gibt, fehlt es an Lösungen für eine integrierte Sprachsteuerung in Mobile Apps, insbesondere in 
+Bezug auf das Erkennen von Triggerwörtern. Daher besteht ein grosses Ausbaupotenzial für 
+Sprachassistenten in Mobile Apps. 
 
 \noindent \newline
 Für die Problemstellung dieser Arbeit ist es wichtig, die verschiedenen Disziplinen der
@@ -140,22 +153,21 @@ einen Überblick über die Thematik verschaffen.
 \end{figure}
 
 \subsection{Fragestellung}
-Wie kann eine integrierte Sprachsteuerung für eine Mobile App entwickelt werden, welche
-das Erkennen von Triggerwörtern ermöglicht und wie kann diese Sprachsteuerung in eine
-Mobile App integriert werden?
+Wie lässt sich eine Sprachsteuerungsfunktion entwickeln, die effektiv Triggerwörter in akustischer 
+Sprache erkennt, und wie kann diese Funktion nahtlos in mobile Applikationen integriert werden?
 
 
 \subsection{Vision}
-Als Vision dieser Arbeit soll eine Grundlage geschaffen werden, um ein Triggerwort
-oder eine Sequenz von Triggerwörtern in der akustischen Sprache erkennen zu können.
-Dabei sollen Methoden und Werkzeuge aus dem Bereich des Machine Learning verwendet werden.
-Zudem sollen die gewonnenen Erkenntnise in eine mobile Plattform wie iOS oder Android integriert
-werden. Für den Rahmen dieser Arbeit genügt die Integration in eine der genannten Plattformen.
-Weiterhin soll auch das Thema Datenschutz und die ethischen Aspekte zu berücksichtigen werden.
+Ziel dieser Arbeit ist es, eine solide Basis für die Erkennung von Triggerwörtern oder Sequenzen in 
+akustischer Sprache zu schaffen, unter Verwendung von Methoden und Werkzeuge aus dem Bereich des 
+Machine Learning. Ein wesentlicher Aspekt ist die Implementierung dieser Erkenntnisse auf einer 
+mobilen Plattform wie iOS oder Android. Für den Umfang dieser Arbeit ist die Integration in eine 
+dieser Plattformen ausreichend. Bei der Entwicklung des Datensatzes wird besonderes Augenmerk auf 
+Datenschutz und ethische Aspekte gelegt.
 
 \subsection{Ziele}
-Die Ziele dieser Arbeit sind als SMART-Ziele definiert. Die Tabelle \ref{tab:smart_goals} zeigt 
-die SMART-Ziele der Bachelorarbeit.
+Die Ziele dieser Arbeit sind in der folgenden Tabelle \ref{tab:smart_goals} aufgeführt. Die Ziele 
+sind nach dem SMART-Prinzip formuliert.
 
 \begin{table}[h]
 	\centering
@@ -180,8 +192,8 @@ die SMART-Ziele der Bachelorarbeit.
 									 Projektzeitrahmens. 
 									 \textbf{Terminiert:} Integration bis zum Abschluss der 
 									 Bachelorarbeit. \\ \hline
-	Datenschutz und Ethik & \textbf{Spezifisch:} Gewährleistung von Datenschutz und ethischer 
-							Konformität bei der Erstellung des Datensatzes. 
+	Datenschutz und Ethik & \textbf{Spezifisch:} Datenschutz und Ethik bei der Datensatzerstellung 
+							beachten. 
 							\textbf{Messbar:} Erfüllung spezifischer Datenschutzrichtlinien und 
 							ethischer Standards im Datenerhebungsprozess. 
 							\textbf{Ausführbar:} Einhaltung von Best Practices und Richtlinien 
