@@ -132,8 +132,8 @@ vollständiger Sprachassistenten in mobilen Apps dienen.
 \newpage \section{Problem, Fragestellung, Vision}
 \subsection{Problemstellung}
 Die Sprachsteuerung bietet grosses Potenzial in Mobile Apps und wird bisher vor allem für 
-Sprachassistenten genutzt. Während es etablierte Lösungen wie Siri, Google Assistant oder Alexa 
-gibt, fehlt es an Lösungen für eine integrierte Sprachsteuerung in Mobile Apps, insbesondere in 
+Sprachassistenten genutzt. Während Sprachassistenten wie Siri, Google Assistant oder Alexa 
+von der Allgemeinheit genutzt werden, gibt es kaum bekannte Lösungen für eine integrierte Sprachsteuerung in Mobile Apps, insbesondere in 
 Bezug auf das Erkennen von Triggerwörtern. Daher besteht ein grosses Ausbaupotenzial für 
 Sprachassistenten in Mobile Apps. 
 
@@ -154,7 +154,7 @@ einen Überblick über die Thematik verschaffen.
 
 \subsection{Fragestellung}
 Wie lässt sich eine Sprachsteuerungsfunktion entwickeln, die effektiv Triggerwörter in akustischer 
-Sprache erkennt, und wie kann diese Funktion nahtlos in mobile Applikationen integriert werden?
+Sprache erkennt und wie kann diese Funktion nahtlos in mobile Applikationen integriert werden?
 
 
 \subsection{Vision}
@@ -166,8 +166,7 @@ dieser Plattformen ausreichend. Bei der Entwicklung des Datensatzes wird besonde
 Datenschutz und ethische Aspekte gelegt.
 
 \subsection{Ziele}
-Die Ziele dieser Arbeit sind in der folgenden Tabelle \ref{tab:smart_goals} aufgeführt. Die Ziele 
-sind nach dem SMART-Prinzip formuliert.
+Die Ziele dieser Arbeit, nach SMART-Prinzip, werden in der folgenden Tabelle \ref{tab:smart_goals} aufgeführt.
 
 \begin{table}[h]
 	\centering
@@ -214,8 +213,8 @@ sind nach dem SMART-Prinzip formuliert.
 \subsection{Abgrenzung}
 Diese Arbeit befasst sich mit der Erkennung von Triggerwörtern in der akustischen Sprache. Es ist 
 kein Ziel dieser Arbeit, einen vollständigen Sprachassistenten zu entwickeln. Das würde den Rahmen
-dieser Arbeit sprengen. Die Resultate dieser Arbeit sollen als Grundlage für eine vollständige
-Implementierung eines Sprachassistenten dienen.
+einer Bachelorarbeit sprengen. Die Resultate dieser Arbeit könnten aber als Grundlage für eine vollständige
+Implementierung eines Sprachassistenten genutzt werden.
 
 \subsection{Rechtfertigung}
 Apple sowie Google stellen mit Siri und Google Assistant bereits Sprachassistenten zur 
@@ -942,11 +941,11 @@ wie folgt berechnet:
 \end{equation*}
 
 \newpage \section{Stand der Forschung}
-Der Stand der Forschung ist ein wichtiger Teil dieser Arbeit. Darin werden die wichtigsten
-zeitlichen Entwicklungen im Bereich der Spracherkennung dargestellt. Die Forschung im Bereich 
+In diesem Kapitel werden die wichtigsten
+zeitlichen Entwicklungen im Bereich der Spracherkennung aufgezeigt. Die Forschung im Bereich 
 der Spracherkennung ist ein aktives Forschungsgebiet. Die Jahre 2010 bis 2020 haben laut 
 (\cite{hannun2021history}) einen grossen Fortschritt in der Spracherkennung erlebt. Dieser 
-Fortschritt ist vor allem auf die Verwendung von Deep Learning zurückzuführen.Weiter wird der 
+Fortschritt ist vor allem auf die Verwendung von Deep Learning zurückzuführen. Weiter wird der 
 Aufbau von Sprachassistenten untersucht und verglichen. Ein wichtiger Teil ist die Funktionsweise 
 vom Sprachassistent Siri. Apple veröffentlichte seinen Sprachassistenten im Jahr 2011 mit dem 
 Release von iOS 5. Weiter betrachten wir eine kommerzielle Lösung von Picovoice, welche aufzeigen 
@@ -1019,7 +1018,7 @@ Entwicklung von Facebook AI's wav2vec2 aufzeigt (\cite{baevski2020wav2vec}).
 \noindent \newline
 
 \noindent \newline
-Deep Learning hat zum grossen Teilen die Spracherkennung revolutioniert, insbesondere durch die
+Deep Learning hatte einen grossen Einfluss auf die Revolutionierung der Spracherkennung, insbesondere durch die
 Sammlung grosser transkribierter Datensätze und Fortschritte in der Hardware. Spätestens seit
 (\textit{Deep Speech}) sind Fähigkeiten der akustischen Sprachmodelle mit denen von Menschen
 vergleichbar (\cite{hannun2021history}).
@@ -1278,8 +1277,8 @@ verwendet werden kann. Nachdem das Modell trainiert wurde, soll es in eine App i
 Das Ergebnis soll eine App sein, welche ein Triggerwort erkennt. Das Resultat dieser Bachelorarbeit
 ist sozusagen eine Teilkomponente einer Sprachsteuerung. Denn wie wir im Kapitel Stand der Forschung
 gesehen haben, besteht eine Sprachsteuerung aus mehreren Komponenten. Um einen möglichen Use Case
-zu nennen, könnte die App als Triggerwort Erkennung für eine Sprachsteuerung in einer Koch App
-verwendet werden. Die App könnte dann beispielsweise folgende Befehle verstehen: ``Hey FOOBY, 
+zu nennen, könnte die App als Triggerwort Erkennung für eine Sprachsteuerung in einer Koch App namens 
+"FOOBY" verwendet werden. Die App könnte dann beispielsweise folgende Befehle verstehen: ``Hey FOOBY, 
 nächster Kochschritt'' oder ``Hey FOOBY, vorheriger Kochschritt''. Eine Sprachsteuerung für eine Koch App
 würde somit den Anwendern ermöglichen, die Hände frei zu haben und sich voll und ganz auf das
 Kochen zu konzentrieren. Die Nutzererfahrung könnte mit einem solchen Feature massiv verbessert
@@ -1309,12 +1308,12 @@ Aspekte zu dokumentieren und die Überlegungen zum sozialen Kontext der Datennut
 In Bezug auf die Erstellung eines Datensatzes für diese Arbeit ist es beispielsweise wichtig, dass 
 die Sprachaufnahmen aus diversen Sprachregionen stammen. In der Schweiz gibt es vier offizielle 
 Sprachen und unzählige Dialekte. St. Galler Dialekt hat einen anderen Klang als der Zürcher Dialekt.
-Ebenfalls gibt es Personen mit Sprachfehlern oder Personen, welche eine andere Sprache als 
+Ebenfalls gibt es Personen mit Sprachfehlern oder Personen mit Migrationshintergrund, welche eine andere Sprache als 
 Muttersprache haben. All diese Aspekte sollten bei der Erstellung eines Datensatzes berücksichtigt 
 werden.
 
 \subsection{Datenschutz und Privatsphäre}
-Die Erestellung des Datensatzes und die Verwendung von Sprachaufnahmen soll unter Einhaltung des 
+Die Erstellung des Datensatzes und die Verwendung von Sprachaufnahmen soll unter Einhaltung des 
 Datenschutzgesetzes erfolgen. Die Sprachaufnahmen sollen nicht an Dritte weitergegeben werden. Die 
 Teilnehmer sollen über die Verwendung der Sprachaufnahmen informiert werden. Ebenfalls sollen die 
 Sprachaufnahmen nach der Verwendung gelöscht werden. 
@@ -1487,7 +1486,7 @@ Planung der Arbeit stark beeinflusst.
 
 \subsection{Projektphasen}
 Im Projektmanagement wurden die Projektphasen definiert. Diese bestehen aus vier Phasen. Die erste
-Phase widmet sich der \textit{Stand der Forschung}. Darin wurden aber bereits einige Punkte der 
+Phase widmet sich dem \textit{Stand der Forschung}. Darin wurden aber bereits einige Punkte der 
 Planung definiert sowie dem Setup der Entwicklungsumgebung. Der Bestandteil liegt aber in der 
 Erarbeitung der Grundlagen sowie der Recherche von bestehenden Lösungen. Die zweite Phase ist die 
 \textit{Erstellung des Modells}. In dieser Phase wird das Modell entwickelt, trainiert und 
