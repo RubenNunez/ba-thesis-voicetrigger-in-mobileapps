@@ -1824,7 +1824,7 @@ mobilen App bewerten.
 \subsection{Genauigkeit des Modells}
 Die Genauigkeit des Modells wurde mit dem F1-Score gemessen. Der F1-Score ist ein Mass für die 
 Genauigkeit eines Modells. Er ist definiert als das harmonische Mittel zwischen Precision und 
-Recall. Da es sich beim Erstellten Datensatz um einen Imbalanced Datensatz handelt, ist der F1-Score 
+Recall. Da es sich beim erstellten Datensatz um einen Imbalanced Datensatz handelt, ist der F1-Score 
 ein geeignetes Mass für die Genauigkeit des Modells. Nach dem Training wurden die restlichen 
 20\% der Daten für die Evaluation verwendet. Die nachfolgende Abbildung \ref{fig:test} zeigt das 
 Tensorboard Dashboard mit den Metriken des Testdatensatzes. 
@@ -1837,8 +1837,16 @@ Tensorboard Dashboard mit den Metriken des Testdatensatzes.
 \end{figure}
 
 \noindent \newline
-Die Werte für den F1-Score und der Accuracy liegen bei 0.96 für den F1-Score und 0.98 für die 
-Accuracy.
+Die Werte für den F1-Score und der Accuracy liegen bei 0.8883 für den F1-Score und 0.8081 für die 
+Accuracy. Die Werte liegen unter den Werten des Trainingsdatensatzes, was aber nicht ein schlechtes 
+Zeichen ist. Denn die Werte sind immer noch sehr gut. Das zeigt sich vor allem in der Realtime 
+iOS-App, welche durch die Usertests bestätigt wurde. Doch bevor die Usertests beschrieben werden, 
+wird zuerst auf die Energieeffizienz sowie die Inferenzgeschwindigkeit des Modells eingegangen.
+
+\subsubsection{Energieeffizienz und Inferenzgeschwindigkeit}
+Die Energieeffizienz und die Inferenzgeschwindigkeit bei der Realtime Anwendungen, zum einen die 
+Python Anwendung und zum anderen die iOS App, wurden mit dem Beobachten der CPU Auslastung sowie 
+der Messung von Zeitdifferenzen gemessen.
 
 
 \newpage \section{Ausblick}
