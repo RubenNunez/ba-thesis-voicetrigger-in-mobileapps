@@ -1235,8 +1235,8 @@ Triggerwort Erkennung könnte es genau die richtige Lösung sein. Dennoch ist gi
 dass die Lösung von Picovoice nicht Open Source ist. Die Preise sind ebenfalls nicht ganz ohne.
 Die Enterprise Lösung startet bei 2'500 USD pro Monat und ist somit für viele Projekte nicht
 finanzierbar. Die Preise sind auf der Webseite von Picovoice einsehbar
-(\cite{picovoice2023porcupine}).
-
+(\cite{picovoice2023porcupine}). Mit der Lösung von Picovoice wird klar, dass es einen Bedarf für 
+eine integrierte Lösung gibt.
 
 \newpage \section{Ideen und Konzepte}
 Dieses Kapitel beschreibt die Ideen und Konzepte, die für die Umsetzung der Arbeit verwendet
@@ -1869,14 +1869,14 @@ Inferenzgeschwindigkeit sowie der Energieeffizienz gemessen an der aktuellen CPU
 \end{figure}
 
 \noindent \newline
-Die Durchschnittliche Inferenzgeschwindigkeit liegt bei ca. 0.01 Sekunden und liegt somit 10 mal
-unterhalb der 0.1 Sekunden, welche für die Realtime Anwendung definiert wurde. Wenn das nicht 
-eingehalten werden kann, würde das zur Folge haben, dass Daten aus dem Audio Stream verloren gehen 
-könnten. Die Energieeffizienz wurde anhand der aktuellen CPU Auslastung gemessen. Die Auslastung 
-der CPU liegt bei ca. 20\%. Hierzu ist es aber Schwierig eine Aussage zu treffen, da die 
-Auslastung der CPU von vielen Faktoren abhängig ist. Dennoch kann gesagt werden, dass die 
-gemessenen Werte im Normalbereich liegen. Damit konnte zumindest gezeigt werden, dass die 
-CPU Auslastung nicht übermässig hoch ist. 
+Die durchschnittliche Inferenzgeschwindigkeit liegt bei ca. 0.01 Sekunden und liegt somit 10 mal
+unterhalb der 0.1 Sekunden, welche für den Loop der Realtime Anwendung definiert wurde. Somit liegt 
+es in einem guten Bereich. Sollte die festgelegte Inferenzgeschwindigkeit nicht erreicht werden, 
+könnte dies zu Datenverlusten im Audio-Stream führen. Die Energieeffizienz wurde anhand der 
+aktuellen CPU Auslastung beim jeweiligen Messpunkt gemessen. Die Auslastung der CPU liegt bei ca. 
+20\%. Hierzu ist es aber Schwierig eine Aussage zu treffen, da die Auslastung der CPU von vielen 
+Faktoren abhängig ist. Dennoch kann gesagt werden, dass die gemessenen Werte im Normalbereich 
+liegen. Damit konnte zumindest gezeigt werden, dass die CPU Auslastung nicht übermässig hoch ist. 
 
 \newpage \section{Ausblick}
 Das Problem dieser Arbeit ist im wesentlichen die Erkennung von Triggerwörtern innerhalb
