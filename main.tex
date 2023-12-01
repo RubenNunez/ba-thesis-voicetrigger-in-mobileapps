@@ -1493,7 +1493,7 @@ Die Realisierung dieser Arbeit besteht im wesentlichen aus drei Teilen. Welche d
 wiederspiegeln. Zum einen wurde ein Datensatz nach ethischen sowie rechtlichen Aspekten erstellt, 
 welcher die Grundlage für die Experimente so wie das Training des Modells bildet. Weiter wurde ein 
 Modell erarbeitet und anschliessend trainiert, welches Triggerwörter erkennt. Der letzte Teil der 
-Realisierung ist die Integration dieses Modells in eine Sample App.
+Realisierung ist die Integration dieses Modells in eine iOS App.
 
 \subsection{Aufbau des Datensatzes}
 Der Aufbau eines Datensatzes war zu Beginn der Arbeit geplant. Es war klar, dass ein Datensatz 
@@ -1624,14 +1624,14 @@ entsprechende Leistungsmessungen durchzuführen.
 \subsubsection{Verwendete Architektur des Modells}
 Die Architektur besteht aus drei Convolutional Layers und einem Long-Short-Term-Memory 
 (LSTM) Layer. Der Vorteil dieser Architektur ist, dass sie sehr energie effizient ist, wie auch sehr 
-schnell in der Inferenz. Mehr dazu im Kapitel \ref{sec:evaluation}. Was besonders Markant ist, ist 
-die Verwendung von Convolutional Layers in Kombination mit einem (LSTM) Layer, welcher die zeitliche 
-Komponente der Sprache berücksichtigt. Die Idee der Kombination von Convolutional Layers und
-(LSTM) Layers ist nicht neu. Es gibt diverse Paper, welche diesen Ansatz verwenden. Beispielsweise 
-verwendet (\cite{khamees2021classifying}) diesen Ansatz für die Klassifizierung von Music Genres.
-Die finale Architektur des Models ist in der Abbildung \ref{fig:model_architecture} dargestellt.
-Für den Namen des Models wurde der Name \textit{WakeupTriggerConvLSTM2s} gewählt. Der Name 
-beinhaltet information darüber, welche Architektur verwendet wurde. Die Zahl 2s steht für die 
+schnell in der Inferenz. Mehr dazu im Kapitel \ref{sec:evaluation} Evaluation. Was besonders Markant 
+ist, ist die Verwendung von Convolutional Layers in Kombination mit einem (LSTM) Layer, welcher die 
+zeitliche Komponente der Sprache berücksichtigt. Die Idee der Kombination von Convolutional Layers 
+und (LSTM) Layers ist nicht neu. Es gibt diverse Paper, welche diesen Ansatz verwenden. 
+Beispielsweise verwendet (\cite{khamees2021classifying}) diesen Ansatz für die Klassifizierung von 
+Music Genres. Die finale Architektur des Models ist in der Abbildung \ref{fig:model_architecture} 
+dargestellt. Für den Namen des Models wurde der Name \textit{WakeupTriggerConvLSTM2s} gewählt. Der 
+Name beinhaltet information darüber, welche Architektur verwendet wurde. Die Zahl 2s steht für die 
 Anzahl Sekunden, welche das Model analysiert. Die Abbildung wurde mit Figma und Blender erstellt.
 
 \begin{figure}[h]
@@ -1844,10 +1844,39 @@ iOS-App, welche durch die Usertests bestätigt wurde. Doch bevor die Usertests b
 wird zuerst auf die Energieeffizienz sowie die Inferenzgeschwindigkeit des Modells eingegangen.
 
 \subsubsection{Energieeffizienz und Inferenzgeschwindigkeit}
-Die Energieeffizienz und die Inferenzgeschwindigkeit bei der Realtime Anwendungen, zum einen die 
-Python Anwendung und zum anderen die iOS App, wurden mit dem Beobachten der CPU Auslastung sowie 
-der Messung von Zeitdifferenzen gemessen.
+Die Energieeffizienz und die Inferenzgeschwindigkeit wurde bei der Realtime Python Anwendung 
+gemessen. Dafür wurden Messungen während der Inferenz durchgeführt. Die nachfolgende Abbildung 
+\ref{fig:profiling_code} zeigt den Code, welcher für die Messungen verwendet wurde. 
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\linewidth]{img/profiling_code.png}
+	\caption{Code für die Messungen der Energieeffizienz und Inferenzgeschwindigkeit}
+	\label{fig:profiling_code}
+\end{figure}
+
+\noindent \newline
+Die Inferenz wurde innerhalb von 10 Sekunden 100 Mal durchgeführt. Das entspricht einer 
+Inferenzgeschwindigkeit von 10 Inferenzen pro Sekunde, was auch der in der Lösung beschriebenen 
+Geschwindigkeit entspricht. Die nachfolgende Abbildung \ref{fig:profiling} zeigt die Messungen der 
+Inferenzgeschwindigkeit sowie der Energieeffizienz gemessen an der aktuellen CPU Auslastung.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\linewidth]{img/profiling_plot.png}
+	\caption{Messungen der Inferenzgeschwindigkeit sowie der Energieeffizienz}
+	\label{fig:profiling}
+\end{figure}
+
+\noindent \newline
+Die Durchschnittliche Inferenzgeschwindigkeit liegt bei ca. 0.01 Sekunden und liegt somit 10 mal
+unterhalb der 0.1 Sekunden, welche für die Realtime Anwendung definiert wurde. Wenn das nicht 
+eingehalten werden kann, würde das zur Folge haben, dass Daten aus dem Audio Stream verloren gehen 
+könnten. Die Energieeffizienz wurde anhand der aktuellen CPU Auslastung gemessen. Die Auslastung 
+der CPU liegt bei ca. 20\%. Hierzu ist es aber Schwierig eine Aussage zu treffen, da die 
+Auslastung der CPU von vielen Faktoren abhängig ist. Dennoch kann gesagt werden, dass die 
+gemessenen Werte im Normalbereich liegen. Damit konnte zumindest gezeigt werden, dass die 
+CPU Auslastung nicht übermässig hoch ist. 
 
 \newpage \section{Ausblick}
 Das Problem dieser Arbeit ist im wesentlichen die Erkennung von Triggerwörtern innerhalb
