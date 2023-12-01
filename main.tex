@@ -207,8 +207,6 @@ Die Ziele dieser Arbeit, nach SMART-Prinzip, werden in der folgenden Tabelle \re
 	\caption{SMART Ziele der Bachelorarbeit}
 	\label{tab:smart_goals}
 \end{table}
-	
-
 
 \subsection{Abgrenzung}
 Diese Arbeit befasst sich mit der Erkennung von Triggerwörtern in der akustischen Sprache. Es ist 
@@ -1669,13 +1667,13 @@ Transformation der Sprachdaten eingesetzt wird, ist in Abbildung \ref{fig:transf
 \subsubsection{Training des Modells}
 Hier werden die Resultate des Trainings beschrieben. Der Datensatz wurde in Trainingsdaten und 
 Testdaten aufgeteilt. Die Trainingsdaten wurden für das Training des Modells verwendet. 
-Die Testdaten wurden verwendet, um das Modell nach dem Training zu evaluieren, das wird im 
-Kapitel \ref{sec:evaluation} beschrieben. Die Aufteilung der Daten erfolgte mit einem Verhältnis 
-von 80\% Trainingsdaten und 20\% Testdaten.
+Die Testdaten wurden verwendet, um das Modell nach dem Training zu evaluieren. Die Aufteilung der 
+Daten erfolgte mit einem Verhältnis von 80\% Trainingsdaten und 20\% Testdaten.
 
 \noindent \newline
 Die nachfolgenden Abbildungen zeigen verschiedene Metriken, die während des Trainingsprozesses 
-aufgezeichnet wurden:
+aufgezeichnet wurden. Die Batch-Metriken wurden nach jedem Batch aufgezeichnet. Die Epoche-Metriken 
+wurden nach jeder Epoche aufgezeichnet.
 
 \begin{figure}[H]
     \centering
@@ -1813,9 +1811,21 @@ Ausführung in C++ wird auf das Tutorial \textit{Loading a PyTorch Model in C++}
 
 
 \newpage \section{Evaluation und Validation} \label{sec:evaluation}
-Das Problem dieser Arbeit ist im wesentlichen die Erkennung von Triggerwörtern innerhalb
-des Kontext einer App. Grundsätzlich ist es unüblich, dass mobile Apps eine
-integrierte Sprachsteuerungsfunktion anbieten. 
+In der Evaluation soll Rückblickend auf die Ziele der Arbeit eingegangen werden. Die Ergebnisse der 
+drei Hauptziele werden in den nachfolgenden Kapiteln beschrieben. Als erstes wird eine Aussage über 
+die Genauigkeit des Modells getroffen, welches für die Triggerwort Erkennung trainiert wurde. Vor 
+Beginn des Trainings wurde ein 80/20 Split für die Trainingsdaten und Testdaten durchgeführt. 
+Weiter soll eine Aussage über die Energieeffizienz sowie die Inferenzgeschwindigkeit des Modells 
+getroffen werden. Denn diese beiden Punkte sind entscheidend für die Integration in eine Echtzeit 
+Anwendung. Zu guter Letzt soll eine Aussage über die Integration des Modells in eine mobile App 
+gemacht werden. Das in Bezug auf Usertest, welche die Usability der Triggerwort Erkennung in der 
+mobilen App bewerten.
+
+\subsection{Genauigkeit des Modells}
+Die Genauigkeit des Modells wurde mit dem F1-Score gemessen. Der F1-Score ist ein Mass für die 
+Genauigkeit eines Modells. Er ist definiert als das harmonische Mittel zwischen Precision und 
+Recall. Da es sich beim Erstellten Datensatz um einen Imbalanced Datensatz handelt, ist der F1-Score 
+ein geeignetes Mass für die Genauigkeit des Modells. 
 
 
 \newpage \section{Ausblick}

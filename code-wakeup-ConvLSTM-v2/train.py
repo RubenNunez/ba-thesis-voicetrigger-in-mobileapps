@@ -12,7 +12,7 @@ import torch.nn as nn
 from tensorboardX import SummaryWriter
 
 from model import WakeupTriggerConvLSTM2s
-from dataset import get_train_loader
+from dataset import get_data_loader
 
 # metrics
 def get_metrics_for_logits(logits):
@@ -57,13 +57,13 @@ criterion = nn.BCEWithLogitsLoss(pos_weight=pos_weight)
 start_epoch = 0
 
 # Load the checkpoint if one exists
-checkpoint_path = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM-v2/checkpoints-best/checkpoint_epoch_35_loss_0.08726639538489951.pt"
-checkpoint = torch.load(checkpoint_path)
+# checkpoint_path = "/Users/ruben/Projects/ba-thesis-voicetrigger-in-mobileapps/data-wakeup-ConvLSTM-v2/checkpoints-best/checkpoint_epoch_35_loss_0.08726639538489951.pt"
+# checkpoint = torch.load(checkpoint_path)
 # 
-# # Update model and optimizer with the saved states
-model.load_state_dict(checkpoint['model_state_dict'])
-optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
-start_epoch = checkpoint['epoch']
+# # # Update model and optimizer with the saved states
+# model.load_state_dict(checkpoint['model_state_dict'])
+# optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+# start_epoch = checkpoint['epoch']
 
 # Data
 audio_files = []
@@ -83,7 +83,7 @@ for folder in root_dir.iterdir():
                 #     audio_files.append(silence_file_path)
                 #     labels.append(label)
 
-train_loader = get_train_loader(audio_files, labels)
+train_loader = get_data_loader(audio_files, labels)
 
 writer = SummaryWriter('runs/training_logs-v2')
 

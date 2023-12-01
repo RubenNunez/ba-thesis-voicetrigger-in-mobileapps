@@ -33,7 +33,7 @@ class WakeupTriggerDataset(Dataset):
         label = self.labels[idx]
         return audio_waveform, label
 
-def get_train_loader(audio_files, labels, batch_size=32):
+def get_data_loader(audio_files, labels, batch_size=32):
     transform = AudioToSpectrogramTransform()
     train_dataset = WakeupTriggerDataset(audio_files, labels, transform=transform)
     return DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
