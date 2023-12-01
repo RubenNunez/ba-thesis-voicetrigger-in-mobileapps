@@ -67,7 +67,7 @@ model = WakeupTriggerConvLSTM2s(device).to(device)
 model.load_state_dict(checkpoint['model_state_dict'])
 transform = AudioToSpectrogramTransform()
 
-eval_loader = get_data_loader(audio_files, labels)
+eval_loader = get_data_loader(audio_files, labels, batch_size=32)
 
 def run(model, eval_loader, device):
     model.eval()

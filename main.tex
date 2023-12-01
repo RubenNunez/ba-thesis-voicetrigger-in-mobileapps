@@ -1825,7 +1825,20 @@ mobilen App bewerten.
 Die Genauigkeit des Modells wurde mit dem F1-Score gemessen. Der F1-Score ist ein Mass für die 
 Genauigkeit eines Modells. Er ist definiert als das harmonische Mittel zwischen Precision und 
 Recall. Da es sich beim Erstellten Datensatz um einen Imbalanced Datensatz handelt, ist der F1-Score 
-ein geeignetes Mass für die Genauigkeit des Modells. 
+ein geeignetes Mass für die Genauigkeit des Modells. Nach dem Training wurden die restlichen 
+20\% der Daten für die Evaluation verwendet. Die nachfolgende Abbildung \ref{fig:test} zeigt das 
+Tensorboard Dashboard mit den Metriken des Testdatensatzes. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\linewidth]{img/test/test.png}
+	\caption{Tensorboard Dashboard mit den Metriken des Testdatensatzes}
+	\label{fig:test}	
+\end{figure}
+
+\noindent \newline
+Die Werte für den F1-Score und der Accuracy liegen bei 0.96 für den F1-Score und 0.98 für die 
+Accuracy.
 
 
 \newpage \section{Ausblick}
