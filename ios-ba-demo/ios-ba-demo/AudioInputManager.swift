@@ -24,6 +24,12 @@ class AudioDataManager: ObservableObject, AudioInputManagerDelegate {
     
     private var audioInputManager: AudioInputManager?
     
+    
+    private let threshold: Float = 0.90
+    private var sma3Queue: [Float] = []
+    private var sma5Queue: [Float] = []
+    private var sma10Queue: [Float] = []
+    
     private lazy var module: TorchModule = {
         if let modelFilePath = Bundle.main.path(forResource: "model", ofType: "ptl"),
            let transformFilePath = Bundle.main.path(forResource: "transform", ofType: "ptl"),
@@ -77,12 +83,17 @@ class AudioDataManager: ObservableObject, AudioInputManagerDelegate {
             self.lastCapturedData.withUnsafeMutableBufferPointer { pointer in
                 if let baseAddress = pointer.baseAddress {
                     if let results = self.module.predict(withBuffer: baseAddress) as? [Float], let resultValue = results.first {
-                        var text = ""
+                        let text = ""
                         if(resultValue > 0.5){
                             //text = self.module.recognize(baseAddress, bufferLength: 32000)
                         }
                         
-                        self.printLevel(probability: resultValue, text: text)
+                        //self.printLevel(probability: resultValue, text: text)
+                        // Update queues and calculate SMAs
+                        self.updateSMAQueues(with: resultValue)
+                        self.checkSMAThresholds()
+                        
+                        
                     }
                 }
             }
@@ -97,6 +108,52 @@ class AudioDataManager: ObservableObject, AudioInputManagerDelegate {
         let formattedNumber = String(format: "%.3f", probability)
         
         print("\r[\(blocks)\(spaces)] \(formattedNumber) -> \(text)", terminator: "")
+    }
+    
+    private func updateSMAQueues(with newValue: Float) {
+        updateQueue(&sma3Queue, with: newValue, maxSize: 3)
+        updateQueue(&sma5Queue, with: newValue, maxSize: 5)
+        updateQueue(&sma10Queue, with: newValue, maxSize: 10)
+    }
+    
+    private func updateQueue(_ queue: inout [Float], with newValue: Float, maxSize: Int) {
+        if queue.count >= maxSize {
+            queue.removeFirst()
+        }
+        queue.append(newValue)
+    }
+    
+    private func checkSMAThresholds() {
+        var isTriggered = false
+
+        if calculateSMA(for: sma3Queue) > threshold {
+            print("SMA 3 - Triggered")
+            isTriggered = true
+        }
+        if calculateSMA(for: sma5Queue) > threshold {
+            print("SMA 5 - Triggered")
+            isTriggered = true
+        }
+        if calculateSMA(for: sma10Queue) > threshold {
+            print("SMA 10 - Triggered")
+            isTriggered = true
+        }
+
+        if isTriggered {
+            clearSMAQueues()
+        }
+    }
+
+    private func clearSMAQueues() {
+        sma3Queue.removeAll()
+        sma5Queue.removeAll()
+        sma10Queue.removeAll()
+    }
+
+    
+    private func calculateSMA(for queue: [Float]) -> Float {
+        guard !queue.isEmpty else { return 0 }
+        return queue.reduce(0, +) / Float(queue.count)
     }
 }
 
@@ -251,4 +308,6 @@ public class AudioInputManager {
         audioEngine.stop()
         audioEngine.inputNode.removeTap(onBus: 0)
     }
+    
+    
 }

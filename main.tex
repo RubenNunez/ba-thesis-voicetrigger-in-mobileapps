@@ -23,7 +23,6 @@
 \usepackage{enumitem}
 \usepackage{float}
 
-
 \geometry{a4paper, total={170mm,257mm}, left=20mm, top=20mm}
 \usetikzlibrary{matrix, positioning, calc, fit, arrows.meta}
 
@@ -1888,10 +1887,48 @@ aktuellen CPU Auslastung beim jeweiligen Messpunkt gemessen. Die Auslastung der 
 Faktoren abhängig ist. Dennoch kann gesagt werden, dass die gemessenen Werte im Normalbereich 
 liegen. Damit konnte zumindest gezeigt werden, dass die CPU Auslastung nicht übermässig hoch ist. 
 
-\section{Usertests}
-Die Usertests wurden mit der Realtime iOS App durchgeführt. Die App wurde auf einem iPhone 12 Pro 
-durchgeführt. Die Usertests wurden mit 5 Personen durchgeführt. Bei den Tests geht 
-es darum, zu messen, wie gut die Triggerwort Erkennung funktioniert. 
+\subsection{Usertests}
+Usertests zur Evaluierung der Triggerworterkennung wurden mit der Realtime iOS App auf einem iPhone 
+XS durchgeführt. Sechs Personen nahmen an den Tests teil, von denen zwei Teil des Datensatzes waren. 
+Es zeigte sich kein signifikanter Unterschied in den Ergebnissen zwischen den Personen, die Teil des 
+Datensatzes waren, und denen, die nicht Teil davon waren. Bei den Geschlechtern der Testpersonen 
+handelte es sich um zwei weibliche und vier männliche Personen. Die Altersspanne der Testpersonen 
+lag zwischen 20 und 30 Jahren.
+
+\noindent \newline
+Die Testpersonen wurden instruiert, die App zu verwenden, als ob sie mit einem Sprachassistenten 
+interagieren würden. Sie sollten das Triggerwort 'Hey FOOBY' mindestens zehnmal aussprechen, 
+jeweils mit einem Abstand zwischen den Wiederholungen. Zusätzlich sollten sie mindestens zehnmal 
+andere Worte, Geräusche oder Sätze äussern, die nicht das Triggerwort beinhalteten. Die Resultate 
+der Inferenzen wurden während der Tests notiert und in einer Konfusionsmatrix festgehalten, die in 
+Abbildung \ref{fig:usertests} dargestellt ist.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{img/eval-usertests.png}
+	\caption{Konfusionsmatrix der Usertests}
+	\label{fig:usertests}
+\end{figure}
+
+\noindent \newline
+Die Konfusionsmatrix zeigt, dass das Modell das Triggerwort 'Hey FOOBY' in 50 Fällen korrekt 
+erkannte (True Positives) und in 11 Fällen nicht erkannte (False Negatives), wenn es tatsächlich 
+gesagt wurde. Allerdings wurden in 28 Fällen andere Äusserungen fälschlicherweise als das 
+Triggerwort erkannt (False Positives), was auf eine Schwäche des Modells hinweist. In 35 Fällen 
+wurde korrekterweise festgestellt, dass kein Triggerwort gesprochen wurde (True Negatives).
+
+\noindent \newline
+Diese Ergebnisse deuten darauf hin, dass das Modell eine akzeptable Sensitivität bei der Erkennung 
+des Triggerworts 'Hey FOOBY' aufweist, aber eine hohe Rate an Falsch-Positiven vorliegt, was zu 
+einer Beeinträchtigung der allgemeinen Benutzererfahrung führen kann. Die Tests zeigten diese 
+Schwäche auf und lieferten wertvolle Erkenntnisse für die weitere Entwicklung. 
+Das zusammengefasste Fazit der Testpersonen zeigt, dass die Triggerworterkennung bei deutlicher 
+Aussprache gut funktioniert, aber zu viele falsche Wörter als Triggerwort erkennt, was zu vielen 
+Falsch-Positiven führt. Die Ergebnisse variieren und sind für den produktiven Einsatz noch nicht 
+zuverlässig genug.
+
+
+
 
 \newpage \section{Ausblick}
 Das Problem dieser Arbeit ist im wesentlichen die Erkennung von Triggerwörtern innerhalb
