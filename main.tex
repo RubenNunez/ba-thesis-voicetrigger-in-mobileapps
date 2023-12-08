@@ -22,6 +22,9 @@
 \usepackage{multicol}
 \usepackage{enumitem}
 \usepackage{float}
+\usepackage{tocloft}
+\usepackage{tocbibind}
+\usepackage{xpatch}
 
 \geometry{a4paper, total={170mm,257mm}, left=20mm, top=20mm}
 \usetikzlibrary{matrix, positioning, calc, fit, arrows.meta}
@@ -30,6 +33,12 @@
 \makeglossaries
 \renewcommand*{\glstextformat}[1]{\textit{#1}}
 \renewcommand{\lstlistingname}{Source Code}
+
+\newlistof{formulas}{equ}{}
+\newcommand{\formulas}[1]{%
+\addcontentsline{equ}{formulas}{\protect\numberline{\theequation}#1}\par}
+\setcounter{tocdepth}{2} 
+\cftsetindents{formulas}{1.7em}{2.3em}
 
 \addbibresource{references.bib}
 
@@ -455,28 +464,30 @@ wird auch von Prof. Dr. Weitz in seinem Video zu Fourier-Analyse erläutert
 Fourier-Transformation eines Signals \( f(t) \) wie folgt definiert
 (\cite[Chapter~5]{hansen2014fourier}):
 
-\begin{equation*}
+\begin{equation}
 	F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-i \omega t} \, dt
 	\label{eq:fourier_transform}
-\end{equation*}
+\end{equation}
+\formulas{Fourier-Transformation}
 
 \noindent
 \(F(\omega)\) ist die Fourier-Transformation von \(f(t)\)
 (\cite[49:27]{weitz2023fourier}). Als kleines Rechenbeispiel betrachten wir die
 Fourier-Transformation der Rechteckfunktion \( \text{rect}(x) \), die wie folgt definiert ist:
 
-\[
-	\text{rect}(x) =
-	\begin{cases}
-		1 & \text{für } -1 \leq x \leq 1 \\
-		0 & \text{sonst}
-	\end{cases}
-\]
+\begin{equation}
+    \text{rect}(x) = \begin{cases}
+        1 & \text{für } -1 \leq x \leq 1, \\
+        0 & \text{sonst.}
+    \end{cases}
+    \label{eq:rect_function}
+\end{equation}
+\formulas{Rechteckfunktion}
 
 \noindent
 Die Fourier-Transformation der Funktion \( \text{rect}(x) \) kann wie folgt berechnet werden:
 
-\begin{equation*}
+\begin{equation}
 	\begin{split}
 		F(\omega) &= \int_{-\infty}^{\infty} \text{rect}(x) e^{-i \omega x} \, dx \\
 		&= \int_{-1}^{1} e^{-i \omega x} \, dx \\
@@ -486,8 +497,9 @@ Die Fourier-Transformation der Funktion \( \text{rect}(x) \) kann wie folgt bere
 		&= \frac{1}{-i \omega} \left( -2 i \sin(\omega) \right) \\
 		&= \frac{2 \sin(\omega)}{\omega}
 	\end{split}
-\end{equation*}
-\noindent
+	\label{eq:fourier_transform_rect}
+\end{equation}
+\formulas{Fourier-Transformation der Rechteckfunktion}
 
 \noindent
 \newline
@@ -518,9 +530,11 @@ Systemen sind Signale typischerweise diskret und bestehen aus einzelnen Samples,
 besonders relevant für solche Anwendungen ist. Die mathematische Definition der DFT ist
 (\cite[Chapter~3]{hansen2014fourier}):
 
-\[
-	F(k) = \sum_{n=0}^{N-1} f(n) \cdot e^{-\frac{2\pi i}{N} kn}
-\]
+\begin{equation}
+    F(k) = \sum_{n=0}^{N-1} f(n) \cdot e^{-\frac{2\pi i}{N} kn}
+    \label{eq:fourier_series}
+\end{equation}
+\formulas{Fourier-Reihe}
 
 \noindent \newline
 Zur Veranschaulichung betrachten wir ein Source Code Beispiel (\ref{lst:dft_example}). 
@@ -528,7 +542,11 @@ Wir haben eine Funktion \(f(t)\) und unterteilen diese in \(N\) Samples. Die DFT
 Frequenzkomponenten des Signals. Die Abbildung \ref{fig:dft_example} zeigt ein Beispiel für ein 
 Signal \(f(t)\) mit \(N=5\) Samples.
 
-\[ f(t) = 1.5 \cos(t) + 0.25 \sin(t) + 2 \sin(2t) + \sin(3t) \].
+\begin{equation}
+    f(t) = 1.5 \cos(t) + 0.25 \sin(t) + 2 \sin(2t) + \sin(3t)
+    \label{eq:example_function}
+\end{equation}
+
 
 \begin{lstlisting} [caption={Unterteilung der Funktion \(f(t)\) in 5 Samples}, label={lst:dft_example}]
 import numpy as np
@@ -584,13 +602,14 @@ DFT an. Die Formel der inversen DFT, welche das Signal rekonstruiert, lautet
 (\cite[Chapter~3]{hansen2014fourier}):
 
 
-\[
+\begin{equation}
 	f(n) = \frac{1}{N} \sum_{k=0}^{N-1} F(k) \cdot e^{\frac{2\pi i}{N} kn}
-\]
+	\label{eq:inverse_fourier_series}
+\end{equation}
+\formulas{Inverse Fourier-Reihe}
 
 \begin{lstlisting}
 reconstructed_manual = np.zeros_like(x_points, dtype=np.complex128)
-
 dt = x_points[1] - x_points[0] # Abstand zwischen zwei Punkten
 T = N_SAMPLES * dt # Periode des Signals
 
@@ -628,7 +647,7 @@ ursprüngliche Signal eine Frequenz von 200 Hz hätte. Das ist, als ob man ein s
 drehendes Rad filmt und auf dem Video wirkt es, als würde es sich langsamer oder sogar rückwärts
 drehen. Um solche Fehler zu verhindern, sollte die Samplingrate stets mindestens das
 Doppelte der höchsten Frequenz des Signals betragen, ein Grundsatz, der als Nyquist-Kriterium
-bekannt ist. (\cite[]{weitz2023fourier}).
+bekannt ist (\cite[]{weitz2023fourier}).
 
 \subsection{Spektrogramm}
 Mit einem Verständnis der Grundlagen der Fourier-Analyse können wir die Bedeutung des Spektrogramms
@@ -656,7 +675,7 @@ das im Rahmen dieser Arbeit entwickelt wurde. Das Spektrogramm wurde unter Verwe
 Python-Bibliotheken \texttt{PyQt6} für die Echtzeit-Visualisierung und \texttt{soundevice} für den
 Zugriff auf die Audio-Hardware generiert.
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.73\linewidth]{img/spectrogram.png}
 	\caption{Spektrogramm}
@@ -891,9 +910,11 @@ besprochenen Loss Function, die den Unterschied zwischen der tatsächlichen und 
 Ausgabe quantifiziert, nutzen wir weitere Metriken. Die nachstehende Formel illustriert den 
 \textit{Mean Squared Error} (MSE), eine gängige Methode, um den Loss zu berechnen:
 
-\begin{equation*}
+\begin{equation}
     \text{MSE} = \frac{1}{n} \sum_{i=1}^{n} (y_{i} - \hat{y}_{i})^{2}
-\end{equation*}
+	\label{eq:mse}
+\end{equation}
+\formulas{Mean Squared Error}
 
 \noindent
 Vor der Betrachtung weiterer Metriken ist das Verständnis der \textit{Confusion Matrix} wesentlich. 
@@ -918,39 +939,47 @@ in Tabelle \ref{tab:confusion_matrix} abgebildet ist.
 Mit der Confusion Matrix können wir nun die anderen Metriken betrachten. Die \textit{Accuracy} 
 zeigt den Anteil der korrekten Vorhersagen. Die Accuracy wird wie folgt berechnet:
 
-\begin{equation*}
+\begin{equation}
 	\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}
-\end{equation*}
+	\label{eq:accuracy}
+\end{equation}
+\formulas{Accuracy}
 
 \noindent \newline
 Die \textit{Precision} zeigt den Anteil der korrekten positiven Vorhersagen. Die Precision wird wie 
 folgt berechnet:
 
-\begin{equation*}
+\begin{equation}
 	\text{Precision} = \frac{TP}{TP + FP}
-\end{equation*}
+	\label{eq:precision}
+\end{equation}
+\formulas{Precision}
 
 \noindent \newline
 Die \textit{Recall} zeigt den Anteil der korrekten positiven Vorhersagen. Die Recall wird wie 
 folgt berechnet:
 
-\begin{equation*}
+\begin{equation}
 	\text{Recall} = \frac{TP}{TP + FN}
-\end{equation*}
+	\label{eq:recall}
+\end{equation}
+\formulas{Recall}
 
 \noindent  \newline
 Die \textit{F1-Score} ist das harmonische Mittel zwischen Precision und Recall. Die F1-Score wird 
 wie folgt berechnet:
 
-\begin{equation*}
+\begin{equation}
 	\text{F1-Score} = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + 
 	\text{Recall}}
-\end{equation*}
+	\label{eq:f1_score}
+\end{equation}
+\formulas{F1-Score}
 
 \newpage \section{Stand der Forschung}
 In diesem Kapitel werden die wichtigsten
 zeitlichen Entwicklungen im Bereich der Spracherkennung aufgezeigt. Die Forschung im Bereich 
-der Spracherkennung ist ein aktives Forschungsgebiet. Die Jahre 2010 bis 2020 haben laut 
+der Spracherkennung ist ein aktives Forschungsgebiet. Die Jahre 2010 bis 2020 haben laut Hannun 
 (\cite{hannun2021history}) einen grossen Fortschritt in der Spracherkennung erlebt. Dieser 
 Fortschritt ist vor allem auf die Verwendung von Deep Learning zurückzuführen. Weiter wird der 
 Aufbau von Sprachassistenten untersucht und verglichen. Ein wichtiger Teil ist die Funktionsweise 
@@ -967,7 +996,7 @@ bringen wird (\cite{hannun2021history}).
 
 \noindent \newline
 Die Abbildung \ref{fig:updated_timeline} zeigt eine Timeline der wichtigsten Entwicklungen im
-Zeitraum von 2010 bis 2020. Die Timeline wurde basierend auf der Timeline von
+Zeitraum von 2010 bis 2020. Die Timeline wurde basierend auf der Timeline von Hannun 
 (\cite{hannun2021history}) erstellt aber mit einem Zusatz für das Jahr 2020, welches die neuste
 Entwicklung von Facebook AI's wav2vec2 aufzeigt (\cite{baevski2020wav2vec}).
 
@@ -1038,10 +1067,10 @@ und personalisierten Modellen liegt. Die Wortfehlerrate wird weiter sinken, wäh
 Sprachqualität steigt (\cite{hannun2021history}).
 
 \subsection{Aufbau von Sprachassistenten}
-Sprachassistenten können laut (\cite{matarneh2017speechrecognition}) in folgende Komponenten
+Sprachassistenten können laut Matarneh et al. (\cite{matarneh2017speechrecognition}) in folgende Komponenten
 unterteilt werden: Sprache, Erkennung, Übersetzung und Ausführung von Befehlen. Die nachfolgende
 Abbildung \ref{fig:voice_control} zeigt die Komponenten eines Sprachassistenten. Abbildung basiert
-auf (\cite{matarneh2017speechrecognition}). Zudem wurde aber die Komponente des \gls{twd} 
+auf Matarneh et al. (\cite{matarneh2017speechrecognition}). Zudem wurde aber die Komponente des \gls{twd} 
 hinzugefügt.
 
 \vspace{1em}
@@ -1078,11 +1107,11 @@ Amazon und Apple verwenden für ihre Sprachassistenten Cloud-basierte Ansätze
 
 \subsection{Vergleich von Sprachassistenten}\label{sec:vergleich_sprachassistenten}
 
-In der Arbeit von (\cite{matarneh2017speechrecognition}) werden verschiedene Spracherkennungssysteme 
-anhand von Kriterien wie Genauigkeit, API-Qualität, Leistung, Echtzeitgeschwindigkeit, 
-Antwortzeit und Kompatibilität verglichen. Die Beurteilung umfasst sowohl Systeme mit offenem 
-(\textit{Open-Source}) als auch geschlossenem Sourcecode (\textit{Closed-Source}), mit einer 
-detaillierten Untersuchung von deren Fähigkeiten und Einschränkungen.
+In der Arbeit von Matarneh et al. werden verschiedene Spracherkennungssysteme anhand von Kriterien 
+wie Genauigkeit, API-Qualität, Leistung, Echtzeitgeschwindigkeit, Antwortzeit und Kompatibilität 
+verglichen. Die Beurteilung umfasst sowohl Systeme mit offenem (\textit{Open-Source}) als auch 
+geschlossenem Sourcecode (\textit{Closed-Source}), mit einer detaillierten Untersuchung von deren 
+Fähigkeiten und Einschränkungen (\cite{matarneh2017speechrecognition}).
 
 \raggedcolumns
 \begin{multicols}{2}
@@ -1185,7 +1214,7 @@ Assistant'' (\cite{siri2017hey}).
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.75\linewidth]{img/siri_dnn.png}
-	\caption{DNN Architektur von Siri}
+	\caption{DNN Architektur von Siri (\cite{siri2017hey})}
 	\label{fig:siri_dnn}
 \end{figure}
 
@@ -1299,10 +1328,10 @@ freiwillig ihre Stimme aufgenommen haben.
 Das Erstellen eines Datensatzes hat eine gewisse Verantwortung. Es geht dabei nicht nur um die 
 Einhaltung des Datenschutzgesetzes, sondern auch um ethische Aspekte. Ein Datensatz sollte 
 vielfältige Sprachaufnahmen beinhalten und nicht nur Aufnahmen bestimmter Personengruppen. Das 
-Paper von Papakyriakopoulos et al. (\cite{papakyriakopoulos2023augmented}) betont die 
-Notwendigkeit der Diversität in Sprachdaten und die Auswirkungen auf Fairness und Robustheit von 
-Sprachtechnologien. Sie empfehlen, mehr Transparenz bei der Datensammlung zu schaffen, um ethische 
-Aspekte zu dokumentieren und die Überlegungen zum sozialen Kontext der Datennutzung zu vertiefen.
+Paper von Papakyriakopoulos et al. betont die Notwendigkeit der Diversität in Sprachdaten und die 
+Auswirkungen auf Fairness und Robustheit von Sprachtechnologien. Sie empfehlen, mehr Transparenz 
+bei der Datensammlung zu schaffen, um ethische Aspekte zu dokumentieren und die Überlegungen zum 
+sozialen Kontext der Datennutzung zu vertiefen (\cite{papakyriakopoulos2023augmented}).
 
 \noindent \newline
 In Bezug auf die Erstellung eines Datensatzes für diese Arbeit ist es beispielsweise wichtig, dass 
@@ -1324,9 +1353,9 @@ Schlüsselüberlegung für dieses Projekt war die Fähigkeit zur Integration in 
 Es gibt einge Frameworks, welche das ermöglichen. Um nur einige zu nennen: PyTorch, TensorFlow, 
 CoreML. Wobei CoreML nur für Apple Ekosysteme verwendet werden kann. Da nicht nur die Integration
 in eine mobile App wichtig ist, sondern auch die Entwicklung von Prototypen, wurde PyTorch gewählt.
-TensorFlow wäre ebenfalls eine gute Wahl gewesen, aber laut (\cite{valantis2023battle}) hat PyTorch 
-in den letzten Jahren an Popularität gewonnen. Ebenfalls ist PyTorch sehr beliebt für die 
-Forschung und bietet eine Integration in mobile Apps. Daher wurde PyTorch als Framework für die 
+TensorFlow wäre ebenfalls eine gute Wahl gewesen, aber laut Valantis hat PyTorch in den letzten 
+Jahren an Popularität gewonnen (\cite{valantis2023battle}). Ebenfalls ist PyTorch sehr beliebt für 
+die Forschung und bietet eine Integration in mobile Apps. Daher wurde PyTorch als Framework für die 
 Entwicklung der hier beschriebenen Arbeit gewählt.
 
 \subsection{Erste Überlegungen zur Modelarchitektur}
@@ -1452,7 +1481,7 @@ energieintensiv beziehungsweise zu rechenintensiv in der Inferenz.
 
 \subsubsection{Versuch 3: LiteFEW}
 Nach den Misserfolgen mit wav2vec2 wurde ein weiterer vielversprechender Versuch gestartet. Dieser 
-basiert auf dem Paper von lim et al. (\cite{lim2023lightweight}). Der Grundgedanke dieses Papers 
+basiert auf dem Paper von Lim et al. (\cite{lim2023lightweight}). Der Grundgedanke dieses Papers 
 ist es, ein Modell auf Basis von wav2vec2 zu entwickeln, welches optimiert ist für die Triggerwort 
 Erkennung auf mobilen Geräten. Das im Paper beschriebene Verfahren beinhaltet die Verwendung von 
 wav2vec2 als Teacher-Model und ein kleineres Modell als Student-Model. Dieses Verfahren hätte 
@@ -1483,6 +1512,27 @@ Aufgabenstellung ging schon hervor, dass ein eigenes Machine Learning Modell fü
 Erkennung erarbeitet werden soll. Zum andren soll das Modell in eine mobile App integriert werden.
 Diese zwei Bereiche wurden Bereits bei der Planung der Arbeit definiert und haben daher die 
 Planung der Arbeit stark beeinflusst.
+
+\subsection{Werkzeuge und Vorgehen}
+Die Arbeit wurde mit dem Textsatzsystem LaTeX geschrieben. Die Arbeit wurde in einem öffentlichem 
+Git Repository verwaltet. Das Repository beinhaltet sämtlichen Source Code, Experimente, 
+Dokumentationen und diese Arbeit selbst. Der Source Code wurde mehrheitlich in Python geschrieben 
+mit der Verwendung von Anaconda als Package Manager. Jupiter Notebooks wurden verwendet, um 
+Experimente zu dokumentieren und zu visualisieren. Die Modelle wurden mit PyTorch entwickelt und 
+trainiert. Die Modelle wurden mit der TorchScript API in ein mobiles Format konvertiert. Daher 
+wurde auch Xcode verwendet, um die Modelle in eine iOS App zu integrieren.
+
+\subsubsection{Artificial Intelligence als Werkzeug}
+Künstliche Intelligenz hat entscheidend die Art und Weise, wie wir leben, arbeiten und 
+kommunizieren, beeinflusst. In diesem Projekt wurde Künstliche Intelligenz als Werkzeug eingesetzt, 
+um den kreativen Prozess und die Programmierung zu unterstützen. Tools wie GitHub Copilot und 
+ChatGPT wurden genutzt, um den Geist zu inspirieren und schneller zu innovativen Lösungen zu 
+gelangen. Die Verwendung dieser Technologien erfolgte jedoch mit einer kritischen Perspektive. Es 
+wurde stets darauf geachtet, dass sie als Hilfsmittel dienten, um die Effizienz und Qualität der 
+Entwicklung zu steigern, ohne die eigene kreative und analytische Arbeit zu ersetzen. Auf diese 
+Weise wurde sichergestellt, dass die Technologie die Arbeit unterstützt und bereichert, aber nicht 
+dominiert.
+
 
 \subsection{Projektphasen}
 Im Projektmanagement wurden die Projektphasen definiert. Diese bestehen aus vier Phasen. Die erste
@@ -1688,12 +1738,12 @@ wurden nach jeder Epoche aufgezeichnet.
     \centering
     \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\textwidth]{img/train/batch_accuracy.png}
-        \caption{Genauigkeit pro Batch während des Trainings}
+        \caption{Genauigkeit pro Batch während des Trainings (x axis: Batch, y axis: Accuracy)}
         \label{fig:batch_accuracy}
     \end{minipage}\hfill
     \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\textwidth]{img/train/batch_f1.png}
-        \caption{F1-Score pro Batch während des Trainings}
+        \caption{F1-Score pro Batch während des Trainings (x axis: Batch, y axis: F1-Score)}
         \label{fig:batch_f1}
     \end{minipage}
 \end{figure}
@@ -1702,12 +1752,12 @@ wurden nach jeder Epoche aufgezeichnet.
     \centering
     \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\textwidth]{img/train/batch_loss.png}
-        \caption{Loss pro Batch während des Trainings}
+        \caption{Loss pro Batch während des Trainings (x axis: Batch, y axis: Loss)}
         \label{fig:batch_loss}
     \end{minipage}\hfill
     \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\textwidth]{img/train/epoch_accuracy.png}
-        \caption{Genauigkeit pro Epoche}
+        \caption{Genauigkeit pro Epoche während des Trainings (x axis: Epoche, y axis: Accuracy)}
         \label{fig:epoch_accuracy}
     \end{minipage}
 \end{figure}
@@ -1716,12 +1766,12 @@ wurden nach jeder Epoche aufgezeichnet.
     \centering
     \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\textwidth]{img/train/epoch_f1.png}
-        \caption{F1-Score pro Epoche}
+        \caption{F1-Score pro Epoche während des Trainings (x axis: Epoche, y axis: F1-Score)}
         \label{fig:epoch_f1}
     \end{minipage}\hfill
     \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\textwidth]{img/train/epoch_loss.png}
-        \caption{Loss pro Epoche}
+        \caption{Loss pro Epoche während des Trainings (x axis: Epoche, y axis: Loss)}
         \label{fig:epoch_loss}
     \end{minipage}
 \end{figure}
@@ -1759,7 +1809,7 @@ die Wahrscheinlichkeit an, dass das Triggerwort im Audio Chunk vorhanden ist.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1.0\linewidth]{img/realtime-application.pdf}
+	\includegraphics[width=1.0\linewidth, trim=0 10pt 0 10pt, clip]{img/realtime-application.pdf}
 	\caption{Real Time Anwendung}
 	\label{fig:realtime-application}
 \end{figure}
@@ -1772,13 +1822,15 @@ getroffen werden, ob das Triggerwort vorhanden ist oder nicht. Dazu wird ein Gle
 Simple Moving Average (SMA) bekannt. Die Formel für den Gleitenden Durchschnitt kann wie folgt 
 beschrieben werden:
 
+\noindent
 \begin{equation*}
 	SMA = \frac{1}{n} \sum_{i=0}^{n} x_{i}
 \end{equation*}
 
 \noindent
 Die nachfolgende Abbildung \ref{fig:sma} zeigt die Berechnung des Gleitenden Durchschnitts über 
-die Wahrscheinlichkeiten der letzten 3, 5 und 10 Audio Chunks.
+die Wahrscheinlichkeiten der letzten 3, 5 und 10 Audio Chunks. Ein Balken repräsentiert einen Audio 
+Abschnitt von 0.1 Sekunden.
 
 \begin{figure}[H]
 	\centering
@@ -1857,9 +1909,10 @@ Die Energieeffizienz und die Inferenzgeschwindigkeit wurde bei der Realtime Pyth
 gemessen. Dafür wurden Messungen während der Inferenz durchgeführt. Die nachfolgende Abbildung 
 \ref{fig:profiling_code} zeigt den Code, welcher für die Messungen verwendet wurde. 
 
+\noindent
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1.0\linewidth]{img/profiling_code.png}
+	\includegraphics[width=1.0\linewidth, trim=0 20pt 0 40pt, clip]{img/profiling_code.png}
 	\caption{Code für die Messungen der Energieeffizienz und Inferenzgeschwindigkeit}
 	\label{fig:profiling_code}
 \end{figure}
@@ -1923,9 +1976,13 @@ des Triggerworts 'Hey FOOBY' aufweist, aber eine hohe Rate an Falsch-Positiven v
 einer Beeinträchtigung der allgemeinen Benutzererfahrung führen kann. Die Tests zeigten diese 
 Schwäche auf und lieferten wertvolle Erkenntnisse für die weitere Entwicklung. 
 Das zusammengefasste Fazit der Testpersonen zeigt, dass die Triggerworterkennung bei deutlicher 
-Aussprache gut funktioniert, aber zu viele falsche Wörter als Triggerwort erkennt, was zu vielen 
+Aussprache 
+gut funktioniert, aber zu viele falsche Wörter als Triggerwort erkennt, was zu vielen 
 Falsch-Positiven führt. Die Ergebnisse variieren und sind für den produktiven Einsatz noch nicht 
 zuverlässig genug.
+
+\subsection{Ergebnisse der Arbeit}
+
 
 
 
@@ -1944,10 +2001,17 @@ integrierte Sprachsteuerungsfunktion anbieten.
 \printglossary[title=Glossar]
 
 % Verzeichnisse
-\addcontentsline{toc}{section}{Abbildungsverzeichnis}
-\listoffigures
-\addcontentsline{toc}{section}{Tabellenverzeichnis}
-\listoftables
 \printbibliography[title=Literaturverzeichnis, heading=bibintoc]
+%\addcontentsline{toc}{section}{Abbildungsverzeichnis}
+\listoffigures
+%\addcontentsline{toc}{section}{Tabellenverzeichnis}
+\listoftables
+
+\addcontentsline{toc}{section}{Formelverzeichnis}
+\section*{Formelverzeichnis}
+\vspace{-6ex}
+\listofformulas
+
+
 
 \end{document}
