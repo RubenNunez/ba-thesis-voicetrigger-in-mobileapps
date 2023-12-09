@@ -39,11 +39,13 @@
 
 % formulas
 \newlistof{formulas}{equ}{}
-\newcommand{\formulas}[1]{%
-\addcontentsline{equ}{formulas}{\protect\numberline{\theequation}#1}\par}
-\setcounter{tocdepth}{2} 
+\setcounter{tocdepth}{3} 
+\newcommand{\formulas}[1]{
+	\addcontentsline{equ}{formulas}{\protect\numberline{\theequation}#1}\par
+}
 \cftsetindents{formulas}{1.7em}{2.3em}
 
+% Bibliography
 \addbibresource{references.bib}
 
 \definecolor{ba-gray}{rgb}{0.9,0.9,0.9}
@@ -148,11 +150,7 @@ Mosberger, die, die Idee für diese Bachelorarbeit hatte.
 
 
 \newpage
-\setlength{\cftbeforesecskip}{1.2pt} 
-\setlength{\cftbeforesubsecskip}{1pt}
-\addtocontents{toc}{\protect\setcounter{tocdepth}{-1}}
 \tableofcontents
-\addtocontents{toc}{\protect\setcounter{tocdepth}{2}}
 \newpage
 
 \newpage \section{Problem, Fragestellung, Vision}
@@ -2047,14 +2045,14 @@ Sprachsteuerung für die FOOBY App zu entwickeln.
 \printbibliography[title=Literaturverzeichnis, heading=bibintoc]
 
 % Abbildungsverzeichnis
-\vspace{-6ex}
 \listoffigures
 
 % Tabellenverzeichnis
-\vspace{-6ex}
 \listoftables
 
-
+% Formelverzeichnis
+\section*{Formelnverzeichnis}
+\addcontentsline{toc}{section}{Formelnverzeichnis}
 \vspace{-6ex}
 \listofformulas
 
