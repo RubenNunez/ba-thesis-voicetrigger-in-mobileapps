@@ -11,6 +11,7 @@
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{tabularx}
+\usepackage{longtable}
 \usepackage{booktabs}
 \usepackage{listings}
 \usepackage{colortbl}
@@ -25,15 +26,18 @@
 \usepackage{tocloft}
 \usepackage{tocbibind}
 \usepackage{xpatch}
+\usepackage{tocloft}
 
 \geometry{a4paper, total={170mm,257mm}, left=20mm, top=20mm}
 \usetikzlibrary{matrix, positioning, calc, fit, arrows.meta}
 
+% Glossary (not used)
 \input{glossary.tex}
 \makeglossaries
 \renewcommand*{\glstextformat}[1]{\textit{#1}}
 \renewcommand{\lstlistingname}{Source Code}
 
+% formulas
 \newlistof{formulas}{equ}{}
 \newcommand{\formulas}[1]{%
 \addcontentsline{equ}{formulas}{\protect\numberline{\theequation}#1}\par}
@@ -144,7 +148,11 @@ Mosberger, die, die Idee für diese Bachelorarbeit hatte.
 
 
 \newpage
+\setlength{\cftbeforesecskip}{1.2pt} 
+\setlength{\cftbeforesubsecskip}{1pt}
+\addtocontents{toc}{\protect\setcounter{tocdepth}{-1}}
 \tableofcontents
+\addtocontents{toc}{\protect\setcounter{tocdepth}{2}}
 \newpage
 
 \newpage \section{Problem, Fragestellung, Vision}
@@ -1982,36 +1990,81 @@ Falsch-Positiven führt. Die Ergebnisse variieren und sind für den produktiven 
 zuverlässig genug.
 
 \subsection{Ergebnisse der Arbeit}
+In diesem Kapitel werden die zentralen Ergebnisse der Arbeit zusammengefasst. Die Entwicklung des 
+WakeupTriggerConvLSTM2s-Modells hat gezeigt, dass eine effiziente und genaue Triggerwort-Erkennung 
+in mobilen Anwendungen realisierbar ist. Durch die Kombination von Convolutional und LSTM Layern 
+konnte eine hohe Erkennungsgenauigkeit bei gleichzeitiger Energieeffizienz erreicht werden. Die 
+erfolgreiche Integration des Modells in einen mobilen App-Prototyp demonstriert die praktische 
+Anwendbarkeit der Forschungsergebnisse. Die Arbeit unterstreicht die Bedeutung von Datenschutz und 
+ethischen Überlegungen bei der Entwicklung von Sprachsteuerungsfunktionen. Die Ergebnisse bieten 
+eine solide Grundlage für zukünftige Forschungen und Entwicklungen im Bereich der Sprachsteuerung 
+in mobilen Apps, insbesondere hinsichtlich der Verbesserung der Benutzerfreundlichkeit und der 
+Erweiterung der Funktionalitäten.
 
 
 
 
 
-\newpage \section{Ausblick}
-Das Problem dieser Arbeit ist im wesentlichen die Erkennung von Triggerwörtern innerhalb
-des Kontext einer App. Grundsätzlich ist es unüblich, dass mobile Apps eine
-integrierte Sprachsteuerungsfunktion anbieten.
+\section{Ausblick}
+Die vorliegende Arbeit hat aufgezeigt, dass die Realisierung einer effizienten Triggerwort-Erkennung 
+in mobilen Anwendungen möglich ist. Diese Erkennung ist ein fundamentaler Bestandteil der 
+Sprachsteuerung und könnte als Basis für die Entwicklung eines Sprachassistenten dienen. Allerdings 
+wurden in dieser Arbeit auch Schwächen der Triggerwort-Erkennung identifiziert, insbesondere in 
+Bezug auf die hohe Anzahl an falsch-positiven Vorhersagen, die vor allem in den Usertests auffielen. 
+Eine mögliche Erklärung hierfür könnte in der unzureichenden Diversität und Anzahl der Trainingsdaten 
+liegen. Selbst mit der Augmentierung der Sprachaufnahmen blieb die Variation der Sprachdaten relativ 
+begrenzt. Für zukünftige Forschungsansätze wäre es daher empfehlenswert, eine umfangreichere und 
+vielfältigere Sammlung an Sprachaufnahmen zu erstellen.
 
-\newpage \section{Anhang}
-\subfile{thesis-video.tex} % Thesis Video separat
+\noindent \newline
+Des Weiteren könnte das Trainieren und Vergleichen verschiedener Modelle von grossem Nutzen sein. 
+Eine mögliche Optimierung könnte beispielsweise durch die Anpassung der Architektur von Barazanji 
+et al. (\cite{barazanji2023heyditto}) und die Variation von Hyperparametern erreicht werden. In 
+dieser Arbeit war es allerdings nicht möglich, unterschiedliche Modelle umfassend zu trainieren und 
+zu evaluieren. Dies lag zum einen an dem hohen Zeitaufwand, der für das Training eines Modells 
+erforderlich ist, und zum anderen daran, dass zu Beginn der Arbeit noch keine klare Entscheidung 
+über die zu verwendende Architektur für die Triggerwort-Erkennung getroffen wurde.
+
+\noindent \newline
+Ein wichtiger Aspekt dieser Arbeit war die Integration des Modells in eine mobile App. Mit den 
+heutigen technischen Möglichkeiten ist es problemlos machbar, ein eigenständiges Machine Learning 
+Modell in eine mobile Applikation zu integrieren. Die C++ API von PyTorch bietet dabei eine 
+effektive Möglichkeit, Machine Learning Modelle in andere Programmiersprachen zu integrieren. Die 
+Entscheidung für dieses Framework erwies sich als vorteilhaft.
+
+\noindent \newline
+Diese Bachelorarbeit wurde ursprünglich mit dem Ziel initiiert, eine Sprachsteuerung für die mobile 
+App FOOBY zu entwickeln. Daher konzentrierte sich die Triggerwort-Erkennung auf das spezifische 
+Triggerwort 'Hey FOOBY'. Zukünftige Arbeiten könnten auf dieser Grundlage aufbauen, um eine robuste 
+Sprachsteuerung für die FOOBY App zu entwickeln.
+
 
 \clearpage
-% Glossar
-\printglossary[type=\acronymtype,title=Akronyme]
-\printglossary[title=Glossar]
 
 % Verzeichnisse
+
+% Literaturverzeichnis
 \printbibliography[title=Literaturverzeichnis, heading=bibintoc]
-%\addcontentsline{toc}{section}{Abbildungsverzeichnis}
+
+% Abbildungsverzeichnis
+\vspace{-6ex}
 \listoffigures
-%\addcontentsline{toc}{section}{Tabellenverzeichnis}
+
+% Tabellenverzeichnis
+\vspace{-6ex}
 \listoftables
 
-\addcontentsline{toc}{section}{Formelverzeichnis}
-\section*{Formelverzeichnis}
+
 \vspace{-6ex}
 \listofformulas
 
+% Glossar
+%\printglossary[type=\acronymtype,title=Akronyme]
+%\printglossary[title=Glossar]
 
+% Anhang
+\newpage \section{Anhang}
+\subfile{user-tests.tex} % Usertests separat
+\subfile{thesis-video.tex} % Thesis Video separat
 
 \end{document}
