@@ -76,7 +76,7 @@
 
 \title{
 	{\LARGE Bachelorarbeit}\\[2em] 
-	{\textbf{Integration einer Sprachsteuerungsfunktion {\break} in Mobile Apps}}
+	{\textbf{Integration von Sprachsteuerung {\break} in Mobile Apps}}
 }
 
 \author{Rubén Nuñez}
@@ -191,8 +191,7 @@ dieser Plattformen ausreichend. Bei der Entwicklung des Datensatzes wird besonde
 Datenschutz und ethische Aspekte gelegt.
 
 \subsection{Ziele}
-Die Ziele dieser Arbeit, nach SMART-Prinzip, werden in der folgenden Tabelle \ref{tab:smart_goals} 
-aufgeführt.
+Die Ziele dieser Arbeit, nach SMART-Prinzip, werden in der folgenden Tabelle \ref{tab:smart_goals} aufgeführt.
 
 \begin{table}[h]
 	\centering
@@ -1946,9 +1945,7 @@ liegen. Damit konnte zumindest gezeigt werden, dass die CPU Auslastung nicht üb
 
 \subsection{Usertests}
 Usertests zur Evaluierung der Triggerworterkennung wurden mit der Realtime iOS App auf einem iPhone 
-XS durchgeführt. Dabei wurden die gleitenden Durchschnitte für die Wahrscheinlichkeiten der letzten 
-3, 5 und 10 Audio Chunks verwendet, welche bei einem Threshold von 0.9 als Triggerwort erkannt 
-wurden. Sechs Personen nahmen an den Tests teil, von denen zwei Teil des Datensatzes waren. 
+XS durchgeführt. Sechs Personen nahmen an den Tests teil, von denen zwei Teil des Datensatzes waren. 
 Es zeigte sich kein signifikanter Unterschied in den Ergebnissen zwischen den Personen, die Teil des 
 Datensatzes waren, und denen, die nicht Teil davon waren. Bei den Geschlechtern der Testpersonen 
 handelte es sich um zwei weibliche und vier männliche Personen. Die Altersspanne der Testpersonen 
@@ -1976,7 +1973,6 @@ gesagt wurde. Allerdings wurden in 28 Fällen andere Äusserungen fälschlicherw
 Triggerwort erkannt (False Positives), was auf eine Schwäche des Modells hinweist. In 35 Fällen 
 wurde korrekterweise festgestellt, dass kein Triggerwort gesprochen wurde (True Negatives).
 
-
 \noindent \newline
 Diese Ergebnisse deuten darauf hin, dass das Modell eine akzeptable Sensitivität bei der Erkennung 
 des Triggerworts 'Hey FOOBY' aufweist, aber eine hohe Rate an Falsch-Positiven vorliegt, was zu 
@@ -1994,7 +1990,7 @@ WakeupTriggerConvLSTM2s-Modells hat gezeigt, dass eine effiziente und genaue Tri
 in mobilen Anwendungen realisierbar ist. Durch die Kombination von Convolutional und LSTM Layern 
 konnte eine hohe Erkennungsgenauigkeit bei gleichzeitiger Energieeffizienz erreicht werden. Die 
 erfolgreiche Integration des Modells in einen mobilen App-Prototyp demonstriert die praktische 
-Anwendbarkeit der Ergebnisse. Die Arbeit unterstreicht die Bedeutung von Datenschutz und 
+Anwendbarkeit der Forschungsergebnisse. Die Arbeit unterstreicht die Bedeutung von Datenschutz und 
 ethischen Überlegungen bei der Entwicklung von Sprachsteuerungsfunktionen. Die Ergebnisse bieten 
 eine solide Grundlage für zukünftige Forschungen und Entwicklungen im Bereich der Sprachsteuerung 
 in mobilen Apps, insbesondere hinsichtlich der Verbesserung der Benutzerfreundlichkeit und der 
@@ -2037,6 +2033,7 @@ App FOOBY zu entwickeln. Daher konzentrierte sich die Triggerwort-Erkennung auf 
 Triggerwort 'Hey FOOBY'. Zukünftige Arbeiten könnten auf dieser Grundlage aufbauen, um eine robuste 
 Sprachsteuerung für die FOOBY App zu entwickeln.
 
+
 \clearpage
 
 % Verzeichnisse
@@ -2060,12 +2057,8 @@ Sprachsteuerung für die FOOBY App zu entwickeln.
 %\printglossary[type=\acronymtype,title=Akronyme]
 %\printglossary[title=Glossar]
 
-
 % Anhang
 \newpage \section{Anhang}
-% PDF mit Aufgabenstellung
-\subsection{Aufgabenstellung}
-\includegraphics[width=1\linewidth]{Aufgabenstellung_BAA.pdf}
 \subfile{user-tests.tex} % Usertests separat
 \subfile{thesis-video.tex} % Thesis Video separat
 
