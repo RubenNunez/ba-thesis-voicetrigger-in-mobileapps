@@ -96,15 +96,13 @@
 \newpage \section*{Abstract}
 Diese Bachelorarbeit konzentriert sich auf die Herausforderung, die Grundlage für eine integrierte 
 Sprachsteuerung in mobilen Apps zu schaffen. Der Fokus liegt hierbei auf der Entwicklung einer 
-Triggerwort-Erkennung, die es ermöglicht, bestimmte Wörter oder Wortsequenzen in der akustischen 
-Sprache zu erkennen. Da integrierte Sprachsteuerungsfunktionen in mobilen Apps eher unüblich sind, 
+Triggerwort-Erkennung, die es ermöglicht, bestimmte Wörter oder Wortsequenzen akustisch zu erkennen. Da integrierte Sprachsteuerungsfunktionen in mobilen Apps eher unüblich sind, 
 bietet diese Arbeit eine innovative Lösung an. Der Ansatz umfasst drei Hauptkomponenten: die 
 Erstellung eines ethisch und rechtlich einwandfreien Datensatzes, die Entwicklung und das Training 
 eines effizienten Modells zur Erkennung von Triggerwörtern, und die Integration dieses Modells in 
 eine mobile Anwendung. Grundsätzlich beschreibt diese Arbeit einen veralgemeinerten Ansatz wie 
-Sprachsteuerungsfunktionen in mobile Apps integriert werden können. Dennoch wurde als möglicher 
-Use Case eine Integration in die FOOBY App gewählt. Aus diesem Grund wurde der Datensatz mit 
-Sprachsamples von 'Hey FOOBY' erstellt.
+Sprachsteuerungsfunktionen in mobile Apps integriert werden können. Als 
+Use Case wurde die Integration in die FOOBY App gewählt.
 
 
 \noindent \newline
@@ -112,7 +110,7 @@ Die Erstellung des Datensatzes erfolgte durch die Aufnahme von Sprachdaten mit e
 die speziell für diesen Zweck entwickelt wurde. Bei Aufnahme der Daten wurde besonderes Augenmerk 
 auf Datenschutz und ethische Aspekte gelegt. Das Ergebnis ist ein Datensatz, der die Grundlage für 
 die Entwicklung eines Modells zur Erkennung von Triggerwörtern bildet. Die ethischen Aspekte 
-befassen mit Überlegungen zu Diversität und Inklusion, sowie der Vermeidung von Diskriminierung. 
+befassen sich mit Überlegungen zu Diversität und Inklusion, sowie der Vermeidung von Diskriminierung. 
 Zu den Datenschutzaspekten gehören die Einhaltung von Datenschutzrichtlinien und die Vermeidung 
 von Datenschutzverletzungen.
 
@@ -121,12 +119,12 @@ von Datenschutzverletzungen.
 Im Zentrum der Arbeit steht die Entwicklung eines Machine Learning-Modells, basierend auf einer 
 Kombination aus Convolutional und Long-Short-Term-Memory (LSTM) Layern. Diese Architektur, 
 implementiert in PyTorch, zeichnet sich durch Energieeffizienz und schnelle Inferenz aus. Das 
-Modell, benannt als WakeupTriggerConvLSTM2s, wurde daraufhin trainiert, Triggerwörter aus 
+Modell, benannt als WakeupTriggerConvLSTM2s, wurde darauf trainiert, Triggerwörter aus 
 akustischen Signalen zu erkennen. In einem Real-Time Verfahren werden die Sprachdaten in 
 Spektrogramme transformiert, die als Input für das Modell dienen. 
 
 \noindent \newline
-Ein entscheidender Aspekt der Arbeit war die Integration des Modells in mobile App. Hierfür wurde 
+Ein entscheidender Aspekt der Arbeit war die Integration des Modells in eine mobile App. Hierfür wurde 
 das Modell mithilfe von PyTorch Scripting in ein für mobile Apps geeignetes Format konvertiert und 
 in einem Prototyp eingebettet, der einen kontinuierlichen Audio-Stream in Echtzeit verarbeitet. Die 
 App kann Triggerwörter in 2-Sekunden-Abschnitten erkennen, wobei die Inferenz 10-mal pro 
@@ -146,12 +144,15 @@ gilt mein Dank an meinen Betreuer Prof. Dr. Florian Herzog für die wertvollen I
 Unterstützung während der Arbeit. Zudem möchte ich mich bei meinem Unternehmen, der Bitforge AG, 
 für die Unterstützung während der Arbeit bedanken. Bei Stefan Reinhart für die Unterstützung bei 
 der Einrichtung der GCP Umgebung sowie der Recorder Webseite. Ebenfalls bei Antonia 
-Mosberger, die, die Idee für diese Bachelorarbeit hatte.
+Mosberger, die die Idee für diese Bachelorarbeit hatte.
 
 
 \newpage
+\addtocontents{toc}{\protect\setcounter{tocdepth}{-10}}
 \tableofcontents
+\addtocontents{toc}{\protect\setcounter{tocdepth}{2}}
 \newpage
+
 
 \newpage \section{Problem, Fragestellung, Vision}
 \subsection{Problemstellung}
@@ -159,12 +160,12 @@ Die Sprachsteuerung bietet grosses Potenzial in Mobile Apps und wird bisher vor 
 Sprachassistenten genutzt. Während Sprachassistenten wie Siri, Google Assistant oder Alexa 
 von der Allgemeinheit genutzt werden, gibt es kaum bekannte Lösungen für eine integrierte Sprachsteuerung in Mobile Apps, insbesondere in 
 Bezug auf das Erkennen von Triggerwörtern. Daher besteht ein grosses Ausbaupotenzial für 
-Sprachassistenten in Mobile Apps. 
+Sprachsteuerung in Mobile Apps. 
 
 \noindent \newline
 Für die Problemstellung dieser Arbeit ist es wichtig, die verschiedenen Disziplinen der
 Spracherkennung zu differenzieren. Diese Arbeit befasst sich vor allem mit der \gls{twd}. Die 
-nachfolgende Abbildung \ref{fig:asr_twd} zeigt mögliche Teilgebiete der Spracherkennung und soll 
+nachfolgende Abbildung \ref{fig:asr_twd} zeigt Teilgebiete der Spracherkennung und soll 
 einen Überblick über die Thematik verschaffen. 
 
 \vspace{1em}
@@ -234,14 +235,13 @@ Die Ziele dieser Arbeit, nach SMART-Prinzip, werden in der folgenden Tabelle \re
 
 \subsection{Abgrenzung}
 Diese Arbeit befasst sich mit der Erkennung von Triggerwörtern in der akustischen Sprache. Es ist 
-kein Ziel dieser Arbeit, einen vollständigen Sprachassistenten zu entwickeln. Das würde den Rahmen
-einer Bachelorarbeit sprengen. Die Resultate dieser Arbeit könnten aber als Grundlage für eine vollständige
+kein Ziel dieser Arbeit, einen vollständigen Sprachassistenten zu entwickeln. Die Resultate dieser Arbeit könnten aber als Grundlage für eine vollständige
 Implementierung eines Sprachassistenten genutzt werden.
 
 \subsection{Rechtfertigung}
 Apple sowie Google stellen mit Siri und Google Assistant bereits Sprachassistenten zur 
 Verfügung, um Apps zu öffnen oder auch direkte Befehle auszuführen. Daher stellt sich die Frage, 
-warum überhaupt eine eigene In App Sprachsteuerung? Wenn ein Sprachassistent wie Siri bereits 
+warum überhaupt eine eigene In App Sprachsteuerung erforderlich ist, wenn Sprachassistenten wie Siri bereits 
 API's anbieten. Als Beispiel hat Spotify eine Integration mit Siri. Es können Befehle wie 
 ``Hey Siri, play music on Spotify'' verwendet werden. Die Integration einer eigens entwickelten 
 Sprachsteuerung in Apps ist trotz verfügbarer Lösungen wie Siri und Google Assistant aus mehreren 
@@ -268,8 +268,8 @@ In diesem Kapitel werden die Grundlagen für die Arbeit erläutert. Dabei wird a
 Audioverarbeitung und Machine Learning eingegangen. Diese bilden das Fundament für diese Arbeit.
 
 \subsection{Audio}
-In der digitalen Welt werden Schallwellen, die durch eine Reihe von numerischen Werten
-repräsentiert. (\cite[p.9]{somberg2019audioapi}) beschreibt Audio als: \glqq Fundamentally,
+In der digitalen Welt werden Schallwellen durch eine Reihe von numerischen Werten
+repräsentiert. (\cite[p.9]{somberg2019audioapi}) beschreiben Audio folgendermassen: \glqq Fundamentally,
 audio can be modeled as waves in an elastic medium. In our normal everyday experience, the elastic
 medium is air, and the waves are air pressure waves.\grqq \ Audiosignale werden durch die Funktion
 \(A(t)\) repräsentiert, wobei \(t\) die Zeit und \(A(t)\) die Amplitude zum
@@ -308,10 +308,8 @@ als \textit{Bit-Depth} bezeichnet und bestimmt die Auflösung des Signals. Typis
 Bit-Depth Werte sind \(16\) oder \(24\) Bit (\cite[p.10]{somberg2019audioapi}).
 
 \subsubsection{Frames, Channels, Buffers}
-Ebendfalls wichtig ist das Verständnis von Frames, Channels und Buffers. Da diese Arbeit sich mit
-Audio-Systemen beschäftigt, ist es wichtig, die Begriffe \textit{Frame}, \textit{Channel} und
-\textit{Buffer} zu verstehen. Fangen wir mit dem Begriff \textit{Channel} an. Ein Channel kann als
-ein einzelnes Audio-Signal verstanden werden. Ein Mono-Signal hat genau nur einen Channel. Ein
+Ebendfalls wichtig ist das Verständnis von Frames, Channels und Buffers. Fangen wir mit dem Begriff \textit{Channel} an. Ein Channel kann als
+ein einzelnes Audio-Signal verstanden werden. Ein Mono-Signal hat genau einen Channel. Ein
 Stereo-Signal hat zwei Channels. Ein Surround-Signal hat mehr als zwei Channels. usw.
 Nun zum Begriff \textit{Frame}. Ein Frame entspricht einem Sample pro Channel. Weiter sind Frames
 in Buffers organisiert. Ein Buffer ist eine Sammlung von Frames. Typischerweise werden Buffers in
@@ -330,19 +328,19 @@ Beziehung zwischen Frames, Channels und Buffers (\cite[p.10]{somberg2019audioapi
 \subsubsection{Buffers im Detail}
 Ein Buffer im Kontext von Audio ist eine aufeinanderfolgende Sammlung von Frames. Die bereits
 angesprochene Grösse eines Buffers bestimmt im wesentlichen die Latenzzeit des Systems. Kleine
-Buffer-Grössen haben eine geringe Latenzzeit, während grosse Buffer-Grössen eine hohe Latenzzeit
-haben (\cite[p.10]{somberg2019audioapi}). Der Trade-Off ist dass kleine Buffer-Grössen
-zu einer höheren CPU-Auslastung führen, während bei grossen Buffer-Grössen das nicht der Fall ist.
-Das liegt daran, dass bei kleinen Buffer-Grössen die CPU häufiger aufgerufen wird, um die Buffers
+Buffer haben eine geringe Latenzzeit, während grosse Buffer eine hohe Latenzzeit
+haben (\cite[p.10]{somberg2019audioapi}). Der Trade-Off ist, dass kleine Buffer-Grössen
+zu einer höheren CPU-Auslastung führen.
+Das liegt daran, dass bei kleinen Buffer-Grössen die CPU häufiger aufgerufen wird, um die Buffer
 zu verarbeiten.
 
 \noindent \newline
 Nun betrachten wir die mögliche Anordnung eines Buffers, wie in der folgenden Tablle 
 \ref{tab:frames_buffers} dargestellt. Es gibt zwei Möglichkeiten, wie Buffers angeordnet werden
 können: \textit{Interleaved} und \textit{Non-Interleaved}. Bei der \textit{Interleaved}-Anordnung
-werden die Samples der einzelnen Channels nacheinander in sequentieller Reihenfolge in den Buffer
+werden die Samples der verschiedenen Channels nacheinander in sequentieller Reihenfolge in den Buffer
 geschrieben. Im Gegensatz dazu werden bei der \textit{Non-Interleaved}-Variante die Samples
-eines Channels nacheinander in den Buffer geschrieben, bevor die Samples des nächsten Channels
+eines einzelnen Channels nacheinander in den Buffer geschrieben, bevor die Samples des nächsten Channels
 hinzugefügt werden. Dieser Vorgang wird für jeden Channel wiederholt. Die Tabelle
 \ref{tab:frames_buffers} zeigt die Unterschiede zwischen den beiden Anordnungen. Jede Zelle der
 Tabelle entspricht einem Sample. L und R stehen exemplarisch für die Channels Left und Right.
@@ -374,7 +372,7 @@ Entwickler die Audioverarbeitung von Grund auf neu implementieren.
 
 \noindent \newline
 In der Erarbeitungsphase dieser Arbeit kristallisierten sich zwei primäre Anwendungsgebiete heraus.
-Erstens die intensive Auseinandersetzung mit Audioverarbeitung in Python, um tieferes Verständnis
+Erstens, die intensive Auseinandersetzung mit Audioverarbeitung in Python, um tieferes Verständnis
 für die Materie zu entwickeln. Zweitens die Notwendigkeit, eine Audio API in eine mobile
 Applikation zu integrieren. Im Kontext dieser Arbeit werden sie als \textit{Audio API für Analyse}
 und \textit{Audio API für Integration} bezeichnet.
@@ -437,8 +435,8 @@ so einfach sein.
 
 \newpage
 \subsubsection{Audio API für Integration} \label{sec:audio_api_integration}
-Dieser Abschnitt befasst sich mit dem Thema Audio API für Integration in eine iOS App. Die Wahl 
-fiel auf die \textbf{AVAudioEngine} API für iOS und macOS. Im der folgenden Abbildung 
+Dieser Abschnitt befasst sich mit der Integration einer Audio API in eine iOS App. Die Wahl 
+fiel auf die \textbf{AVAudioEngine} API für iOS und macOS. In der folgenden Abbildung 
 \ref{fig:avaudioengine} wird gezeigt, wie ein kontinuierlicher Audio-Stream mit AVAudioEngine 
 aufgenommen werden kann.
 
@@ -667,7 +665,7 @@ einem Signal über die Zeit hinweg vorhanden sind. Ein Spektrogramm wird wie fol
 \end{displayquote}
 
 \noindent
-Im Bereich des Machine Learning, insbesondere bei der Spracherkennung, nimmt das Spektrogramm eine
+Im Bereich des Machine Learning bei der Spracherkennung, nimmt das Spektrogramm eine
 zentrale Position ein. Die Fourier-Transformation eines Audiosignals in seine Frequenzkomponenten
 resultiert in einem Verlust der zeitlichen Informationen durch die Anwendung der FFT. Für Aufgaben
 wie die Spracherkennung ist es jedoch von grundlegender Bedeutung, nicht nur die im Signal
@@ -738,7 +736,7 @@ Im einfachsten Fall bestehen Neuronen aus Inputs \(x_{1}, x_{2}, \dots, x_{n}\),
 
 
 \noindent
-Neuronale Netze sind gut geeignet, um komplexe Probleme zu lösen, die nicht besonders einfach mit
+Neuronale Netze sind gut geeignet, um komplexe Probleme zu lösen, die nicht einfach mit
 traditionellen Algorithmen gelöst werden können. Ein Beispiel dafür ist die Spracherkennung oder
 auch die Bilderkennung. Netzwerke werden trainiert, um die richtigen Gewichte
 \(w_{1}, w_{2}, \dots, w_{n}\) und den Bias \(b\) zu finden, um die gewünschte Ausgabe zu erhalten.
@@ -986,7 +984,7 @@ wie folgt berechnet:
 In diesem Kapitel werden die wichtigsten
 zeitlichen Entwicklungen im Bereich der Spracherkennung aufgezeigt. Die Forschung im Bereich 
 der Spracherkennung ist ein aktives Forschungsgebiet. Die Jahre 2010 bis 2020 haben laut Hannun 
-(\cite{hannun2021history}) einen grossen Fortschritt in der Spracherkennung erlebt. Dieser 
+(\cite{hannun2021history}) einen grossen Fortschritt in der Spracherkennung erbracht. Dieser 
 Fortschritt ist vor allem auf die Verwendung von Deep Learning zurückzuführen. Weiter wird der 
 Aufbau von Sprachassistenten untersucht und verglichen. Ein wichtiger Teil ist die Funktionsweise 
 vom Sprachassistent Siri. Apple veröffentlichte seinen Sprachassistenten im Jahr 2011 mit dem 
@@ -1173,7 +1171,7 @@ Es lohnt sich daher, die Potenziale und Anpassungsmöglichkeiten von wav2vec2 f�
 Anwendung weiter zu untersuchen.
 
 \noindent \newline
-Darüber hinaus zeigt wav2vec2.0 das grosse Potenzial des Vortrainierens auf nicht beschrifteten 
+Darüber hinaus zeigt wav2vec2 das grosse Potenzial des Vortrainierens auf nicht beschrifteten 
 Daten für die Sprachverarbeitung. Selbst mit nur 10 Minuten beschrifteter Trainingsdaten erreicht 
 das Modell beeindruckende Ergebnisse auf dem Librispeech-Test (\cite{baevski2020wav2vec}). Es stellt 
 auch einen neuen Standard in der Librispeech-Benchmark für verrauschte Sprache dar und übertrifft 
@@ -1244,8 +1242,7 @@ Anforderungen an die Erkennung von 'Hey Siri' sehr gut:
 \end{displayquote}
 
 \subsubsection{Takeaways}
-Es ist sehr interessant zu sehen, wie der Trigger Mechanismus von Siri funktioniert. Der simple
-Aufbau mit einem DNN, welches die Wahrscheinlichkeiten für jedes Phonem berechnet, ist sehr
+Der simple Trigger Mechanismus von Siri mit einem DNN, welches die Wahrscheinlichkeiten für jedes Phonem berechnet, ist sehr
 interessant. Die Verwendung von zwei DNNs ist ebenfalls wertvoll und kann auch in dieser Arbeit
 in Betracht gezogen werden. Ebenfalls wird die Notwendigkeit von einer schnellen und
 energieeffizienten Erkennung von 'Hey Siri' deutlich. Dies ist auch für die Umsetzung dieser Arbeit
@@ -1256,7 +1253,7 @@ dieser Arbeit.
 
 \subsection{Marktanalyse - Trigger Wort Erkennung}
 Während der Recherche für diese Arbeit wurden bestehende Lösungen auf dem Markt gesucht. Nebst den 
-bereits erwähnten Lösungen im Unterkapitel \ref{sec:vergleich_sprachassistenten} wurde eine Lösung 
+bereits erwähnten Lösungen im Unterkapitel \ref{sec:vergleich_sprachassistenten} wurde eine weitere Lösung 
 gefunden. Es wurde ein Anbieter gefunden, welcher exakt eine Lösung für die Trigger Wort Erkennung 
 anbietet. Der Anbieter heisst Picovoice und bietet eine Lösung mit dem Namen Porcupine an. Sie 
 beschreiben ihre Lösung wie folgt:
@@ -1284,7 +1281,7 @@ eine integrierte Lösung gibt.
 
 \newpage \section{Ideen und Konzepte}
 Dieses Kapitel beschreibt die Ideen und Konzepte, die für die Umsetzung der Arbeit verwendet
-werden. Es wird auch auf die verwendeten Technologien eingegangen. Die Grob Idee ist es im 
+werden. Es wird auch auf die verwendeten Technologien eingegangen. Die grobe Idee ist es im 
 wesentlichen, ein eigenes Modell zu trainieren, ganz nach dem Vorbild von Siri (\cite{siri2017hey}), 
 welches Triggerwörter erkennt. Dazu wird ein Datensatz erstellt, welcher die Triggerwörter, 
 sowie andere Wörter enthält. Weiter sollen weitere Datensätze untersucht werden, um die 
@@ -1298,7 +1295,7 @@ wird illustrativ dargestellt, wie die Grundlegende Idee umgesetzt werden soll. E
 Erarbeitung der Grundlagen in Bezug auf Audio und Machine Learning. Danach wird eine Möglichkeit
 erarbeitet, um Sprachaufnahmen zu machen. Ein Schritt weiter ist es, die Sprachaufnahmen
 aufzubereiten und in ein Format zu bringen, welches für das Training eines Modells verwendet werden
-kann. Ebenfalls soll eine Modelarchitektur erarbeitet werden, welche für die Triggerwort Erkennung
+kann. Ebenfalls soll eine Modellarchitektur erarbeitet werden, welche für die Triggerwort Erkennung
 verwendet werden kann. Nachdem das Modell trainiert wurde, soll es in eine App integriert werden.
 
 \begin{figure}[h]
@@ -1310,9 +1307,9 @@ verwendet werden kann. Nachdem das Modell trainiert wurde, soll es in eine App i
 
 \noindent \newline
 Das Ergebnis soll eine App sein, welche ein Triggerwort erkennt. Das Resultat dieser Bachelorarbeit
-ist sozusagen eine Teilkomponente einer Sprachsteuerung. Denn wie wir im Kapitel Stand der Forschung
-gesehen haben, besteht eine Sprachsteuerung aus mehreren Komponenten. Um einen möglichen Use Case
-zu nennen, könnte die App als Triggerwort Erkennung für eine Sprachsteuerung in einer Koch App namens 
+ist eine Teilkomponente einer Sprachsteuerung. Denn wie wir im Kapitel \textit{Stand der Forschung}
+gesehen haben, besteht eine Sprachsteuerung aus mehreren Komponenten. Als möglichen Use Case
+, könnte die App als Triggerwort Erkennung für eine Sprachsteuerung in einer Koch App namens 
 "FOOBY" verwendet werden. Die App könnte dann beispielsweise folgende Befehle verstehen: ``Hey FOOBY, 
 nächster Kochschritt'' oder ``Hey FOOBY, vorheriger Kochschritt''. Eine Sprachsteuerung für eine Koch App
 würde somit den Anwendern ermöglichen, die Hände frei zu haben und sich voll und ganz auf das
@@ -1356,7 +1353,7 @@ Sprachaufnahmen nach der Verwendung gelöscht werden.
 \subsection{Erste Überlegungen zu Tools und Technologien}
 Für die Entwicklung von Machine-Learning-Modellen stehen mehrere Frameworks zur Verfügung. Eine 
 Schlüsselüberlegung für dieses Projekt war die Fähigkeit zur Integration in eine mobile App.
-Es gibt einge Frameworks, welche das ermöglichen. Um nur einige zu nennen: PyTorch, TensorFlow, 
+Es gibt einge Frameworks, welche das ermöglichen. Um nur einige zu nennen: PyTorch, TensorFlow, und 
 CoreML. Wobei CoreML nur für Apple Ekosysteme verwendet werden kann. Da nicht nur die Integration
 in eine mobile App wichtig ist, sondern auch die Entwicklung von Prototypen, wurde PyTorch gewählt.
 TensorFlow wäre ebenfalls eine gute Wahl gewesen, aber laut Valantis hat PyTorch in den letzten 
@@ -1375,7 +1372,7 @@ stand immer die Erkennung von 'Hey FOOBY' im Vordergrund.
 \subsection{Versuche}
 Als Teil der Ideen und Konzepte wurden verschiedene Versuche beziehungsweise Experimente gestartet. 
 Diese Versuche sind wichtig, um die Machbarkeit der Triggerwort Erkennung zu überprüfen. Da aus dem 
-Kapitel Stand der Forschung hervorgeht, dass das Model wav2vec2 von Facebook AI einen grossen 
+Kapitel \textit{Stand der Forschung} hervorgeht, dass das Model wav2vec2 von Facebook AI einen grossen 
 Fortschritt in der Spracherkennung darstellt, basieren die ersten drei Versuche auf der Verwendung 
 von wav2vec2.
 
@@ -1479,7 +1476,7 @@ wav2vec2-Modells für die spezifische Aufgabe der Triggerwort-Erkennung. Es nutz
 fortschrittlichen Fähigkeiten des wav2vec2-Modells zur Merkmalsextraktion und kombiniert 
 diese mit einem massgeschneiderten Klassifikationsmechanismus, um hohe Genauigkeit bei der 
 Erkennung von Triggerwörtern zu erreichen. Dennoch wurde dieser Ansatz nicht weiter verfolgt, da 
-das resultierende Modell nicht den Anforderungen entsprechen in Bezug auf die Integration in eine 
+das resultierende Modell nicht den Anforderungen entspricht in Bezug auf die Integration in eine 
 mobile App. Es ist zum einen zu gross in Bezug auf der Grösse in Megabytes und zum anderen zu 
 energieintensiv beziehungsweise zu rechenintensiv in der Inferenz. 
 
