@@ -47,12 +47,9 @@
     \textbf{Dozent:} & Dr. Florian Herzog \\
     \textbf{Experte:} & Damien Piguet \\
     \textbf{Auftraggeber:} & Stefan Reinhard \\
-    \textbf{Keywords:} & Sprachsteuerung, Mobile Apps, Machine Learning, Triggerwort-Erkennung, Audioverarbeitung, Datensatzerstellung, Modelltraining, App-Integration \\
+    \textbf{Keywords:} & Sprachsteuerung, Mobile Apps, Machine Learning, Triggerwort-Erkennung, Audioverarbeitung, Datensatzerstellung, Modelltraining, App-Integration, PyTorch, TorchScript, iOS, Swift, Objective-C, C++ \\
 \end{tabularx}
     
-
-
-
 
 \section{Aufgabenstellung}
 Das Ziel dieser Bachelorarbeit ist die Entwicklung einer Sprachsteuerungsfunktion für mobile Anwendungen, mit einem besonderen Fokus auf der Erkennung von Triggerwörtern aus akustischer Sprache. Die Arbeit umfasst die Entwicklung eines Machine Learning-Modells, dessen Integration in eine mobile Plattform, insbesondere iOS, sowie die Berücksichtigung von Datenschutz und ethischen Richtlinien bei der Erstellung und Nutzung des für das Training des Modells erforderlichen Datensatzes.
@@ -66,14 +63,14 @@ Im Rahmen der Bachelorarbeit wurden folgende Ergebnisse erzielt:
     \item Ein \textbf{Machine Learning-Modell}, das in der Lage ist, Triggerwörter in akustischer Sprache zu erkennen.
     \item Eine \textbf{Integration in eine iOS-App}, die das Modell verwendet, um Triggerwörter in Echtzeit zu erkennen.
     \item Ein \textbf{Datensatz}, welcher ethische Richtlinien und Datenschutzbestimmungen einhält, wurde erstellt und verwendet, um das Modell zu trainieren.
-    \item Eine \textbf{Dokumentation}, die die Entwicklung des Modells, die Erstellung des Datensatzes und die Implementierung der App beschreibt.
+    \item Eine \textbf{Dokumentation}, die die Entwicklung des Modells, die Erstellung des Datensatzes und die Integration in eine iOS-App beschreibt.
 \end{itemize}
 
 \noindent
-Das Machine Learning Modell, benannt \textbf{WakeupTriggerConvLSTM2s}, ist eine Kombination aus einem \textit{Convolutional Neural Network} (CNN) und einem \textit{Long Short-Term Memory} (LSTM) Netzwerk. Das CNN extrahiert die akustischen Merkmale der Sprache, während das LSTM die zeitlichen Abhängigkeiten zwischen diesen Merkmalen erfasst. Es wurde in PyTorch implementiert, mit dem erstellten Datensatz trainiert und erreichte eine Genauigkeit (Accuracy) von 0.88 sowie einen F1-Score von 0.80 auf dem Testdatensatz. Zusätzlich wurde eine Transformationskomponente \textbf{AudioToSpectrogramTransformJit} in PyTorch entwickelt, die Audio in Spektrogramme umwandelt.
+Das Machine Learning Modell, benannt \textbf{WakeupTriggerConvLSTM2s}, ist eine Kombination aus einem \textit{Convolutional Neural Network} (CNN) und einem \textit{Long Short-Term Memory} (LSTM) Netzwerk. Das CNN extrahiert die akustischen Merkmale der Sprache, während das LSTM die zeitlichen Abhängigkeiten zwischen diesen Merkmalen erfasst. Es wurde in PyTorch implementiert, mit dem erstellten Datensatz trainiert und erreichte eine Genauigkeit (Accuracy) von 0.88 sowie einen F1-Score von 0.80 auf dem Testdatensatz. Zusätzlich wurde eine Transformationskomponente mit dem Namen \textbf{AudioToSpectrogramTransformJit} in PyTorch entwickelt, die Audio in Spektrogramme umwandelt.
 
 \noindent \newline
-Die Effizienz des Modells, insbesondere im Hinblick auf Echtzeitfähigkeit, war entscheidend. Das Modell erreicht eine Vorhersagegeschwindigkeit von 0.01 Sekunden pro Spektrogramm, was den Anforderungen einer Echtzeiterkennung entspricht, ohne die Leistung des Geräts zu signifikant zu beeinträchtigen. Die entwickelten PyTorch-Module \textbf{AudioToSpectrogramTransformJit} und \textbf{WakeupTriggerConvLSTM2s} wurden in einer iOS-App implementiert, um eine effiziente Triggerworterkennung in Echtzeit zu ermöglichen.
+Die Effizienz des Modells, insbesondere im Hinblick auf Echtzeitfähigkeit, war entscheidend. Das Modell erreicht eine Vorhersagegeschwindigkeit von 0.01 Sekunden pro Spektrogramm, was den Anforderungen einer Echtzeiterkennung entspricht, ohne die Leistung des Geräts signifikant zu beeinträchtigen. Die entwickelten PyTorch-Module \textbf{AudioToSpectrogramTransformJit} und \textbf{WakeupTriggerConvLSTM2s} wurden in einer iOS-App implementiert, um eine effiziente Triggerworterkennung in Echtzeit zu ermöglichen.
 
 \noindent \newline
 Es wurde eine Recorder-Webseite für die Aufnahme von Sprachsamples entwickelt und auf der Google Cloud Platform gehostet. Diese Webseite ist eine dockerisierte Python Flask App die es ermöglichte eine effiziente Sammlung von Sprachdaten zu gewährleisten.
@@ -125,7 +122,7 @@ TorchScript is a way to create serializable and optimizable models from PyTorch 
 Neben dem konvertieren musste auch die Integration in Objective-C, C++ und Swift erfolgen. Das Ganze ist dabei nicht so einfach wie es klingt. Es mussten einige Hürden überwunden werden, um die Module erfolgreich in die iOS App zu integrieren. Das Grundsätzliche Problem war, die fehlende Erfahrung in der Entwicklung mit Objective-C und C++.
 
 \section{Ausblick}
-
+Die vorliegende Bachelorarbeit demonstriert die Machbarkeit und Effizienz der Triggerwort-Erkennung in mobilen Anwendungen, ein wesentlicher Schritt hin zu einer umfassenden Sprachsteuerung. Zukünftige Forschungen könnten sich auf die Verbesserung der Genauigkeit und die Reduktion falsch-positiver Vorhersagen konzentrieren, möglicherweise durch eine erweiterte und diversifiziertere Datensammlung. Das Experimentieren mit verschiedenen Modellarchitekturen und Hyperparametern könnte weitere Optimierungen bringen. Die erfolgreiche Integration des Machine Learning-Modells in eine mobile App unterstreicht die praktische Anwendbarkeit solcher Technologien. Abschliessend bietet diese Arbeit eine solide Grundlage für eine mögliche Entwicklung eines Sprachsteuerungsassistenten für eine mobile App, der die Benutzerfreundlichkeit und den Komfort von Hands-free-Interaktionen verbessern würde.
 
 
 \end{document}
