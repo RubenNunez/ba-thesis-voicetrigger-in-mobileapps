@@ -73,7 +73,7 @@ Im Rahmen der Bachelorarbeit wurden folgende Ergebnisse erzielt:
 Das Machine Learning Modell, benannt \textbf{WakeupTriggerConvLSTM2s}, ist eine Kombination aus einem \textit{Convolutional Neural Network} (CNN) und einem \textit{Long Short-Term Memory} (LSTM) Netzwerk. Das CNN extrahiert die akustischen Merkmale der Sprache, während das LSTM die zeitlichen Abhängigkeiten zwischen diesen Merkmalen erfasst. Es wurde in PyTorch implementiert, mit dem erstellten Datensatz trainiert und erreichte eine Genauigkeit (Accuracy) von 0.88 sowie einen F1-Score von 0.80 auf dem Testdatensatz. Zusätzlich wurde eine Transformationskomponente \textbf{AudioToSpectrogramTransformJit} in PyTorch entwickelt, die Audio in Spektrogramme umwandelt.
 
 \noindent \newline
-Die Effizienz des Modells, insbesondere im Hinblick auf Echtzeitfähigkeit, war entscheidend. Das Modell erreicht eine Vorhersagegeschwindigkeit von 0.01 Sekunden pro Spektrogramm, was den Anforderungen einer Echtzeiterkennung entspricht, ohne die Leistung des Geräts zu beeinträchtigen. Die entwickelten PyTorch-Module \textbf{AudioToSpectrogramTransformJit} und \textbf{WakeupTriggerConvLSTM2s} wurden in einer iOS-App implementiert, um eine effiziente Triggerworterkennung in Echtzeit zu ermöglichen.
+Die Effizienz des Modells, insbesondere im Hinblick auf Echtzeitfähigkeit, war entscheidend. Das Modell erreicht eine Vorhersagegeschwindigkeit von 0.01 Sekunden pro Spektrogramm, was den Anforderungen einer Echtzeiterkennung entspricht, ohne die Leistung des Geräts zu signifikant zu beeinträchtigen. Die entwickelten PyTorch-Module \textbf{AudioToSpectrogramTransformJit} und \textbf{WakeupTriggerConvLSTM2s} wurden in einer iOS-App implementiert, um eine effiziente Triggerworterkennung in Echtzeit zu ermöglichen.
 
 \noindent \newline
 Es wurde eine Recorder-Webseite für die Aufnahme von Sprachsamples entwickelt und auf der Google Cloud Platform gehostet. Diese Webseite ist eine dockerisierte Python Flask App die es ermöglichte eine effiziente Sammlung von Sprachdaten zu gewährleisten.
@@ -125,6 +125,7 @@ TorchScript is a way to create serializable and optimizable models from PyTorch 
 Neben dem konvertieren musste auch die Integration in Objective-C, C++ und Swift erfolgen. Das Ganze ist dabei nicht so einfach wie es klingt. Es mussten einige Hürden überwunden werden, um die Module erfolgreich in die iOS App zu integrieren. Das Grundsätzliche Problem war, die fehlende Erfahrung in der Entwicklung mit Objective-C und C++.
 
 \section{Ausblick}
+
 
 
 \end{document}
