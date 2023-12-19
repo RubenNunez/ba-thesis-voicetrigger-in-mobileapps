@@ -297,11 +297,11 @@ von \(T_s = 0.001\). Um nun die Sampling-Rate zu berechnen, müssen wir den Kehr
 Sampling-Periode berechnen. \(F_s = \displaystyle\frac{1}{0.001} = 1000\). Somit erhalten wir eine
 Sampling-Rate von \(1000\) Samples pro Sekunde. Typische Sampling-Raten sind \(44100\) Hz
 oder \(48000\) Hz. Ein Hertz entspricht einer Frequenz von einem Sample pro Sekunde. 
-Ein weiter wichtiger Begriff ist die \textit{Nyquist-Frequenz}. Die Nyquist-Frequenz \(F_n\) ist 
-die Hälfte der Sampling-Rate \(F_n = \displaystyle\frac{F_s}{2}\) und muss mindestens doppelt so 
-hoch sein wie die höchste Frequenz des Signals. Ist diese Eigenschaft erfüllt, kann das 
-Signal ohne Informationsverlust rekonstruiert werden (\cite[Chapter~3.1]{tarr2018hackaudio}). 
-Mehr dazu folgt im Unterkapitel \textit{Fourier-Analyse}.
+Ein weiter wichtiger Begriff ist die \textit{Nyquist-Frequenz}. Die Nyquist-Frequenz \(F_n\) ist die 
+Hälfte der Sampling-Rate (\(F_n = \displaystyle\frac{F_s}{2}\)). Um das Nyquist-Kriterium zu erfüllen, 
+muss die Sampling-Rate \(F_s\) mindestens doppelt so hoch sein wie die höchste Frequenz des Signals. 
+Ist diese Eigenschaft erfüllt, kann das Signal ohne Informationsverlust rekonstruiert werden 
+(\cite[Chapter~3.1]{tarr2018hackaudio}). Mehr dazu folgt im Unterkapitel \textit{Fourier-Analyse}.
 
 \noindent \newline
 Weiter ist es wichtig zu verstehen, dass ein Sample ein diskreter Wert ist und in digitalen 
