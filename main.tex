@@ -159,8 +159,9 @@ Mosberger, die die Idee für diese Bachelorarbeit hatte.
 \subsection{Problemstellung}
 Die Sprachsteuerung bietet grosses Potenzial in mobilen Apps und wird bisher vor allem für 
 Sprachassistenten genutzt. Während Sprachassistenten wie Siri, Google Assistant oder Alexa 
-von der Allgemeinheit genutzt werden, gibt es kaum bekannte Lösungen für eine integrierte Sprachsteuerung in mobilen Apps, insbesondere in 
-Bezug auf das Erkennen von Triggerwörtern. Daher besteht ein grosses Ausbaupotenzial für 
+von der Allgemeinheit genutzt werden, gibt es kaum bekannte Lösungen für eine integrierte 
+Sprachsteuerung in mobilen Apps, insbesondere in Bezug auf das Erkennen von Triggerwörtern. Daher 
+besteht ein grosses Ausbaupotenzial für 
 Sprachsteuerung in Mobile Apps. 
 
 \noindent \newline
@@ -796,7 +797,7 @@ Chapter 4).
 Zwei wichtige Konzepte in neuronalen Netzen sind der \textit{Forward Pass} und der
 \textit{Backward Pass}. Der Forward Pass ist der Vorgang, bei dem die Eingabe \(x\) durch das
 Netzwerk geleitet wird, um die Ausgabe \(y\) zu erhalten. Der Backward Pass ist der Vorgang, bei
-dem die Gewichte \(w_{1}, w_{2}, \dots, w_{n}\) und der Bias \(b\) optimiert werden. Dabei wird 
+dem die Gewichte \(w_{1}, w_{2}, \dots, w_{n}\) und der Bias \(b\) optimiert werden. Dabei wird
 der Backpropagation-Algorithmus verwendet, um den Fehler des Netzwerks zu berechnen. Der Fehler 
 wird als \textit{Loss Function} bezeichnet.
 
@@ -1147,9 +1148,17 @@ Fähigkeiten und Einschränkungen (\cite{matarneh2017speechrecognition}).
 \end{multicols}
 	
 \noindent
-Der Vergleich diente dazu, potenzielle bestehende Spracherkennungssysteme für diese Arbeit zu evaluieren. Trotz der Betrachtung verschiedener Systeme wurde keine dieser Lösungen ausgewählt. Ein entscheidender Grund hierfür war, dass der Schwerpunkt des Vergleichs von Matarneh nicht auf dem Erkennen von Trigger-Wörtern lag, was eine wesentliche Anforderung dieser Arbeit darstellt. Zudem spiegeln die in der Quelle von Matarneh vorgestellten Lösungen lediglich den Stand der Technik aus dem Jahr 2017 wider (\cite{matarneh2017speechrecognition}). Inzwischen haben sich jedoch neuere und leistungsfähigere Technologien entwickelt, wie im nächsten Kapitel am Beispiel von Facebook AI's wav2vec2-Modell verdeutlicht wird.
+Der Vergleich diente dazu, potenzielle bestehende Spracherkennungssysteme für diese Arbeit zu 
+evaluieren. Trotz der Betrachtung verschiedener Systeme wurde keine dieser Lösungen ausgewählt. Ein 
+entscheidender Grund hierfür war, dass der Schwerpunkt des Vergleichs von Matarneh nicht auf dem 
+Erkennen von Trigger-Wörtern lag, was eine wesentliche Anforderung dieser Arbeit darstellt. Zudem 
+spiegeln die in der Quelle von Matarneh vorgestellten Lösungen lediglich den Stand der Technik aus 
+dem Jahr 2017 wider (\cite{matarneh2017speechrecognition}). Inzwischen haben sich jedoch neuere und 
+leistungsfähigere Technologien entwickelt, wie im nächsten Kapitel am Beispiel von Facebook AI's 
+wav2vec2-Modell verdeutlicht wird.
 
 \subsection{Facebook AI wav2vec2}
+
 Im Jahr 2020 präsentierte Facebook AI mit wav2vec2 ein innovatives Modell im Bereich der 
 Spracherkennung. Dieses Modell stellt einen signifikanten Durchbruch in der Technologie dar und 
 nutzt eine Methode, die als \textit{Self-Supervised Learning} bezeichnet wird. Durch diese Methode 
@@ -1301,7 +1310,14 @@ verwendet werden kann. Nachdem das Modell trainiert wurde, soll es in eine App i
 \end{figure}
 
 \noindent \newline
-Das Ergebnis soll eine App sein, welche ein Triggerwort erkennt. Diese App stellt eine Teilkomponente einer Sprachsteuerung dar. Wie wir im Kapitel \textit{Stand der Forschung} gesehen haben, besteht eine Sprachsteuerung aus mehreren Komponenten. Ein anschauliches Beispiel für einen möglichen Anwendungsfall wäre die Nutzung der App als Triggerwort-Erkennung in einer Koch- oder Rezepte-App wie FOOBY. Die App könnte dann beispielsweise Befehle verstehen wie ``Hey FOOBY, nächster Kochschritt'' oder ``Hey FOOBY, vorheriger Kochschritt''. Eine Sprachsteuerung für eine Koch-App würde es den Nutzern ermöglichen, die Hände frei zu haben und sich auf das Kochen zu konzentrieren, was die Nutzererfahrung deutlich verbessern könnte.
+Das Ergebnis soll eine App sein, welche ein Triggerwort erkennt. Diese App stellt eine 
+Teilkomponente einer Sprachsteuerung dar. Wie wir im Kapitel \textit{Stand der Forschung} gesehen 
+haben, besteht eine Sprachsteuerung aus mehreren Komponenten. Ein anschauliches Beispiel für einen 
+möglichen Anwendungsfall wäre die Nutzung der App als Triggerwort-Erkennung in einer Koch- oder 
+Rezepte-App wie FOOBY. Die App könnte dann beispielsweise Befehle verstehen wie ``Hey FOOBY, 
+nächster Kochschritt'' oder ``Hey FOOBY, vorheriger Kochschritt''. Eine Sprachsteuerung für 
+eine Koch-App würde es den Nutzern ermöglichen, die Hände frei zu haben und sich auf das Kochen zu 
+konzentrieren, was die Nutzererfahrung deutlich verbessern könnte.
 
 \subsection{Erstellung eines Datensatzes}
 Die Erstellung eines Datensatzes ist ein wichtiger Bestandteil dieser Arbeit. Daher soll eine 
@@ -1464,7 +1480,7 @@ fortschrittlichen Fähigkeiten des wav2vec2-Modells zur Merkmalsextraktion und k
 diese mit einem massgeschneiderten Klassifikationsmechanismus, um hohe Genauigkeit bei der 
 Erkennung von Triggerwörtern zu erreichen. Dennoch wurde dieser Ansatz nicht weiter verfolgt, da 
 das resultierende Modell nicht den Anforderungen entspricht in Bezug auf die Integration in eine 
-mobile App. Es ist zum einen zu gross in Bezug auf der Grösse in Megabytes und zum anderen zu 
+mobile App. Es ist zum einen hinsichtlich der Grösse in Megabytes zu gross und zum anderen zu 
 energieintensiv beziehungsweise zu rechenintensiv in der Inferenz. 
 
 
@@ -1487,7 +1503,7 @@ enthält eine Definition für ein Modell, welches mit TensorFlow implementiert w
 Barazanji et al. (\cite{barazanji2023heyditto}) entwickelte Modell wurde für die Triggerwort 
 Erkennung entwickelt und kann die Wörter 'Hey Ditto' erkennen. Ein Kritikpunkt an das Repository 
 ist, dass es keine Dokumentation oder Quellenangaben enthält. Dennoch wurde das Modell als 
-Grundlage für einen weiteren Versuch verwendet. Dazu wurde es in PyTorch übersetzt und 
+Grundlage für diesen Versuch verwendet. Dazu wurde es in PyTorch übersetzt und 
 entsprechend angepasst, sodass es auf den Anwendungsfall dieser Arbeit zugeschnitten ist. 
 Das Verfahren selbst ist sehr interessant und basiert auf der Verwendung von Convolutional Layers 
 in Kombination mit einem LSTM Layer. Hier konnte eine weitere Quelle gefunden werden, welche 
@@ -1497,14 +1513,14 @@ diese Art von Modelarchitektur verwendet. Das Paper von Khamees et al.
 Realisierung zu finden.
 
 \newpage \section{Methoden}
-Das Vorgehen dieser Arbeit kann als eine klassische Projektvorgehen beschrieben werden. Aus der 
+Das Vorgehen dieser Arbeit kann als ein klassisches Projektvorgehen beschrieben werden. Aus der 
 Aufgabenstellung ging schon hervor, dass ein eigenes Machine Learning Modell für die Triggerwort 
-Erkennung erarbeitet werden soll. Zum andren soll das Modell in eine mobile App integriert werden.
+Erkennung erarbeitet werden soll. Zum andern soll das Modell in eine mobile App integriert werden.
 Diese zwei Bereiche wurden Bereits bei der Planung der Arbeit definiert und haben daher die 
-Planung der Arbeit stark beeinflusst.
+Arbeit stark beeinflusst.
 
 \subsection{Werkzeuge und Vorgehen}
-Die Arbeit wurde mit dem Textsatzsystem LaTeX geschrieben. Die Arbeit wurde in einem öffentlichem 
+Die Arbeit wurde mit dem Textsatzsystem LaTeX geschrieben. Die Dokumente wurden in einem öffentlichem 
 Git Repository verwaltet. Das Repository beinhaltet sämtlichen Source Code, Experimente, 
 Dokumentationen und diese Arbeit selbst. Der Source Code wurde mehrheitlich in Python geschrieben 
 mit der Verwendung von Anaconda als Package Manager. Jupiter Notebooks wurden verwendet, um 
@@ -1516,7 +1532,7 @@ wurde auch Xcode verwendet, um die Modelle in eine iOS App zu integrieren.
 Künstliche Intelligenz hat entscheidend die Art und Weise, wie wir leben, arbeiten und 
 kommunizieren, beeinflusst. In diesem Projekt wurde Künstliche Intelligenz als Werkzeug eingesetzt, 
 um den kreativen Prozess und die Programmierung zu unterstützen. Tools wie GitHub Copilot und 
-ChatGPT wurden genutzt, um den Geist zu inspirieren und schneller zu innovativen Lösungen zu 
+ChatGPT wurden als inspirtaion genutzt, um schneller zu innovativen Lösungen zu 
 gelangen. Die Verwendung dieser Technologien erfolgte jedoch mit einer kritischen Perspektive. Es 
 wurde stets darauf geachtet, dass sie als Hilfsmittel dienten, um die Effizienz und Qualität der 
 Entwicklung zu steigern, ohne die eigene kreative und analytische Arbeit zu ersetzen. Auf diese 
@@ -1526,11 +1542,11 @@ dominiert.
 
 \subsection{Projektphasen}
 Im Projektmanagement wurden die Projektphasen definiert. Diese bestehen aus vier Phasen. Die erste
-Phase widmet sich dem \textit{Stand der Forschung}. Darin wurden aber bereits einige Punkte der 
-Planung definiert sowie dem Setup der Entwicklungsumgebung. Der Bestandteil liegt aber in der 
+Phase widmet sich dem \textit{Stand der Forschung}. Darin wurden bereits einige Punkte der 
+Planung definiert sowie das Setup der Entwicklungsumgebung vollzogen. Der Hauptbestandteil lag aber in der 
 Erarbeitung der Grundlagen sowie der Recherche von bestehenden Lösungen. Die zweite Phase ist die 
 \textit{Erstellung des Modells}. In dieser Phase wird das Modell entwickelt, trainiert und 
-evaluiert. Ebenfalls wird auch eine Möglichkeit erarbeitet um ein Datenstaz zu erstellen. In der 
+evaluiert. Ebenfalls wird eine Möglichkeit erarbeitet um ein Datenstaz zu erstellen. In der 
 dritten Phase namens \textit{Prototype} wird das Modell in eine mobile App integriert. 
 Die letzte Phase ist das \textit{Refinement}. In dieser Phase wird die Arbeit sowie die
 Dokumentation fertiggestellt. 
@@ -1538,16 +1554,16 @@ Dokumentation fertiggestellt.
 \subfile{projectmanagement.tex} % Projektmanagement separat
 
 \newpage \section{Realisierung}
-Die Realisierung dieser Arbeit besteht im wesentlichen aus drei Teilen. Welche die Ziele der Arbeit 
-wiederspiegeln. Zum einen wurde ein Datensatz nach ethischen sowie rechtlichen Aspekten erstellt, 
+Die Realisierung dieser Arbeit besteht im wesentlichen aus drei Teilen, welche die Ziele der Arbeit 
+wiederspiegeln. Zum einen wurde ein Datensatz nach ethischen sowie rechtlichen Richtlinien erstellt, 
 welcher die Grundlage für die Experimente so wie das Training des Modells bildet. Weiter wurde ein 
 Modell erarbeitet und anschliessend trainiert, welches Triggerwörter erkennt. Der letzte Teil der 
-Realisierung ist die Integration dieses Modells in eine iOS App.
+Realisierung war die Integration dieses Modells in eine iOS App.
 
 \subsection{Aufbau des Datensatzes}
-Der Aufbau eines Datensatzes war zu Beginn der Arbeit geplant. Es war klar, dass ein Datensatz 
+Der Aufbau eines Datensatzes war zum Beginn der Arbeit geplant. Es war klar, dass ein Datensatz 
 benötigt wird, um ein Modell zu trainieren. Der Datensatz wiederspiegelt die Grundlage des 
-Problemfeldes. Es geht ja darum ein spezifisches Wort oder Wörter zu erkennen. Die nachfolgende 
+Problemfeldes, in dem es darum geht ein spezifisches Wort oder Wörter zu erkennen. Die nachfolgende 
 Abbildung \ref{fig:dataset} zeigt die zwei Klassen des Datensatzes. Die Klasse 0 beinhaltet 
 Sprachaufnahmen, welche das Triggerwort nicht enthalten. Die Klasse 1 beinhaltet Sprachaufnahmen, 
 welche das Triggerwort enthalten.
@@ -1660,8 +1676,8 @@ verbessern.
 
 \subsection{Erstellung des Modells}
 Bei der Erstellung des Modells wurde die Architektur von Barazanji et al. 
-(\cite{barazanji2023heyditto}) verwendet. Das Modell wurde in PyTorch implementiert als ein PyTorch 
-Modul und anschliessend trainiert. Das Training wurde auf einem MacBook Pro mit einem M1 Pro Chip 
+(\cite{barazanji2023heyditto}) verwendet. Das Modell wurde als PyTorch 
+Modul implementiert und anschliessend trainiert. Das Training wurde auf einem MacBook Pro mit einem M1 Pro Chip 
 durchgeführt. Die Trainingszeit betrug für 120 Epochen etwa 8 Stunden. Neben der Architektur und 
 dem Training des Modells wurde ebenfalls die Implementierung in einer Echtzeitanwendung konzipiert. 
 Dabei war zu berücksichtigen, dass das Modell in eine mobile App integriert werden soll, weshalb 
@@ -1672,11 +1688,11 @@ entsprechende Leistungsmessungen durchzuführen.
 
 \subsubsection{Verwendete Architektur des Modells}
 Die Architektur besteht aus drei Convolutional Layers und einem Long-Short-Term-Memory 
-(LSTM) Layer. Der Vorteil dieser Architektur ist, dass sie sehr energie effizient ist, wie auch sehr 
+(LSTM) Layer. Der Vorteil dieser Architektur ist, dass sie sehr energieeffizient ist, wie auch sehr 
 schnell in der Inferenz. Mehr dazu im Kapitel \ref{sec:evaluation} Evaluation. Was besonders Markant 
-ist, ist die Verwendung von Convolutional Layers in Kombination mit einem (LSTM) Layer, welcher die 
+ist, ist die Verwendung von Convolutional Layers in Kombination mit einem LSTM Layer, welcher die 
 zeitliche Komponente der Sprache berücksichtigt. Die Idee der Kombination von Convolutional Layers 
-und (LSTM) Layers ist nicht neu. Es gibt diverse Paper, welche diesen Ansatz verwenden. 
+und LSTM Layers ist nicht neu. Es gibt diverse Paper, welche diesen Ansatz verwenden. 
 Beispielsweise verwendet (\cite{khamees2021classifying}) diesen Ansatz für die Klassifizierung von 
 Music Genres. Die finale Architektur des Models ist in der Abbildung \ref{fig:model_architecture} 
 dargestellt. Für den Namen des Models wurde der Name \textit{WakeupTriggerConvLSTM2s} gewählt. Der 
@@ -1786,11 +1802,10 @@ da das Modell in eine mobile App integriert werden soll.
 \subsubsection{Real Time Anwendung in Python}
 Die Realtime Anwendung wurde in ersten Linie von (\cite{siri2017hey}) inspiriert. Dies in Bezug 
 auf den Aufbau der Anwendung. Die Anwendung verarbeitet einen kontinuierlichen Audio Stream, eines 
-Mikrofons. Die Verarbeitung des Audio Streams erfolgt in Stücke von 2 Sekunden. Diese Stücke werden 
+Mikrofons. Die Verarbeitung des Audio Streams erfolgt in Stücken von 2 Sekunden. Diese Stücke werden 
 alle 0.1 Sekunden verarbeitet. Zwei Sekunden sind 32000 Samples bei einer Sample Rate von 16kHz. 
 Somit werden pro Sekunde 10 Inferenzen durch die Pipeline durchgeführt. Bei dieser Variante der 
-Verarbeitung wird, falls das Triggerwort im Stream vorhanden ist, die Erkennung des Triggerwortes 
-mehrfach erkannt. Das bietet den Vorteil einer gewissen Redundanz. Die Rate der Inferenzen könnte 
+Verarbeitung wird das Triggerwort mehrfach erkannt, falls es im Stream vorhanden ist. Das bietet den Vorteil einer gewissen Redundanz. Die Rate der Inferenzen könnte 
 auch Variabel an die Systemleistung angepasst werden. Die nachfolgende Abbildung 
 \ref{fig:realtime-application} zeigt schematisch die Realtime Anwendung. Dabei wird ein Audio Chunk 
 von 2 Sekunden in ein Spektrogramm transformiert und anschliessend vom Modell verarbeitet. Das 
@@ -1867,13 +1882,13 @@ drei Hauptziele werden in den nachfolgenden Kapiteln beschrieben. Als erstes wir
 die Genauigkeit des Modells getroffen, welches für die Triggerwort Erkennung trainiert wurde. Vor 
 Beginn des Trainings wurde ein 80/20 Split für die Trainingsdaten und Testdaten durchgeführt. 
 Weiter soll eine Aussage über die Energieeffizienz sowie die Inferenzgeschwindigkeit des Modells 
-getroffen werden. Denn diese beiden Punkte sind entscheidend für die Integration in eine Echtzeit 
+getroffen werden. Denn diese beiden Punkte sind entscheidend für die Integration in eine Echtzeit-
 Anwendung. Zu guter Letzt soll eine Aussage über die Integration des Modells in eine mobile App 
-gemacht werden. Das in Bezug auf Usertest, welche die Usability der Triggerwort Erkennung in der 
+gemacht werden. Dies wird durch Usertests evaluiert, welche die Usability der Triggerwort Erkennung in der 
 mobilen App bewerten.
 
 \subsection{Genauigkeit des Modells}
-Die Genauigkeit des Modells wurde mit dem F1-Score gemessen. Der F1-Score ist ein Mass für die 
+Die Genauigkeit des Modells wurde mit dem F1-Score gemessen, einem Mass für die 
 Genauigkeit eines Modells. Er ist definiert als das harmonische Mittel zwischen Precision und 
 Recall. Da es sich beim erstellten Datensatz um einen Imbalanced Datensatz handelt, ist der F1-Score 
 ein geeignetes Mass für die Genauigkeit des Modells. Nach dem Training wurden die restlichen 
@@ -1890,7 +1905,7 @@ Tensorboard Dashboard mit den Metriken des Testdatensatzes.
 \noindent \newline
 Die Werte für den F1-Score und der Accuracy liegen bei 0.8883 für den F1-Score und 0.8081 für die 
 Accuracy. Die Werte liegen unter den Werten des Trainingsdatensatzes, was aber nicht ein schlechtes 
-Zeichen ist. Denn die Werte sind immer noch sehr gut. Das zeigt sich vor allem in der Realtime 
+Zeichen ist, denn die Werte sind immer noch sehr gut. Das zeigt sich vor allem in der Realtime 
 iOS-App, welche durch die Usertests bestätigt wurde. Doch bevor die Usertests beschrieben werden, 
 wird zuerst auf die Energieeffizienz sowie die Inferenzgeschwindigkeit des Modells eingegangen.
 
@@ -1932,13 +1947,10 @@ liegen. Damit konnte zumindest gezeigt werden, dass die CPU Auslastung nicht üb
 
 \subsection{Usertests}
 Usertests zur Evaluierung der Triggerworterkennung wurden mit der Realtime iOS App auf einem iPhone 
-XS durchgeführt. Dabei wurden die gleitenden Durchschnitte für die Wahrscheinlichkeiten der letzten 
-3, 5 und 10 Audio Chunks verwendet, welche bei einem Threshold von 0.9 als Triggerwort erkannt 
-wurden. Sechs Personen nahmen an den Tests teil, von denen zwei Teil des Datensatzes waren. 
+XS durchgeführt. Sechs Personen nahmen an den Tests teil, von denen zwei Teil des Datensatzes waren. 
 Es zeigte sich kein signifikanter Unterschied in den Ergebnissen zwischen den Personen, die Teil des 
-Datensatzes waren, und denen, die nicht Teil davon waren. Bei den Geschlechtern der Testpersonen 
-handelte es sich um zwei weibliche und vier männliche Personen. Die Altersspanne der Testpersonen 
-lag zwischen 20 und 30 Jahren.
+Datensatzes waren, und denen, die nicht Teil davon waren. Es handlete sich um zwei weibliche und 
+vier männliche Personen. Die Altersspanne der Testpersonen lag zwischen 20 und 30 Jahren.
 
 \noindent \newline
 Die Testpersonen wurden instruiert, die App zu verwenden, als ob sie mit einem Sprachassistenten 
@@ -1962,7 +1974,6 @@ gesagt wurde. Allerdings wurden in 28 Fällen andere Äusserungen fälschlicherw
 Triggerwort erkannt (False Positives), was auf eine Schwäche des Modells hinweist. In 35 Fällen 
 wurde korrekterweise festgestellt, dass kein Triggerwort gesprochen wurde (True Negatives).
 
-
 \noindent \newline
 Diese Ergebnisse deuten darauf hin, dass das Modell eine akzeptable Sensitivität bei der Erkennung 
 des Triggerworts 'Hey FOOBY' aufweist, aber eine hohe Rate an Falsch-Positiven vorliegt, was zu 
@@ -1980,7 +1991,7 @@ WakeupTriggerConvLSTM2s-Modells hat gezeigt, dass eine effiziente und genaue Tri
 in mobilen Anwendungen realisierbar ist. Durch die Kombination von Convolutional und LSTM Layern 
 konnte eine hohe Erkennungsgenauigkeit bei gleichzeitiger Energieeffizienz erreicht werden. Die 
 erfolgreiche Integration des Modells in einen mobilen App-Prototyp demonstriert die praktische 
-Anwendbarkeit der Ergebnisse. Die Arbeit unterstreicht die Bedeutung von Datenschutz und 
+Anwendbarkeit der Forschungsergebnisse. Die Arbeit unterstreicht die Bedeutung von Datenschutz und 
 ethischen Überlegungen bei der Entwicklung von Sprachsteuerungsfunktionen. Die Ergebnisse bieten 
 eine solide Grundlage für zukünftige Forschungen und Entwicklungen im Bereich der Sprachsteuerung 
 in mobilen Apps, insbesondere hinsichtlich der Verbesserung der Benutzerfreundlichkeit und der 
