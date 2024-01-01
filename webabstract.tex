@@ -112,17 +112,11 @@ Ebenfalls wurden User Tests durchgeführt, um die Benutzerfreundlichkeit der App
 
 
 \section{Spezielle Herausforderungen}
-Eines der Herausforderungen war es die erarbeiteten PyTorch Module über TorchScript zu konvertieren so dass diese in der iOS App verwendet werden können. Die Grundidee hinter TorchScript ist es, die PyTorch Module in ein Format zu konvertieren, das von der C++ API von PyTorch verwendet werden kann. 
-
-\begin{displayquote}
-TorchScript is a way to create serializable and optimizable models from PyTorch code. Any TorchScript program can be saved from a Python process and loaded in a process where there is no Python dependency. (\cite{pytorch2023jit})
-\end{displayquote}
-
-\noindent
-Neben dem konvertieren musste auch die Integration in Objective-C, C++ und Swift erfolgen. Das Ganze ist dabei nicht so einfach wie es klingt. Es mussten einige Hürden überwunden werden, um die Module erfolgreich in die iOS App zu integrieren. Das Grundsätzliche Problem war, die fehlende Erfahrung in der Entwicklung mit Objective-C und C++.
+Eine der Herausforderungen war es, die erarbeiteten PyTorch Module über TorchScript zu konvertieren so dass diese in der iOS App verwendet werden können. Die Grundidee hinter TorchScript ist es, die PyTorch Module in ein Format zu konvertieren, das von der C++ API von PyTorch verwendet werden kann. 
+Neben der Konvertierung musste auch die Integration in Objective-C, C++ und Swift erfolgen. Es mussten einige Hürden überwunden werden, um die Module erfolgreich in die iOS App zu integrieren. Das grundsätzliche Problem war, die fehlende Erfahrung in der Entwicklung mit Objective-C und C++.
 
 \section{Ausblick}
-Die vorliegende Bachelorarbeit demonstriert die Machbarkeit und Effizienz der Triggerwort-Erkennung in mobilen Anwendungen, ein wesentlicher Schritt hin zu einer umfassenden Sprachsteuerung. Zukünftige Forschungen könnten sich auf die Verbesserung der Genauigkeit und die Reduktion falsch-positiver Vorhersagen konzentrieren, möglicherweise durch eine erweiterte und diversifiziertere Datensammlung. Das Experimentieren mit verschiedenen Modellarchitekturen und Hyperparametern könnte weitere Optimierungen bringen. Die erfolgreiche Integration des Machine Learning-Modells in eine mobile App unterstreicht die praktische Anwendbarkeit solcher Technologien. Abschliessend bietet diese Arbeit eine solide Grundlage für eine mögliche Entwicklung eines Sprachsteuerungsassistenten für eine mobile App, der die Benutzerfreundlichkeit und den Komfort von Hands-free-Interaktionen verbessern würde.
+Die vorliegende Bachelorarbeit demonstriert die Machbarkeit und Effizienz der Triggerwort-Erkennung in mobilen Anwendungen was ein wesentlicher Schritt hin zu einer umfassenden Sprachsteuerung darstellt. Zukünftige Forschungen könnten sich auf die Verbesserung der Genauigkeit und die Reduktion falsch-positiver Vorhersagen konzentrieren, möglicherweise durch eine erweiterte und diversifiziertere Datensammlung. Das Experimentieren mit verschiedenen Modellarchitekturen und Hyperparametern könnte weitere Optimierungen bringen. Die erfolgreiche Integration des Machine Learning-Modells in eine mobile App unterstreicht die praktische Anwendbarkeit solcher Technologien. Abschliessend bietet diese Arbeit eine solide Grundlage für eine mögliche Entwicklung eines Sprachsteuerungsassistenten für eine mobile App, der die Benutzerfreundlichkeit und den Komfort von Hands-free-Interaktionen verbessern würde.
 
 
 \end{document}
