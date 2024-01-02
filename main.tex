@@ -1657,7 +1657,7 @@ die Entwicklung eines leistungsfähigen Erkennungssystems unerlässlich ist.
 
 \subsubsection{Datensatz 'hey-fooby'}
 Insgesamt wurden etwa 700 Sprachaufnahmen mit dem Recorder erstellt. 300 davon enthielten das 
-Triggerwort 'Hey FOOBY', und 400 Aufnahmen bestanden aus anderen Wörtern. Durch 
+Triggerwort 'Hey FOOBY' und 400 Aufnahmen bestanden aus anderen Wörtern. Durch 
 Augmentierungstechniken wurde die Anzahl der Samples auf 10'000 erhöht, wobei ein Verhältnis von 
 1 zu 2 im Vergleich zum 'other' Datensatz beibehalten wurde. Die daraus resultierende 
 Imbalance wurde bei dem Training der finalen Modellarchitektur berücksichtigt.
@@ -1882,8 +1882,7 @@ drei Hauptziele werden in den nachfolgenden Kapiteln beschrieben. Als erstes wir
 die Genauigkeit des Modells getroffen, welches für die Triggerwort Erkennung trainiert wurde. Vor 
 Beginn des Trainings wurde ein 80/20 Split für die Trainingsdaten und Testdaten durchgeführt. 
 Weiter soll eine Aussage über die Energieeffizienz sowie die Inferenzgeschwindigkeit des Modells 
-getroffen werden. Denn diese beiden Punkte sind entscheidend für die Integration in eine Echtzeit-
-Anwendung. Zu guter Letzt soll eine Aussage über die Integration des Modells in eine mobile App 
+getroffen werden. Denn diese beiden Punkte sind entscheidend für die Integration in eine Echtzeit-Anwendung. Zu guter Letzt soll eine Aussage über die Integration des Modells in eine mobile App 
 gemacht werden. Dies wird durch Usertests evaluiert, welche die Usability der Triggerwort Erkennung in der 
 mobilen App bewerten.
 
@@ -1941,7 +1940,7 @@ unterhalb der 0.1 Sekunden, welche für den Loop der Realtime Anwendung definier
 es in einem guten Bereich. Sollte die festgelegte Inferenzgeschwindigkeit nicht erreicht werden, 
 könnte dies zu Datenverlusten im Audio-Stream führen. Die Energieeffizienz wurde anhand der 
 aktuellen CPU Auslastung beim jeweiligen Messpunkt gemessen. Die Auslastung der CPU liegt bei ca. 
-20\%. Hierzu ist es aber Schwierig eine Aussage zu treffen, da die Auslastung der CPU von vielen 
+20\%. Hierzu ist es aber schwierig eine Aussage zu treffen, da die Auslastung der CPU von vielen 
 Faktoren abhängig ist. Dennoch kann gesagt werden, dass die gemessenen Werte im Normalbereich 
 liegen. Damit konnte zumindest gezeigt werden, dass die CPU Auslastung nicht übermässig hoch ist. 
 
@@ -1949,7 +1948,7 @@ liegen. Damit konnte zumindest gezeigt werden, dass die CPU Auslastung nicht üb
 Usertests zur Evaluierung der Triggerworterkennung wurden mit der Realtime iOS App auf einem iPhone 
 XS durchgeführt. Sechs Personen nahmen an den Tests teil, von denen zwei Teil des Datensatzes waren. 
 Es zeigte sich kein signifikanter Unterschied in den Ergebnissen zwischen den Personen, die Teil des 
-Datensatzes waren, und denen, die nicht Teil davon waren. Es handlete sich um zwei weibliche und 
+Datensatzes waren und denen, die nicht Teil davon waren. Es handlete sich um zwei weibliche und 
 vier männliche Personen. Die Altersspanne der Testpersonen lag zwischen 20 und 30 Jahren.
 
 \noindent \newline
