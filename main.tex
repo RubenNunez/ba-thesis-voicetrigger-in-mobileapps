@@ -798,7 +798,8 @@ Zwei wichtige Konzepte in neuronalen Netzen sind der \textit{Forward Pass} und d
 Netzwerk geleitet wird, um die Ausgabe \(y\) zu erhalten. Der Backward Pass ist der Vorgang, bei
 dem die Gewichte \(w_{1}, w_{2}, \dots, w_{n}\) und der Bias \(b\) optimiert werden. Dabei wird
 der Backpropagation-Algorithmus verwendet, um den Fehler des Netzwerks zu berechnen. Der Fehler 
-wird als \textit{Loss Function} bezeichnet.
+wird als \textit{Loss Function} bezeichnet. Der Backward Pass kann auch als \textit{Training} 
+bezeichnet werden.
 
 \noindent \newline \textbf{Loss Function} \newline
 Die Loss Function ist eine Funktion, die den Fehler zwischen der Ausgabe des neuronalen Netzes und
@@ -951,8 +952,7 @@ zeigt den Anteil der korrekten Vorhersagen. Die Accuracy wird wie folgt berechne
 \formulas{Accuracy}
 
 \noindent \newline
-Die \textit{Precision} zeigt den Anteil der korrekten positiven Vorhersagen. Die Precision wird wie 
-folgt berechnet:
+Die \textit{Precision} zeigt den Anteil der korrekten positiven Vorhersagen an den gesamten positiven Vorhersagen. Die Precision wird wie folgt berechnet:
 
 \begin{equation}
 	\text{Precision} = \frac{TP}{TP + FP}
@@ -961,8 +961,7 @@ folgt berechnet:
 \formulas{Precision}
 
 \noindent \newline
-Die \textit{Recall} zeigt den Anteil der korrekten positiven Vorhersagen. Die Recall wird wie 
-folgt berechnet:
+Im Gegensatz dazu gibt der \textit{Recall} den Anteil der korrekten positiven Vorhersagen an den gesamten tatsächlich positiven Fällen an. Recall misst somit, wie viele der tatsächlichen positiven Fälle vom System als positiv erkannt wurden. Die Berechnung des Recall erfolgt wie folgt:
 
 \begin{equation}
 	\text{Recall} = \frac{TP}{TP + FN}
@@ -1607,7 +1606,7 @@ Die Anpassungen der Webseite für diese Arbeit umfassten die folgenden Punkte:
 Mit der überarbeiteten Recorder Webseite wurden Sprachaufnahmen von zwei Sekunden Länge und einer 
 Sample Rate von 48kHz erstellt. Bei den freiwilligen Teilnehmern handelte es sich um Personen aus 
 dem Bekanntenkreis des Autors. Um den Datenschutz zu gewährleisten, wurden die Teilnehmer über die 
-Nutzung der Sprachaufnahmen informiert. Das Paper von Papakyriakopoulos et al. 
+Nutzung sowie der anschliessenden Löschung der Sprachaufnahmen informiert. Das Paper von Papakyriakopoulos et al. 
 (\cite{papakyriakopoulos2023augmented}) betont die Notwendigkeit der Diversität in Sprachdaten. Die 
 Aufnahmen beinhalten Aufnahmen von mindestens 10 verschiedenen Personen. Da die Variation der 
 Sprachaufnahmen relativ gering war, wurden zusätzlich Augmentierungen der Sprachaufnahmen 
