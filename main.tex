@@ -1335,7 +1335,7 @@ Das Erstellen eines Datensatzes hat eine gewisse Verantwortung. Es geht dabei ni
 Einhaltung des Datenschutzgesetzes, sondern auch um ethische Aspekte. Ein Datensatz sollte 
 vielfältige Sprachaufnahmen beinhalten und nicht nur Aufnahmen bestimmter Personengruppen. Das 
 Paper von Papakyriakopoulos et al. betont die Notwendigkeit der Diversität in Sprachdaten und die 
-Auswirkungen auf Fairness und Robustheit von Sprachtechnologien. Sie empfehlen, mehr Transparenz 
+Auswirkungen auf Fairness und Robustheit von Sprachtechnologien. Sie empfehlen mehr Transparenz 
 bei der Datensammlung zu schaffen, um ethische Aspekte zu dokumentieren und die Überlegungen zum 
 sozialen Kontext der Datennutzung zu vertiefen (\cite{papakyriakopoulos2023augmented}).
 
@@ -1353,7 +1353,7 @@ Datenschutzgesetzes erfolgen. Die Sprachaufnahmen sollen nicht an Dritte weiterg
 Teilnehmer sollen über die Verwendung der Sprachaufnahmen informiert werden. Ebenfalls sollen die 
 Sprachaufnahmen nach der Verwendung gelöscht werden. 
 
-\subsection{Erste Überlegungen zu Tools und Technologien}
+\subsection{Überlegungen zu Tools und Technologien}
 Für die Entwicklung von Machine-Learning-Modellen stehen mehrere Frameworks zur Verfügung. Eine 
 Schlüsselüberlegung für dieses Projekt war die Fähigkeit zur Integration in eine mobile App.
 Es gibt einge Frameworks, welche das ermöglichen. Um nur einige zu nennen: PyTorch, TensorFlow, und 
@@ -1364,11 +1364,11 @@ Jahren an Popularität gewonnen (\cite{valantis2023battle}). Ebenfalls ist PyTor
 die Forschung und bietet eine Integration in mobile Apps. Daher wurde PyTorch als Framework für die 
 Entwicklung der hier beschriebenen Arbeit gewählt.
 
-\subsection{Erste Überlegungen zur Modelarchitektur}
+\subsection{Überlegungen zur Modelarchitektur}
 Mit der Wahl von PyTorch als Framework wurde zwar eine wichtige Entscheidung getroffen, aber die 
 Modelarchitektur ist noch nicht definiert. Die Inspiration für die Modelarchitektur kommt von 
 (\cite{siri2017hey}). Die Modelarchitektur von Siri ist sehr einfach und besteht aus einem DNN. 
-Daher war ein erster Gedanke, eine ähnliche Architektur zu verwenden. Im folgenden werden die 
+Daher war ein erster Gedanke, eine ähnliche Architektur zu verwenden. Im Folgenden werden die 
 unterschiedlichen Versuche die im Rahmen dieser Arbeit gemacht wurden, beschrieben. Als Experiment 
 stand immer die Erkennung von 'Hey FOOBY' im Vordergrund.
 
@@ -1460,7 +1460,7 @@ class TriggerWordWav2Vec2Model(nn.Module):
 \noindent \newline
 Im Forward-Durchlauf des Modells werden die Audioeingaben durch das wav2vec2-Modell verarbeitet, 
 das dabei relevante Merkmale aus den Audiodaten extrahiert. Vom Output des wav2vec2-Modells wird 
-der Durchschnitt der Hidden States berechnet. Danch wird der Durchschnitt dem Linear Layer 
+der Durchschnitt der Hidden States berechnet. Danach wird der Durchschnitt dem Linear Layer 
 übergeben, welcher die Wahrscheinlichkeit berechnet, dass das Triggerwort in der Audioeingabe
 vorhanden ist. Die Wahrscheinlichkeit wird durch die Sigmoid Activation Function berechnet. Der 
 Prozess wird im Beitrag "Fine-tuning XLS-R for Multi-Lingual ASR with Transformers" von Patrick 
@@ -1532,7 +1532,7 @@ wurde auch Xcode verwendet, um die Modelle in eine iOS App zu integrieren.
 Künstliche Intelligenz hat entscheidend die Art und Weise, wie wir leben, arbeiten und 
 kommunizieren, beeinflusst. In diesem Projekt wurde Künstliche Intelligenz als Werkzeug eingesetzt, 
 um den kreativen Prozess und die Programmierung zu unterstützen. Tools wie GitHub Copilot und 
-ChatGPT wurden als inspirtaion genutzt, um schneller zu innovativen Lösungen zu 
+ChatGPT wurden als Inspirtaion genutzt, um schneller zu innovativen Lösungen zu 
 gelangen. Die Verwendung dieser Technologien erfolgte jedoch mit einer kritischen Perspektive. Es 
 wurde stets darauf geachtet, dass sie als Hilfsmittel dienten, um die Effizienz und Qualität der 
 Entwicklung zu steigern, ohne die eigene kreative und analytische Arbeit zu ersetzen. Auf diese 
